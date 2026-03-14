@@ -4220,6 +4220,19 @@ a:hover .icon-box-2 {
 }
 
 
+/* 모바일 전용: 수강생 성공사례 1열, 푸터 가운데 영역 왼쪽 정렬·오른쪽 메뉴 숨김 */
+@media only screen and (max-width: 767px) {
+    .success-stories-grid {
+        grid-template-columns: 1fr !important;
+    }
+    #footer .r-container .row.g-4 > div:nth-child(2) {
+        text-align: left !important;
+    }
+    #footer .r-container .row.g-4 > div:nth-child(3) {
+        display: none !important;
+    }
+}
+
 @media only screen and (max-width:993px) {
 
     /* ---------------------------- */

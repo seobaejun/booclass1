@@ -842,7 +842,7 @@
                         실제 성공 사례와 후기를 통해 저희 부트캠프가 어떻게 수강생들의 커리어 목표 달성을 도왔는지 확인해보세요.
                     </p>
                 </div>
-                <div class="success-stories-grid" style="display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 1.5rem !important; grid-auto-rows: min-content !important; align-items: start !important;">
+                <div class="success-stories-grid">
                     <style>
                         .success-stories-grid {
                             display: grid !important;
@@ -850,6 +850,11 @@
                             gap: 1.5rem !important;
                             grid-auto-rows: min-content !important;
                             align-items: start !important;
+                        }
+                        @media (max-width: 767px) {
+                            .success-stories-grid {
+                                grid-template-columns: 1fr !important;
+                            }
                         }
                         .success-card {
                             height: auto !important;
