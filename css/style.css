@@ -2523,6 +2523,155 @@ a:hover .icon-box-2 {
 }
 
 /* ---------------------------- */
+/* Board pagination (목록 하단 페이징) */
+/* ---------------------------- */
+.board-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.board-pagination-inner {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.board-pagination-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    padding: 0 8px;
+    color: var(--text-color);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.board-pagination-arrow:hover:not(.is-disabled) {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+.board-pagination-arrow.is-disabled {
+    opacity: 0.4;
+    pointer-events: none;
+    cursor: default;
+}
+
+.board-pagination-numbers {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.board-pagination-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    padding: 0 6px;
+    color: var(--text-color);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+
+.board-pagination-num:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+.board-pagination-num.is-current {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+    font-weight: 600;
+    cursor: default;
+}
+
+/* ---------------------------- */
+/* Board detail (게시글 상세)   */
+/* ---------------------------- */
+.board-detail-card {
+    width: 100%;
+}
+
+.board-detail-title {
+    font-size: inherit;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.board-detail-meta {
+    color: var(--text-color);
+}
+
+.board-detail-content {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.board-detail-content .board-content {
+    white-space: pre-line;
+}
+
+.board-detail-content a {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.board-detail-content a:hover {
+    color: var(--accent-color-2);
+}
+
+/* 목록 헤더/행: 번호, 제목, 작성일 - 칸 맞춤 (Bootstrap 유틸보다 우선) */
+.board-list-table {
+    --board-col-no: 64px;
+    --board-col-date: 110px;
+}
+
+.board-list-table .board-list-header,
+.board-list-table .board-list-row {
+    display: grid !important;
+    grid-template-columns: var(--board-col-no) 1fr var(--board-col-date);
+    gap: 12px;
+    align-items: center;
+}
+
+.board-list-table .board-list-header {
+    padding-left: 0;
+}
+
+.board-list-table .board-list .board-list-item {
+    padding-left: 0;
+    list-style: none;
+}
+
+.board-list-table .board-list-col-no {
+    text-align: center;
+}
+
+.board-list-table .board-list-col-title {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.board-list-table .board-list-col-date {
+    text-align: right;
+}
+
+/* ---------------------------- */
 /* Specific Media Queries       */
 /* ---------------------------- */
 .video-e119 {

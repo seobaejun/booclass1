@@ -5,10 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shishirraven/animate-on-scroll@v1.2/animation_utility.css">
     <link rel="icon" type="image/x-icon" href="image/logo.png">
-    <title>부스트클래스 - 유료 게시판</title>
+    <title>부스트클래스 - 게시글</title>
 </head>
 
 <body>
@@ -33,7 +31,7 @@
                             <a class="nav-link active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="blog.html">무료 게시판</a></li>
-                                <li><a class="dropdown-item active" href="blog-post.html">유료 게시판</a></li>
+                                <li><a class="dropdown-item" href="blog-post.html">유료 게시판</a></li>
                             </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="index.html#contact">문의</a></li>
@@ -50,13 +48,15 @@
     <main>
         <div class="section bg-attach-cover" style="margin-top: 6em; min-height: 60vh; background-image: url(image/bg_support.png);">
             <div class="r-container py-5">
-                <div class="d-flex flex-column gap-2 mb-4">
-                    <h6 class="text-accent">게시판</h6>
-                    <h3 class="text-white">유료 게시판</h3>
-                    <p class="text-white-50 mb-0">제목을 클릭하면 내용을 볼 수 있습니다.</p>
+                <div class="mb-3">
+                    <a href="#" id="board-back-link" class="text-accent text-decoration-none small">← 목록으로</a>
                 </div>
-                <div id="board-list" class="card rounded-4 p-4 bg-dark border border-secondary" data-board-type="paid">
-                    <div data-board-list></div>
+                <div id="board-detail" class="card rounded-4 p-4 p-xl-5 bg-dark border border-secondary board-detail-card">
+                    <div class="board-detail-top text-white-50 small d-flex flex-wrap gap-3 gap-xl-4 mb-3 pb-3 border-bottom border-secondary">
+                        <strong id="board-detail-title" class="text-white board-detail-title"></strong>
+                        <span>작성일 : <span id="board-detail-date"></span></span>
+                    </div>
+                    <div id="board-detail-content" class="board-detail-content text-body"></div>
                 </div>
             </div>
         </div>
@@ -101,7 +101,20 @@
     <script src="js/vendor/jquery.min.js"></script>
     <script src="js/vendor/bootstrap.bundle.min.js"></script>
     <script src="js/board.js"></script>
-    <script>Board.loadList('paid', 'board-list');</script>
+    <script>
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        var type = params.get('type') || 'free';
+        var id = params.get('id');
+        var backLink = document.getElementById('board-back-link');
+        if (backLink) backLink.href = type === 'paid' ? 'blog-post.html' : 'blog.html';
+        if (id) Board.loadDetail(type, id, 'board-detail-title', 'board-detail-content');
+        else {
+          document.getElementById('board-detail-title').textContent = '글을 찾을 수 없습니다.';
+          document.getElementById('board-detail-content').innerHTML = '<a href="' + (type === 'paid' ? 'blog-post.html' : 'blog.html') + '">목록으로</a>';
+        }
+      })();
+    </script>
 </body>
 
 </html>
