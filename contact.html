@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shishirraven/animate-on-scroll@v1.2/animation_utility.css">
+    <link rel="icon" type="image/x-icon" href="image/logo.png">
+    <title>Recode - Contact Us</title>
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="header" class="fixed-top bg-accent-transparent glass-effect py-0" style="z-index: 9999;">
+        <nav class="navbar navbar-expand-xl">
+            <div class="r-container w-100 px-3 px-xl-5 d-flex flex-nowrap align-items-center">
+                <div class="logo-container flex-shrink-0">
+                    <a class="navbar-brand" href="index.html"><img src="image/logo.png" alt="" class="img-fluid" style="border-radius: 12px;"></a>
+                </div>
+                <button class="navbar-toggler flex-shrink-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa-solid fa-bars-staggered accent-color-2"></i>
+                </button>
+                <div class="collapse navbar-collapse flex-grow-1 flex-nowrap min-w-0" id="navbarNav">
+                    <ul class="navbar-nav ms-xl-4 ps-xl-5 me-auto mb-2 mb-xl-0 gap-1 py-2 py-xl-0 nav-links-nowrap">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">홈</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="course-list.html">강의 수강</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="ebook.html">전자책</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">사이트 바로가기</a>
+                        </li>
+                        <li class="nav-item d-none">
+                            <a class="nav-link" href="mentor.html">멘토</a>
+                        </li>
+                        <li class="nav-item d-none">
+                            <a class="nav-link" href="pricing-plan.html">가격</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="blog.html">무료 게시판</a></li>
+                                <li><a class="dropdown-item" href="blog-post.html">유료 게시판</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="contact.html">문의</a>
+                        </li>
+                    </ul>
+                    <div class="mb-xl-0 mb-3 d-flex flex-xl-row flex-column gap-3 w-max-content ps-xl-3">
+                        <a href="" class="btn btn-accent accent d-flex flex-row gap-2 justify-content-center"><span>회원가입</span></a>
+                        <a href="" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그인</span></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- End Header -->
+
+    <!-- Main -->
+    <main>
+        <!-- Banner -->
+        <div class="section position-relative bg-attach-cover pb-0" style="margin-top: 6em; ">
+            <div class="r-container">
+                <div class="row row-cols-xl-2 row-cols-1">
+                    <div class="col col-xl-4 mb-3">
+                        <div class="d-flex flex-column gap-3 pt-xl-5">
+                            <h2><span class="text-accent">Contact </span>Us</h2>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col col-xl-8 mb-3">
+                        <img src="image/img_banner.png" class="img-fluid" style=" margin-top: -5rem;" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Contact -->
+         <div class="section">
+            <div class="r-container">
+                <div class="row row-cols-xl-2 row-cols-1">
+                    <div class="col col-xl-8 scrollanimation animated fadeInLeft">
+                        <div class="d-flex flex-column gap-3">
+                            <div class="d-flex flex-column gap-3 w-100 h-100 p-5 bg-accent rounded-4">
+                                <div class="d-flex flex-column gap-2">
+                                    <h6 class="text-accent">Get in Touch</h6>
+                                    <h3>Let’s Chat About Your Coding Journey</h3>
+                                    <p>
+                                        Have questions or need more information? Reach out to our team, and we’ll be happy
+                                        to assist you!
+                                    </p>
+                                </div>
+                                <div class="success_msg toast align-items-center w-100 shadow-none mb-3 border border-success rounded-pill my-4"
+                                    role="alert" aria-live="assertive" aria-atomic="true">
+                                    <div class="d-flex p-2">
+                                        <div class="toast-body f-18 d-flex flex-row gap-3 align-items-center text-success">
+                                            <i class="fa-solid fa-check f-36 text-success"></i>
+                                            Your Message Successfully Send.
+                                        </div>
+                                        <button type="button"
+                                            class="me-2 m-auto bg-transparent border-0 ps-1 pe-0 text-success"
+                                            data-bs-dismiss="toast" aria-label="Close"><i
+                                                class="fa-solid fa-xmark"></i></button>
+                                    </div>
+                                </div>
+                                <div class="error_msg toast align-items-center w-100 shadow-none border-danger mb-3 my-4 border rounded-pill"
+                                    role="alert" aria-live="assertive" aria-atomic="true">
+                                    <div class="d-flex p-2">
+                                        <div class="toast-body f-18 d-flex flex-row gap-3 align-items-center text-danger">
+                                            <i class="fa-solid fa-triangle-exclamation f-36 text-danger"></i>
+                                            Something Wrong ! Send Form Failed.
+                                        </div>
+                                        <button type="button"
+                                            class="me-2 m-auto bg-transparent border-0 ps-1 pe-0 text-danger"
+                                            data-bs-dismiss="toast" aria-label="Close"><i
+                                                class="fa-solid fa-xmark"></i></button>
+                                    </div>
+                                </div>
+                                <form
+                                    class="d-flex flex-column gap-1 h-100 justify-content-center w-100 needs-validation form"
+                                    novalidate>
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control py-3 px-4" name="name"
+                                            placeholder="Your Full Name" required>
+                                        <div class="invalid-feedback">
+                                            The field is required.
+                                        </div>
+                                    </div>
+                                    <div class="row row-cols-xl-2 row-cols-1">
+                                        <div class="col mb-3">
+                                            <input type="email" class="form-control py-3 px-4" name="email"
+                                                placeholder="Your E-mail" required>
+                                            <div class="invalid-feedback">
+                                                The field is required.
+                                            </div>
+                                        </div>
+                                        <div class="col mb-3">
+                                            <input type="tel" class="form-control py-3 px-4" name="phone"
+                                                placeholder="Your Phone Number" required>
+                                            <div class="invalid-feedback">
+                                                The field is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="mb-3">
+                                            <select name="subject" id="subject" class="form-control form-select py-3 px-4"
+                                                required>
+                                                <option value="" selected>Subject</option>
+                                                <option value="1">Subject 1</option>
+                                                <option value="2">Subject 2</option>
+                                                <option value="3">Subject 3</option>
+                                                <option value="4">Subject 4</option>
+                                                <option value="5">Subject 5</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <textarea class="form-control py-3 px-4" name="message" rows="4"
+                                            placeholder="Your Message"></textarea>
+                                    </div>
+                                    <div>
+                                        <button type="submit"
+                                            class="btn btn-accent submit_form d-flex justify-content-center gap-2 rounded-4">
+                                            <span>Send Message</span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-xl-4 scrollanimation animated fadeInRight">
+                        <div class="d-flex flex-column gap-3 ps-xl-2">
+                            <div class="position-relative h-100 overflow-hidden rounded-4">
+                                <iframe loading="lazy" class="maps"
+                                    src="https://maps.google.com/maps?q=London%20Eye%2C%20London%2C%20United%20Kingdom&amp;t=m&amp;z=14&amp;output=embed&amp;iwloc=near"
+                                    title="London Eye, London, United Kingdom"
+                                    aria-label="London Eye, London, United Kingdom"></iframe>
+                            </div>
+                            <div class="d-flex flex-column gap-3 p-5 rounded-4 bg-accent-color-primary border border-accent-5">
+                                <div class="d-flex flex-row align-items-center font-2 gap-3">
+                                    <i class="rtmicon rtmicon-location fs-3 accent-color"></i>
+                                    <div class="d-flex flex-column">
+                                        <h6>Address</h6>
+                                        <span class="text-color-2">KLLG st, No.99, Pku City, ID 28289</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row align-items-center font-2 gap-3">
+                                    <i class="rtmicon rtmicon-classic-phone fs-3 accent-color"></i>
+                                    <div class="d-flex flex-column">
+                                        <h6>Phone</h6>
+                                        <span class="text-color-2">+1 (212) 555-1212</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row align-items-center font-2 gap-3">
+                                    <i class="rtmicon rtmicon-envelope fs-3 accent-color"></i>
+                                    <div class="d-flex flex-column">
+                                        <h6>E-mail</h6>
+                                        <span class="text-color-2">hello@domainsite.com</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div>
+
+        <!-- Section FAQs -->
+        <div class="section bg-attach-cover" style="background-image: url(image/bg_all.png);">
+            <div class="r-container d-flex flex-column gap-5">
+                <div class="row row-cols-xl-2 row-cols-1 align-items-end">
+                    <div class="col mb-3 scrollanimation animated fadeInLeft adr-7">
+                        <div class="d-flex flex-column gap-2" style="max-width: 430px;">
+                            <h6 class="text-accent">FAQs</h6>
+                            <h3>Got Questions? We Have Answers!</h3>
+                        </div>
+                    </div>
+                    <div class="col mb-3 scrollanimation animated fadeInRight adr-7">
+                        <p style="max-width: 400px; justify-self: end;">
+                            Get answers to common questions before starting your learning journey.
+                        </p>
+                    </div>
+                </div>
+                <div class="row row-cols-xl-2 row-cols-1">
+                    <div class="col mb-3">
+                        <div class="d-flex flex-column gap-4 w-100">
+                            <div class="accordion mt-3 d-flex flex-column gap-4" id="faqAccordion1">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true"
+                                            aria-controls="faq1">
+                                            How long does the bootcamp program take?
+                                        </button>
+                                    </h2>
+                                    <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion1">
+                                        <div class="accordion-body">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel erat
+                                            nibh. Sed rutrum turpis quis lacinia sollicitudin. Sed ac neque cursus,
+                                            ornare augue pellentesque, elementum turpis.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false"
+                                            aria-controls="faq2">
+                                            Do you offer job placement support after I graduate?
+                                        </button>
+                                    </h2>
+                                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion1">
+                                        <div class="accordion-body">
+                                            Yes, you will need a laptop to complete assignments and projects. We
+                                            recommend using a laptop with at least 8GB of RAM and a modern processor for
+                                            the best experience.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                                            Do I need prior coding experience to join the bootcamp?
+                                        </button>
+                                    </h2>
+                                    <div id="faq3" class="accordion-collapse collapse show"
+                                        data-bs-parent="#faqAccordion1">
+                                        <div class="accordion-body">
+                                            No, you don't need prior coding experience to join our bootcamp! Our
+                                            programs are designed to cater to beginner, and we provide all the
+                                            foundational training you need.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false"
+                                            aria-controls="faq4">
+                                            Can I get a refund if I’m not satisfied with the program?
+                                        </button>
+                                    </h2>
+                                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion1">
+                                        <div class="accordion-body">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel erat
+                                            nibh. Sed rutrum turpis quis lacinia sollicitudin. Sed ac neque cursus,
+                                            ornare augue pellentesque, elementum turpis.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false"
+                                            aria-controls="faq5">
+                                            Can I get a refund if I’m not satisfied with the program?
+                                        </button>
+                                    </h2>
+                                    <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion1">
+                                        <div class="accordion-body">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel erat
+                                            nibh. Sed rutrum turpis quis lacinia sollicitudin. Sed ac neque cursus,
+                                            ornare augue pellentesque, elementum turpis.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-3">
+                        <div class="d-flex flex-column gap-4 w-100">
+                            <div class="accordion mt-3 d-flex flex-column gap-4" id="faqAccordion2">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq6" aria-expanded="true"
+                                            aria-controls="faq6">
+                                            Do I need prior coding experience to join the bootcamp?
+                                        </button>
+                                    </h2>
+                                    <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion2">
+                                        <div class="accordion-body">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel erat
+                                            nibh. Sed rutrum turpis quis lacinia sollicitudin. Sed ac neque cursus,
+                                            ornare augue pellentesque, elementum turpis.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#faq7" aria-expanded="false" aria-controls="faq7">
+                                            Do I need to bring my own laptop for the bootcamp?
+                                        </button>
+                                    </h2>
+                                    <div id="faq7" class="accordion-collapse collapse show"
+                                        data-bs-parent="#faqAccordion2">
+                                        <div class="accordion-body">
+                                            Yes, you will need a laptop to complete assignments and projects. We
+                                            recommend using a laptop with at least 8GB of RAM and a modern processor for
+                                            the best experience.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq8" aria-expanded="false"
+                                            aria-controls="faq8">
+                                            How long does the bootcamp program take?
+                                        </button>
+                                    </h2>
+                                    <div id="faq8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion2">
+                                        <div class="accordion-body">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel erat
+                                            nibh. Sed rutrum turpis quis lacinia sollicitudin. Sed ac neque cursus,
+                                            ornare augue pellentesque, elementum turpis.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq9" aria-expanded="false"
+                                            aria-controls="faq9">
+                                            Can I get a refund if I’m not satisfied with the program?
+                                        </button>
+                                    </h2>
+                                    <div id="faq9" class="accordion-collapse collapse" data-bs-parent="#faqAccordion2">
+                                        <div class="accordion-body">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel erat
+                                            nibh. Sed rutrum turpis quis lacinia sollicitudin. Sed ac neque cursus,
+                                            ornare augue pellentesque, elementum turpis.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq10" aria-expanded="false"
+                                            aria-controls="faq10">
+                                            Do you offer job placement support after I graduate?
+                                        </button>
+                                    </h2>
+                                    <div id="faq10" class="accordion-collapse collapse" data-bs-parent="#faqAccordion1">
+                                        <div class="accordion-body">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel erat
+                                            nibh. Sed rutrum turpis quis lacinia sollicitudin. Sed ac neque cursus,
+                                            ornare augue pellentesque, elementum turpis.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Contact Us -->
+    <section class="section contact-us-section py-5" id="contact" style="background: #1a1a1a;">
+        <div class="r-container">
+            <div class="text-center mb-5">
+                <h2 class="text-white mb-2">Contact Us</h2>
+                <p class="text-white-50">궁금한 점이 있으신가요? 도움이 필요하신가요? 편하게 문의해 주세요.</p>
+            </div>
+            <form class="d-flex flex-column gap-1 w-100 needs-validation form" novalidate>
+                <input type="text" name="action" value="appointment" hidden>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-4">
+                        <input type="text" class="form-control form-control-lg bg-dark text-white py-3 px-4 contact-form-border" name="name" placeholder="이름" required>
+                        <div class="invalid-feedback">필수 입력 사항입니다.</div>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="email" class="form-control form-control-lg bg-dark text-white py-3 px-4 contact-form-border" name="email" placeholder="이메일" required>
+                        <div class="invalid-feedback">필수 입력 사항입니다.</div>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="tel" class="form-control form-control-lg bg-dark text-white py-3 px-4 contact-form-border" name="phone" placeholder="전화번호" required>
+                        <div class="invalid-feedback">필수 입력 사항입니다.</div>
+                    </div>
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <select name="bootcamp" class="form-select form-control-lg bg-dark text-white py-3 px-4 contact-form-border">
+                            <option value="" selected>부트캠프 프로그램 선택 (선택사항)</option>
+                            <option value="1">전자책 플랜</option>
+                            <option value="2">올인원 플랜</option>
+                            <option value="3">1:1 수익화 플랜</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <select name="location" class="form-select form-control-lg bg-dark text-white py-3 px-4 contact-form-border">
+                            <option value="" selected>선호 장소 (선택사항)</option>
+                            <option value="1">서울 (오프라인)</option>
+                            <option value="2">천안 (오프라인)</option>
+                            <option value="3">온라인 (원격)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <textarea class="form-control form-control-lg bg-dark text-white py-3 px-4 contact-form-border" name="message" rows="4" placeholder="메시지" required></textarea>
+                    <div class="invalid-feedback">필수 입력 사항입니다.</div>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-accent submit_appointment d-flex justify-content-center gap-2 rounded-4 px-4 py-3"><span>등록하기</span></button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" style="background: #111; color: #fff;">
+        <div class="r-container py-5">
+            <div class="row g-4 align-items-start mb-5">
+                <div class="col-12 col-md-3 col-lg-2 text-start">
+                    <a href="index.html"><img src="image/logo.png" alt="부스트클래스" class="img-fluid" width="280" style="border-radius: 12px; max-width: 320px;"></a>
+                </div>
+                <div class="col-12 col-md-6 col-lg-7 text-start">
+                    <div class="d-flex flex-column gap-2 text-white-50 small">
+                        <p class="mb-0">회사명 : 부스트클래스 | 대표자 : 서배준 | 연락처 : 010-3673-6942</p>
+                        <p class="mb-0">사업자등록번호 : 152-74-00452 | 통신판매신고번호 : 제2024-충남천안-2840호</p>
+                        <p class="mb-0">주소 : 충청남도 천안시 서북구 월봉로 126, 901-17호(쌍용동, 대림프라자)</p>
+                        <p class="mb-0">개인정보보호 최고책임자 : 서배준 | 담당자 메일 : sprince1004@naver.com</p>
+                        <p class="mb-0">카카오뱅크 3333-32-0313102 부스트클래스</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-3 col-lg-3 text-start">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><a href="index.html#hero" class="text-white-50 text-decoration-none">홈</a></li>
+                        <li class="mb-2"><a href="course-list.html" class="text-white-50 text-decoration-none">강의 수강</a></li>
+                        <li class="mb-2"><a href="ebook.html" class="text-white-50 text-decoration-none">전자책</a></li>
+                        <li class="mb-2"><a href="about.html" class="text-white-50 text-decoration-none">사이트 바로가기</a></li>
+                        <li class="mb-2"><a href="blog.html" class="text-white-50 text-decoration-none">게시판</a></li>
+                        <li class="mb-2"><a href="contact.html" class="text-white-50 text-decoration-none">문의하기</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-4 border-top border-secondary d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+                <p class="mb-0 text-white-50 small">© Copyright 2025. All Rights Reserved 부스트클래스</p>
+                <div class="d-flex gap-3">
+                    <a href="index.html" class="text-white-50 text-decoration-none small">이용약관</a>
+                    <a href="index.html" class="text-white-50 text-decoration-none small">개인정보처리방침</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Scripts -->
+    <script src="js/vendor/jquery.min.js"></script>
+    <script src="js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="js/vendor/swiper-bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/swiper-script.js"></script>
+    <script src="js/submit-form.js"></script>
+    <script src="js/vendor/isotope.pkgd.min.js"></script>
+    <script src="js/video_embedded.js"></script>
+    <script src="js/vendor/fslightbox.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/gh/shishirraven/animate-on-scroll@v1.0/oyethemes_onscroll_animation.js"></script>
+</body>
+
+</html>
