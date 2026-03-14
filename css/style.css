@@ -298,7 +298,7 @@ img {
     background-color: transparent;
     border-radius: 20px;
     color: var(--text-color-2);
-    border: 1px solid var(--accent-color);
+    border: 1px solid rgba(255, 255, 255, 0.35);
     outline: none;
     font-family: var(--font-2);
 }
@@ -308,7 +308,7 @@ img {
     background-color: transparent;
     border-radius: 20px;
     color: var(--text-color-2);
-    border: 1px solid var(--accent-color);
+    border: 1px solid rgba(255, 255, 255, 0.35);
     outline: none;
     font-family: var(--font-2);
 }
@@ -317,7 +317,7 @@ img {
 .form.contact textarea:focus,
 .form.contact select:focus {
     box-shadow: none;
-    border: solid 1px var(--accent-color);
+    border: solid 1px #fff;
     background-color: var(--accent-color);
     color: var(--primary);
 }
@@ -567,12 +567,12 @@ form select.form-select option:checked {
 }
 
 .contact-form-border {
-    border: 1px solid var(--accent-color) !important;
+    border: 1px solid rgba(255, 255, 255, 0.35) !important;
 }
 
 .contact-form-border:focus {
-    border-color: var(--accent-color) !important;
-    box-shadow: 0 0 0 0.2rem rgba(169, 248, 181, 0.25);
+    border-color: rgba(255, 255, 255, 0.7) !important;
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.1);
 }
 
 .nav-link {
