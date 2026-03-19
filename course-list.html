@@ -153,9 +153,15 @@
                             <a class="nav-link" href="index.html#contact">문의</a>
                         </li>
                     </ul>
-                    <div class="mb-xl-0 mb-3 d-flex flex-xl-row flex-column gap-3 w-max-content ps-xl-3">
-                        <a href="" class="btn btn-accent accent d-flex flex-row gap-2 justify-content-center"><span>회원가입</span></a>
-                        <a href="" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그인</span></a>
+                    <div class="mb-xl-0 mb-3 d-flex flex-xl-row flex-column gap-3 w-max-content ps-xl-3" id="headerAuthWrap">
+                        <div id="headerGuest" class="d-flex flex-xl-row flex-column gap-3 w-max-content">
+                            <a href="register.html" class="btn btn-accent accent d-flex flex-row gap-2 justify-content-center"><span>회원가입</span></a>
+                            <a href="login.html" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그인</span></a>
+                        </div>
+                        <div id="headerUser" class="d-flex flex-xl-row flex-column gap-3 w-max-content align-items-center d-none">
+                            <a href="mypage.html" class="text-accent text-decoration-none">마이페이지</a>
+                            <button type="button" id="btnHeaderLogout" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그아웃</span></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -172,103 +178,8 @@
                     <h3>올인원 플랜 강의</h3>
                     <p class="mx-auto" style="max-width: 600px;">원하는 강의를 선택하고 수강을 시작하세요.</p>
                 </div>
-                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 row-cols-xxl-4 g-4">
-                    <div class="col">
-                        <div class="card course-card">
-                            <div class="card-media">
-                                <a href="course-detail.html?id=1"><img src="image/dummy-img-900x600.jpg" alt="웹 개발 기초"></a>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-title-wrap">
-                                    <h5 class="card-title"><a href="course-detail.html?id=1">웹 개발 기초 – HTML, CSS, JavaScript</a></h5>
-                                    <p class="card-desc">HTML, CSS, JavaScript 기초부터 실전 웹 페이지 제작까지</p>
-                                </div>
-                                <div class="author-row">
-                                    <div class="avatar"><img src="image/dummy-img-600x700.jpg" alt=""></div>
-                                    <span class="author-name">강사명</span>
-                                </div>
-                                <div class="meta-row">
-                                    <span class="price">무료</span>
-                                    <a href="course-detail.html?id=1" class="btn btn-sm btn-outline-accent rounded-3">자세히</a>
-                                </div>
-                                <div class="mt-3">
-                                    <a href="course-detail.html?id=1" class="btn btn-accent rounded-3 w-100">수강하기</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card course-card">
-                            <div class="card-media">
-                                <a href="course-detail.html?id=2"><img src="image/dummy-img-900x600.jpg" alt="프론트엔드 개발"></a>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-title-wrap">
-                                    <h5 class="card-title"><a href="course-detail.html?id=2">프론트엔드 개발 – React 실전</a></h5>
-                                    <p class="card-desc">React로 현대적인 웹 앱 개발하기</p>
-                                </div>
-                                <div class="author-row">
-                                    <div class="avatar"><img src="image/dummy-img-600x700.jpg" alt=""></div>
-                                    <span class="author-name">강사명</span>
-                                </div>
-                                <div class="meta-row">
-                                    <span class="price">₩99,000</span>
-                                    <a href="course-detail.html?id=2" class="btn btn-sm btn-outline-accent rounded-3">자세히</a>
-                                </div>
-                                <div class="mt-3">
-                                    <a href="course-detail.html?id=2" class="btn btn-accent rounded-3 w-100">수강하기</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card course-card">
-                            <div class="card-media">
-                                <a href="course-detail.html?id=3"><img src="image/dummy-img-900x600.jpg" alt="백엔드 개발"></a>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-title-wrap">
-                                    <h5 class="card-title"><a href="course-detail.html?id=3">백엔드 개발 – Node.js & DB</a></h5>
-                                    <p class="card-desc">서버·DB 연동 백엔드 개발 실전</p>
-                                </div>
-                                <div class="author-row">
-                                    <div class="avatar"><img src="image/dummy-img-600x700.jpg" alt=""></div>
-                                    <span class="author-name">강사명</span>
-                                </div>
-                                <div class="meta-row">
-                                    <span class="price">₩149,000</span>
-                                    <a href="course-detail.html?id=3" class="btn btn-sm btn-outline-accent rounded-3">자세히</a>
-                                </div>
-                                <div class="mt-3">
-                                    <a href="course-detail.html?id=3" class="btn btn-accent rounded-3 w-100">수강하기</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card course-card">
-                            <div class="card-media">
-                                <a href="course-detail.html?id=4"><img src="image/dummy-img-900x600.jpg" alt="SQL과 DevOps"></a>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-title-wrap">
-                                    <h5 class="card-title"><a href="course-detail.html?id=4">SQL & DevOps 기초</a></h5>
-                                    <p class="card-desc">SQL과 DevOps 핵심 개념과 실습</p>
-                                </div>
-                                <div class="author-row">
-                                    <div class="avatar"><img src="image/dummy-img-600x700.jpg" alt=""></div>
-                                    <span class="author-name">강사명</span>
-                                </div>
-                                <div class="meta-row">
-                                    <span class="price">₩79,000</span>
-                                    <a href="course-detail.html?id=4" class="btn btn-sm btn-outline-accent rounded-3">자세히</a>
-                                </div>
-                                <div class="mt-3">
-                                    <a href="course-detail.html?id=4" class="btn btn-accent rounded-3 w-100">수강하기</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 row-cols-xxl-4 g-4" id="courseListGrid">
+                    <div class="col w-100 text-center py-5 text-muted" id="courseListPlaceholder">불러오는 중...</div>
                 </div>
             </div>
         </div>
@@ -311,12 +222,17 @@
         </div>
     </footer>
 
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="js/header-auth.js"></script>
     <script src="js/vendor/jquery.min.js"></script>
     <script src="js/vendor/bootstrap.bundle.min.js"></script>
     <script src="js/vendor/swiper-bundle.min.js"></script>
     <script src="js/script.js"></script>
     <script src="js/swiper-script.js"></script>
     <script src="js/submit-form.js"></script>
+    <script src="js/course-list.js"></script>
 </body>
 
 </html>

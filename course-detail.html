@@ -10,42 +10,19 @@
     <link rel="icon" type="image/x-icon" href="image/logo.png">
     <title>부스트클래스 - 강의 상세</title>
     <style>
+        body { min-height: 100vh; display: flex; flex-direction: column; background: #111; }
+        body main { flex: 1; background: #1a1a1a; }
         .course-detail-media {
             position: relative;
-            aspect-ratio: 16/9;
+            aspect-ratio: 16/10;
             border-radius: 1rem;
             overflow: hidden;
             background: #111;
         }
-        .course-detail-media img,
-        .course-detail-media iframe {
+        .course-detail-media img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-        }
-        .course-detail-media .play-overlay {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0,0,0,0.4);
-        }
-        .course-detail-media .play-overlay .btn-play {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: var(--accent-color, #DDF247);
-            color: #1a1a1a;
-            border: none;
-            font-size: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s;
-        }
-        .course-detail-media .play-overlay .btn-play:hover {
-            transform: scale(1.05);
         }
         .course-meta-row {
             display: flex;
@@ -111,9 +88,15 @@
                             <a class="nav-link" href="index.html#contact">문의</a>
                         </li>
                     </ul>
-                    <div class="mb-xl-0 mb-3 d-flex flex-xl-row flex-column gap-3 w-max-content ps-xl-3">
-                        <a href="" class="btn btn-accent accent d-flex flex-row gap-2 justify-content-center"><span>회원가입</span></a>
-                        <a href="" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그인</span></a>
+                    <div class="mb-xl-0 mb-3 d-flex flex-xl-row flex-column gap-3 w-max-content ps-xl-3" id="headerAuthWrap">
+                        <div id="headerGuest" class="d-flex flex-xl-row flex-column gap-3 w-max-content">
+                            <a href="register.html" class="btn btn-accent accent d-flex flex-row gap-2 justify-content-center"><span>회원가입</span></a>
+                            <a href="login.html" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그인</span></a>
+                        </div>
+                        <div id="headerUser" class="d-flex flex-xl-row flex-column gap-3 w-max-content align-items-center d-none">
+                            <a href="mypage.html" class="text-accent text-decoration-none">마이페이지</a>
+                            <button type="button" id="btnHeaderLogout" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그아웃</span></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -122,8 +105,8 @@
     <!-- End Header -->
 
     <main>
-        <!-- Breadcrumb -->
-        <div class="section pt-5" style="margin-top: 5em;">
+        <!-- Breadcrumb (헤더 아래로 내림) -->
+        <div class="section pt-2 pb-0" style="margin-top: 8rem; padding-top: 2rem !important; padding-bottom: 0.5rem !important;">
             <div class="r-container">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
@@ -135,49 +118,37 @@
             </div>
         </div>
 
-        <!-- 강의 상세 (open9 nft-detail 스타일: 미디어 + 정보) -->
-        <div class="section bg-attach-cover" style="background-image: url(image/bg_all.png);">
+        <!-- 강의 상세: 전자책처럼 이미지 표시 -->
+        <div class="section pt-1 pb-5 bg-attach-cover" style="background-image: url(image/bg_all.png); padding-top: 2.5rem !important; padding-bottom: 4rem !important;">
             <div class="r-container">
-                <div class="row row-cols-xl-2 row-cols-1 g-4">
+                <div class="row row-cols-1 g-4">
                     <div class="col">
-                        <div class="course-detail-media">
-                            <!-- 실제 연동 시 영상 URL로 교체 -->
-                            <img src="image/dummy-img-900x600.jpg" alt="강의 썸네일" id="courseThumb">
-                            <div class="play-overlay" id="playOverlay">
-                                <button type="button" class="btn-play" id="btnPlay" aria-label="재생">
-                                    <i class="fa-solid fa-play"></i>
-                                </button>
-                            </div>
-                            <!-- 재생 시 표시할 영상 영역 (숨김) -->
-                            <iframe id="courseVideo" src="" title="강의 영상" allowfullscreen style="display: none;"></iframe>
+                        <div class="course-detail-media" style="max-width: 560px;">
+                            <img src="image/6.jpg" alt="강의 커버" id="courseThumb">
                         </div>
                     </div>
                     <div class="col">
-                        <h1 class="mb-3">웹 개발 기초 – HTML, CSS, JavaScript</h1>
+                        <h2 class="h3 mb-3" id="courseTitleText">-</h2>
                         <div class="d-flex align-items-center gap-3">
                             <div class="rounded-circle overflow-hidden" style="width: 48px; height: 48px;">
-                                <img src="image/dummy-img-600x700.jpg" alt="강사" class="w-100 h-100 object-fit-cover">
+                                <img src="image/dummy-img-600x700.jpg" alt="강사" class="w-100 h-100 object-fit-cover" id="courseInstructorImg">
                             </div>
                             <div>
                                 <span class="d-block small text-secondary">강사</span>
-                                <strong>강사명</strong>
+                                <strong id="courseInstructorName">-</strong>
                             </div>
                         </div>
                         <div class="course-meta-row">
-                            <span class="meta-item"><i class="fa-regular fa-clock"></i> 약 8시간</span>
-                            <span class="meta-item"><i class="fa-regular fa-folder"></i> 24개 섹션</span>
-                            <span class="price text-accent fw-bold fs-5">무료</span>
+                            <span class="meta-item"><i class="fa-regular fa-clock"></i> <span id="courseDurationText">-</span></span>
+                            <span class="price text-accent fw-bold fs-5" id="coursePriceText">-</span>
                         </div>
                         <div class="mt-4">
                             <a href="#" class="btn btn-accent rounded-3 px-4 py-3 me-2">수강하기</a>
-                            <a href="course-list.html" class="btn btn-outline-accent rounded-3 px-4 py-3">목록으로</a>
+                            <a href="course-list.html" class="btn rounded-3 px-4 py-3" style="color: var(--accent-color); border: 1px solid var(--accent-color); background: transparent;">목록으로</a>
                         </div>
                         <div class="course-description">
                             <h6 class="text-accent mb-3">강의 소개</h6>
-                            <p>
-                                웹의 기본인 HTML, CSS, JavaScript를 처음부터 배웁니다. 태그와 스타일, 간단한 스크립트까지 다루며
-                                실제 웹 페이지를 만들 수 있는 기초를 쌓을 수 있습니다. 초보자도 따라 할 수 있도록 단계별로 구성했습니다.
-                            </p>
+                            <div id="courseDescriptionText" class="course-description-body text-white-50">-</div>
                         </div>
                     </div>
                 </div>
@@ -186,7 +157,7 @@
     </main>
 
     <!-- Footer -->
-    <footer id="footer" style="background: #111; color: #fff;">
+    <footer id="footer" style="background: #111; color: #fff; margin-top: auto;">
         <div class="r-container py-5">
             <div class="row g-4 align-items-start mb-5">
                 <div class="col-12 col-md-3 col-lg-2 text-start">
@@ -222,23 +193,96 @@
         </div>
     </footer>
 
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="js/header-auth.js"></script>
     <script src="js/vendor/jquery.min.js"></script>
     <script src="js/vendor/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
     <script src="js/submit-form.js"></script>
     <script>
-        // 재생 버튼 클릭 시 썸네일 숨기고 영상 표시 (예시: 유튜브 등 연동 가능)
-        document.getElementById('btnPlay')?.addEventListener('click', function () {
-            var overlay = document.getElementById('playOverlay');
-            var thumb = document.getElementById('courseThumb');
-            var video = document.getElementById('courseVideo');
-            if (overlay && thumb && video) {
-                overlay.style.display = 'none';
-                thumb.style.display = 'none';
-                video.style.display = 'block';
-                video.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1';
+        (function () {
+            var params = new URLSearchParams(window.location.search);
+            var courseId = params.get('id');
+            if (!courseId) return;
+
+            var firebaseConfig = {
+                apiKey: "AIzaSyCijM7nOf7xYPKevbOsRrrZTA6XwgODeIM",
+                authDomain: "boostclass-7d4fd.firebaseapp.com",
+                projectId: "boostclass-7d4fd",
+                storageBucket: "boostclass-7d4fd.firebasestorage.app",
+                messagingSenderId: "774803491487",
+                appId: "1:774803491487:web:daada5b95008a14c2730aa"
+            };
+
+            if (typeof firebase === 'undefined') return;
+            if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+            var db = firebase.firestore();
+
+            function formatPrice(n) {
+                if (n === 0) return '무료';
+                if (typeof n !== 'number') n = parseInt(n, 10) || 0;
+                return '₩' + Number(n).toLocaleString();
             }
-        });
+
+            function formatDuration(mins) {
+                var m = typeof mins === 'number' ? mins : parseInt(mins, 10) || 0;
+                if (!m) return '-';
+                if (m >= 60) {
+                    var h = Math.floor(m / 60);
+                    var r = m % 60;
+                    return '약 ' + h + '시간' + (r ? (' ' + r + '분') : '');
+                }
+                return '약 ' + m + '분';
+            }
+
+            db.collection('courses').doc(courseId).get().then(function (doc) {
+                if (!doc.exists) return;
+                var d = doc.data() || {};
+
+                var thumbEl = document.getElementById('courseThumb');
+                if (thumbEl) thumbEl.src = d.coverImageUrl || 'image/6.jpg';
+
+                var instructorImgEl = document.getElementById('courseInstructorImg');
+                if (instructorImgEl) instructorImgEl.src = d.instructorImageUrl || 'image/dummy-img-600x700.jpg';
+
+                var titleEl = document.getElementById('courseTitleText');
+                if (titleEl) titleEl.textContent = d.courseTitle || '-';
+
+                var instructorNameEl = document.getElementById('courseInstructorName');
+                if (instructorNameEl) instructorNameEl.textContent = d.courseInstructor || '-';
+
+                var durationEl = document.getElementById('courseDurationText');
+                if (durationEl) durationEl.textContent = formatDuration(d.duration);
+
+                var priceEl = document.getElementById('coursePriceText');
+                if (priceEl) {
+                    var original = (typeof d.priceOriginal === 'number') ? d.priceOriginal : 0;
+                    var sale = (typeof d.priceSale === 'number') ? d.priceSale : 0;
+                    var hasDiscount = original > sale && original > 0;
+                    if (hasDiscount) {
+                        priceEl.innerHTML =
+                            '<span class="text-decoration-line-through text-secondary me-1">' + formatPrice(original) + '</span> ' +
+                            formatPrice(sale);
+                    } else {
+                        priceEl.textContent = formatPrice(sale);
+                    }
+                }
+
+                var descEl = document.getElementById('courseDescriptionText');
+                if (descEl) {
+                    var desc = d.courseDesc || '';
+                    if (desc.indexOf('<') !== -1 && desc.indexOf('>') !== -1) {
+                        descEl.innerHTML = desc;
+                    } else {
+                        descEl.textContent = desc || '-';
+                    }
+                }
+            }).catch(function () {
+                // 화면은 기본 더미값으로 유지
+            });
+        })();
     </script>
 </body>
 

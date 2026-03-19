@@ -4,11 +4,34 @@
 var Board = (function () {
   var DATA_URL = { free: 'data/free-board.json', paid: 'data/paid-board.json' };
 
+  var FIRESTORE_COLLECTION = { free: 'diet_free_posts', paid: 'diet_paid_posts' };
+  var FIREBASE_CONFIG = {
+    apiKey: "AIzaSyCijM7nOf7xYPKevbOsRrrZTA6XwgODeIM",
+    authDomain: "boostclass-7d4fd.firebaseapp.com",
+    projectId: "boostclass-7d4fd",
+    storageBucket: "boostclass-7d4fd.firebasestorage.app",
+    messagingSenderId: "774803491487",
+    appId: "1:774803491487:web:daada5b95008a14c2730aa"
+  };
+
   function getDataUrl(type) {
     return DATA_URL[type] || DATA_URL.free;
   }
 
   var PER_PAGE = 15;
+  var LOAD_TIMEOUT_MS = 12000;
+
+  function promiseWithTimeout(promise, ms) {
+    return new Promise(function (resolve, reject) {
+      var t = setTimeout(function () {
+        reject(new Error('시간 초과'));
+      }, ms);
+      promise.then(
+        function (v) { clearTimeout(t); resolve(v); },
+        function (e) { clearTimeout(t); reject(e); }
+      );
+    });
+  }
 
   function getPageFromUrl() {
     var p = new URLSearchParams(window.location.search).get('page');
@@ -29,10 +52,12 @@ var Board = (function () {
     if (!listWrap) listWrap = container;
     var page = getPageFromUrl();
     var baseUrl = getListBaseUrl();
-    listWrap.innerHTML = '<p class="text-white-50">불러오는 중...</p>';
-    fetch(getDataUrl(type))
-      .then(function (res) { return res.json(); })
-      .then(function (items) {
+    listWrap.innerHTML = '';
+
+    var hasFirestore = (typeof firebase !== "undefined" && firebase.firestore);
+    var loadPromise = hasFirestore ? loadListFromFirestore(type) : loadListFromJson(type);
+
+    loadPromise.then(function (items) {
         if (!items || !items.length) {
           listWrap.innerHTML = '<p class="text-white-50">등록된 글이 없습니다.</p>';
           return;
@@ -85,9 +110,70 @@ var Board = (function () {
         html += '<a href="' + nextUrl + '" class="board-pagination-arrow' + (page >= totalPages ? ' is-disabled' : '') + '" aria-label="다음">&#10095;</a>';
         html += '</div></nav>';
         listWrap.innerHTML = html;
-      })
-      .catch(function () {
-        listWrap.innerHTML = '<p class="text-white-50">목록을 불러올 수 없습니다.</p>';
+      }).catch(function () {
+        listWrap.innerHTML = '<p class="text-white-50">목록을 불러올 수 없습니다. 새로고침 해 주세요.</p>';
+      });
+  }
+
+  function formatDate(ts) {
+    if (!ts) return '';
+    if (ts.toDate) {
+      var d = ts.toDate();
+      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    }
+    return ts;
+  }
+
+  /** Firestore 문서에서 본문 문자열 추출 (필드명이 content가 아닐 때 대비) */
+  function getBoardBodyText(d) {
+    if (!d || typeof d !== 'object') return '';
+    var v = d.content;
+    if (v == null || v === '') v = d.body;
+    if (v == null || v === '') v = d.context;
+    if (v == null || v === '') v = d.description;
+    if (v == null) return '';
+    if (typeof v === 'object' && v !== null) return '';
+    return String(v);
+  }
+
+  function initFirebaseIfNeeded() {
+    if (typeof firebase === "undefined") return false;
+    if (!firebase.apps.length) firebase.initializeApp(FIREBASE_CONFIG);
+    return true;
+  }
+
+  function loadListFromJson(type) {
+    return fetch(getDataUrl(type)).then(function (res) { return res.json(); }).then(function (items) {
+      return items || [];
+    });
+  }
+
+  function loadListFromFirestore(type) {
+    if (!initFirebaseIfNeeded()) return Promise.reject(new Error('Firebase not found'));
+    var collectionName = FIRESTORE_COLLECTION[type] || FIRESTORE_COLLECTION.free;
+    var db = firebase.firestore();
+
+    return db
+      .collection(collectionName)
+      .get()
+      .then(function (snap) {
+        var items = [];
+        snap.forEach(function (doc) {
+          var d = doc.data() || {};
+          items.push({
+            id: doc.id,
+            title: d.title || '',
+            content: d.content || '',
+            createdAt: formatDate(d.createdAt)
+          });
+        });
+        // createdAt이 문자열일 수 있으니, 정렬은 원본 timestamp 기준으로 다시 한 번 시도
+        items.sort(function (a, b) {
+          // formatDate 후 문자열이므로, 없으면 0 처리
+          // (Firestore timestamp를 별도 들고 올 수 없으니 여기선 createdAt이 있는 항목 기준으로만 동작)
+          return (b.createdAt || '').localeCompare(a.createdAt || '');
+        });
+        return items;
       });
   }
 
@@ -95,26 +181,79 @@ var Board = (function () {
     var titleEl = document.getElementById(titleElId);
     var contentEl = document.getElementById(contentElId);
     if (!titleEl || !contentEl) return;
-    titleEl.textContent = '불러오는 중...';
-    contentEl.innerHTML = '';
+    titleEl.textContent = '';
+    contentEl.textContent = '';
     var dateEl = document.getElementById('board-detail-date');
-    fetch(getDataUrl(type))
-      .then(function (res) { return res.json(); })
-      .then(function (items) {
-        var post = (items || []).find(function (item) { return String(item.id) === String(id); });
-        if (!post) {
-          titleEl.textContent = '글을 찾을 수 없습니다.';
-          contentEl.innerHTML = '<p class="text-white-50"><a href="' + (type === 'paid' ? 'blog-post.html' : 'blog.html') + '">목록으로</a></p>';
+    var hasFirestore = (typeof firebase !== "undefined" && firebase.firestore);
+    if (hasFirestore) {
+      loadDetailFromFirestore(type, id, titleEl, contentEl, dateEl);
+    } else {
+      fetch(getDataUrl(type))
+        .then(function (res) { return res.json(); })
+        .then(function (items) {
+          var post = (items || []).find(function (item) { return String(item.id) === String(id); });
+          if (!post) {
+            titleEl.textContent = '글을 찾을 수 없습니다.';
+            contentEl.textContent = '';
+            if (dateEl) dateEl.textContent = '';
+            return;
+          }
+          titleEl.textContent = post.title;
+          if (dateEl) dateEl.textContent = post.createdAt || '';
+          contentEl.textContent = post.content || '';
+          contentEl.style.whiteSpace = 'pre-wrap';
+        })
+        .catch(function () {
+          titleEl.textContent = '오류';
+          contentEl.textContent = '글을 불러올 수 없습니다.';
           if (dateEl) dateEl.textContent = '';
-          return;
+        });
+    }
+  }
+
+  function loadDetailFromFirestore(type, id, titleEl, contentEl, dateEl) {
+    if (!initFirebaseIfNeeded()) {
+      titleEl.textContent = '오류';
+      contentEl.textContent = '글을 불러올 수 없습니다.';
+      if (dateEl) dateEl.textContent = '';
+      return;
+    }
+    var collectionName = FIRESTORE_COLLECTION[type] || FIRESTORE_COLLECTION.free;
+    var db = firebase.firestore();
+    db
+      .collection(collectionName)
+      .doc(id)
+      .get()
+      .then(function (doc) {
+        try {
+          if (!doc.exists) {
+            titleEl.textContent = '글을 찾을 수 없습니다.';
+            contentEl.textContent = '';
+            if (dateEl) dateEl.textContent = '';
+            return;
+          }
+
+          var d = doc.data() || {};
+          titleEl.textContent = d.title || '';
+          if (dateEl) dateEl.textContent = formatDate(d.createdAt);
+          var rawBody = getBoardBodyText(d);
+          if (rawBody.indexOf('<') !== -1 && rawBody.indexOf('>') !== -1) {
+            contentEl.innerHTML = '<div class="board-content board-content-html">' + rawBody + '</div>';
+            contentEl.style.whiteSpace = '';
+            contentEl.style.color = 'rgba(255,255,255,0.92)';
+          } else {
+            contentEl.textContent = rawBody;
+            contentEl.style.whiteSpace = 'pre-wrap';
+            contentEl.style.color = 'rgba(255,255,255,0.92)';
+          }
+        } catch (e) {
+          console.error(e);
+          contentEl.textContent = '본문 로딩 오류';
         }
-        titleEl.textContent = post.title;
-        if (dateEl) dateEl.textContent = post.createdAt || '';
-        contentEl.innerHTML = '<div class="board-content">' + lineBreaksToHtml(escapeHtml(post.content || '')) + '</div>';
       })
       .catch(function () {
         titleEl.textContent = '오류';
-        contentEl.innerHTML = '<p class="text-white-50">글을 불러올 수 없습니다.</p>';
+        contentEl.textContent = '글을 불러올 수 없습니다.';
         if (dateEl) dateEl.textContent = '';
       });
   }

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shishirraven/animate-on-scroll@v1.2/animation_utility.css">
+    <link rel="icon" type="image/x-icon" href="image/logo.png">
+    <title>마이페이지 - 부스트클래스</title>
+    <style>.mypage-stat-box:hover{background:#2a2a2a!important;}</style>
+</head>
+<body>
+    <!-- Header (메인과 동일) -->
+    <div id="header" class="fixed-top bg-accent-transparent glass-effect py-0" style="z-index: 9999;">
+        <nav class="navbar navbar-expand-xl">
+            <div class="r-container w-100 px-3 px-xl-5 d-flex flex-nowrap align-items-center">
+                <div class="logo-container flex-shrink-0">
+                    <a class="navbar-brand" href="index.html"><img src="image/logo.png" alt="" class="img-fluid" style="border-radius: 12px;"></a>
+                </div>
+                <button class="navbar-toggler flex-shrink-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa-solid fa-bars-staggered accent-color-2"></i>
+                </button>
+                <div class="collapse navbar-collapse flex-grow-1 flex-nowrap min-w-0" id="navbarNav">
+                    <ul class="navbar-nav ms-xl-4 ps-xl-5 me-auto mb-2 mb-xl-0 gap-1 py-2 py-xl-0 nav-links-nowrap">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">홈</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="course-list.html">강의 수강</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="ebook.html">전자책</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">사이트 바로가기</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="blog.html">무료 게시판</a></li>
+                                <li><a class="dropdown-item" href="blog-post.html">유료 게시판</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html#contact">문의</a>
+                        </li>
+                    </ul>
+                    <div class="mb-xl-0 mb-3 d-flex flex-xl-row flex-column gap-3 w-max-content ps-xl-3" id="headerAuthWrap">
+                        <div id="headerGuest" class="d-flex flex-xl-row flex-column gap-3 w-max-content">
+                            <a href="register.html" class="btn btn-accent accent d-flex flex-row gap-2 justify-content-center"><span>회원가입</span></a>
+                            <a href="login.html" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그인</span></a>
+                        </div>
+                        <div id="headerUser" class="d-flex flex-xl-row flex-column gap-3 w-max-content align-items-center d-none">
+                            <a href="mypage.html" class="text-accent text-decoration-none">마이페이지</a>
+                            <button type="button" id="btnHeaderLogout" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그아웃</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <main>
+        <section style="min-height: calc(100vh - 120px); padding: 7rem 0 3rem 0;">
+            <div class="r-container w-100 px-3 px-xl-5">
+                <div style="display: flex; flex-direction: row; width: 100%; min-height: 480px; gap: 0;">
+                    <aside style="width: 260px; flex-shrink: 0; background: transparent; padding: 2.5rem 1.5rem 2rem 1.5rem; text-align: left; border-right: 1px solid rgba(255,255,255,0.08); padding-right: 2rem;">
+                        <p style="font-size: 1rem; margin-bottom: 2.25rem; color: #fff;">안녕하세요 ❤️ <span id="mypageUserName">회원</span>님</p>
+                        <button type="button" disabled style="width: 100%; margin-bottom: 2rem; padding: 0.65rem 1rem; border: none; border-radius: 8px; font-weight: 500; color: #111; background: linear-gradient(78.12deg, #A9F8B5 0.32%, #DFF494 99.52%); cursor: pointer; opacity: 0.9;">정보수정</button>
+                        <div style="display: flex; gap: 0.75rem; margin-bottom: 2.25rem;">
+                            <a href="javascript:void(0)" class="mypage-stat-box" data-panel="wish" style="flex: 1; aspect-ratio: 1; min-width: 0; background: #252525; border-radius: 8px; padding: 0.6rem; text-align: center; text-decoration: none; color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.05);">
+                                <span style="font-size: 1.4rem; color: #A9F8B5; margin-bottom: 0.2rem;"><i class="fa-solid fa-heart"></i></span>
+                                <span style="font-size: 0.7rem; display: block; color: rgba(255,255,255,0.85);">찜상품</span>
+                                <span style="font-size: 0.95rem; font-weight: 600; margin-top: 0.15rem;">0</span>
+                            </a>
+                            <a href="javascript:void(0)" class="mypage-stat-box" data-panel="cart" style="flex: 1; aspect-ratio: 1; min-width: 0; background: #252525; border-radius: 8px; padding: 0.6rem; text-align: center; text-decoration: none; color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.05);">
+                                <span style="font-size: 1.4rem; color: #A9F8B5; margin-bottom: 0.2rem;"><i class="fa-solid fa-cart-shopping"></i></span>
+                                <span style="font-size: 0.7rem; display: block; color: rgba(255,255,255,0.85);">장바구니</span>
+                                <span style="font-size: 0.95rem; font-weight: 600; margin-top: 0.15rem;">0</span>
+                            </a>
+                            <a href="javascript:void(0)" class="mypage-stat-box" data-panel="alert" style="flex: 1; aspect-ratio: 1; min-width: 0; background: #252525; border-radius: 8px; padding: 0.6rem; text-align: center; text-decoration: none; color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.05);">
+                                <span style="font-size: 1.4rem; color: #A9F8B5; margin-bottom: 0.2rem;"><i class="fa-solid fa-bell"></i></span>
+                                <span style="font-size: 0.7rem; display: block; color: rgba(255,255,255,0.85);">알림</span>
+                                <span style="font-size: 0.95rem; font-weight: 600; margin-top: 0.15rem;">0</span>
+                            </a>
+                        </div>
+                        <button type="button" disabled style="width: 100%; padding: 0.65rem 1rem; border: none; border-radius: 8px; font-weight: 500; color: #111; background: linear-gradient(78.12deg, #A9F8B5 0.32%, #DFF494 99.52%); cursor: pointer; opacity: 0.9;">내강의 보기</button>
+                    </aside>
+                    <div id="mypageContentArea" style="flex: 1; min-height: 400px; padding: 2.5rem 2.5rem 3rem; overflow: auto;">
+                        <div id="mypageContentEmpty" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 320px; color: rgba(255,255,255,0.5); text-align: center; padding: 3rem 2rem;">
+                            <span style="font-size: 3rem; color: rgba(169,248,181,0.3); margin-bottom: 1.25rem;"><i class="fa-solid fa-hand-pointer"></i></span>
+                            <p class="mb-0" style="font-size: 1rem;">왼쪽 메뉴를 클릭하면 내용이 여기에 표시됩니다.</p>
+                        </div>
+                        <div id="mypageContentBody" class="d-none" style="min-height: 320px;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (메인과 동일) -->
+    <footer id="footer" style="background: #111; color: #fff;">
+        <div class="r-container py-5">
+            <div class="row g-4 align-items-start mb-5">
+                <div class="col-12 col-md-3 col-lg-2 text-start">
+                    <a href="index.html"><img src="image/logo.png" alt="부스트클래스" class="img-fluid" width="280" style="border-radius: 12px; max-width: 320px;"></a>
+                </div>
+                <div class="col-12 col-md-6 col-lg-7 text-start">
+                    <div class="d-flex flex-column gap-2 text-white-50 small">
+                        <p class="mb-0">회사명 : 부스트클래스 | 대표자 : 서배준 | 연락처 : 010-3673-6942</p>
+                        <p class="mb-0">사업자등록번호 : 152-74-00452 | 통신판매신고번호 : 제2024-충남천안-2840호</p>
+                        <p class="mb-0">주소 : 충청남도 천안시 서북구 월봉로 126, 901-17호(쌍용동, 대림프라자)</p>
+                        <p class="mb-0">개인정보보호 최고책임자 : 서배준 | 담당자 메일 : sprince1004@naver.com</p>
+                        <p class="mb-0">카카오뱅크 3333-32-0313102 부스트클래스</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-3 col-lg-3 text-start">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><a href="index.html#hero" class="text-white-50 text-decoration-none">홈</a></li>
+                        <li class="mb-2"><a href="course-list.html" class="text-white-50 text-decoration-none">강의 수강</a></li>
+                        <li class="mb-2"><a href="ebook.html" class="text-white-50 text-decoration-none">전자책</a></li>
+                        <li class="mb-2"><a href="about.html" class="text-white-50 text-decoration-none">사이트 바로가기</a></li>
+                        <li class="mb-2"><a href="blog.html" class="text-white-50 text-decoration-none">게시판</a></li>
+                        <li class="mb-2"><a href="index.html#contact" class="text-white-50 text-decoration-none">문의하기</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-4 border-top border-secondary d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+                <p class="mb-0 text-white-50 small">© Copyright 2025. All Rights Reserved 부스트클래스</p>
+                <div class="d-flex gap-3">
+                    <a href="#" class="text-white-50 text-decoration-none small" data-bs-toggle="modal" data-bs-target="#termsModal">이용약관</a>
+                    <a href="#" class="text-white-50 text-decoration-none small" data-bs-toggle="modal" data-bs-target="#privacyModal">개인정보처리방침</a>
+                    <span id="footerAdminLink" class="d-none"><a href="admin/xhtml/page-lock-screen.html" class="text-white-50 text-decoration-none small" target="_blank" rel="noopener">관리자</a></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/vendor/jquery.min.js"></script>
+    <script src="js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="js/header-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script>
+(function() {
+  var config = {
+    apiKey: "AIzaSyCijM7nOf7xYPKevbOsRrrZTA6XwgODeIM",
+    authDomain: "boostclass-7d4fd.firebaseapp.com",
+    projectId: "boostclass-7d4fd",
+    storageBucket: "boostclass-7d4fd.firebasestorage.app",
+    messagingSenderId: "774803491487",
+    appId: "1:774803491487:web:daada5b95008a14c2730aa"
+  };
+  if (typeof firebase === 'undefined') return;
+  firebase.initializeApp(config);
+  var auth = firebase.auth();
+  var db = firebase.firestore();
+  function updateHeader(user) {
+    var guest = document.getElementById('headerGuest');
+    var userEl = document.getElementById('headerUser');
+    if (!guest || !userEl) return;
+    if (user) {
+      guest.classList.add('d-none');
+      userEl.classList.remove('d-none');
+    } else {
+      guest.classList.remove('d-none');
+      userEl.classList.add('d-none');
+      window.location.href = 'index.html';
+    }
+  }
+  function setUserName(displayName) {
+    var el = document.getElementById('mypageUserName');
+    if (el) el.textContent = (displayName && displayName.trim()) ? displayName.trim() : '회원';
+  }
+  function loadUserName(uid) {
+    if (!uid) return;
+    var user = auth.currentUser;
+    if (user && user.displayName) {
+      setUserName(user.displayName);
+      return;
+    }
+    db.collection('member').doc(uid).get().then(function(doc) {
+      if (doc.exists && doc.data().displayName) setUserName(doc.data().displayName);
+    }).catch(function() {});
+  }
+  auth.onAuthStateChanged(function(user) {
+    updateHeader(user);
+    if (user) {
+      if (user.displayName) setUserName(user.displayName);
+      else loadUserName(user.uid);
+    }
+  });
+  document.getElementById('btnHeaderLogout') && document.getElementById('btnHeaderLogout').addEventListener('click', function() {
+    auth.signOut();
+    window.location.href = 'index.html';
+  });
+
+  var panelTitles = { wish: '찜상품', cart: '장바구니', alert: '알림' };
+  document.querySelectorAll('.mypage-stat-box').forEach(function(el) {
+    el.addEventListener('click', function(e) {
+      e.preventDefault();
+      var panel = el.getAttribute('data-panel');
+      var title = panelTitles[panel] || '메뉴';
+      var emptyEl = document.getElementById('mypageContentEmpty');
+      var bodyEl = document.getElementById('mypageContentBody');
+      if (!emptyEl || !bodyEl) return;
+      emptyEl.style.display = 'none';
+      bodyEl.classList.remove('d-none');
+      bodyEl.innerHTML = '<h5 style="margin-bottom: 1rem; color: #fff;">' + title + '</h5><p style="color: rgba(255,255,255,0.6);">내용 준비 중입니다.</p>';
+    });
+  });
+})();
+    </script>
+</body>
+</html>

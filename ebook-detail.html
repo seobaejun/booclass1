@@ -10,6 +10,8 @@
     <link rel="icon" type="image/x-icon" href="image/logo.png">
     <title>부스트클래스 - 전자책 상세</title>
     <style>
+        body { min-height: 100vh; display: flex; flex-direction: column; background: #111; }
+        body main { flex: 1; background: #1a1a1a; }
         .ebook-detail-media {
             position: relative;
             aspect-ratio: 16/10;
@@ -40,6 +42,8 @@
             padding-top: 1.5rem;
             border-top: 1px solid rgba(255,255,255,0.1);
         }
+        .ebook-intro-body { color: var(--bs-secondary, #888); line-height: 1.6; }
+        .ebook-intro-body img { max-width: 100%; height: auto; }
     </style>
 </head>
 
@@ -72,9 +76,15 @@
                         </li>
                         <li class="nav-item"><a class="nav-link" href="index.html#contact">문의</a></li>
                     </ul>
-                    <div class="mb-xl-0 mb-3 d-flex flex-xl-row flex-column gap-3 w-max-content ps-xl-3">
-                        <a href="" class="btn btn-accent accent d-flex flex-row gap-2 justify-content-center"><span>회원가입</span></a>
-                        <a href="" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그인</span></a>
+                    <div class="mb-xl-0 mb-3 d-flex flex-xl-row flex-column gap-3 w-max-content ps-xl-3" id="headerAuthWrap">
+                        <div id="headerGuest" class="d-flex flex-xl-row flex-column gap-3 w-max-content">
+                            <a href="register.html" class="btn btn-accent accent d-flex flex-row gap-2 justify-content-center"><span>회원가입</span></a>
+                            <a href="login.html" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그인</span></a>
+                        </div>
+                        <div id="headerUser" class="d-flex flex-xl-row flex-column gap-3 w-max-content align-items-center d-none">
+                            <a href="mypage.html" class="text-accent text-decoration-none">마이페이지</a>
+                            <button type="button" id="btnHeaderLogout" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그아웃</span></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -83,8 +93,8 @@
     <!-- End Header -->
 
     <main>
-        <!-- Breadcrumb -->
-        <div class="section pt-5" style="margin-top: 5em;">
+        <!-- Breadcrumb (헤더 아래로 내림) -->
+        <div class="section pt-2 pb-0" style="margin-top: 8rem; padding-top: 2rem !important; padding-bottom: 0.5rem !important;">
             <div class="r-container">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
@@ -97,19 +107,19 @@
         </div>
 
         <!-- 전자책 상세 -->
-        <div class="section bg-attach-cover" style="background-image: url(image/bg_all.png);">
+        <div class="section pt-1 pb-5 bg-attach-cover" style="background-image: url(image/bg_all.png); padding-top: 2.5rem !important; padding-bottom: 4rem !important;">
             <div class="r-container">
-                <div class="row row-cols-xl-2 row-cols-1 g-4">
+                <div class="row row-cols-1 g-4">
                     <div class="col">
-                        <div class="ebook-detail-media">
-                            <img src="image/dummy-img-900x600.jpg" alt="전자책 표지" id="ebookCover">
+                        <div class="ebook-detail-media" style="max-width: 560px;">
+                            <img src="image/10.jpg" alt="전자책 표지" id="ebookCover" onerror="this.src='image/10.jpg'">
                         </div>
                     </div>
                     <div class="col">
-                        <h1 class="mb-3" id="ebookTitle">단독웹 수익화 가이드 – 처음부터 실전까지</h1>
+                        <h2 class="h3 mb-3" id="ebookTitle">단독웹 수익화 가이드 – 처음부터 실전까지</h2>
                         <div class="d-flex align-items-center gap-3">
                             <div class="rounded-circle overflow-hidden" style="width: 48px; height: 48px;">
-                                <img src="image/dummy-img-600x700.jpg" alt="저자" class="w-100 h-100 object-fit-cover">
+                                <img id="ebookAuthorImage" src="image/dummy-img-600x700.jpg" alt="저자" class="w-100 h-100 object-fit-cover">
                             </div>
                             <div>
                                 <span class="d-block small text-secondary">저자</span>
@@ -117,17 +127,15 @@
                             </div>
                         </div>
                         <div class="ebook-meta-row">
-                            <span class="price text-accent fw-bold fs-5" id="ebookPrice">무료</span>
+                            <span id="ebookPrice" class="text-accent fw-bold fs-5">무료</span>
                         </div>
                         <div class="mt-4">
-                            <a href="#" class="btn btn-accent rounded-3 px-4 py-3 me-2">구매하기</a>
-                            <a href="ebook.html" class="btn btn-outline-accent rounded-3 px-4 py-3">목록으로</a>
+                            <a href="#" class="btn btn-accent rounded-3 px-4 py-3 me-2"><span>구매하기</span></a>
+                            <a href="ebook.html" class="btn btn-outline-accent rounded-3 px-4 py-3"><span>목록으로</span></a>
                         </div>
                         <div class="ebook-description">
                             <h6 class="text-accent mb-3">전자책 소개</h6>
-                            <p id="ebookDesc">
-                                단독웹을 활용한 수익화를 처음부터 실전까지 단계별로 안내합니다. 기획, 제작, 판매까지 한 번에 배울 수 있습니다.
-                            </p>
+                            <div id="ebookDesc" class="ebook-intro-body"></div>
                         </div>
                     </div>
                 </div>
@@ -136,7 +144,7 @@
     </main>
 
     <!-- Footer -->
-    <footer id="footer" style="background: #111; color: #fff;">
+    <footer id="footer" style="background: #111; color: #fff; margin-top: auto;">
         <div class="r-container py-5">
             <div class="row g-4 align-items-start mb-5">
                 <div class="col-12 col-md-3 col-lg-2 text-start">
@@ -172,34 +180,15 @@
         </div>
     </footer>
 
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="js/header-auth.js"></script>
     <script src="js/vendor/jquery.min.js"></script>
     <script src="js/vendor/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
     <script src="js/submit-form.js"></script>
-    <script>
-        (function () {
-            var params = new URLSearchParams(window.location.search);
-            var id = params.get('id') || '1';
-            var data = {
-                '1': { title: '단독웹 수익화 가이드 – 처음부터 실전까지', author: '저자명', price: '무료', desc: '단독웹을 활용한 수익화를 처음부터 실전까지 단계별로 안내합니다. 기획, 제작, 판매까지 한 번에 배울 수 있습니다.' },
-                '2': { title: '전자책 기획과 집필 – 0원부터 수익 내기', author: '저자명', price: '₩9,900', desc: '전자책을 기획하고 집필하여 수익을 내는 방법을 0원부터 단계별로 설명합니다. 실전 노하우를 담았습니다.' },
-                '3': { title: '디지털 마케팅 전자책 – SNS·블로그 활용법', author: '저자명', price: '₩14,900', desc: 'SNS와 블로그를 활용한 디지털 마케팅과 전자책 연계 전략을 소개합니다. 실무에 바로 적용할 수 있는 내용입니다.' },
-                '4': { title: '부업 수익화 전자책 – 1인 창작 실전 노하우', author: '저자명', price: '₩7,900', desc: '1인 창작자에게 맞는 부업 수익화 방법과 전자책 제작·유통 실전 노하우를 공유합니다.' }
-            };
-            var item = data[id] || data['1'];
-            var breadcrumb = document.getElementById('ebookBreadcrumb');
-            var titleEl = document.getElementById('ebookTitle');
-            var authorEl = document.getElementById('ebookAuthor');
-            var priceEl = document.getElementById('ebookPrice');
-            var descEl = document.getElementById('ebookDesc');
-            if (breadcrumb) breadcrumb.textContent = item.title;
-            if (titleEl) titleEl.textContent = item.title;
-            if (authorEl) authorEl.textContent = item.author;
-            if (priceEl) priceEl.textContent = item.price;
-            if (descEl) descEl.textContent = item.desc;
-            document.title = '부스트클래스 - ' + item.title;
-        })();
-    </script>
+    <script src="js/ebook-detail.js"></script>
 </body>
 
 </html>

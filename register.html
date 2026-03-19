@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="image/logo.png">
+    <title>회원가입 - 부스트클래스</title>
+    <style>
+        .auth-section { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem 0; margin-top: 80px; }
+        .auth-card { max-width: 420px; width: 100%; }
+        .auth-card .form-control { padding: 0.75rem 1rem; }
+    </style>
+</head>
+<body>
+    <!-- 상단: 로고 없음, 홈으로만 -->
+    <div id="header" class="fixed-top bg-accent-transparent glass-effect py-0" style="z-index: 9999;">
+        <nav class="navbar navbar-expand-xl">
+            <div class="r-container w-100 px-3 px-xl-5 d-flex align-items-center justify-content-end">
+                <a href="index.html" class="btn btn-accent">홈으로</a>
+            </div>
+        </nav>
+    </div>
+
+    <section class="auth-section">
+        <div class="auth-card">
+            <h2 class="text-center mb-2">회원가입</h2>
+            <p class="text-center text-white-50 mb-4">부스트클래스 계정을 만드세요</p>
+            <div id="registerError" class="alert alert-danger d-none mb-3" role="alert"></div>
+            <form id="registerForm" novalidate>
+                <div class="mb-3">
+                    <label for="registerDisplayName" class="form-label">이름 <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control bg-dark text-white border-secondary" id="registerDisplayName" placeholder="홍길동" required autocomplete="name">
+                </div>
+                <div class="mb-3">
+                    <label for="registerPhone" class="form-label">전화번호 <span class="text-danger">*</span></label>
+                    <input type="tel" class="form-control bg-dark text-white border-secondary" id="registerPhone" placeholder="010-0000-0000" required autocomplete="tel">
+                </div>
+                <div class="mb-3">
+                    <label for="registerEmail" class="form-label">아이디(이메일) <span class="text-danger">*</span></label>
+                    <input type="email" class="form-control bg-dark text-white border-secondary" id="registerEmail" placeholder="이메일을 입력하세요" required autocomplete="email">
+                </div>
+                <div class="mb-3">
+                    <label for="registerPassword" class="form-label">비밀번호 <span class="text-danger">*</span></label>
+                    <input type="password" class="form-control bg-dark text-white border-secondary" id="registerPassword" placeholder="6자 이상" required autocomplete="new-password" minlength="6">
+                </div>
+                <div class="mb-3">
+                    <label for="registerPasswordConfirm" class="form-label">비밀번호 확인 <span class="text-danger">*</span></label>
+                    <input type="password" class="form-control bg-dark text-white border-secondary" id="registerPasswordConfirm" placeholder="비밀번호 다시 입력" required minlength="6">
+                </div>
+                <button type="submit" class="btn btn-accent w-100 py-3 mb-3" id="btnRegisterSubmit">회원가입</button>
+            </form>
+            <p class="text-center mt-4 text-white-50">이미 계정이 있으신가요? <a href="login.html" class="text-accent">로그인</a></p>
+        </div>
+    </section>
+
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script>
+// Firestore: Firebase Console에서 Firestore DB 생성 후, 규칙에서 member 컬렉션 쓰기 허용 필요
+(function() {
+  var config = {
+    apiKey: "AIzaSyCijM7nOf7xYPKevbOsRrrZTA6XwgODeIM",
+    authDomain: "boostclass-7d4fd.firebaseapp.com",
+    projectId: "boostclass-7d4fd",
+    storageBucket: "boostclass-7d4fd.firebasestorage.app",
+    messagingSenderId: "774803491487",
+    appId: "1:774803491487:web:daada5b95008a14c2730aa"
+  };
+  if (typeof firebase === 'undefined') {
+    var errEl = document.getElementById('registerError');
+    if (errEl) { errEl.textContent = 'Firebase를 불러올 수 없습니다.'; errEl.classList.remove('d-none'); }
+    return;
+  }
+  firebase.initializeApp(config);
+  var auth = firebase.auth();
+  var db = firebase.firestore();
+  var registrationInProgress = false;
+
+  function errMsg(code) {
+    var map = {
+      'auth/email-already-in-use': '이미 사용 중인 이메일입니다.',
+      'auth/invalid-email': '올바른 이메일이 아닙니다.',
+      'auth/weak-password': '비밀번호는 6자 이상이어야 합니다.',
+      'auth/popup-closed-by-user': '창이 닫혔습니다.',
+      'auth/popup-blocked': '팝업을 허용해 주세요.',
+      'auth/operation-not-allowed': '이 로그인 방식이 비활성화되어 있습니다.',
+      'permission-denied': '데이터베이스 쓰기 권한이 없습니다. Firebase 콘솔에서 member 컬렉션 규칙을 확인해 주세요.'
+    };
+    return map[code] || (code || '오류가 발생했습니다.');
+  }
+
+  function saveMemberToFirestore(uid, email, displayName, phone) {
+    return db.collection('member').doc(uid).set({
+      email: email,
+      displayName: displayName || '',
+      phone: phone || '',
+      memberType: '',
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  }
+
+  window.doRegister = function() {
+    var nameEl = document.getElementById('registerDisplayName');
+    var phoneEl = document.getElementById('registerPhone');
+    var emailEl = document.getElementById('registerEmail');
+    var pwEl = document.getElementById('registerPassword');
+    var pw2El = document.getElementById('registerPasswordConfirm');
+    var errEl = document.getElementById('registerError');
+    var btn = document.getElementById('btnRegisterSubmit');
+    if (!emailEl || !pwEl || !errEl || !btn) return;
+    var displayName = (nameEl && nameEl.value) ? nameEl.value.trim() : '';
+    var phone = (phoneEl && phoneEl.value) ? phoneEl.value.trim() : '';
+    var email = (emailEl.value || '').trim();
+    var password = pwEl.value || '';
+    var password2 = (pw2El && pw2El.value) || '';
+    errEl.classList.add('d-none');
+    if (!displayName) { errEl.textContent = '이름을 입력해 주세요.'; errEl.classList.remove('d-none'); return; }
+    if (!phone) { errEl.textContent = '전화번호를 입력해 주세요.'; errEl.classList.remove('d-none'); return; }
+    if (!email || !password) { errEl.textContent = '아이디(이메일)와 비밀번호를 입력해 주세요.'; errEl.classList.remove('d-none'); return; }
+    if (password.length < 6) { errEl.textContent = '비밀번호는 6자 이상이어야 합니다.'; errEl.classList.remove('d-none'); return; }
+    if (password !== password2) { errEl.textContent = '비밀번호가 일치하지 않습니다.'; errEl.classList.remove('d-none'); return; }
+    btn.disabled = true;
+    btn.textContent = '가입 중…';
+    registrationInProgress = true;
+    auth.createUserWithEmailAndPassword(email, password)
+      .then(function(cred) {
+        var user = cred.user;
+        return user.updateProfile({ displayName: displayName }).then(function() {
+          return saveMemberToFirestore(user.uid, email, displayName, phone).then(function() { return cred; });
+        });
+      })
+      .then(function() { window.location.href = 'index.html'; })
+      .catch(function(e) {
+        var msg = (e && e.code && e.code.indexOf('auth/') === 0) ? errMsg(e.code) : (e && e.message ? e.message : '저장 중 오류가 발생했습니다.');
+        errEl.textContent = msg;
+        errEl.classList.remove('d-none');
+      })
+      .finally(function() {
+        registrationInProgress = false;
+        btn.disabled = false;
+        btn.textContent = '회원가입';
+      });
+  };
+
+  function init() {
+    auth.onAuthStateChanged(function(user) {
+      if (user && !registrationInProgress) window.location.href = 'index.html';
+    });
+    var form = document.getElementById('registerForm');
+    var btn = document.getElementById('btnRegisterSubmit');
+    if (form) form.addEventListener('submit', function(e) { e.preventDefault(); window.doRegister(); });
+    if (btn) btn.addEventListener('click', window.doRegister);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else setTimeout(init, 0);
+})();
+    </script>
+</body>
+</html>

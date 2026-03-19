@@ -36,9 +36,15 @@
                         </li>
                         <li class="nav-item"><a class="nav-link" href="index.html#contact">문의</a></li>
                     </ul>
-                    <div class="mb-xl-0 mb-3 d-flex flex-xl-row flex-column gap-3 w-max-content ps-xl-3">
-                        <a href="" class="btn btn-accent accent d-flex flex-row gap-2 justify-content-center"><span>회원가입</span></a>
-                        <a href="" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그인</span></a>
+                    <div class="mb-xl-0 mb-3 d-flex flex-xl-row flex-column gap-3 w-max-content ps-xl-3" id="headerAuthWrap">
+                        <div id="headerGuest" class="d-flex flex-xl-row flex-column gap-3 w-max-content">
+                            <a href="register.html" class="btn btn-accent accent d-flex flex-row gap-2 justify-content-center"><span>회원가입</span></a>
+                            <a href="login.html" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그인</span></a>
+                        </div>
+                        <div id="headerUser" class="d-flex flex-xl-row flex-column gap-3 w-max-content align-items-center d-none">
+                            <a href="mypage.html" class="text-accent text-decoration-none">마이페이지</a>
+                            <button type="button" id="btnHeaderLogout" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그아웃</span></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -56,7 +62,7 @@
                         <strong id="board-detail-title" class="text-white board-detail-title"></strong>
                         <span>작성일 : <span id="board-detail-date"></span></span>
                     </div>
-                    <div id="board-detail-content" class="board-detail-content text-body"></div>
+                    <div id="board-detail-content" class="board-detail-content text-white"></div>
                 </div>
             </div>
         </div>
@@ -98,9 +104,13 @@
         </div>
     </footer>
 
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="js/header-auth.js"></script>
     <script src="js/vendor/jquery.min.js"></script>
     <script src="js/vendor/bootstrap.bundle.min.js"></script>
-    <script src="js/board.js"></script>
+    <script src="js/board.js?v=9"></script>
     <script>
       (function () {
         var params = new URLSearchParams(window.location.search);
@@ -108,10 +118,32 @@
         var id = params.get('id');
         var backLink = document.getElementById('board-back-link');
         if (backLink) backLink.href = type === 'paid' ? 'blog-post.html' : 'blog.html';
-        if (id) Board.loadDetail(type, id, 'board-detail-title', 'board-detail-content');
-        else {
-          document.getElementById('board-detail-title').textContent = '글을 찾을 수 없습니다.';
-          document.getElementById('board-detail-content').innerHTML = '<a href="' + (type === 'paid' ? 'blog-post.html' : 'blog.html') + '">목록으로</a>';
+
+        var titleEl = document.getElementById('board-detail-title');
+        var contentEl = document.getElementById('board-detail-content');
+        var listUrl = type === 'paid' ? 'blog-post.html' : 'blog.html';
+        var noContentHtml = '<p class="text-white-50 mb-0">목록에서 글을 선택해 주세요.</p><a href="' + listUrl + '" class="text-accent">목록으로</a>';
+
+        if (!id) {
+          if (titleEl) titleEl.textContent = '글을 찾을 수 없습니다.';
+          if (contentEl) contentEl.innerHTML = '<a href="' + listUrl + '">목록으로</a>';
+          return;
+        }
+
+        function tryLoad() {
+          if (typeof firebase === 'undefined' || !firebase.firestore) return false;
+          Board.loadDetail(type, id, 'board-detail-title', 'board-detail-content');
+          return true;
+        }
+
+        if (!tryLoad()) {
+          var attempts = 0;
+          var t = setInterval(function () {
+            if (tryLoad() || ++attempts > 50) {
+              clearInterval(t);
+              if (attempts > 50 && contentEl) contentEl.textContent = '새로고침 해 주세요.';
+            }
+          }, 100);
         }
       })();
     </script>

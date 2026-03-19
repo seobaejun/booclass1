@@ -103,3 +103,16 @@ body .card.course-card .card-title a:hover,
 body .card.ebook-card .card-title a:hover {
     color: var(--accent-color, #DDF247) !important;
 }
+
+/* 강사(작성자) 이미지/이름 크기 확대: 강의수강 + 전자책 카드 공통 */
+body .card.course-card .author-row .avatar,
+body .card.ebook-card .author-row .avatar {
+    width: 44px !important;
+    height: 44px !important;
+}
+
+body .card.course-card .author-row .author-name,
+body .card.ebook-card .author-row .author-name {
+    font-size: 1.05rem !important;
+    color: var(--bs-secondary, #888) !important;
+}

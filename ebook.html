@@ -142,9 +142,15 @@
                         </li>
                         <li class="nav-item"><a class="nav-link" href="index.html#contact">문의</a></li>
                     </ul>
-                    <div class="mb-xl-0 mb-3 d-flex flex-xl-row flex-column gap-3 w-max-content ps-xl-3">
-                        <a href="" class="btn btn-accent accent d-flex flex-row gap-2 justify-content-center"><span>회원가입</span></a>
-                        <a href="" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그인</span></a>
+                    <div class="mb-xl-0 mb-3 d-flex flex-xl-row flex-column gap-3 w-max-content ps-xl-3" id="headerAuthWrap">
+                        <div id="headerGuest" class="d-flex flex-xl-row flex-column gap-3 w-max-content">
+                            <a href="register.html" class="btn btn-accent accent d-flex flex-row gap-2 justify-content-center"><span>회원가입</span></a>
+                            <a href="login.html" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그인</span></a>
+                        </div>
+                        <div id="headerUser" class="d-flex flex-xl-row flex-column gap-3 w-max-content align-items-center d-none">
+                            <a href="mypage.html" class="text-accent text-decoration-none">마이페이지</a>
+                            <button type="button" id="btnHeaderLogout" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그아웃</span></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -162,103 +168,9 @@
                     <h3>전자책 플랜</h3>
                     <p class="mx-auto" style="max-width: 600px;">원하는 전자책을 선택하고 읽어보세요.</p>
                 </div>
-                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 row-cols-xxl-4 g-4">
-                    <div class="col">
-                        <div class="card ebook-card">
-                            <div class="card-media">
-                                <a href="ebook-detail.html?id=1"><img src="image/dummy-img-900x600.jpg" alt="단독웹 수익화 가이드"></a>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-title-wrap">
-                                    <h5 class="card-title"><a href="ebook-detail.html?id=1">단독웹 수익화 가이드 – 처음부터 실전까지</a></h5>
-                                    <p class="card-desc">단독웹 기획부터 수익화까지 한 번에</p>
-                                </div>
-                                <div class="author-row">
-                                    <div class="avatar"><img src="image/dummy-img-600x700.jpg" alt=""></div>
-                                    <span class="author-name">저자명</span>
-                                </div>
-                                <div class="meta-row">
-                                    <span class="price">무료</span>
-                                    <a href="ebook-detail.html?id=1" class="btn btn-sm btn-outline-accent rounded-3">자세히</a>
-                                </div>
-                                <div class="mt-3">
-                                    <a href="ebook-detail.html?id=1" class="btn btn-accent rounded-3 w-100">구매하기</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card ebook-card">
-                            <div class="card-media">
-                                <a href="ebook-detail.html?id=2"><img src="image/dummy-img-900x600.jpg" alt="전자책 기획과 집필"></a>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-title-wrap">
-                                    <h5 class="card-title"><a href="ebook-detail.html?id=2">전자책 기획과 집필 – 0원부터 수익 내기</a></h5>
-                                    <p class="card-desc">전자책 기획·집필부터 수익화 노하우</p>
-                                </div>
-                                <div class="author-row">
-                                    <div class="avatar"><img src="image/dummy-img-600x700.jpg" alt=""></div>
-                                    <span class="author-name">저자명</span>
-                                </div>
-                                <div class="meta-row">
-                                    <span class="price">₩9,900</span>
-                                    <a href="ebook-detail.html?id=2" class="btn btn-sm btn-outline-accent rounded-3">자세히</a>
-                                </div>
-                                <div class="mt-3">
-                                    <a href="ebook-detail.html?id=2" class="btn btn-accent rounded-3 w-100">구매하기</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card ebook-card">
-                            <div class="card-media">
-                                <a href="ebook-detail.html?id=3"><img src="image/dummy-img-900x600.jpg" alt="디지털 마케팅 전자책"></a>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-title-wrap">
-                                    <h5 class="card-title"><a href="ebook-detail.html?id=3">디지털 마케팅 전자책 – SNS·블로그 활용법</a></h5>
-                                    <p class="card-desc">SNS·블로그로 전자책 마케팅하기</p>
-                                </div>
-                                <div class="author-row">
-                                    <div class="avatar"><img src="image/dummy-img-600x700.jpg" alt=""></div>
-                                    <span class="author-name">저자명</span>
-                                </div>
-                                <div class="meta-row">
-                                    <span class="price">₩14,900</span>
-                                    <a href="ebook-detail.html?id=3" class="btn btn-sm btn-outline-accent rounded-3">자세히</a>
-                                </div>
-                                <div class="mt-3">
-                                    <a href="ebook-detail.html?id=3" class="btn btn-accent rounded-3 w-100">구매하기</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card ebook-card">
-                            <div class="card-media">
-                                <a href="ebook-detail.html?id=4"><img src="image/dummy-img-900x600.jpg" alt="부업 수익화 전자책"></a>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-title-wrap">
-                                    <h5 class="card-title"><a href="ebook-detail.html?id=4">부업 수익화 전자책 – 1인 창작 실전 노하우</a></h5>
-                                    <p class="card-desc">1인 창작자 부업 수익화 실전</p>
-                                </div>
-                                <div class="author-row">
-                                    <div class="avatar"><img src="image/dummy-img-600x700.jpg" alt=""></div>
-                                    <span class="author-name">저자명</span>
-                                </div>
-                                <div class="meta-row">
-                                    <span class="price">₩7,900</span>
-                                    <a href="ebook-detail.html?id=4" class="btn btn-sm btn-outline-accent rounded-3">자세히</a>
-                                </div>
-                                <div class="mt-3">
-                                    <a href="ebook-detail.html?id=4" class="btn btn-accent rounded-3 w-100">구매하기</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 row-cols-xxl-4 g-4" id="ebookListContainer">
+                    <!-- Firestore에서 로드된 카드가 여기 채워집니다. 데이터 없을 때만 아래 플레이스홀더 표시 -->
+                    <div class="col-12 text-center py-5 text-secondary d-none" id="ebookListEmpty">등록된 전자책이 없습니다.</div>
                 </div>
             </div>
         </div>
@@ -303,6 +215,10 @@
 
 
     <!-- Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="js/header-auth.js"></script>
     <script src="js/vendor/jquery.min.js"></script>
     <script src="js/vendor/bootstrap.bundle.min.js"></script>
     <script src="js/vendor/swiper-bundle.min.js"></script>
@@ -312,8 +228,8 @@
     <script src="js/vendor/isotope.pkgd.min.js"></script>
     <script src="js/video_embedded.js"></script>
     <script src="js/vendor/fslightbox.js"></script>
-    <script
-        src="https://cdn.jsdelivr.net/gh/shishirraven/animate-on-scroll@v1.0/oyethemes_onscroll_animation.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/shishirraven/animate-on-scroll@v1.0/oyethemes_onscroll_animation.js"></script>
+    <script src="js/ebook-list.js"></script>
 </body>
 
 </html>
