@@ -448,10 +448,10 @@ var Akademi  = function(){
 
    
    var handelBootstrapSelect = function(){
-	   /* Bootstrap Select box function by  = bootstrap-select.min.js */ 
-	   if(jQuery('select').length > 0){
-	   
-		   jQuery('select').selectpicker();
+	   /* Bootstrap Select box function by  = bootstrap-select.min.js */
+	   var $bsSelects = jQuery("select:not(.boostclass-native-select)");
+	   if ($bsSelects.length > 0) {
+		   $bsSelects.selectpicker();
 	   /* Bootstrap Select box function by  = bootstrap-select.min.js end*/
 	   }
    }
