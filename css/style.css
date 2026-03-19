@@ -4272,6 +4272,33 @@ a:hover .icon-box-2 {
     #footer .r-container .row.g-4 > div:nth-child(3) {
         display: none !important;
     }
+    /* 하단 푸터: 로고 크기, 하단 카피라인 줄 왼쪽 정렬 (좌우 여백은 max-width 993px 블록의 .r-container) */
+    #footer .footer-logo-img {
+        max-width: 168px !important;
+        width: auto !important;
+        height: auto !important;
+    }
+    #footer .r-container > .border-top.d-flex {
+        align-items: flex-start !important;
+        text-align: left;
+    }
+    #footer .r-container > .border-top .d-flex.gap-3 {
+        justify-content: flex-start !important;
+        flex-wrap: wrap;
+    }
+}
+
+/* 태블릿·모바일: 푸터 전체 좌우 여백 + 사업자 텍스트 왼쪽 정렬 */
+@media only screen and (max-width: 993px) {
+    #footer .r-container {
+        padding-left: 1.65rem !important;
+        padding-right: 1.65rem !important;
+    }
+    #footer .r-container .row.g-4 > div:nth-child(2) .d-flex.flex-column {
+        text-align: left !important;
+        justify-content: flex-start !important;
+        align-items: flex-start !important;
+    }
 }
 
 @media only screen and (max-width:993px) {
