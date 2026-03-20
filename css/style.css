@@ -2730,6 +2730,24 @@ a:hover .icon-box-2 {
     text-align: right;
 }
 
+/* 모바일에서는 제목 공간 확보를 위해 작성일 숨김 (무료/유료 공통) */
+@media (max-width: 767.98px) {
+    .board-list-table {
+        --board-col-no: 52px;
+        --board-col-date: 0px;
+    }
+
+    .board-list-table .board-list-header,
+    .board-list-table .board-list-row {
+        grid-template-columns: var(--board-col-no) 1fr;
+        gap: 10px;
+    }
+
+    .board-list-table .board-list-col-date {
+        display: none;
+    }
+}
+
 /* ---------------------------- */
 /* Specific Media Queries       */
 /* ---------------------------- */
