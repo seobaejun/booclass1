@@ -1,5 +1,9 @@
 /**
  * 관리자 전자책 업로드: 저자/표지 이미지·전자책 파일 → Storage 업로드, 메타데이터 → Firestore 저장
+ * ?edit=문서ID 로 수정 모드 (강의 등록 course-register-admin.js 와 동일 패턴)
+ *
+ * 수정 시 소개 HTML은 Firestore 비동기 로드 후 setHTML이 아니라 RichEditorAdmin.create({ initialValue })로
+ * 주입한다. Toast UI Editor는 마운트 이후 비동기 setHTML이 무시되는 경우가 있어 강의 수정과 동작이 달랐음.
  */
 (function () {
   var firebaseConfig = {
@@ -13,10 +17,25 @@
 
   var STORAGE_PREFIX = "ebooks";
 
+  function resolveIntroHtml(d) {
+    if (!d || typeof d !== "object") return "";
+    var v = d.intro;
+    if (v == null || v === "") v = d.description;
+    if (v == null || v === "") v = d.content;
+    if (v == null || v === "") v = d.ebookIntro;
+    if (v == null) return "";
+    return typeof v === "string" ? v : String(v);
+  }
+
   function runWhenReady() {
     var form = document.getElementById("ebookUploadForm");
     var btnSubmit = document.getElementById("btnEbookSubmit");
     if (!form || !btnSubmit) return;
+
+    var editEbookId = (new URLSearchParams(window.location.search)).get("edit") || "";
+    var currentEbookDoc = null;
+    var editorInstance = null;
+    var isEditDataReady = !editEbookId;
 
     function showMessage(msg, isError) {
       var existing = form.querySelector(".alert");
@@ -37,18 +56,21 @@
     var storage = firebase.storage();
 
     var btnCancel = document.getElementById("btnEbookCancel");
-    var editorInstance = null;
 
-    function initEditor() {
+    /**
+     * 에디터는 페이지당 1회만 생성. 수정 모드에서는 Firestore에서 받은 HTML을 initialValue로 넣는다.
+     * @param {object|null} introSource - intro 필드를 가진 문서 또는 null(신규)
+     */
+    function initEditor(introSource) {
       try {
-        if (typeof RichEditorAdmin !== "undefined" && document.getElementById("ebookIntroEditor")) {
-          editorInstance = RichEditorAdmin.create({
-            containerId: "ebookIntroEditor",
-            height: "320px",
-            storage: storage,
-            storagePathPrefix: "ebooks/editor-images"
-          });
-        }
+        if (typeof RichEditorAdmin === "undefined" || !document.getElementById("ebookIntroEditor")) return;
+        editorInstance = RichEditorAdmin.create({
+          containerId: "ebookIntroEditor",
+          height: "320px",
+          storage: storage,
+          storagePathPrefix: "ebooks/editor-images",
+          initialValue: resolveIntroHtml(introSource)
+        });
       } catch (e) {
         console.warn("에디터 초기화 실패:", e);
       }
@@ -57,6 +79,58 @@
     function getIntroHtml() {
       if (editorInstance && editorInstance.getHTML) return editorInstance.getHTML() || "";
       return "";
+    }
+
+    function fillEbookFields(d) {
+      if (!d) return;
+      var el = function (id) { return document.getElementById(id); };
+      if (el("ebookTitle")) el("ebookTitle").value = d.title || "";
+      if (el("ebookAuthor")) el("ebookAuthor").value = d.authorName || "";
+      if (el("ebookPriceOriginal")) {
+        el("ebookPriceOriginal").value = d.priceOriginal !== undefined && d.priceOriginal !== null ? String(d.priceOriginal) : "";
+      }
+      if (el("ebookPriceSale")) {
+        el("ebookPriceSale").value = d.priceSale !== undefined && d.priceSale !== null ? String(d.priceSale) : "";
+      }
+    }
+
+    function beginEditLoad() {
+      if (!editEbookId) {
+        initEditor(null);
+        return;
+      }
+      isEditDataReady = false;
+      btnSubmit.disabled = true;
+      btnSubmit.textContent = "불러오는 중…";
+
+      db.collection("ebooks")
+        .doc(editEbookId)
+        .get()
+        .then(function (doc) {
+          if (!doc.exists) {
+            showMessage("전자책을 찾을 수 없습니다.", true);
+            initEditor(null);
+            btnSubmit.textContent = "전자책 업로드";
+            btnSubmit.disabled = false;
+            return;
+          }
+          currentEbookDoc = doc.data() || {};
+          initEditor(currentEbookDoc);
+          fillEbookFields(currentEbookDoc);
+          btnSubmit.textContent = "전자책 수정";
+          btnSubmit.disabled = false;
+          isEditDataReady = true;
+          var cardTitle = document.getElementById("ebookUploadCardTitle");
+          if (cardTitle) cardTitle.textContent = "전자책 수정";
+        })
+        .catch(function (err) {
+          console.error(err);
+          showMessage("전자책 불러오기 실패: " + (err.message || err), true);
+          initEditor(null);
+          btnSubmit.textContent = "전자책 업로드";
+          btnSubmit.disabled = false;
+          isEditDataReady = false;
+        });
     }
 
     function uniqueId() {
@@ -82,31 +156,43 @@
       });
     }
 
-    function saveEbook(payload) {
-      var data = {
-        title: payload.title,
-        authorName: payload.authorName,
-        authorImageUrl: payload.authorImageUrl || "",
-        coverImageUrl: payload.coverImageUrl || "",
-        ebookFileUrl: payload.ebookFileUrl || "",
-        priceOriginal: payload.priceOriginal,
-        priceSale: payload.priceSale,
-        intro: payload.intro || "",
-        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        order: payload.order
-      };
-      return db.collection("ebooks").add(data);
-    }
+    beginEditLoad();
 
     if (btnCancel) {
       btnCancel.addEventListener("click", function () {
-        form.reset();
-        if (editorInstance && editorInstance.setHTML) editorInstance.setHTML("");
+        if (editEbookId && currentEbookDoc) {
+          fillEbookFields(currentEbookDoc);
+          form.querySelectorAll('input[type="file"]').forEach(function (inp) {
+            inp.value = "";
+          });
+          if (editorInstance && editorInstance.setHTML) {
+            var html = resolveIntroHtml(currentEbookDoc);
+            editorInstance.setHTML(html);
+            setTimeout(function () {
+              if (editorInstance && editorInstance.setHTML) editorInstance.setHTML(html);
+            }, 0);
+          }
+        } else {
+          form.reset();
+          if (editorInstance && editorInstance.setHTML) editorInstance.setHTML("");
+        }
+        var alertEl = form.querySelector(".alert");
+        if (alertEl) alertEl.remove();
       });
     }
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
+
+      if (editEbookId && !isEditDataReady) {
+        showMessage("데이터를 불러오는 중입니다. 잠시 후 다시 시도해 주세요.", true);
+        return;
+      }
+      if (editEbookId && !currentEbookDoc) {
+        showMessage("수정할 전자책 정보가 없습니다. 페이지를 새로고침 해 주세요.", true);
+        return;
+      }
+
       var title, authorName, priceOriginal, priceSale, coverFile, authorFile, ebookFile;
 
       try {
@@ -128,9 +214,12 @@
       }
 
       btnSubmit.disabled = true;
-      showMessage("업로드 및 등록 중...", false);
+      showMessage(editEbookId ? "수정 중..." : "업로드 및 등록 중...", false);
 
-      var refId = uniqueId();
+      var refId =
+        editEbookId && currentEbookDoc && currentEbookDoc.refId
+          ? currentEbookDoc.refId
+          : uniqueId();
       var basePath = STORAGE_PREFIX + "/" + refId;
 
       Promise.all([
@@ -138,23 +227,51 @@
         uploadFile(coverFile, basePath + "/cover" + (coverFile ? getExtension(coverFile.name) : "")),
         uploadFile(ebookFile, basePath + "/ebook" + (ebookFile ? getExtension(ebookFile.name) : ""))
       ]).then(function (urls) {
-        return db.collection("ebooks").get().then(function (snap) {
-          return saveEbook({
+        var authorImageUrl = urls[0] || (currentEbookDoc && currentEbookDoc.authorImageUrl) || "";
+        var coverImageUrl = urls[1] || (currentEbookDoc && currentEbookDoc.coverImageUrl) || "";
+        var ebookFileUrl = urls[2] || (currentEbookDoc && currentEbookDoc.ebookFileUrl) || "";
+        var introHtml = getIntroHtml();
+        var orderVal = currentEbookDoc && currentEbookDoc.order != null ? currentEbookDoc.order : 0;
+
+        if (editEbookId && currentEbookDoc) {
+          var updateData = {
             title: title,
             authorName: authorName,
-            authorImageUrl: urls[0] || "",
-            coverImageUrl: urls[1] || "",
-            ebookFileUrl: urls[2] || "",
+            authorImageUrl: authorImageUrl,
+            coverImageUrl: coverImageUrl,
+            ebookFileUrl: ebookFileUrl,
             priceOriginal: priceOriginal,
             priceSale: priceSale,
-            intro: getIntroHtml(),
-            order: snap.size
-          });
+            intro: introHtml,
+            order: orderVal,
+            refId: refId,
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+          };
+          return db.collection("ebooks").doc(editEbookId).update(updateData);
+        }
+
+        return db.collection("ebooks").get().then(function (snap) {
+          var data = {
+            title: title,
+            authorName: authorName,
+            authorImageUrl: authorImageUrl,
+            coverImageUrl: coverImageUrl,
+            ebookFileUrl: ebookFileUrl,
+            priceOriginal: priceOriginal,
+            priceSale: priceSale,
+            intro: introHtml,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            order: snap.size,
+            refId: refId
+          };
+          return db.collection("ebooks").add(data);
         });
       }).then(function () {
-        showMessage("전자책이 등록되었습니다.", false);
-        form.reset();
-        if (editorInstance && editorInstance.setHTML) editorInstance.setHTML("");
+        showMessage(editEbookId ? "전자책이 수정되었습니다." : "전자책이 등록되었습니다.", false);
+        if (!editEbookId) {
+          form.reset();
+          if (editorInstance && editorInstance.setHTML) editorInstance.setHTML("");
+        }
       }).catch(function (err) {
         console.error(err);
         var msg = err.message || String(err);
@@ -168,8 +285,6 @@
         btnSubmit.disabled = false;
       });
     });
-
-    initEditor();
   }
 
   if (document.readyState === "loading") {

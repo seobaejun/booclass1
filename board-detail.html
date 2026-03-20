@@ -64,6 +64,18 @@
                     </div>
                     <div id="board-detail-content" class="board-detail-content text-white"></div>
                 </div>
+
+                <!-- 유료 게시판 번호 1번 글: 비밀번호 입력 전까지 본문 미표시 -->
+                <div id="paid-post1-gate" class="paid-post1-gate d-none" role="dialog" aria-modal="true" aria-labelledby="paid-post1-gate-title" aria-hidden="true">
+                    <div class="paid-post1-gate-inner card rounded-4 p-4 p-xl-5 bg-dark border border-secondary">
+                        <h2 id="paid-post1-gate-title" class="h5 text-white mb-2">유료 게시판 1번 글</h2>
+                        <p class="text-white-50 small mb-3">이 글은 비밀번호 입력 후 열람할 수 있습니다. (유료·무료 회원 동일)</p>
+                        <label for="paid-post1-input" class="form-label text-white-50 small mb-1">비밀번호</label>
+                        <input type="password" id="paid-post1-input" class="form-control mb-2" autocomplete="off" placeholder="비밀번호 입력">
+                        <p id="paid-post1-error" class="text-danger small mb-0 d-none" role="alert"></p>
+                        <button type="button" id="paid-post1-submit" class="btn btn-accent mt-3">확인</button>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -110,7 +122,8 @@
     <script src="js/header-auth.js"></script>
     <script src="js/vendor/jquery.min.js"></script>
     <script src="js/vendor/bootstrap.bundle.min.js"></script>
-    <script src="js/board.js?v=9"></script>
+    <script src="js/board.js?v=10"></script>
+    <script src="js/paid-post1-gate.js?v=1"></script>
     <script>
       (function () {
         var params = new URLSearchParams(window.location.search);
@@ -122,7 +135,6 @@
         var titleEl = document.getElementById('board-detail-title');
         var contentEl = document.getElementById('board-detail-content');
         var listUrl = type === 'paid' ? 'blog-post.html' : 'blog.html';
-        var noContentHtml = '<p class="text-white-50 mb-0">목록에서 글을 선택해 주세요.</p><a href="' + listUrl + '" class="text-accent">목록으로</a>';
 
         if (!id) {
           if (titleEl) titleEl.textContent = '글을 찾을 수 없습니다.';
@@ -130,9 +142,40 @@
           return;
         }
 
+        function loadDetailNow() {
+          Board.loadDetail(type, id, 'board-detail-title', 'board-detail-content');
+        }
+
         function tryLoad() {
           if (typeof firebase === 'undefined' || !firebase.firestore) return false;
-          Board.loadDetail(type, id, 'board-detail-title', 'board-detail-content');
+          if (typeof Board === 'undefined' || typeof Board.getPaidFirstPostId !== 'function') {
+            loadDetailNow();
+            return true;
+          }
+          if (type !== 'paid') {
+            loadDetailNow();
+            return true;
+          }
+          Board.getPaidFirstPostId()
+            .then(function (firstId) {
+              var isPost1 = firstId != null && String(firstId) === String(id);
+              if (!isPost1) {
+                loadDetailNow();
+                return;
+              }
+              if (window.PaidPost1Gate && PaidPost1Gate.isUnlocked()) {
+                loadDetailNow();
+                return;
+              }
+              if (window.PaidPost1Gate && typeof PaidPost1Gate.showGate === 'function') {
+                PaidPost1Gate.showGate(loadDetailNow);
+              } else {
+                loadDetailNow();
+              }
+            })
+            .catch(function () {
+              loadDetailNow();
+            });
           return true;
         }
 

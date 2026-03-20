@@ -15,6 +15,11 @@
   if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
   var db = firebase.firestore();
 
+  /** 문서 id별 외부 결제(아임웹 등) URL — 구매하기 버튼에 연결 */
+  var PURCHASE_URL_BY_EBOOK_ID = {
+    RHRpfrw7ZHW7QIhLonNk: "https://boostmaster.imweb.me/?idx=9"
+  };
+
   function formatPrice(n) {
     if (n === 0) return "무료";
     return "₩" + Number(n).toLocaleString();
@@ -70,6 +75,16 @@
 
       if (descEl) {
         descEl.innerHTML = intro || "<p class=\"text-secondary mb-0\">소개 내용이 없습니다.</p>";
+      }
+
+      var purchaseLink = document.getElementById("ebookPurchaseLink");
+      if (purchaseLink) {
+        var externalPurchaseUrl = PURCHASE_URL_BY_EBOOK_ID[id];
+        if (externalPurchaseUrl) {
+          purchaseLink.href = externalPurchaseUrl;
+          purchaseLink.target = "_blank";
+          purchaseLink.rel = "noopener noreferrer";
+        }
       }
 
       document.title = "부스트클래스 - " + title;

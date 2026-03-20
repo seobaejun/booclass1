@@ -142,9 +142,36 @@ var Board = (function () {
     return true;
   }
 
+  /** 목록 번호와 동일한 순서: 작성일 내림차순(목록 1번 = 정렬 후 첫 항목) */
+  function sortItemsByCreatedDesc(items) {
+    if (!items || !items.length) return;
+    items.sort(function (a, b) {
+      return (b.createdAt || '').localeCompare(a.createdAt || '');
+    });
+  }
+
   function loadListFromJson(type) {
     return fetch(getDataUrl(type)).then(function (res) { return res.json(); }).then(function (items) {
       return items || [];
+    });
+  }
+
+  /**
+   * 유료 게시판 목록에서 표시되는「번호 1」에 해당하는 글의 문서 id.
+   * Firestore/JSON 모두 목록과 동일한 정렬을 적용한다.
+   */
+  function getPaidFirstPostId() {
+    var hasFirestore = typeof firebase !== 'undefined' && firebase.firestore;
+    var loadPromise = hasFirestore
+      ? loadListFromFirestore('paid')
+      : loadListFromJson('paid').then(function (items) {
+          var list = items || [];
+          sortItemsByCreatedDesc(list);
+          return list;
+        });
+    return loadPromise.then(function (items) {
+      if (!items || !items.length) return null;
+      return items[0].id;
     });
   }
 
@@ -167,12 +194,7 @@ var Board = (function () {
             createdAt: formatDate(d.createdAt)
           });
         });
-        // createdAt이 문자열일 수 있으니, 정렬은 원본 timestamp 기준으로 다시 한 번 시도
-        items.sort(function (a, b) {
-          // formatDate 후 문자열이므로, 없으면 0 처리
-          // (Firestore timestamp를 별도 들고 올 수 없으니 여기선 createdAt이 있는 항목 기준으로만 동작)
-          return (b.createdAt || '').localeCompare(a.createdAt || '');
-        });
+        sortItemsByCreatedDesc(items);
         return items;
       });
   }
@@ -271,6 +293,7 @@ var Board = (function () {
 
   return {
     loadList: loadList,
-    loadDetail: loadDetail
+    loadDetail: loadDetail,
+    getPaidFirstPostId: getPaidFirstPostId
   };
 })();

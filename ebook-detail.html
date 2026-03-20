@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shishirraven/animate-on-scroll@v1.2/animation_utility.css">
     <link rel="icon" type="image/x-icon" href="image/logo.png">
@@ -12,9 +15,13 @@
     <style>
         body { min-height: 100vh; display: flex; flex-direction: column; background: #111; }
         body main { flex: 1; background: #1a1a1a; }
+        /* 상세 본문: 라틴(영문·숫자)은 Manrope, 한글은 뒤쪽 스택 */
+        main {
+            font-family: "Manrope", "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+        }
         .ebook-detail-media {
             position: relative;
-            aspect-ratio: 16/10;
+            aspect-ratio: 1 / 1;
             border-radius: 1rem;
             overflow: hidden;
             background: #111;
@@ -23,6 +30,38 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+        /* 표지 옆 요약: md 이상 가로 + 세로 중앙 정렬, 제목 강조 */
+        .detail-hero-title {
+            font-size: clamp(2.15rem, 3.2vw + 1rem, 3.65rem);
+            font-weight: 700;
+            line-height: 1.18;
+            letter-spacing: -0.025em;
+            color: #fff;
+            margin-bottom: 1.25rem;
+        }
+        .detail-hero-role {
+            display: block;
+            font-size: clamp(0.9rem, 0.6vw + 0.75rem, 1.05rem);
+            color: var(--bs-secondary, #9a9a9a);
+            margin-bottom: 0.2rem;
+        }
+        .detail-hero-person-name {
+            font-size: clamp(1.2rem, 1.35vw + 0.85rem, 1.65rem);
+            font-weight: 600;
+            color: #fff;
+        }
+        .detail-hero-price {
+            font-size: clamp(1.45rem, 2.1vw + 0.85rem, 2.15rem);
+            font-weight: 700;
+        }
+        .detail-hero-summary {
+            min-width: 0;
+        }
+        @media (min-width: 768px) {
+            .detail-hero-summary {
+                max-width: 36rem;
+            }
         }
         .ebook-meta-row {
             display: flex;
@@ -109,30 +148,36 @@
         <!-- 전자책 상세 -->
         <div class="section pt-1 pb-5 bg-attach-cover" style="background-image: url(image/bg_all.png); padding-top: 2.5rem !important; padding-bottom: 4rem !important;">
             <div class="r-container">
-                <div class="row row-cols-1 g-4">
-                    <div class="col">
-                        <div class="ebook-detail-media" style="max-width: 560px;">
+                <div class="row g-4 g-md-5 align-items-md-center">
+                    <div class="col-12 col-md-5 col-lg-4 text-center text-md-start">
+                        <div class="ebook-detail-media mx-auto mx-md-0" style="max-width: 480px;">
                             <img src="image/10.jpg" alt="전자책 표지" id="ebookCover" onerror="this.src='image/10.jpg'">
                         </div>
                     </div>
-                    <div class="col">
-                        <h2 class="h3 mb-3" id="ebookTitle">단독웹 수익화 가이드 – 처음부터 실전까지</h2>
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="rounded-circle overflow-hidden" style="width: 48px; height: 48px;">
-                                <img id="ebookAuthorImage" src="image/dummy-img-600x700.jpg" alt="저자" class="w-100 h-100 object-fit-cover">
+                    <div class="col-12 col-md-7 col-lg-8 ps-md-4 ps-lg-5">
+                        <div class="detail-hero-summary">
+                            <h2 class="detail-hero-title mb-3 mb-md-4" id="ebookTitle">단독웹 수익화 가이드 – 처음부터 실전까지</h2>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="rounded-circle overflow-hidden flex-shrink-0" style="width: 64px; height: 64px;">
+                                    <img id="ebookAuthorImage" src="image/dummy-img-600x700.jpg" alt="저자" class="w-100 h-100 object-fit-cover">
+                                </div>
+                                <div>
+                                    <span class="detail-hero-role">저자</span>
+                                    <strong id="ebookAuthor" class="detail-hero-person-name">저자명</strong>
+                                </div>
                             </div>
-                            <div>
-                                <span class="d-block small text-secondary">저자</span>
-                                <strong id="ebookAuthor">저자명</strong>
+                            <div class="ebook-meta-row">
+                                <span id="ebookPrice" class="text-accent detail-hero-price">무료</span>
+                            </div>
+                            <div class="mt-4 pt-1 d-flex flex-wrap gap-2 gap-md-3">
+                                <a href="#" id="ebookPurchaseLink" class="btn btn-accent rounded-3 px-4 py-3" rel="noopener noreferrer"><span>구매하기</span></a>
+                                <a href="ebook.html" class="btn btn-outline-accent rounded-3 px-4 py-3"><span>목록으로</span></a>
                             </div>
                         </div>
-                        <div class="ebook-meta-row">
-                            <span id="ebookPrice" class="text-accent fw-bold fs-5">무료</span>
-                        </div>
-                        <div class="mt-4">
-                            <a href="#" class="btn btn-accent rounded-3 px-4 py-3 me-2"><span>구매하기</span></a>
-                            <a href="ebook.html" class="btn btn-outline-accent rounded-3 px-4 py-3"><span>목록으로</span></a>
-                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4 mt-md-5">
+                    <div class="col-12">
                         <div class="ebook-description">
                             <h6 class="text-accent mb-3">전자책 소개</h6>
                             <div id="ebookDesc" class="ebook-intro-body"></div>

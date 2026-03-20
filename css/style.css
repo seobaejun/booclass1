@@ -2657,6 +2657,24 @@ a:hover .icon-box-2 {
     color: var(--accent-color-2);
 }
 
+/* 유료 게시판 1번 글 비밀번호 영역 */
+.paid-post1-gate {
+    position: fixed;
+    inset: 0;
+    z-index: 10050;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(6px);
+}
+
+.paid-post1-gate-inner {
+    width: 100%;
+    max-width: 420px;
+}
+
 .board-content-html img,
 .course-description-body img {
     max-width: 100%;
