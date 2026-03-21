@@ -156,25 +156,6 @@ var Board = (function () {
     });
   }
 
-  /**
-   * 유료 게시판 목록에서 표시되는「번호 1」에 해당하는 글의 문서 id.
-   * Firestore/JSON 모두 목록과 동일한 정렬을 적용한다.
-   */
-  function getPaidFirstPostId() {
-    var hasFirestore = typeof firebase !== 'undefined' && firebase.firestore;
-    var loadPromise = hasFirestore
-      ? loadListFromFirestore('paid')
-      : loadListFromJson('paid').then(function (items) {
-          var list = items || [];
-          sortItemsByCreatedDesc(list);
-          return list;
-        });
-    return loadPromise.then(function (items) {
-      if (!items || !items.length) return null;
-      return items[0].id;
-    });
-  }
-
   function loadListFromFirestore(type) {
     if (!initFirebaseIfNeeded()) return Promise.reject(new Error('Firebase not found'));
     var collectionName = FIRESTORE_COLLECTION[type] || FIRESTORE_COLLECTION.free;
@@ -293,7 +274,6 @@ var Board = (function () {
 
   return {
     loadList: loadList,
-    loadDetail: loadDetail,
-    getPaidFirstPostId: getPaidFirstPostId
+    loadDetail: loadDetail
   };
 })();

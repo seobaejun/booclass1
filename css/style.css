@@ -2757,33 +2757,6 @@ a:hover .icon-box-2 {
     color: var(--accent-color-2);
 }
 
-/* 유료 게시판 1번 글 비밀번호 영역 */
-.paid-post1-gate {
-    position: fixed;
-    inset: 0;
-    z-index: 10050;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
-    background: rgba(0, 0, 0, 0.72);
-    backdrop-filter: blur(6px);
-}
-
-.paid-post1-gate-inner {
-    width: 100%;
-    max-width: 420px;
-}
-
-/* 전역 .card:hover 규칙 예외: 비밀번호 카드 호버 시 크기 고정 */
-.paid-post1-gate-inner:hover {
-    transform: none !important;
-    width: 100% !important;
-    height: auto !important;
-    top: auto !important;
-    left: auto !important;
-}
-
 .board-content-html img,
 .course-description-body img {
     max-width: 100%;

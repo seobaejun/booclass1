@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    	
     <meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="author" content="DexignLab" >
@@ -16,81 +17,34 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- Page Title Here -->
-	<title>부스트클래스 관리자 대시보드</title>
+	<title>구매코드 관리 - 부스트클래스 관리자</title>
+	<meta http-equiv="refresh" content="0;url=index.html">
+	<script>window.location.replace("index.html");</script>
 
 <!-- FAVICONS ICON -->
 	<link rel="shortcut icon" type="image/png" href="images/favicon.png" >
 	<link href="vendor/wow-master/css/libs/animate.css" rel="stylesheet">
 	<link href="vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="vendor/bootstrap-select-country/css/bootstrap-select-country.min.css">
-	<link rel="stylesheet" href="vendor/jquery-nice-select/css/nice-select.css">
-	<link href="vendor/datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="./vendor/jquery-nice-select/css/nice-select.css">
 	
-	 <link href="vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+	<link href="vendor/bootstrap-datepicker-master/css/bootstrap-datepicker.min.css" rel="stylesheet">
+	
+	
+	 <link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
 	<!--swiper-slider-->
-	<link rel="stylesheet" href="./vendor/swiper/css/swiper-bundle.min.css">
+	
 	<!-- Style css -->
-	<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-	<link href="css/dashboard-purchase-code.css" rel="stylesheet">
-	<style>
-	/* 최근 수강생: 목록만 스크롤, 전체 수강생 보기는 패널 하단 고정 */
-	#wallet-bar.wallet-bar-dashboard-students {
-		display: flex;
-		flex-direction: column;
-		height: 100%;
-		padding-bottom: 1rem;
-		box-sizing: border-box;
-		overflow: hidden;
-	}
-	#wallet-bar.wallet-bar-dashboard-students > .row {
-		flex: 1 1 auto;
-		min-height: 0;
-		display: flex;
-		flex-direction: column;
-		margin-left: 0;
-		margin-right: 0;
-		width: 100%;
-	}
-	#wallet-bar.wallet-bar-dashboard-students > .row > [class*="col-"] {
-		display: flex;
-		flex-direction: column;
-		min-height: 0;
-		flex: 1 1 auto;
-	}
-	#wallet-bar.wallet-bar-dashboard-students .wallet-recent-card {
-		flex: 1 1 auto;
-		min-height: 0;
-		display: flex !important;
-		flex-direction: column;
-	}
-	#wallet-bar.wallet-bar-dashboard-students .wallet-recent-scroll {
-		flex: 1 1 auto;
-		min-height: 0;
-		overflow-y: auto;
-		-webkit-overflow-scrolling: touch;
-	}
-	#wallet-bar.wallet-bar-dashboard-students .wallet-recent-footer {
-		flex-shrink: 0;
-		width: 100%;
-	}
-	</style>
 	
 </head>
 <body>
-    <script>
-(function() {
-  try {
-    if (sessionStorage.getItem('adminUnlocked') !== '1') {
-      window.location.replace('page-lock-screen.html');
-    }
-  } catch (e) {}
-})();
-    </script>
+
     <!--*******************
         Preloader start
     ********************-->
-	<div id="preloader">
+	 	
+    <div id="preloader">
 	  <div class="loader">
 		<div class="dots">
 			  <div class="dot mainDot"></div>
@@ -105,15 +59,16 @@
     <!--*******************
         Preloader end
     ********************-->
+
     <!--**********************************
         Main wrapper start
     ***********************************-->
-    <div id="main-wrapper" class="wallet-open active">
+    <div id="main-wrapper">
 	
         <!--**********************************
             Nav header start
         ***********************************-->
-        <div class="nav-header">
+         <div class="nav-header">
             <a href="index.html" class="brand-logo d-flex align-items-center">
 				<img src="../../image/logo.png" alt="부스트클래스" class="img-fluid" style="max-height: 40px; width: auto; border-radius: 8px;">
             </a>
@@ -135,7 +90,7 @@
 					</svg>		
                 </div>
             </div>
-        </div>
+		 </div>
         <!--**********************************
             Nav header end
         ***********************************-->
@@ -148,23 +103,23 @@
 			<div class="custom-tab-1">
 				<ul class="nav nav-tabs">
 					<li class="nav-item">
-						<a class="nav-link" data-bs-toggle="tab" href="#notes">메모</a>
+						<a class="nav-link" data-bs-toggle="tab" href="#notes">Notes</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" data-bs-toggle="tab" href="#alerts">알림</a>
+						<a class="nav-link" data-bs-toggle="tab" href="#alerts">Alerts</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link active" data-bs-toggle="tab" href="#chat">채팅</a>
+						<a class="nav-link active" data-bs-toggle="tab" href="#chat">Chat</a>
 					</li>
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane fade active show" id="chat" role="tabpanel">
 						<div class="card mb-sm-3 mb-md-0 contacts_card dlab-chat-user-box">
 							<div class="card-header chat-list-header text-center">
-								<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#chat_model"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect fill="#000000" x="4" y="11" width="16" height="2" rx="1"/><rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) " x="4" y="11" width="16" height="2" rx="1"/></g></svg></a>
+								<a href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect fill="#000000" x="4" y="11" width="16" height="2" rx="1"/><rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) " x="4" y="11" width="16" height="2" rx="1"/></g></svg></a>
 								<div>
-								<h6 class="mb-1">채팅 목록</h6>
-								<p class="mb-0">전체 보기</p>
+									<h6 class="mb-1">Chat List</h6>
+									<p class="mb-0">Show All</p>
 								</div>
 								<a href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg></a>
 							</div>
@@ -369,7 +324,7 @@
 								</div>							
 								<div class="dropdown">
 									<a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
-										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1" >
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1">
 											<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 												<rect x="0" y="0" width="24" height="24"/>
 												<circle fill="#000000" cx="5" cy="12" r="2"/>
@@ -529,7 +484,7 @@
 							<div class="card-header chat-list-header text-center">
 								<a href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg></a>
 								<div>
-									<h6 class="mb-1">알림</h6>
+									<h6 class="mb-1">Notications</h6>
 									<p class="mb-0">Show All</p>
 								</div>
 								<a href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/><path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" fill="#000000" fill-rule="nonzero"/></g></svg></a>
@@ -585,8 +540,8 @@
 							<div class="card-header chat-list-header text-center">
 								<a href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect fill="#000000" x="4" y="11" width="16" height="2" rx="1"/><rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) " x="4" y="11" width="16" height="2" rx="1"/></g></svg></a>
 								<div>
-									<h6 class="mb-1">메모</h6>
-									<p class="mb-0">새 메모 추가</p>
+									<h6 class="mb-1">Notes</h6>
+									<p class="mb-0">Add New Nots</p>
 								</div>
 								<a href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/><path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" fill="#000000" fill-rule="nonzero"/></g></svg></a>
 							</div>
@@ -650,6 +605,7 @@
 		<!--**********************************
             Chat box End
         ***********************************-->
+		
 		<!--**********************************
             Header start
         ***********************************-->
@@ -659,7 +615,7 @@
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
 						<div class="dashboard_bar">
-							대시보드
+							전자책 목록
 						</div>
                         </div>
                         <ul class="navbar-nav header-right">
@@ -671,11 +627,7 @@
 									<div class="card mb-0">
 										<div class="card-header border-0 d-block h-auto">
 											<ul class="d-flex align-items-center justify-content-around">
-												<li class="nav-item dropdown notification_dropdown">
-												  <a class="nav-link  menu-wallet" href="javascript:void(0);">
-															<svg id="Layer_1" enable-background="new 0 0 512 512" height="18" viewBox="0 0 512 512" width="18" xmlns="http://www.w3.org/2000/svg"><g><path d="m174 240h-108c-36.393 0-66-29.607-66-66v-108c0-36.393 29.607-66 66-66h108c36.393 0 66 29.607 66 66v108c0 36.393-29.607 66-66 66zm-108-208c-18.748 0-34 15.252-34 34v108c0 18.748 15.252 34 34 34h108c18.748 0 34-15.252 34-34v-108c0-18.748-15.252-34-34-34z"/><path d="m446 240h-108c-36.393 0-66-29.607-66-66v-108c0-36.393 29.607-66 66-66h108c36.393 0 66 29.607 66 66v108c0 36.393-29.607 66-66 66zm-108-208c-18.748 0-34 15.252-34 34v108c0 18.748 15.252 34 34 34h108c18.748 0 34-15.252 34-34v-108c0-18.748-15.252-34-34-34z"/><path d="m392 512c-66.168 0-120-53.832-120-120s53.832-120 120-120 120 53.832 120 120-53.832 120-120 120zm0-208c-48.523 0-88 39.477-88 88s39.477 88 88 88 88-39.477 88-88-39.477-88-88-88z"/><path d="m174 512h-108c-36.393 0-66-29.607-66-66v-108c0-36.393 29.607-66 66-66h108c36.393 0 66 29.607 66 66v108c0 36.393-29.607 66-66 66zm-108-208c-18.748 0-34 15.252-34 34v108c0 18.748 15.252 34 34 34h108c18.748 0 34-15.252 34-34v-108c0-18.748-15.252-34-34-34z"/></g></svg>
-												  </a>
-												</li>
+												
 												<li class="nav-item dropdown notification_dropdown">
 												  <a class="nav-link bell dz-theme-mode" href="javascript:void(0);">
 															<svg id="icon-light" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
@@ -785,11 +737,7 @@
 									</div>
 								</div>
 							</li>
-							<li class="nav-item dropdown notification_dropdown">
-                                <a class="nav-link  menu-wallet" href="javascript:void(0);">
-									<svg id="Layer_2" enable-background="new 0 0 512 512" height="18" viewBox="0 0 512 512" width="18" xmlns="http://www.w3.org/2000/svg"><g><path d="m174 240h-108c-36.393 0-66-29.607-66-66v-108c0-36.393 29.607-66 66-66h108c36.393 0 66 29.607 66 66v108c0 36.393-29.607 66-66 66zm-108-208c-18.748 0-34 15.252-34 34v108c0 18.748 15.252 34 34 34h108c18.748 0 34-15.252 34-34v-108c0-18.748-15.252-34-34-34z"/><path d="m446 240h-108c-36.393 0-66-29.607-66-66v-108c0-36.393 29.607-66 66-66h108c36.393 0 66 29.607 66 66v108c0 36.393-29.607 66-66 66zm-108-208c-18.748 0-34 15.252-34 34v108c0 18.748 15.252 34 34 34h108c18.748 0 34-15.252 34-34v-108c0-18.748-15.252-34-34-34z"/><path d="m392 512c-66.168 0-120-53.832-120-120s53.832-120 120-120 120 53.832 120 120-53.832 120-120 120zm0-208c-48.523 0-88 39.477-88 88s39.477 88 88 88 88-39.477 88-88-39.477-88-88-88z"/><path d="m174 512h-108c-36.393 0-66-29.607-66-66v-108c0-36.393 29.607-66 66-66h108c36.393 0 66 29.607 66 66v108c0 36.393-29.607 66-66 66zm-108-208c-18.748 0-34 15.252-34 34v108c0 18.748 15.252 34 34 34h108c18.748 0 34-15.252 34-34v-108c0-18.748-15.252-34-34-34z"/></g></svg>
-                                </a>
-							</li>
+							
 							<li class="nav-item dropdown notification_dropdown">
                                 <a class="nav-link bell dz-theme-mode" href="javascript:void(0);">
 									<i id="icon-light-1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></i>
@@ -1267,239 +1215,58 @@
             Sidebar end
         ***********************************-->
 		
-		<!--****
-		Wallet Sidebar
-		****-->
-		<div class="wallet-bar wow fadeInRight active wallet-bar-dashboard-students" id="wallet-bar" data-wow-delay="0.7s">		
-			<div class="row">
-				<div class="col-xl-12 d-flex flex-column">
-					<div class="card bg-transparent mb-0 wallet-recent-card">
-						<div class="card-header border-0 px-3 flex-shrink-0">
-							<div>
-								<h2 class="heading mb-0">최근 수강생</h2>
-								<span>총 <span class="font-w600" id="dashboardRecentTotalMembers">—</span>명</span>
-							</div>
-						</div>
-						<div class="card-body recent-activity-wrapper p-3 pt-2 wallet-recent-scroll" id="RecentActivityContent">
-							<p class="text-muted text-center py-3 mb-0" id="dashboardRecentLoading">불러오는 중...</p>
-						</div>
-						<div class="card-footer text-center border-0 pt-2 px-3 pb-3 wallet-recent-footer">
-							<a href="student.html" class="btn btn-block btn-primary light btn-rounded">전체 수강생 보기</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="wallet-bar-close"></div>
-		<!--**********************************
-            Content body start
-        ***********************************-->
         <!--**********************************
             Content body start
         ***********************************-->
-		<div class="content-body">
-            <!-- row -->
+        <div class="content-body">
 			<div class="container-fluid">
-				<!-- Row -->
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="card">
-							<div class="card-body pb-xl-4 pb-sm-3 pb-0">	
-								<div class="row">
-									<div class="col-xl-3 col-6">
-										<div class="content-box">
-											<div class="icon-box icon-box-xl std-data">
-												<svg width="25" height="25" viewBox="0 0 30 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-													<path fill-rule="evenodd" clip-rule="evenodd" d="M12.9288 37.75H3.75C1.67875 37.75 0 36.0713 0 34V23.5863C0 21.7738 1.29625 20.2213 3.07875 19.8975C5.72125 19.4163 10.2775 18.5875 12.855 18.12C14.2737 17.8612 15.7263 17.8612 17.145 18.12C19.7225 18.5875 24.2788 19.4163 26.9213 19.8975C28.7038 20.2213 30 21.7738 30 23.5863C30 26.3125 30 31.0825 30 34C30 36.0713 28.3212 37.75 26.25 37.75H12.9288ZM24.785 22.05L24.79 22.0563C25.0088 22.3838 25.06 22.795 24.9287 23.1662L24.0462 25.6662C23.9312 25.9925 23.685 26.2575 23.3675 26.3963L21.7075 27.12L22.3675 28.4412C22.5525 28.81 22.5425 29.2462 22.3425 29.6075L19.2075 35.25H26.25C26.94 35.25 27.5 34.69 27.5 34C27.5 31.0825 27.5 26.3125 27.5 23.5863C27.5 22.9825 27.0675 22.465 26.4738 22.3562L24.785 22.05ZM21.3663 21.4275L16.6975 20.5788C15.575 20.375 14.425 20.375 13.3025 20.5788L8.63375 21.4275L7.63625 22.9238L8.13 24.3213L10.5 25.3537C10.8138 25.4912 11.0575 25.7512 11.175 26.0737C11.2925 26.3962 11.2712 26.7525 11.1175 27.0588L10.1625 28.9688L13.6525 35.25H16.3475L19.8375 28.9688L18.8825 27.0588C18.7288 26.7525 18.7075 26.3962 18.825 26.0737C18.9425 25.7512 19.1862 25.4912 19.5 25.3537L21.87 24.3213L22.3638 22.9238L21.3663 21.4275ZM5.215 22.05L3.52625 22.3562C2.9325 22.465 2.5 22.9825 2.5 23.5863V34C2.5 34.69 3.06 35.25 3.75 35.25H10.7925L7.6575 29.6075C7.4575 29.2462 7.4475 28.81 7.6325 28.4412L8.2925 27.12L6.6325 26.3963C6.315 26.2575 6.06875 25.9925 5.95375 25.6662L5.07125 23.1662C4.94 22.795 4.99125 22.3838 5.21 22.0563L5.215 22.05ZM23.75 29V31.5C23.75 32.19 24.31 32.75 25 32.75C25.69 32.75 26.25 32.19 26.25 31.5V29C26.25 28.31 25.69 27.75 25 27.75C24.31 27.75 23.75 28.31 23.75 29ZM15 0.25C10.5163 0.25 6.875 3.89125 6.875 8.375C6.875 12.8587 10.5163 16.5 15 16.5C19.4837 16.5 23.125 12.8587 23.125 8.375C23.125 3.89125 19.4837 0.25 15 0.25ZM15 2.75C18.105 2.75 20.625 5.27 20.625 8.375C20.625 11.48 18.105 14 15 14C11.895 14 9.375 11.48 9.375 8.375C9.375 5.27 11.895 2.75 15 2.75Z" fill="white"/>
-												</svg>
-											</div>
-											<div  class="chart-num">
-												<p>코치</p>
-												<h2 class="font-w700 mb-0" id="dashboardStatCoach">—</h2>
-											</div>
-										</div>
-									</div>
-									<div class="col-xl-3 col-6">
-										<div class="content-box">
-											<div class="teach-data icon-box icon-box-xl">
-												<svg width="25" height="25" viewBox="0 0 30 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-													<path fill-rule="evenodd" clip-rule="evenodd" d="M0 34C0 36.0713 1.67875 37.75 3.75 37.75H26.25C28.3212 37.75 30 36.0713 30 34C30 31.0825 30 26.3125 30 23.5863C30 21.7738 28.7038 20.2213 26.9213 19.8975C24.2788 19.4163 19.7225 18.5875 17.145 18.12C15.7263 17.8612 14.2737 17.8612 12.855 18.12C10.2775 18.5875 5.72125 19.4163 3.07875 19.8975C1.29625 20.2213 0 21.7738 0 23.5863V34ZM17.885 20.795L19.7612 27.9288C20.0075 28.865 19.6775 29.8588 18.92 30.4638C18.28 30.9738 17.2713 31.7788 16.5713 32.3388C15.6525 33.0713 14.3475 33.0713 13.4287 32.3388C12.7287 31.7788 11.72 30.9738 11.08 30.4638C10.3225 29.8588 9.9925 28.865 10.2388 27.9288L12.115 20.795L3.52625 22.3562C2.9325 22.465 2.5 22.9825 2.5 23.5863V34C2.5 34.69 3.06 35.25 3.75 35.25C8.98 35.25 21.02 35.25 26.25 35.25C26.94 35.25 27.5 34.69 27.5 34C27.5 31.0825 27.5 26.3125 27.5 23.5863C27.5 22.9825 27.0675 22.465 26.4738 22.3562L17.885 20.795ZM15.2038 20.4288C15.0675 20.425 14.9325 20.425 14.7962 20.4288L12.6663 28.5312L14.9887 30.3837C14.995 30.39 15.005 30.39 15.0113 30.3837L17.3337 28.5312L15.2038 20.4288ZM15 0.25C10.5163 0.25 6.875 3.89125 6.875 8.375C6.875 12.8587 10.5163 16.5 15 16.5C19.4837 16.5 23.125 12.8587 23.125 8.375C23.125 3.89125 19.4837 0.25 15 0.25ZM15 2.75C18.105 2.75 20.625 5.27 20.625 8.375C20.625 11.48 18.105 14 15 14C11.895 14 9.375 11.48 9.375 8.375C9.375 5.27 11.895 2.75 15 2.75Z" fill="white"/>
-												</svg>
-											</div>
-											<div class="chart-num">
-												<p>무료회원</p>
-												<h2 class="font-w700 mb-0" id="dashboardStatFree">—</h2>
-											</div>
-										</div>
-									</div>
-									<div class="col-xl-3 col-6">
-										<div class="content-box">
-											<div class="event-data icon-box icon-box-xl">
-												<svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-													<path d="M24 2.75H21.5V1.5C21.5 1.16848 21.3683 0.850537 21.1339 0.616117C20.8995 0.381696 20.5815 0.25 20.25 0.25C19.9185 0.25 19.6005 0.381696 19.3661 0.616117C19.1317 0.850537 19 1.16848 19 1.5V2.75H15.25V1.5C15.25 1.16848 15.1183 0.850537 14.8839 0.616117C14.6495 0.381696 14.3315 0.25 14 0.25C13.6685 0.25 13.3505 0.381696 13.1161 0.616117C12.8817 0.850537 12.75 1.16848 12.75 1.5V2.75H9V1.5C9 1.16848 8.8683 0.850537 8.63388 0.616117C8.39946 0.381696 8.08152 0.25 7.75 0.25C7.41848 0.25 7.10054 0.381696 6.86612 0.616117C6.6317 0.850537 6.5 1.16848 6.5 1.5V2.75H4C3.00544 2.75 2.05161 3.14509 1.34835 3.84835C0.645088 4.55161 0.25 5.50544 0.25 6.5V24C0.25 24.9946 0.645088 25.9484 1.34835 26.6517C2.05161 27.3549 3.00544 27.75 4 27.75H24C24.9946 27.75 25.9484 27.3549 26.6517 26.6517C27.3549 25.9484 27.75 24.9946 27.75 24V6.5C27.75 5.50544 27.3549 4.55161 26.6517 3.84835C25.9484 3.14509 24.9946 2.75 24 2.75ZM2.75 6.5C2.75 6.16848 2.8817 5.85054 3.11612 5.61612C3.35054 5.3817 3.66848 5.25 4 5.25H6.5V6.5C6.5 6.83152 6.6317 7.14946 6.86612 7.38388C7.10054 7.6183 7.41848 7.75 7.75 7.75C8.08152 7.75 8.39946 7.6183 8.63388 7.38388C8.8683 7.14946 9 6.83152 9 6.5V5.25H12.75V6.5C12.75 6.83152 12.8817 7.14946 13.1161 7.38388C13.3505 7.6183 13.6685 7.75 14 7.75C14.3315 7.75 14.6495 7.6183 14.8839 7.38388C15.1183 7.14946 15.25 6.83152 15.25 6.5V5.25H19V6.5C19 6.83152 19.1317 7.14946 19.3661 7.38388C19.6005 7.6183 19.9185 7.75 20.25 7.75C20.5815 7.75 20.8995 7.6183 21.1339 7.38388C21.3683 7.14946 21.5 6.83152 21.5 6.5V5.25H24C24.3315 5.25 24.6495 5.3817 24.8839 5.61612C25.1183 5.85054 25.25 6.16848 25.25 6.5V10.25H2.75V6.5ZM25.25 24C25.25 24.3315 25.1183 24.6495 24.8839 24.8839C24.6495 25.1183 24.3315 25.25 24 25.25H4C3.66848 25.25 3.35054 25.1183 3.11612 24.8839C2.8817 24.6495 2.75 24.3315 2.75 24V12.75H25.25V24Z" fill="white"/>
-												</svg>	
-											</div>
-											<div class="chart-num">
-												<p>유료회원</p>
-												<h2 class="font-w700 mb-0" id="dashboardStatPaid">—</h2>
-											</div>
-										</div>
-									</div>
-									<div class="col-xl-3 col-6">
-										<div class="content-box">
-											<div class="food-data icon-box icon-box-xl bg-dark">
-												<svg width="23" height="23" viewBox="0 0 28 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-													<path d="M8.25448 0.509167C5.96882 1.64226 4.0464 3.39315 2.70524 5.56327C1.36408 7.7334 0.657848 10.2359 0.666646 12.787V18.7167C0.667705 19.5871 1.01397 20.4216 1.62948 21.0372C2.245 21.6527 3.07951 21.9989 3.94998 22H7.33331V32C7.33331 32.442 7.50891 32.866 7.82147 33.1785C8.13403 33.4911 8.55795 33.6667 8.99998 33.6667C9.44201 33.6667 9.86593 33.4911 10.1785 33.1785C10.4911 32.866 10.6666 32.442 10.6666 32V2C10.6664 1.71598 10.5936 1.43673 10.4552 1.18872C10.3168 0.940703 10.1173 0.732152 9.87574 0.582831C9.63414 0.43351 9.3584 0.348368 9.07467 0.335477C8.79095 0.322585 8.50863 0.382371 8.25448 0.509167ZM7.33331 18.6833L3.99998 18.7167V12.787C3.99498 11.3525 4.28878 9.93273 4.86268 8.61805C5.43658 7.30336 6.27798 6.12261 7.33331 5.151V18.6833ZM24 2V8.66667C23.9994 9.10852 23.8236 9.53211 23.5112 9.84455C23.1988 10.157 22.7752 10.3328 22.3333 10.3333V2C22.3333 1.55797 22.1577 1.13405 21.8452 0.821489C21.5326 0.508929 21.1087 0.333334 20.6666 0.333334C20.2246 0.333334 19.8007 0.508929 19.4881 0.821489C19.1756 1.13405 19 1.55797 19 2V10.3333C18.5581 10.3328 18.1345 10.157 17.8221 9.84455C17.5097 9.53211 17.3339 9.10852 17.3333 8.66667V2C17.3333 1.55797 17.1577 1.13405 16.8452 0.821489C16.5326 0.508929 16.1087 0.333334 15.6666 0.333334C15.2246 0.333334 14.8007 0.508929 14.4881 0.821489C14.1756 1.13405 14 1.55797 14 2V8.66667C14.0014 9.9923 14.5287 11.2632 15.4661 12.2006C16.4034 13.138 17.6743 13.6652 19 13.6667V32C19 32.442 19.1756 32.866 19.4881 33.1785C19.8007 33.4911 20.2246 33.6667 20.6666 33.6667C21.1087 33.6667 21.5326 33.4911 21.8452 33.1785C22.1577 32.866 22.3333 32.442 22.3333 32V13.6667C23.6589 13.6652 24.9299 13.138 25.8672 12.2006C26.8046 11.2632 27.3319 9.9923 27.3333 8.66667V2C27.3333 1.55797 27.1577 1.13405 26.8452 0.821489C26.5326 0.508929 26.1087 0.333334 25.6666 0.333334C25.2246 0.333334 24.8007 0.508929 24.4881 0.821489C24.1756 1.13405 24 1.55797 24 2Z" fill="white"/>
-												</svg>
-											</div>
-											<div class="chart-num">
-												<p>총회원</p>
-												<h2 class="font-w700 mb-0" id="dashboardStatTotal">—</h2>
-											</div>
-										</div>
-									</div>
-								</div>	
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xl-6 ">
-						<div class="card crypto-chart ">
-							<div class="card-header pb-0 border-0 flex-wrap">
-								<div class="mb-2 mb-sm-0">
-									<div class="chart-title mb-3">
-										<h2 class="heading">수강생</h2>	
-									</div>
-								</div>
-								<div class="p-static">
-									<div class="d-flex align-items-center mb-3 mb-sm-0">
-										<div class="round weekly" id="dzOldSeries">
-											<div>
-												<input type="checkbox" id="checkbox1" name="radio" value="weekly">
-												<label for="checkbox1" class="checkmark"></label>
-											</div>
-											<div>
-												<span class="fs-14">이번 주</span>
-												<h4 class="fs-5 font-w700 mb-0"><span id="dashboardStudentSeriesThis">—</span> <small class="text-muted fs-6 fw-normal">명</small></h4>
-											</div>
-										</div>
-										<div class="round" id="dzNewSeries">
-											<div>
-												<input type="checkbox" id="checkbox" name="radio" value="monthly">
-												<label for="checkbox" class="checkmark"></label>
-											</div>
-											<div>
-												<span class="fs-14">지난 주</span>
-												<h4 class="fs-5 font-w700 mb-0"><span id="dashboardStudentSeriesLast">—</span> <small class="text-muted fs-6 fw-normal">명</small></h4>
-											</div>	
-										</div>
-									</div>
+							<div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+								<h5 class="mb-0">구매코드 관리</h5>
+								<div class="d-flex gap-2">
+									<a href="course-video.html" class="btn btn-outline-primary btn-sm">강의 등록</a>
+									<a href="ebook-upload.html" class="btn btn-outline-primary btn-sm">전자책 등록</a>
 								</div>
 							</div>
-							<div class="card-body pt-2 custome-tooltip pb-0 px-2">
-								<div id="marketChart"></div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-6">
-						<div class="card h-auto">
-							<div class="card-header border-0 pb-0 flex-wrap">
-								<h4 class="heading mb-3 mb-sm-0">매출</h4>
-								<ul class="nav nav-pills mix-chart-tab" id="pills-tab" role="tablist">
-								  <li class="nav-item" role="presentation">
-									<button class="nav-link active" data-series="week" id="pills-week-tab" data-bs-toggle="pill" data-bs-target="#pills-week" type="button" role="tab"  aria-selected="true">주</button>
-								  </li>
-								  <li class="nav-item" role="presentation">
-									<button class="nav-link" data-series="month" id="pills-month-tab" data-bs-toggle="pill" data-bs-target="#pills-month" type="button" role="tab"  aria-selected="false">월</button>
-								  </li>
-								  <li class="nav-item" role="presentation">
-									<button class="nav-link" data-series="year" id="pills-year-tab" data-bs-toggle="pill" data-bs-target="#pills-year" type="button" role="tab"  aria-selected="false">년</button>
-								  </li>
-								   <li class="nav-item" role="presentation">
-									<button class="nav-link" data-series="all" id="pills-all-tab" data-bs-toggle="pill" data-bs-target="#pills-all" type="button" role="tab" aria-selected="false">전체</button>
-								  </li>
-								</ul>
-							</div>
-							<div class="card-body  p-0">
-								<div id="overiewChart"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xl-4 wow fadeInUp" data-wow-delay="1.5s">
-						<div class="card">
-							<div class="card-header pb-0 border-0 flex-wrap">
-								<div>
-									<div class="mb-3">
-										<h2 class="heading mb-0">School Calendar</h2>	
-									</div>
-								</div>
-							</div>
-							<div class="card-body text-center event-calender  py-0 px-1">
-								<input type='text' class="form-control d-none" id='datetimepicker1'>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-8 wow fadeInUp" data-wow-delay="1.5s">
-						<div class="card teacher-deatails purchase-code-card h-100" id="dashboardPurchaseCodeCard">
-							<div class="card-header py-3 border-0 px-3">
-								<h4 class="heading m-0">구매코드 관리</h4>
-							</div>
-							<div class="card-body p-0">
-								<div class="table-responsive basic-tbl">
-									<table id="dashboard-purchase-code-table" class="table table-hover tech-data purchase-code-table" style="min-width: 36rem">
-										<thead>
+							<div class="card-body">
+								<p class="text-muted small mb-3">Firestore에 등록된 강의·전자책이 표시됩니다. 구매코드는 유료 상품에만 필요하며, <strong>무료</strong>로 체크하면 코드 없이 마이페이지에 표시됩니다.</p>
+								<div id="purchaseCodeAdminMessage" class="alert alert-info d-none mb-3" role="alert"></div>
+								<h6 class="fw-bold mb-2">강의</h6>
+								<div class="table-responsive mb-4">
+									<table class="table table-hover table-bordered">
+										<thead class="table-light">
 											<tr>
-												<th>구분</th>
-												<th>강의/전자책 이름</th>
-												<th>구매코드</th>
-												<th class="text-center">무료</th>
-												<th class="text-end">입력/수정</th>
+												<th>강의 이름</th>
+												<th style="min-width: 220px;">구매코드</th>
+												<th class="text-center" style="width: 90px;">무료</th>
+												<th class="text-end" style="width: 100px;">저장</th>
 											</tr>
 										</thead>
-										<tbody id="dashboardPurchaseCodeTbody">
-											<tr><td colspan="5" class="text-center text-muted py-4">불러오는 중...</td></tr>
+										<tbody id="purchaseCodeCoursesTbody">
+											<tr><td colspan="4" class="text-center text-muted py-4">불러오는 중...</td></tr>
+										</tbody>
+									</table>
+								</div>
+								<h6 class="fw-bold mb-2">전자책</h6>
+								<div class="table-responsive">
+									<table class="table table-hover table-bordered">
+										<thead class="table-light">
+											<tr>
+												<th>전자책 이름</th>
+												<th style="min-width: 220px;">구매코드</th>
+												<th class="text-center" style="width: 90px;">무료</th>
+												<th class="text-end" style="width: 100px;">저장</th>
+											</tr>
+										</thead>
+										<tbody id="purchaseCodeEbooksTbody">
+											<tr><td colspan="4" class="text-center text-muted py-4">불러오는 중...</td></tr>
 										</tbody>
 									</table>
 								</div>
 							</div>
-							<div class="card-footer border-0 purchase-code-footer d-flex flex-wrap justify-content-between align-items-center gap-2">
-								<span class="fs-14 mb-0 purchase-code-range" id="dashboardPurchaseCodeRange">총 0개 중 0개 표시</span>
-								<nav aria-label="구매코드 페이지">
-									<ul class="pagination pagination-sm mb-0" id="dashboardPurchaseCodePagination"></ul>
-								</nav>
-							</div>
 						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xl-12">
-					<div class="card">
-						<div class="card-header border-0 p-3 d-flex justify-content-between align-items-center flex-wrap">
-							<h4 class="heading mb-0">관리자 등록하기</h4>
-							<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#adminRegisterModal">+ 관리자 등록</button>
-						</div>
-						<div class="card-body p-0">
-							<div class="table-responsive basic-tbl">
-								<table id="admin-members-table" class="table table-hover" style="min-width: 845px">
-									<thead>
-										<tr>
-											<th>이메일</th>
-											<th>이름</th>
-											<th>멤버 타입</th>
-											<th>등록일</th>
-											<th>관리</th>
-										</tr>
-									</thead>
-									<tbody id="admin-list-tbody">
-												<tr><td colspan="5" class="text-center py-4 text-muted" id="admin-list-placeholder">불러오는 중...</td></tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
 					</div>
 				</div>
 			</div>
@@ -1508,311 +1275,36 @@
         <!--**********************************
             Content body end
         ***********************************-->
-		<!-- 관리자 등록 모달 -->
-		<div class="modal fade" id="adminRegisterModal" tabindex="-1" aria-labelledby="adminRegisterModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="adminRegisterModalLabel">관리자 등록</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<div class="mb-3">
-							<label for="adminEmail" class="form-label">이메일</label>
-							<input type="email" class="form-control" id="adminEmail" placeholder="admin@example.com" required>
-						</div>
-						<div class="mb-3">
-							<label for="adminDisplayName" class="form-label">이름 (선택)</label>
-							<input type="text" class="form-control" id="adminDisplayName" placeholder="홍길동">
-						</div>
-						<div class="mb-3">
-							<label for="adminMemberType" class="form-label">멤버 타입</label>
-							<select class="form-select" id="adminMemberType">
-								<option value="admin">어드민</option>
-								<option value="coach">코치</option>
-							</select>
-						</div>
-						<div id="adminRegisterError" class="text-danger small mb-2 d-none"></div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-						<button type="button" class="btn btn-primary" id="adminRegisterSubmit">등록</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!--**********************************
-			Footer start
-		***********************************-->
-		<div class="footer footer-outer">
+		
+		<div class="footer out-footer style-2">
 			<div class="copyright">
 				<p>Copyright © Designed &amp; Developed by <a href="https://dexignlab.com/" target="_blank">DexignLab</a> 2023</p>
 			</div>
 		</div>
 
+      
+        <!--**********************************
+            Footer end
+        ***********************************-->
 	</div>
-
-	
     <!--**********************************
         Main wrapper end
     ***********************************-->
 
-<!--***********************************-->
-	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-center">
-		<div class="modal-content">
-			<div class="modal-header">
-			<h5 class="modal-title" id="exampleModalLabel">Recent Student title</h5>
-			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<div class="row">
-					<div class="col-xl-6">
-						<div class="mb-3">
-						  <label for="exampleFormControlInput1" class="form-label mb-2">수강생 이름</label>
-						  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="James">
-						</div>
-						<div class="mb-3">
-						  <label for="exampleFormControlInput2" class="form-label mb-2">이메일</label>
-						  <input type="email" class="form-control" id="exampleFormControlInput2" placeholder="hello@example.com">
-						</div>
-						<div class="mb-3">
-						  <label  class="form-label mb-2">성별</label>
-						  <select class="default-select wide" aria-label="Default select example">
-							  <option selected>선택</option>
-							  <option value="1">남성</option>
-							  <option value="2">여성</option>
-							  <option value="3">기타</option>
-						  </select>
-						</div>
-					</div>
-					<div class="col-xl-6">
-						<div class="mb-3">
-						  <label for="exampleFormControlInput4" class="form-label mb-2">입학 연도</label>
-						  <input type="number" class="form-control" id="exampleFormControlInput4" placeholder="EX: 2023">
-						</div>
-						<div class="mb-3">
-						  <label for="exampleFormControlInput5" class="form-label mb-2">Student ID</label>
-						  <input type="number" class="form-control" id="exampleFormControlInput5" placeholder="14EMHEE092">
-						</div>
-						<div class="mb-3">
-						  <label for="exampleFormControlInput6" class="form-label mb-2">연락처</label>
-						  <input type="number" class="form-control" id="exampleFormControlInput6" placeholder="+123456">
-						</div>
-					</div>
-				</div>
-				
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-danger light" data-bs-dismiss="modal">닫기</button>
-				<button type="button" class="btn btn-primary">저장</button>
-			</div>
-		</div>
-		</div>
-	</div>	
-
-		
-	<!--**********************************
-		Modal
-	***********************************-->
     <!--**********************************
         Scripts
     ***********************************-->
     <!-- Required vendors -->
     <script src="vendor/global/global.min.js"></script>
-	<script src="vendor/chart.js/Chart.bundle.min.js"></script>
 	<script src="vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-	<!-- Apex Chart -->
-	<script src="vendor/apexchart/apexchart.js"></script>
-	<!-- Chart piety plugin files -->
-    <script src="vendor/peity/jquery.peity.min.js"></script>
-	<script src="vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
-	<!--swiper-slider-->
-	<script src="vendor/swiper/js/swiper-bundle.min.js"></script>
-	
-	
-    <!-- Datatable -->
-    <script src="vendor/datatables/js/jquery.dataTables.min.js"></script>
-    <script src="js/plugins-init/datatables.init.js"></script>
-
-	<!-- Dashboard 1 -->
-	<script src="js/dashboard/dashboard-1.js"></script>
+	<script src="vendor/moment/moment.min.js"></script>
 	<script src="vendor/wow-master/dist/wow.min.js"></script>
-	<script src="vendor/bootstrap-datetimepicker/js/moment.js"></script>
-	<script src="vendor/datepicker/js/bootstrap-datepicker.min.js"></script>
-	<script src="vendor/bootstrap-select-country/js/bootstrap-select-country.min.js"></script>
-    <script src="js/custom.min.js"></script>
-	<script src="js/dlabnav-init.js"></script>
-	<!-- Firebase -->
 	<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-	<script src="js/dashboard/dashboard-live-data.js"></script>
-	<script src="js/dashboard-purchase-code.js"></script>
-	<script src="../../js/member-notifications.js"></script>
-	<script>
-(function() {
-  var firebaseConfig = {
-    apiKey: "AIzaSyCijM7nOf7xYPKevbOsRrrZTA6XwgODeIM",
-    authDomain: "boostclass-7d4fd.firebaseapp.com",
-    projectId: "boostclass-7d4fd",
-    storageBucket: "boostclass-7d4fd.firebasestorage.app",
-    messagingSenderId: "774803491487",
-    appId: "1:774803491487:web:daada5b95008a14c2730aa"
-  };
-  if (typeof firebase === 'undefined') {
-    var el = document.getElementById('admin-list-placeholder');
-    if (el) { el.textContent = 'Firebase를 불러올 수 없습니다.'; }
-    return;
-  }
-  if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-  var db = firebase.firestore();
-  var MEMBER_COLLECTION = 'member';
-  var MEMBER_TYPES = { admin: '어드민', coach: '코치' };
+	<script src="js/custom.min.js"></script>
+	<script src="js/dlabnav-init.js"></script>
+	<script src="js/styleSwitcher.js"></script>
+	<script src="js/purchase-code-admin.js"></script>
 
-  function hidePlaceholder() {
-    var ph = document.getElementById('admin-list-placeholder');
-    if (ph) ph.style.display = 'none';
-  }
-  function showPlaceholder(text) {
-    var ph = document.getElementById('admin-list-placeholder');
-    if (ph) { ph.style.display = ''; ph.textContent = text || '불러오는 중...'; }
-  }
-  function formatDate(timestamp) {
-    if (!timestamp || !timestamp.toDate) return '-';
-    var d = timestamp.toDate();
-    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
-  }
-  function renderRow(id, data) {
-    var email = data.email || '';
-    var displayName = data.displayName || '-';
-    var memberType = data.memberType || 'member';
-    var typeLabel = MEMBER_TYPES[memberType] || memberType;
-    var createdAt = formatDate(data.createdAt);
-    var tr = document.createElement('tr');
-    tr.setAttribute('data-doc-id', id);
-    tr.innerHTML =
-      '<td>' + escapeHtml(email) + '</td>' +
-      '<td>' + escapeHtml(displayName) + '</td>' +
-      '<td><span class="badge bg-primary">' + escapeHtml(typeLabel) + '</span></td>' +
-      '<td>' + escapeHtml(createdAt) + '</td>' +
-      '<td><div class="d-flex gap-1 flex-wrap">' +
-        (memberType !== 'admin' ? '<button type="button" class="btn btn-sm btn-outline-danger upgrade-btn" data-doc-id="' + escapeHtml(id) + '" data-type="admin" data-prev-type="' + escapeHtml(memberType) + '">어드민으로</button>' : '') +
-        (memberType !== 'coach' ? '<button type="button" class="btn btn-sm btn-outline-info upgrade-btn" data-doc-id="' + escapeHtml(id) + '" data-type="coach" data-prev-type="' + escapeHtml(memberType) + '">코치로</button>' : '') +
-        '<button type="button" class="btn btn-sm btn-outline-secondary admin-delete-btn" data-doc-id="' + escapeHtml(id) + '" data-current-type="' + escapeHtml(memberType) + '">삭제</button>' +
-      '</div></td>';
-    return tr;
-  }
-  function escapeHtml(s) {
-    if (s == null) return '';
-    var div = document.createElement('div');
-    div.textContent = s;
-    return div.innerHTML;
-  }
-  function bindUpgradeButtons() {
-    document.querySelectorAll('#admin-list-tbody .upgrade-btn').forEach(function(btn) {
-      btn.onclick = function() {
-        var docId = btn.getAttribute('data-doc-id');
-        var newType = btn.getAttribute('data-type');
-        var prevType = btn.getAttribute('data-prev-type') || '';
-        if (!docId || !newType) return;
-        db.collection(MEMBER_COLLECTION).doc(docId).update({ memberType: newType }).then(function() {
-          if (typeof BoostNotifications !== 'undefined' && BoostNotifications.notifyMemberTypeChanged) {
-            var prevL = MEMBER_TYPES[prevType] || prevType || '회원';
-            var newL = MEMBER_TYPES[newType] || newType;
-            return BoostNotifications.notifyMemberTypeChanged(docId, prevL, newL).catch(function() {});
-          }
-        }).catch(function(err) {
-          alert('변경 실패: ' + (err.message || err));
-        });
-      };
-    });
-    document.querySelectorAll('#admin-list-tbody .admin-delete-btn').forEach(function(btn) {
-      btn.onclick = function() {
-        var docId = btn.getAttribute('data-doc-id');
-        var curType = btn.getAttribute('data-current-type') || '';
-        if (!docId) return;
-        if (!confirm('이 관리자를 목록에서 제거할까요? 멤버 타입만 일반 회원으로 변경됩니다.')) return;
-        db.collection(MEMBER_COLLECTION).doc(docId).update({ memberType: '' }).then(function() {
-          if (typeof BoostNotifications !== 'undefined' && BoostNotifications.notifyMemberTypeChanged) {
-            var prevL = MEMBER_TYPES[curType] || curType || '회원';
-            return BoostNotifications.notifyMemberTypeChanged(docId, prevL, '일반 회원').catch(function() {});
-          }
-        }).catch(function(err) {
-          alert('제거 실패: ' + (err.message || err));
-        });
-      };
-    });
-  }
-  var unsubscribe = db.collection(MEMBER_COLLECTION).where('memberType', 'in', ['admin', 'coach']).onSnapshot(
-    function(snap) {
-      var tbody = document.getElementById('admin-list-tbody');
-      if (!tbody) return;
-      var placeholder = document.getElementById('admin-list-placeholder');
-      if (placeholder) {
-        placeholder.remove();
-      }
-      tbody.innerHTML = '';
-      if (snap.empty) {
-        var empty = document.createElement('tr');
-        empty.innerHTML = '<td colspan="5" class="text-center py-4 text-muted">등록된 관리자가 없습니다.</td>';
-        tbody.appendChild(empty);
-        return;
-      }
-      var docs = snap.docs.slice();
-      docs.sort(function(a, b) {
-        var ta = (a.data().createdAt && a.data().createdAt.toDate) ? a.data().createdAt.toDate().getTime() : 0;
-        var tb = (b.data().createdAt && b.data().createdAt.toDate) ? b.data().createdAt.toDate().getTime() : 0;
-        return tb - ta;
-      });
-      docs.forEach(function(doc) {
-        tbody.appendChild(renderRow(doc.id, doc.data()));
-      });
-      bindUpgradeButtons();
-    },
-    function(err) {
-      showPlaceholder('목록을 불러오지 못했습니다.');
-      console.error(err);
-    }
-  );
-  document.getElementById('adminRegisterSubmit').addEventListener('click', function() {
-    var emailEl = document.getElementById('adminEmail');
-    var nameEl = document.getElementById('adminDisplayName');
-    var typeEl = document.getElementById('adminMemberType');
-    var errEl = document.getElementById('adminRegisterError');
-    var email = (emailEl && emailEl.value || '').trim();
-    var displayName = (nameEl && nameEl.value || '').trim();
-    var memberType = (typeEl && typeEl.value) || 'coach';
-    errEl.classList.add('d-none');
-    errEl.textContent = '';
-    if (!email) {
-      errEl.textContent = '이메일을 입력해 주세요.';
-      errEl.classList.remove('d-none');
-      return;
-    }
-    db.collection(MEMBER_COLLECTION).where('email', '==', email).get().then(function(snap) {
-      if (!snap || snap.empty) {
-        errEl.textContent = '해당 이메일로 가입한 사용자가 없습니다. 먼저 회원가입을 해 주세요.';
-        errEl.classList.remove('d-none');
-        return;
-      }
-      var doc = snap.docs[0];
-      var updateData = { memberType: memberType };
-      if (displayName) updateData.displayName = displayName;
-      return doc.ref.update(updateData);
-    }).then(function() {
-      if (window.bootstrap && document.getElementById('adminRegisterModal')) {
-        var modal = bootstrap.Modal.getInstance(document.getElementById('adminRegisterModal'));
-        if (modal) modal.hide();
-      }
-      if (emailEl) emailEl.value = '';
-      if (nameEl) nameEl.value = '';
-    }).catch(function(err) {
-      errEl.textContent = err.message || '등록에 실패했습니다.';
-      errEl.classList.remove('d-none');
-    });
-  });
-})();
-	</script>
-	
 </body>
 </html>

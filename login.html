@@ -62,6 +62,19 @@
   }
   firebase.initializeApp(config);
   var auth = firebase.auth();
+  function getSafeRedirect() {
+    var params = new URLSearchParams(window.location.search);
+    var red = params.get('redirect');
+    if (!red || typeof red !== 'string') return '';
+    if (red.length > 500) return '';
+    if (/^https?:\/\//i.test(red) || red.trim().indexOf('//') === 0) return '';
+    if (/[\s<>"']/.test(red)) return '';
+    return red;
+  }
+  function goAfterLogin() {
+    var red = getSafeRedirect();
+    window.location.href = red || 'index.html';
+  }
   function errMsg(code) {
     var map = { 'auth/invalid-email':'올바른 이메일이 아닙니다.', 'auth/user-not-found':'등록되지 않은 이메일입니다.', 'auth/wrong-password':'비밀번호가 올바르지 않습니다.', 'auth/invalid-credential':'이메일 또는 비밀번호가 올바르지 않습니다.', 'auth/popup-closed-by-user':'로그인 창이 닫혔습니다.', 'auth/popup-blocked':'팝업을 허용해 주세요.', 'auth/operation-not-allowed':'이 로그인 방식이 비활성화되어 있습니다.' };
     return map[code] || (code || '오류가 발생했습니다.');
@@ -79,12 +92,12 @@
     btn.disabled = true;
     btn.textContent = '로그인 중…';
     auth.signInWithEmailAndPassword(email, password)
-      .then(function() { window.location.href = 'index.html'; })
+      .then(function() { goAfterLogin(); })
       .catch(function(e) { errEl.textContent = errMsg(e.code); errEl.classList.remove('d-none'); })
       .finally(function() { btn.disabled = false; btn.textContent = '로그인'; });
   };
   function init() {
-    auth.onAuthStateChanged(function(user) { if (user) window.location.href = 'index.html'; });
+    auth.onAuthStateChanged(function(user) { if (user) goAfterLogin(); });
     var form = document.getElementById('loginForm');
     var btn = document.getElementById('btnLoginSubmit');
     if (form) form.addEventListener('submit', function(e) { e.preventDefault(); window.doLogin(); });

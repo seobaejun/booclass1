@@ -61,8 +61,20 @@
                     <h3 class="text-white">유료 게시판</h3>
                     <p class="text-white-50 mb-0">제목을 클릭하면 내용을 볼 수 있습니다.</p>
                 </div>
+                <p id="paid-board-loading" class="text-white-50 mb-3">회원 권한 확인 중…</p>
+                <div id="paid-board-denied" class="d-none card rounded-4 p-4 bg-dark border border-secondary">
+                    <p class="text-white mb-2">유료 게시판은 <strong class="text-accent">유료 회원</strong>만 이용할 수 있습니다.</p>
+                    <p class="text-white-50 small mb-3">(강사·코치·관리자 계정은 운영 목적으로 열람 가능합니다.)</p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="login.html?redirect=blog-post.html" class="btn btn-accent btn-sm">로그인</a>
+                        <a href="mypage.html" class="btn btn-outline-light btn-sm">마이페이지</a>
+                        <a href="index.html" class="btn btn-outline-secondary btn-sm">홈</a>
+                    </div>
+                </div>
+                <div id="paid-board-allowed" class="d-none">
                 <div id="board-list" class="card rounded-4 p-4 bg-dark border border-secondary" data-board-type="paid">
                     <div data-board-list></div>
+                </div>
                 </div>
             </div>
         </div>
@@ -110,27 +122,60 @@
     <script src="js/header-auth.js"></script>
     <script src="js/vendor/jquery.min.js"></script>
     <script src="js/vendor/bootstrap.bundle.min.js"></script>
-    <script src="js/board.js?v=10"></script>
+    <script src="js/paid-board-access.js"></script>
+    <script src="js/board.js?v=12"></script>
     <script>
       (function () {
-        function run() {
-          if (typeof firebase === 'undefined' || !firebase.firestore) return false;
-          Board.loadList('paid', 'board-list');
-          return true;
+        var loadingEl = document.getElementById('paid-board-loading');
+        var deniedEl = document.getElementById('paid-board-denied');
+        var allowedEl = document.getElementById('paid-board-allowed');
+
+        function showDenied() {
+          if (loadingEl) loadingEl.classList.add('d-none');
+          if (allowedEl) allowedEl.classList.add('d-none');
+          if (deniedEl) deniedEl.classList.remove('d-none');
         }
-        if (!run()) {
-          var attempts = 0;
-          var t = setInterval(function () {
-            if (run() || ++attempts > 50) {
-              clearInterval(t);
-              if (attempts > 50) {
-                var w = document.getElementById('board-list');
-                var inner = w && w.querySelector('[data-board-list]');
-                if (inner) inner.innerHTML = '<p class="text-white-50">목록을 불러올 수 없습니다. 새로고침 해 주세요.</p>';
+
+        function runBoardList() {
+          if (loadingEl) loadingEl.classList.add('d-none');
+          if (deniedEl) deniedEl.classList.add('d-none');
+          if (allowedEl) allowedEl.classList.remove('d-none');
+          function run() {
+            if (typeof firebase === 'undefined' || !firebase.firestore) return false;
+            if (typeof Board === 'undefined') return false;
+            Board.loadList('paid', 'board-list');
+            return true;
+          }
+          if (!run()) {
+            var attempts = 0;
+            var t = setInterval(function () {
+              if (run() || ++attempts > 50) {
+                clearInterval(t);
+                if (attempts > 50) {
+                  var w = document.getElementById('board-list');
+                  var inner = w && w.querySelector('[data-board-list]');
+                  if (inner) inner.innerHTML = '<p class="text-white-50">목록을 불러올 수 없습니다. 새로고침 해 주세요.</p>';
+                }
               }
-            }
-          }, 100);
+            }, 100);
+          }
         }
+
+        if (typeof PaidBoardAccess === 'undefined') {
+          showDenied();
+          return;
+        }
+        PaidBoardAccess.runGuard({
+          onAllowed: runBoardList,
+          onDenied: function (reason) {
+            if (reason === 'guest') {
+              var back = 'blog-post.html' + (window.location.search || '');
+              window.location.href = 'login.html?redirect=' + encodeURIComponent(back);
+              return;
+            }
+            showDenied();
+          }
+        });
       })();
     </script>
 </body>

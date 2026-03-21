@@ -57,24 +57,22 @@
                 <div class="mb-3">
                     <a href="#" id="board-back-link" class="text-accent text-decoration-none small">← 목록으로</a>
                 </div>
+                <p id="paid-detail-loading" class="text-white-50 mb-3 d-none">회원 권한 확인 중…</p>
+                <div id="paid-detail-denied" class="d-none card rounded-4 p-4 bg-dark border border-secondary mb-3">
+                    <p class="text-white mb-2">유료 게시판은 <strong class="text-accent">유료 회원</strong>만 이용할 수 있습니다.</p>
+                    <p class="text-white-50 small mb-3">(강사·코치·관리자 계정은 운영 목적으로 열람 가능합니다.)</p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="login.html" id="paid-detail-login-link" class="btn btn-accent btn-sm">로그인</a>
+                        <a href="mypage.html" class="btn btn-outline-light btn-sm">마이페이지</a>
+                        <a href="blog-post.html" class="btn btn-outline-secondary btn-sm">유료 목록</a>
+                    </div>
+                </div>
                 <div id="board-detail" class="card rounded-4 p-4 p-xl-5 bg-dark border border-secondary board-detail-card">
                     <div class="board-detail-top text-white-50 small d-flex flex-wrap gap-3 gap-xl-4 mb-3 pb-3 border-bottom border-secondary">
                         <strong id="board-detail-title" class="text-white board-detail-title"></strong>
                         <span>작성일 : <span id="board-detail-date"></span></span>
                     </div>
                     <div id="board-detail-content" class="board-detail-content text-white"></div>
-                </div>
-
-                <!-- 유료 게시판 번호 1번 글: 비밀번호 입력 전까지 본문 미표시 -->
-                <div id="paid-post1-gate" class="paid-post1-gate d-none" role="dialog" aria-modal="true" aria-labelledby="paid-post1-gate-title" aria-hidden="true">
-                    <div class="paid-post1-gate-inner card rounded-4 p-4 p-xl-5 bg-dark border border-secondary">
-                        <h2 id="paid-post1-gate-title" class="h5 text-white mb-2">유료 게시판 1번 글</h2>
-                        <p class="text-white-50 small mb-3">이 글은 비밀번호 입력 후 열람할 수 있습니다. (유료·무료 회원 동일)</p>
-                        <label for="paid-post1-input" class="form-label text-white-50 small mb-1">비밀번호</label>
-                        <input type="password" id="paid-post1-input" class="form-control mb-2" autocomplete="off" placeholder="비밀번호 입력">
-                        <p id="paid-post1-error" class="text-danger small mb-0 d-none" role="alert"></p>
-                        <button type="button" id="paid-post1-submit" class="btn btn-accent mt-3">확인</button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -122,8 +120,8 @@
     <script src="js/header-auth.js"></script>
     <script src="js/vendor/jquery.min.js"></script>
     <script src="js/vendor/bootstrap.bundle.min.js"></script>
-    <script src="js/board.js?v=10"></script>
-    <script src="js/paid-post1-gate.js?v=1"></script>
+    <script src="js/paid-board-access.js"></script>
+    <script src="js/board.js?v=12"></script>
     <script>
       (function () {
         var params = new URLSearchParams(window.location.search);
@@ -135,6 +133,13 @@
         var titleEl = document.getElementById('board-detail-title');
         var contentEl = document.getElementById('board-detail-content');
         var listUrl = type === 'paid' ? 'blog-post.html' : 'blog.html';
+        var loadingEl = document.getElementById('paid-detail-loading');
+        var deniedEl = document.getElementById('paid-detail-denied');
+        var detailCard = document.getElementById('board-detail');
+        var loginLink = document.getElementById('paid-detail-login-link');
+        if (loginLink) {
+          loginLink.href = 'login.html?redirect=' + encodeURIComponent(location.pathname + location.search);
+        }
 
         if (!id) {
           if (titleEl) titleEl.textContent = '글을 찾을 수 없습니다.';
@@ -148,46 +153,56 @@
 
         function tryLoad() {
           if (typeof firebase === 'undefined' || !firebase.firestore) return false;
-          if (typeof Board === 'undefined' || typeof Board.getPaidFirstPostId !== 'function') {
-            loadDetailNow();
-            return true;
-          }
-          if (type !== 'paid') {
-            loadDetailNow();
-            return true;
-          }
-          Board.getPaidFirstPostId()
-            .then(function (firstId) {
-              var isPost1 = firstId != null && String(firstId) === String(id);
-              if (!isPost1) {
-                loadDetailNow();
-                return;
-              }
-              if (window.PaidPost1Gate && PaidPost1Gate.isUnlocked()) {
-                loadDetailNow();
-                return;
-              }
-              if (window.PaidPost1Gate && typeof PaidPost1Gate.showGate === 'function') {
-                PaidPost1Gate.showGate(loadDetailNow);
-              } else {
-                loadDetailNow();
-              }
-            })
-            .catch(function () {
-              loadDetailNow();
-            });
+          if (typeof Board === 'undefined' || typeof Board.loadDetail !== 'function') return false;
+          loadDetailNow();
           return true;
         }
 
-        if (!tryLoad()) {
-          var attempts = 0;
-          var t = setInterval(function () {
-            if (tryLoad() || ++attempts > 50) {
-              clearInterval(t);
-              if (attempts > 50 && contentEl) contentEl.textContent = '새로고침 해 주세요.';
-            }
-          }, 100);
+        function runWhenReady() {
+          if (!tryLoad()) {
+            var attempts = 0;
+            var t = setInterval(function () {
+              if (tryLoad() || ++attempts > 50) {
+                clearInterval(t);
+                if (attempts > 50 && contentEl) contentEl.textContent = '새로고침 해 주세요.';
+              }
+            }, 100);
+          }
         }
+
+        if (type !== 'paid') {
+          if (loadingEl) loadingEl.classList.add('d-none');
+          runWhenReady();
+          return;
+        }
+
+        if (detailCard) detailCard.classList.add('d-none');
+        if (loadingEl) loadingEl.classList.remove('d-none');
+        if (deniedEl) deniedEl.classList.add('d-none');
+
+        if (typeof PaidBoardAccess === 'undefined') {
+          if (loadingEl) loadingEl.classList.add('d-none');
+          if (deniedEl) deniedEl.classList.remove('d-none');
+          return;
+        }
+
+        PaidBoardAccess.runGuard({
+          onAllowed: function () {
+            if (loadingEl) loadingEl.classList.add('d-none');
+            if (deniedEl) deniedEl.classList.add('d-none');
+            if (detailCard) detailCard.classList.remove('d-none');
+            runWhenReady();
+          },
+          onDenied: function (reason) {
+            if (loadingEl) loadingEl.classList.add('d-none');
+            if (detailCard) detailCard.classList.add('d-none');
+            if (reason === 'guest') {
+              window.location.href = 'login.html?redirect=' + encodeURIComponent(location.pathname + location.search);
+              return;
+            }
+            if (deniedEl) deniedEl.classList.remove('d-none');
+          }
+        });
       })();
     </script>
 </body>

@@ -9,11 +9,11 @@
 	var marketChart = function(){
 		 var options = {
           series: [{
-          name: 'series1',
-          data: [200, 400, 300, 400, 200, 400]
+          name: '이번 주',
+          data: [0, 0, 0, 0, 0, 0]
         }, {
-          name: 'series2',
-          data: [500, 300, 400, 200, 500, 200]
+          name: '지난 주',
+          data: [0, 0, 0, 0, 0, 0]
         }],
           chart: {
           height: 280,
@@ -49,12 +49,12 @@
 				
 			},
 			formatter: function (value) {
-			  return value + "k";
+			  return value + "명";
 			}
 		  },
 		},
         xaxis: {
-          categories: ["Week 01","Week 02","Week 03","Week 04","Week 05","Week 06"],
+          categories: ["1주차","2주차","3주차","4주차","5주차","6주차"],
 		  labels:{
 			  style: {
 				colors: '#B5B5C3',
@@ -70,23 +70,28 @@
 			opacity:0.05
 		},
         tooltip: {
-          x: {
-            format: 'dd/MM/yy HH:mm'
-          },
+          y: {
+            formatter: function (val) {
+              return (typeof val !== "undefined" ? val : 0) + "명";
+            }
+          }
         },
         };
 
         var chart = new ApexCharts(document.querySelector("#marketChart"), options);
         chart.render();
+        if (typeof window !== "undefined") {
+          window.boostDashboardMarketChart = chart;
+        }
 
 		jQuery('#dzOldSeries').on('change',function(){
 			jQuery(this).toggleClass('disabled');
-			chart.toggleSeries('series1');
+			chart.toggleSeries('이번 주');
 		});
 		
 		jQuery('#dzNewSeries').on('change',function(){
 			jQuery(this).toggleClass('disabled');
-			chart.toggleSeries('series2');
+			chart.toggleSeries('지난 주');
 		});
 	}
 	var chartTimeline = function(){
@@ -194,19 +199,20 @@
 		 chartTimelineRender.render();
 	}
 	var overiewChart = function(){
+		 /* 기본 탭 「주」와 동일하게 7일치 매출 데모 */
 		 var options = {
           series: [{
-          name: 'Number of Projects',
+          name: '월별 매출',
           type: 'column',
-          data: [75, 85, 72, 100, 50, 100, 80, 75, 95, 35, 75,100]
+          data: [75, 85, 72, 100, 50, 100, 80]
         }, {
-          name: 'Revenue',
+          name: '누적 매출',
           type: 'area',
-          data: [44, 65, 55, 75, 45, 55, 40, 60, 75, 45, 50,42]
+          data: [44, 65, 55, 75, 45, 55, 40]
         }, {
-          name: 'Active Projects',
+          name: '목표 대비',
           type: 'line',
-          data: [30, 25, 45, 30, 25, 35, 20, 45, 35, 20, 35,20]
+          data: [30, 25, 45, 30, 25, 35, 20]
         }],
           chart: {
           height: 300,
@@ -291,14 +297,12 @@
           }
         },
 		colors:["var(--primary)","#3AC977","#FF5E5E"],
-         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul',
-          'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-        ], 
         markers: {
           size: 0
         },
         xaxis: {
-          type: 'month',
+          type: 'category',
+		  categories: ['일', '월', '화', '수', '목', '금', '토'],
 		  labels: {
 			   style: {
 				   fontSize: '13px',
@@ -315,6 +319,9 @@
 				   fontSize: '13px',
 				   colors:'#888888',
 			   },
+			   formatter: function (val) {
+			     return (typeof val !== "undefined" ? val : 0) + "만";
+			   }
 		  },
         },
         tooltip: {
@@ -323,7 +330,7 @@
           y: {
             formatter: function (y) {
               if (typeof y !== "undefined") {
-                return y.toFixed(0) + " points";
+                return y.toFixed(0) + "만원";
               }
               return y;
         
@@ -334,69 +341,10 @@
 
         var chart = new ApexCharts(document.querySelector("#overiewChart"), options);
         chart.render();
-		
-		$(".mix-chart-tab .nav-link").on('click',function(){
-			var seriesType = $(this).attr('data-series');
-			var columnData = [];
-			var areaData = [];
-			var lineData = [];
-			var newLabels = [];
-
-			switch(seriesType) {
-				case "week":
-					columnData = [75, 85, 72, 100, 50, 100, 80];
-					areaData = [44, 65, 55, 75, 45, 55, 40];
-					lineData = [30, 25, 45, 30, 25, 35];
-					newLabels =['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] 
-					
-					
-					break;
-				case "month":
-					columnData = [20, 50, 80, 52, 10, 80, 50, 30, 95, 10, 60,85];
-					areaData = [40, 25, 85, 45, 85, 25, 95, 65, 45, 45, 20,12];
-					lineData = [65, 45, 25, 65, 45, 25, 75, 35, 65, 75, 15,65];
-					newLabels =['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] 
-					
-					break;
-				case "year":
-					columnData = [30, 20, 80, 52, 10, 90, 50, 30, 95, 20, 60,85];
-					areaData = [40, 25, 40, 45, 85, 25, 50, 65, 45, 60, 20,12];
-					lineData = [65, 45, 30, 65, 45, 25, 75, 40, 65, 50, 15,65];
-					newLabels =['2011', '2022', '2023', '2024', '2025', '2026', '2027','2028','2029','2030','2031','2032'] ;
-					break;
-				case "all":
-					columnData = [20, 50, 80, 60, 10, 80, 50, 40, 95, 20, 60,85];
-					areaData = [40, 25, 30, 45, 85, 25, 95, 65, 50, 45, 20,12];
-					lineData = [65, 45, 25, 65, 45, 25, 30, 35, 65, 75, 15,65];
-					break;
-				default:
-					columnData = [75, 80, 72, 100, 50, 100, 80, 30, 95, 35, 75,100];
-					areaData = [44, 65, 55, 75, 45, 55, 40, 60, 75, 45, 50,42];
-					lineData = [30, 25, 45, 30, 25, 35, 20, 45, 35, 30, 35,20];
-			}
-			chart.updateOptions({
-			  labels: newLabels
-			});
-			chart.updateSeries([
-				{
-					name: "Number of Student",
-					type: 'column',
-					data: columnData
-					
-					
-				},{
-					name: 'Revenue',
-					type: 'area',
-					data: areaData
-					
-				},{
-					name: 'Active Teacher',
-					type: 'line',
-					data: lineData
-					
-				}
-			]);
-		})
+        if (typeof window !== "undefined") {
+          window.boostDashboardRevenueChart = chart;
+        }
+		/* 매출 탭 전환은 dashboard-live-data.js에서 Firestore 기준으로 처리 */
 	 
 	}
 	var NewCustomers = function(){
