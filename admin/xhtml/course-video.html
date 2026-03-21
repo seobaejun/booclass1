@@ -1275,21 +1275,16 @@
 											</select>
 										</div>
 
-										<h6 class="text-primary border-bottom pb-2 mb-3">강의 영상</h6>
-										<div class="mb-3">
-											<label class="form-label text-primary">강의 영상 파일 업로드</label>
-											<input type="file" class="form-control" id="videoUpload" accept="video/mp4,video/webm,video/ogg">
-											<small class="text-muted">MP4, WebM, OGG. Storage에 저장됩니다.</small>
-										</div>
-										<div class="mb-3">
-											<label for="videoUrl" class="form-label text-primary">또는 외부 링크 (YouTube, Vimeo, 개인서버 등)</label>
-											<input type="url" class="form-control" id="videoUrl" placeholder="https://www.youtube.com/... 또는 https://...">
-											<small class="text-muted">파일 업로드 대신 링크를 입력하면 해당 URL로 연결됩니다.</small>
-										</div>
-										<div class="mb-4">
-											<label for="courseDuration" class="form-label text-primary">재생 시간 (분)</label>
-											<input type="number" class="form-control" id="courseDuration" placeholder="예: 45" min="0">
-										</div>
+										<h6 class="text-primary border-bottom pb-2 mb-3">강의 구성 (파트 · 강의별 영상)</h6>
+										<p class="text-muted small mb-2">파트를 추가하고, 각 파트마다 강의 제목·재생시간(분)·영상 파일 또는 외부 URL을 입력하세요. 기존 단일 영상 강의는 수정 시 아래에 자동으로 한 파트로 불러옵니다.</p>
+										<div id="coursePartsMount" class="mb-4"></div>
+
+										<h6 class="text-primary border-bottom pb-2 mb-3">강의에 포함할 전자책</h6>
+										<p class="text-muted small mb-2">아래에서 <strong>새 파일을 업로드</strong>하거나, 그 아래에서 <strong>이미 등록된 전자책을 체크</strong>할 수 있습니다. 온라인 강의 플레이어 우측 「전자책 다운로드」 탭에 표시됩니다.</p>
+										<div id="courseNewEbooksMount" class="mb-3"></div>
+										<h6 class="text-primary border-bottom pb-2 mb-2 small">이미 등록된 전자책 선택</h6>
+										<p class="text-muted small mb-2">「전자책」 메뉴에서 미리 등록한 항목을 고릅니다.</p>
+										<div id="courseAttachedEbooksMount" class="mb-4 border rounded p-3 bg-light"></div>
 
 										<div id="courseFormMessage" class="alert d-none" role="alert"></div>
 										<div class="mb-0">
@@ -1341,7 +1336,8 @@
 	<script src="js/dlabnav-init.js"></script>
 	<script src="js/styleSwitcher.js"></script>
 	<script src="js/rich-editor-admin.js"></script>
-	<script src="js/course-register-admin.js?v=4"></script>
+	<script src="js/course-parts-admin.js"></script>
+	<script src="js/course-register-admin.js?v=7"></script>
 
 </body>
 </html>

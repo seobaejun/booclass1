@@ -540,10 +540,17 @@
         ctaExtraAttrs = ' target="_blank" rel="noopener noreferrer"';
       }
     } else {
-      href = item.detailUrl || '#';
       var isCourse = item.type === 'course';
-      ctaLabel = isCourse ? '온라인 강의 시청하기' : '전자책 보기';
-      icon = isCourse ? 'fa-play' : 'fa-book-open';
+      var isEbook = item.type === 'ebook';
+      if (isCourse && item.itemId) {
+        href = 'course-player.html?id=' + encodeURIComponent(String(item.itemId));
+      } else if (isEbook && item.itemId) {
+        href = 'ebook-download.html?id=' + encodeURIComponent(String(item.itemId));
+      } else {
+        href = item.detailUrl || '#';
+      }
+      ctaLabel = isCourse ? '온라인 강의 시청하기' : '전자책 다운로드';
+      icon = isCourse ? 'fa-play' : 'fa-download';
     }
     var removeBtn = '';
     if (opts.showRemove && opts.listField && item.key) {

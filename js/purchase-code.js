@@ -71,7 +71,7 @@
   function buildCourseItem(docId, data, opts) {
     opts = opts || {};
     var isFree = opts.isFree === true;
-    var detailUrl = "course-detail.html?id=" + encodeURIComponent(docId);
+    var detailUrl = "course-player.html?id=" + encodeURIComponent(docId);
     return {
       key: "course:" + docId,
       type: "course",
@@ -96,7 +96,7 @@
   function buildEbookItem(docId, data, opts) {
     opts = opts || {};
     var isFree = opts.isFree === true;
-    var detailUrl = "ebook-detail.html?id=" + encodeURIComponent(docId);
+    var detailUrl = "ebook-download.html?id=" + encodeURIComponent(docId);
     return {
       key: "ebook:" + docId,
       type: "ebook",
