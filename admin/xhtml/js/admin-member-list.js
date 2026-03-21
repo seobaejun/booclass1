@@ -375,14 +375,46 @@
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
     var db = firebase.firestore();
 
+    function memberTypeLabel(val) {
+      var v = val == null ? "" : String(val);
+      for (var j = 0; j < MEMBER_TYPE_OPTIONS.length; j++) {
+        if (MEMBER_TYPE_OPTIONS[j].value === v) {
+          return MEMBER_TYPE_OPTIONS[j].label;
+        }
+      }
+      return v || "미지정";
+    }
+
     function saveMemberType(uid, memberType, btn) {
       btn.disabled = true;
       hideMessage();
+      var previousType = "";
+      for (var pi = 0; pi < memberDocsAll.length; pi++) {
+        if (memberDocsAll[pi].id === uid) {
+          previousType =
+            memberDocsAll[pi].data.memberType != null
+              ? String(memberDocsAll[pi].data.memberType)
+              : "";
+          break;
+        }
+      }
       db.collection("member")
         .doc(uid)
         .update({
           memberType: memberType,
           updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        })
+        .then(function () {
+          if (
+            typeof BoostNotifications !== "undefined" &&
+            BoostNotifications.notifyMemberTypeChanged
+          ) {
+            var prevL = memberTypeLabel(previousType);
+            var newL = memberTypeLabel(memberType);
+            return BoostNotifications.notifyMemberTypeChanged(uid, prevL, newL).catch(
+              function () {}
+            );
+          }
         })
         .then(function () {
           for (var i = 0; i < memberDocsAll.length; i++) {

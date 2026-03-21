@@ -3,7 +3,7 @@
         <div class="r-container">
             <div class="text-center mb-5">
                 <h2 class="text-white mb-2">Contact Us</h2>
-                <p class="text-white-50">궁금한 점이 있으신가요? 도움이 필요하신가요? 편하게 문의해 주세요.</p>
+                <p class="text-white-50">답변은 마이페이지에서 확인하실 수 있습니다. 편하게 문의해 주세요.</p>
             </div>
             <form class="d-flex flex-column gap-1 w-100 needs-validation form" novalidate>
                 <input type="text" name="action" value="appointment" hidden>

@@ -1,7 +1,14 @@
 # -*- coding: utf-8 -*-
 """
 대시보드(index.html)와 동일하게 모든 관리자 페이지의
-로고, 한글 메뉴, 강의등록, 강의 목록을 통일합니다.
+사이드바(<div class="dlabnav">)와 로고를 통일합니다.
+
+index.html에서 메뉴를 수정한 뒤(예: 수강생 > 1:1 문의) 아래를 실행하면
+모든 *.html에 동일한 메뉴가 반영됩니다.
+
+    python unify_sidebar.py
+
+주의: index.html을 제외한 파일의 사이드바 블록 전체가 덮어씌워집니다.
 """
 import os
 import re

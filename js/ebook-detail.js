@@ -87,6 +87,69 @@
         }
       }
 
+      var btnWish = document.getElementById("btnEbookWish");
+      var btnCart = document.getElementById("btnEbookCart");
+      var detailUrl = "ebook-detail.html?id=" + encodeURIComponent(id);
+      var metaLine = "구매 후 평생 소장";
+      var purchaseUrlForItem =
+        typeof BoostWishCart !== "undefined" && BoostWishCart.resolvePurchaseUrl
+          ? BoostWishCart.resolvePurchaseUrl("ebook", id, detailUrl, null)
+          : (PURCHASE_URL_BY_EBOOK_ID[id] || detailUrl);
+      if (btnWish) {
+        btnWish.classList.remove("d-none");
+        btnWish.onclick = function () {
+          if (typeof BoostWishCart === "undefined") return;
+          var u = BoostWishCart.requireLogin();
+          if (!u) {
+            window.location.href = "login.html?next=" + encodeURIComponent(window.location.href);
+            return;
+          }
+          BoostWishCart.addWishlist(u.uid, {
+            type: "ebook",
+            itemId: id,
+            title: title,
+            metaLine: metaLine,
+            detailUrl: detailUrl,
+            purchaseUrl: purchaseUrlForItem,
+            thumbUrl: coverImg
+          })
+            .then(function (r) {
+              if (r && r.duplicate) window.alert("이미 찜한 전자책입니다.");
+              else window.alert("찜 목록에 추가했습니다. 마이페이지에서 확인하세요.");
+            })
+            .catch(function () {
+              window.alert("저장에 실패했습니다.");
+            });
+        };
+      }
+      if (btnCart) {
+        btnCart.classList.remove("d-none");
+        btnCart.onclick = function () {
+          if (typeof BoostWishCart === "undefined") return;
+          var u = BoostWishCart.requireLogin();
+          if (!u) {
+            window.location.href = "login.html?next=" + encodeURIComponent(window.location.href);
+            return;
+          }
+          BoostWishCart.addCart(u.uid, {
+            type: "ebook",
+            itemId: id,
+            title: title,
+            metaLine: metaLine,
+            detailUrl: detailUrl,
+            purchaseUrl: purchaseUrlForItem,
+            thumbUrl: coverImg
+          })
+            .then(function (r) {
+              if (r && r.duplicate) window.alert("이미 장바구니에 있습니다.");
+              else window.alert("장바구니에 담았습니다.");
+            })
+            .catch(function () {
+              window.alert("저장에 실패했습니다.");
+            });
+        };
+      }
+
       document.title = "부스트클래스 - " + title;
     })
     .catch(function () {});

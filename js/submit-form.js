@@ -9,6 +9,25 @@ $(function () {
         const form = $(this);
         var actionInput = form.find("input[name='action']");
 
+        /* Contact Us(#contact): 로그인 + Firestore 1:1 문의 (contact-auth-inquiry.js) */
+        if (form[0].closest && form[0].closest('#contact')) {
+            if (typeof window.boostContactSubmit === 'function') {
+                if (!form[0].checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    form.addClass('was-validated');
+                    return;
+                }
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                window.boostContactSubmit(form[0]);
+                return false;
+            }
+            event.preventDefault();
+            window.alert('문의 기능을 불러오지 못했습니다. 페이지를 새로고침 후 다시 시도해 주세요.');
+            return false;
+        }
+
         if (!form[0].checkValidity()) {
             event.preventDefault();
             event.stopPropagation();

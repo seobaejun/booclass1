@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="B">
+  <defs>
+    <linearGradient id="brand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A9F8B5"/>
+      <stop offset="35%" stop-color="#DFF494"/>
+      <stop offset="55%" stop-color="#ffffff"/>
+      <stop offset="75%" stop-color="#DFF494"/>
+      <stop offset="100%" stop-color="#A9F8B5"/>
+    </linearGradient>
+  </defs>
+  <!-- 어두운 배경으로 브랜드 그라데이션 글자 대비 -->
+  <rect width="32" height="32" rx="6" fill="#0a0a0a"/>
+  <text
+    x="16"
+    y="16"
+    dominant-baseline="central"
+    text-anchor="middle"
+    font-family="system-ui, -apple-system, 'Segoe UI', Arial, sans-serif"
+    font-weight="800"
+    font-size="28"
+    fill="url(#brand)">B</text>
+</svg>

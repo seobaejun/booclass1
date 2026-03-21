@@ -95,9 +95,70 @@
           '    <div class="mt-3">' +
           '      <a href="' + escapeHtml(detailUrl) + '" class="btn btn-accent rounded-3 w-100">수강하기</a>' +
           "    </div>" +
+          '    <div class="d-flex gap-2 mt-2">' +
+          '      <button type="button" class="btn btn-sm btn-outline-light flex-fill bc-wish-course" data-id="' +
+          escapeHtml(id) +
+          '" data-title="' +
+          escapeHtml(title) +
+          '" data-cover="' +
+          escapeHtml(coverImg) +
+          '">찜</button>' +
+          '      <button type="button" class="btn btn-sm btn-outline-light flex-fill bc-cart-course" data-id="' +
+          escapeHtml(id) +
+          '" data-title="' +
+          escapeHtml(title) +
+          '" data-cover="' +
+          escapeHtml(coverImg) +
+          '">장바구니</button>' +
+          "    </div>" +
           "  </div>" +
           "</div>";
         grid.appendChild(col);
+      });
+
+      grid.addEventListener("click", function (ev) {
+        var wishBtn = ev.target.closest(".bc-wish-course");
+        var cartBtn = ev.target.closest(".bc-cart-course");
+        if (!wishBtn && !cartBtn) return;
+        ev.preventDefault();
+        ev.stopPropagation();
+        if (typeof BoostWishCart === "undefined") return;
+        var u = BoostWishCart.requireLogin();
+        if (!u) {
+          window.location.href = "login.html?next=" + encodeURIComponent(window.location.href);
+          return;
+        }
+        var btn = wishBtn || cartBtn;
+        var itemId = btn.getAttribute("data-id");
+        var itemTitle = btn.getAttribute("data-title") || "";
+        var cover = btn.getAttribute("data-cover") || "";
+        var detailUrl = "course-detail.html?id=" + encodeURIComponent(itemId);
+        var metaLine = "수강기간 : 평생 소장";
+        var purchaseUrl =
+          typeof BoostWishCart !== "undefined" && BoostWishCart.resolvePurchaseUrl
+            ? BoostWishCart.resolvePurchaseUrl("course", itemId, detailUrl, null)
+            : detailUrl;
+        var payload = {
+          type: "course",
+          itemId: itemId,
+          title: itemTitle,
+          metaLine: metaLine,
+          detailUrl: detailUrl,
+          purchaseUrl: purchaseUrl,
+          thumbUrl: cover
+        };
+        var p = wishBtn
+          ? BoostWishCart.addWishlist(u.uid, payload)
+          : BoostWishCart.addCart(u.uid, payload);
+        p.then(function (r) {
+          if (r && r.duplicate) {
+            window.alert(wishBtn ? "이미 찜한 강의입니다." : "이미 장바구니에 있습니다.");
+          } else {
+            window.alert(wishBtn ? "찜 목록에 추가했습니다." : "장바구니에 담았습니다.");
+          }
+        }).catch(function () {
+          window.alert("저장에 실패했습니다.");
+        });
       });
     })
     .catch(function (err) {

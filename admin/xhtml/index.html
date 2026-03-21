@@ -1040,7 +1040,7 @@
 					</a>
 					<ul aria-expanded="false">
 						<li><a href="student.html">수강생 목록</a></li>
-						<li><a href="student-detail.html">수강생 상세</a></li>
+						<li><a href="student-detail.html">1:1 문의</a></li>
 						<li><a href="add-student.html">수강생 등록</a></li>
 						
 					</ul>
@@ -1065,6 +1065,7 @@
 						<ul aria-expanded="false">
 							<li><a href="free-board.html">무료게시판</a></li>
 							<li><a href="paid-board.html">유료게시판</a></li>
+							<li><a href="notice-board.html">공지사항</a></li>
 						</ul>
 
 					</li>
@@ -1956,6 +1957,7 @@
 	<!-- Firebase -->
 	<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+	<script src="../../js/member-notifications.js"></script>
 	<script>
 (function() {
   var firebaseConfig = {
@@ -2003,9 +2005,9 @@
       '<td><span class="badge bg-primary">' + escapeHtml(typeLabel) + '</span></td>' +
       '<td>' + escapeHtml(createdAt) + '</td>' +
       '<td><div class="d-flex gap-1 flex-wrap">' +
-        (memberType !== 'admin' ? '<button type="button" class="btn btn-sm btn-outline-danger upgrade-btn" data-doc-id="' + escapeHtml(id) + '" data-type="admin">어드민으로</button>' : '') +
-        (memberType !== 'coach' ? '<button type="button" class="btn btn-sm btn-outline-info upgrade-btn" data-doc-id="' + escapeHtml(id) + '" data-type="coach">코치로</button>' : '') +
-        '<button type="button" class="btn btn-sm btn-outline-secondary admin-delete-btn" data-doc-id="' + escapeHtml(id) + '">삭제</button>' +
+        (memberType !== 'admin' ? '<button type="button" class="btn btn-sm btn-outline-danger upgrade-btn" data-doc-id="' + escapeHtml(id) + '" data-type="admin" data-prev-type="' + escapeHtml(memberType) + '">어드민으로</button>' : '') +
+        (memberType !== 'coach' ? '<button type="button" class="btn btn-sm btn-outline-info upgrade-btn" data-doc-id="' + escapeHtml(id) + '" data-type="coach" data-prev-type="' + escapeHtml(memberType) + '">코치로</button>' : '') +
+        '<button type="button" class="btn btn-sm btn-outline-secondary admin-delete-btn" data-doc-id="' + escapeHtml(id) + '" data-current-type="' + escapeHtml(memberType) + '">삭제</button>' +
       '</div></td>';
     return tr;
   }
@@ -2020,8 +2022,15 @@
       btn.onclick = function() {
         var docId = btn.getAttribute('data-doc-id');
         var newType = btn.getAttribute('data-type');
+        var prevType = btn.getAttribute('data-prev-type') || '';
         if (!docId || !newType) return;
-        db.collection(MEMBER_COLLECTION).doc(docId).update({ memberType: newType }).catch(function(err) {
+        db.collection(MEMBER_COLLECTION).doc(docId).update({ memberType: newType }).then(function() {
+          if (typeof BoostNotifications !== 'undefined' && BoostNotifications.notifyMemberTypeChanged) {
+            var prevL = MEMBER_TYPES[prevType] || prevType || '회원';
+            var newL = MEMBER_TYPES[newType] || newType;
+            return BoostNotifications.notifyMemberTypeChanged(docId, prevL, newL).catch(function() {});
+          }
+        }).catch(function(err) {
           alert('변경 실패: ' + (err.message || err));
         });
       };
@@ -2029,10 +2038,14 @@
     document.querySelectorAll('#admin-list-tbody .admin-delete-btn').forEach(function(btn) {
       btn.onclick = function() {
         var docId = btn.getAttribute('data-doc-id');
+        var curType = btn.getAttribute('data-current-type') || '';
         if (!docId) return;
         if (!confirm('이 관리자를 목록에서 제거할까요? 멤버 타입만 일반 회원으로 변경됩니다.')) return;
         db.collection(MEMBER_COLLECTION).doc(docId).update({ memberType: '' }).then(function() {
-          // 목록은 onSnapshot으로 자동 갱신됨 (admin/coach만 조회하므로 해당 행 제거됨)
+          if (typeof BoostNotifications !== 'undefined' && BoostNotifications.notifyMemberTypeChanged) {
+            var prevL = MEMBER_TYPES[curType] || curType || '회원';
+            return BoostNotifications.notifyMemberTypeChanged(docId, prevL, '일반 회원').catch(function() {});
+          }
         }).catch(function(err) {
           alert('제거 실패: ' + (err.message || err));
         });
