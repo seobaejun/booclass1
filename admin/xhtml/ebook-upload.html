@@ -1263,9 +1263,12 @@
 											<small class="text-muted">이미지·표·링크 등 서식 있는 소개를 입력할 수 있습니다. 이미지는 Storage에 자동 업로드됩니다.</small>
 										</div>
 										<div class="mb-3">
-											<label for="ebookFileUpload" class="form-label text-primary">전자책 파일 업로드</label>
-											<input type="file" class="form-control" id="ebookFileUpload" accept=".pdf,.epub,.doc,.docx">
-											<small class="text-muted">PDF, EPUB, DOC 등. Storage에 저장됩니다.</small>
+											<label class="form-label text-primary">전자책 파일 <span class="text-muted small">(행 추가로 여러 개)</span></label>
+											<div id="ebookFileRows" class="ebook-file-rows"></div>
+											<button type="button" class="btn btn-sm btn-outline-primary mt-1" id="btnAddEbookFileRow">
+												<i class="fa fa-plus me-1"></i>파일 행 추가
+											</button>
+											<small class="text-muted d-block mt-2">PDF·엑셀·텍스트·워드·PPT 등. 각 행 설명은 다운로드 화면에 표시됩니다.</small>
 										</div>
 										<div class="mb-0">
 											<button class="btn btn-outline-primary me-3" type="button" id="btnEbookCancel">취소</button>
@@ -1309,15 +1312,17 @@
 	<script src="vendor/moment/moment.min.js"></script>
 	<script src="vendor/wow-master/dist/wow.min.js"></script>
 	<script src="https://uicdn.toast.com/editor/3.2.2/toastui-editor-all.min.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-storage-compat.js"></script>
 	<script src="js/custom.min.js"></script>
 	<script src="js/dlabnav-init.js"></script>
 	<script src="js/styleSwitcher.js"></script>
 	<script src="js/rich-editor-admin.js"></script>
-	<script src="js/ebook-upload-admin.js?v=3"></script>
+	<script src="../../js/mime-types-browser.js"></script>
+	<script src="../../js/storage-attachment-meta.js"></script>
+	<script src="js/ebook-upload-admin.js?v=5"></script>
 
 </body>
 </html>

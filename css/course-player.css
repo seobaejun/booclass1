@@ -446,12 +446,20 @@
   display: inline-flex;
   align-items: center;
   padding: 0.35rem 0.75rem;
+  border: none;
   border-radius: 0.4rem;
   font-size: 0.78rem;
   font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
   text-decoration: none;
   color: #111;
   background: linear-gradient(78.12deg, #a9f8b5 0.32%, #dff494 99.52%);
+}
+
+.cp-ebook-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .cp-ebook-btn:hover {

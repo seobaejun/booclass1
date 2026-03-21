@@ -31,6 +31,19 @@
     return d.innerHTML;
   }
 
+  function downloadErrorMessage() {
+    if (typeof BoostFileDownloadHelp === "string") return BoostFileDownloadHelp;
+    return "다운로드에 실패했습니다. docs/ebook-download-solution.md 를 참고하세요.";
+  }
+
+  function escAttr(s) {
+    if (s == null) return "";
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/"/g, "&quot;")
+      .replace(/</g, "&lt;");
+  }
+
   function formatDurationMin(m) {
     var n = parseInt(m, 10);
     if (isNaN(n) || n <= 0) return "—";
@@ -120,6 +133,57 @@
   var curriculumEl = document.getElementById("cpCurriculum");
   var ebookPanelEl = document.getElementById("cpEbookDownloads");
   var rootEl = document.getElementById("coursePlayerRoot");
+
+  if (ebookPanelEl) {
+    ebookPanelEl.addEventListener("click", function (ev) {
+      var btn = ev.target.closest(".cp-ebook-btn");
+      if (!btn || btn.tagName !== "BUTTON") return;
+      ev.preventDefault();
+      ev.stopPropagation();
+      var url = btn.getAttribute("data-ebook-url") || "";
+      var title = btn.getAttribute("data-ebook-title") || "";
+      if (!url) return;
+      if (typeof BoostFileDownload === "undefined" || !BoostFileDownload.downloadFromUrl) {
+        alert("다운로드 스크립트를 불러올 수 없습니다. 페이지를 새로고침해 주세요.");
+        return;
+      }
+      btn.disabled = true;
+      var idleHtml = btn.getAttribute("data-download-idle-html");
+      if (!idleHtml) {
+        idleHtml = btn.innerHTML;
+        btn.setAttribute("data-download-idle-html", idleHtml);
+      }
+      btn.innerHTML =
+        '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> 다운로드 중…';
+      BoostFileDownload.downloadFromUrl(url, title, {
+        onEnd: function () {
+          btn.innerHTML = btn.getAttribute("data-download-idle-html") || idleHtml;
+        }
+      })
+        .then(function () {
+          if (
+            typeof BoostFileDownloadUsedTabFallback !== "undefined" &&
+            BoostFileDownloadUsedTabFallback &&
+            !sessionStorage.getItem("boost_download_cors_hint_shown")
+          ) {
+            sessionStorage.setItem("boost_download_cors_hint_shown", "1");
+            alert(
+              "파일을 새 탭에서 열었습니다.\n" +
+                "PC 저장: Ctrl+S 또는 ⋮ → 다른 이름으로 저장.\n\n" +
+                "※ 화면에만 보이고 저장이 안 되면 관리자에서 해당 파일을 다시 업로드해 주세요.\n" +
+                "(Storage에 attachment가 붙어야 브라우저가 바로 내려받습니다.)"
+            );
+          }
+        })
+        .catch(function (err) {
+          console.error(err);
+          alert("다운로드에 실패했습니다.\n\n" + downloadErrorMessage());
+        })
+        .finally(function () {
+          btn.disabled = false;
+        });
+    });
+  }
   var shellEl = document.getElementById("cpVideoShell");
   var controlsEl = document.getElementById("cpControls");
   var cpBtnPlay = document.getElementById("cpBtnPlay");
@@ -422,10 +486,34 @@
     });
   }
 
+  function normalizeEbookFileList(d) {
+    if (!d) return [];
+    if (d.ebookFiles && Array.isArray(d.ebookFiles) && d.ebookFiles.length) {
+      return d.ebookFiles
+        .slice()
+        .sort(function (a, b) {
+          return (a.order || 0) - (b.order || 0);
+        })
+        .map(function (x) {
+          return {
+            fileLabel: x.fileLabel || x.label || "파일",
+            fileUrl: x.fileUrl || x.url || ""
+          };
+        })
+        .filter(function (x) {
+          return x.fileUrl;
+        });
+    }
+    if (d.ebookFileUrl) {
+      return [{ fileLabel: "다운로드", fileUrl: d.ebookFileUrl }];
+    }
+    return [];
+  }
+
   /**
    * 강의 문서의 attachedEbookIds 로 ebooks 컬렉션에서 메타·다운로드 URL 조회
    * @param {object} course
-   * @returns {Promise<Array<{ id: string, title: string, fileUrl: string }>>}
+   * @returns {Promise<Array<{ id: string, title: string, fileUrl: string, files: Array<{fileLabel:string,fileUrl:string}> }>>}
    */
   function fetchAttachedEbooks(course) {
     var ids = course && course.attachedEbookIds;
@@ -442,10 +530,12 @@
           .then(function (doc) {
             if (!doc.exists) return null;
             var d = doc.data() || {};
+            var files = normalizeEbookFileList(d);
             return {
               id: doc.id,
               title: d.title || "전자책",
-              fileUrl: d.ebookFileUrl || ""
+              fileUrl: d.ebookFileUrl || "",
+              files: files
             };
           });
       })
@@ -461,23 +551,40 @@
         '<p class="px-3 text-muted small">이 강의에 연결된 전자책이 없습니다. 관리자에서 강의 등록 시 전자책을 선택할 수 있습니다.</p>';
       return;
     }
-    var html = items.map(function (it) {
-      if (it.fileUrl) {
-        return (
+    var html = [];
+    items.forEach(function (it) {
+      var files =
+        it.files && it.files.length
+          ? it.files
+          : it.fileUrl
+            ? [{ fileLabel: "다운로드", fileUrl: it.fileUrl }]
+            : [];
+      if (!files.length) {
+        html.push(
           '<div class="cp-ebook-row">' +
-          '<span class="cp-ebook-title">' +
-          esc(it.title) +
-          '</span><a class="cp-ebook-btn" href="' +
-          esc(it.fileUrl) +
-          '" target="_blank" rel="noopener noreferrer">다운로드</a></div>'
+            '<span class="cp-ebook-title">' +
+            esc(it.title) +
+            '</span><span class="cp-ebook-missing small text-muted">파일 없음</span></div>'
         );
+        return;
       }
-      return (
-        '<div class="cp-ebook-row">' +
-        '<span class="cp-ebook-title">' +
-        esc(it.title) +
-        '</span><span class="cp-ebook-missing small text-muted">파일 없음</span></div>'
-      );
+      files.forEach(function (f) {
+        var sub =
+          files.length > 1
+            ? " · " + esc(f.fileLabel || "")
+            : "";
+        html.push(
+          '<div class="cp-ebook-row">' +
+            '<span class="cp-ebook-title">' +
+            esc(it.title) +
+            sub +
+            '</span><button type="button" class="cp-ebook-btn" data-ebook-url="' +
+            escAttr(f.fileUrl) +
+            '" data-ebook-title="' +
+            escAttr(it.title + (f.fileLabel ? "_" + f.fileLabel : "")) +
+            '">다운로드</button></div>'
+        );
+      });
     });
     ebookPanelEl.innerHTML = html.join("");
   }

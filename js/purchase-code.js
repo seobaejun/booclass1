@@ -71,20 +71,27 @@
   function buildCourseItem(docId, data, opts) {
     opts = opts || {};
     var isFree = opts.isFree === true;
+    var d = data || {};
     var detailUrl = "course-player.html?id=" + encodeURIComponent(docId);
+    var priceSale = d.priceSale != null && d.priceSale !== "" ? Number(d.priceSale) : null;
+    var priceOriginal = d.priceOriginal != null && d.priceOriginal !== "" ? Number(d.priceOriginal) : null;
+    if (priceSale != null && isNaN(priceSale)) priceSale = null;
+    if (priceOriginal != null && isNaN(priceOriginal)) priceOriginal = null;
     return {
       key: "course:" + docId,
       type: "course",
       itemId: docId,
-      title: (data && data.courseTitle) || "강의",
+      title: d.courseTitle || "강의",
       categoryLabel: "강의",
       badgeText: isFree ? "무료" : "수강중",
-      metaLine: isFree ? "무료 강의" : "구매코드로 등록됨",
+      metaLine: "",
       detailUrl: detailUrl,
       purchaseUrl: resolvePurchaseUrl("course", docId, detailUrl),
-      thumbUrl: (data && data.coverImageUrl) || "image/6.jpg",
+      thumbUrl: d.coverImageUrl || "image/6.jpg",
       addedAt: nowTs(),
-      isFreeCatalog: isFree
+      isFreeCatalog: isFree,
+      priceSale: priceSale,
+      priceOriginal: priceOriginal
     };
   }
 
@@ -96,20 +103,27 @@
   function buildEbookItem(docId, data, opts) {
     opts = opts || {};
     var isFree = opts.isFree === true;
+    var d = data || {};
     var detailUrl = "ebook-download.html?id=" + encodeURIComponent(docId);
+    var priceSale = d.priceSale != null && d.priceSale !== "" ? Number(d.priceSale) : null;
+    var priceOriginal = d.priceOriginal != null && d.priceOriginal !== "" ? Number(d.priceOriginal) : null;
+    if (priceSale != null && isNaN(priceSale)) priceSale = null;
+    if (priceOriginal != null && isNaN(priceOriginal)) priceOriginal = null;
     return {
       key: "ebook:" + docId,
       type: "ebook",
       itemId: docId,
-      title: (data && data.title) || "전자책",
+      title: d.title || "전자책",
       categoryLabel: "전자책",
       badgeText: isFree ? "무료" : "소장",
-      metaLine: isFree ? "무료 전자책" : "구매코드로 등록됨",
+      metaLine: "",
       detailUrl: detailUrl,
       purchaseUrl: resolvePurchaseUrl("ebook", docId, detailUrl),
-      thumbUrl: (data && data.coverImageUrl) || "image/5.jpg",
+      thumbUrl: d.coverImageUrl || "image/5.jpg",
       addedAt: nowTs(),
-      isFreeCatalog: isFree
+      isFreeCatalog: isFree,
+      priceSale: priceSale,
+      priceOriginal: priceOriginal
     };
   }
 

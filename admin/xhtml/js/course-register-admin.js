@@ -65,8 +65,20 @@
           return;
         }
         var ref = storage.ref(path);
+        var meta = {};
+        if (typeof BoostMimeTypes !== "undefined" && BoostMimeTypes.getMimeTypeFromFilename) {
+          meta.contentType = BoostMimeTypes.getMimeTypeFromFilename(file.name);
+        }
+        if (
+          typeof BoostStorageAttachment !== "undefined" &&
+          BoostStorageAttachment.isDownloadAttachmentPath &&
+          BoostStorageAttachment.buildContentDisposition &&
+          BoostStorageAttachment.isDownloadAttachmentPath(path)
+        ) {
+          meta.contentDisposition = BoostStorageAttachment.buildContentDisposition(file.name);
+        }
         ref
-          .put(file)
+          .put(file, meta)
           .then(function () {
             return ref.getDownloadURL();
           })
@@ -165,7 +177,7 @@
         '<div class="col-md-5"><label class="form-label small mb-0">전자책 제목</label>' +
         '<input type="text" class="form-control form-control-sm cp-new-ebook-title" placeholder="예: 실습 자료 PDF"></div>' +
         '<div class="col-md-4"><label class="form-label small mb-0">파일</label>' +
-        '<input type="file" class="form-control form-control-sm cp-new-ebook-file" accept=".pdf,.epub,.doc,.docx"></div>' +
+        '<input type="file" class="form-control form-control-sm cp-new-ebook-file" accept=".pdf,.epub,.doc,.docx,.txt,.rtf,.odt,.hwp,.xls,.xlsx,.xlsm,.csv,.ppt,.pptx,.ods,.odp"></div>' +
         '<div class="col-md-3"><label class="form-label small mb-0">저자 표시</label>' +
         '<input type="text" class="form-control form-control-sm cp-new-ebook-author" placeholder="비우면 강사명"></div></div>' +
         '<button type="button" class="btn btn-sm btn-outline-danger mt-2 cp-remove-new-ebook">이 행 삭제</button>';
@@ -179,7 +191,7 @@
       var mount = document.getElementById("courseNewEbooksMount");
       if (!mount) return;
       mount.innerHTML =
-        '<p class="text-muted small mb-2">PDF·EPUB·DOC 등을 선택하면, 강의 저장 시 전자책으로 등록되고 <strong>이 강의에 자동 연결</strong>됩니다.</p>' +
+        '<p class="text-muted small mb-2">PDF·문서·스프레드시트·PPT 등을 선택하면, 강의 저장 시 전자책으로 등록되고 <strong>이 강의에 자동 연결</strong>됩니다.</p>' +
         '<div id="courseNewEbooksRowsInner"></div>' +
         '<button type="button" class="btn btn-sm btn-primary mt-1" id="btnCourseAddEbookRow">' +
         '<i class="fa fa-plus"></i> 전자책 업로드 행 추가</button>';
@@ -226,13 +238,20 @@
           EBOOK_STORAGE_PREFIX + "/" + ebookRefId + "/ebook" + getExtension(item.file.name);
         return uploadFile(item.file, path).then(function (url) {
           var authorName = item.authorName || courseInstructor || "강의";
-          return db.collection("ebooks").get().then(function (snap) {
+            return db.collection("ebooks").get().then(function (snap) {
             return db.collection("ebooks").add({
               title: item.title,
               authorName: authorName,
               authorImageUrl: "",
               coverImageUrl: "",
               ebookFileUrl: url,
+              ebookFiles: [
+                {
+                  fileLabel: item.title || "파일",
+                  fileUrl: url,
+                  order: 0
+                }
+              ],
               priceOriginal: 0,
               priceSale: 0,
               intro: "",
