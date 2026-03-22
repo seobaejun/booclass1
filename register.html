@@ -84,6 +84,7 @@
             <h2 class="text-center mb-2">회원가입</h2>
             <p class="text-center text-white-50 mb-4">부스트클래스 계정을 만드세요</p>
             <div id="registerError" class="alert alert-danger d-none mb-3" role="alert"></div>
+            <p id="registerReferralInfo" class="small text-warning mb-3 d-none" role="status"></p>
             <form id="registerForm" novalidate>
                 <div class="mb-3">
                     <label for="registerDisplayName" class="form-label">이름 <span class="text-danger">*</span></label>
@@ -107,7 +108,8 @@
                 </div>
                 <div class="mb-3">
                     <label for="registerReferralCode" class="form-label">추천인 코드 <span class="text-white-50 small fw-normal">(선택)</span></label>
-                    <input type="text" class="form-control bg-dark text-white border-secondary" id="registerReferralCode" name="referralCode" placeholder="추천인 코드" autocomplete="off" maxlength="64">
+                    <input type="text" class="form-control bg-dark text-white border-secondary" id="registerReferralCode" name="referralCode" placeholder="예: 코치 이메일 @ 앞 아이디" autocomplete="off" maxlength="64">
+                    <p class="form-text text-white-50 small mb-0">코치 추천: 코치 로그인 이메일에서 <strong>@ 앞 부분</strong>을 소문자로 입력하세요.</p>
                 </div>
                 <div class="mb-3">
                     <div class="register-privacy-row">
@@ -149,6 +151,76 @@
   var db = firebase.firestore();
   var registrationInProgress = false;
 
+  /** 추천 링크로 들어온 코드: 홈 이동 후에도 같은 브라우저·탭 세션에서 복원 */
+  var PENDING_REFERRAL_STORAGE_KEY = 'boostclass_pending_referral_v1';
+
+  function persistPendingReferralFromUrl(code) {
+    try {
+      var trimmed = String(code || '').trim();
+      if (!trimmed) return;
+      sessionStorage.setItem(
+        PENDING_REFERRAL_STORAGE_KEY,
+        JSON.stringify({ code: trimmed, fromUrl: true })
+      );
+    } catch (e) {}
+  }
+
+  function readPendingReferral() {
+    try {
+      var raw = sessionStorage.getItem(PENDING_REFERRAL_STORAGE_KEY);
+      if (!raw) return null;
+      if (raw.charAt(0) === '{') {
+        var o = JSON.parse(raw);
+        if (o && typeof o.code === 'string' && o.code.trim()) {
+          return { code: o.code.trim(), fromUrl: o.fromUrl === true };
+        }
+      }
+      var legacy = raw.trim();
+      if (legacy) return { code: legacy, fromUrl: true };
+    } catch (e) {}
+    return null;
+  }
+
+  function clearPendingReferral() {
+    try {
+      sessionStorage.removeItem(PENDING_REFERRAL_STORAGE_KEY);
+    } catch (e) {}
+  }
+
+  function coachReferralCodeFromEmail(email) {
+    var s = String(email || '').trim().toLowerCase();
+    var at = s.indexOf('@');
+    if (at < 0) return s;
+    return s.slice(0, at);
+  }
+
+  function normReferralStored(val) {
+    return String(val == null ? '' : val).trim().toLowerCase();
+  }
+
+  /**
+   * 활성 코치(동일 @앞 코드, referralCodeActive !== false)가 있을 때만 추천 코드 저장.
+   * @returns {Promise<{ code: string, dismissed: boolean }>}
+   */
+  function resolveActiveReferralCode(rawInput) {
+    var trimmed = (rawInput || '').trim();
+    if (!trimmed) {
+      return Promise.resolve({ code: '', dismissed: false });
+    }
+    var want = normReferralStored(trimmed);
+    return db.collection('member').where('memberType', 'in', ['코치', 'coach']).get().then(function (snap) {
+      var anyActive = false;
+      snap.forEach(function (doc) {
+        var data = doc.data();
+        if (data.referralCodeActive === false) return;
+        var c = coachReferralCodeFromEmail(data.email);
+        if (normReferralStored(c) === want) anyActive = true;
+      });
+      if (anyActive) return { code: trimmed, dismissed: false };
+      return { code: '', dismissed: true };
+    });
+  }
+
   function errMsg(code) {
     var map = {
       'auth/email-already-in-use': '이미 사용 중인 이메일입니다.',
@@ -176,6 +248,9 @@
     if (code) {
       payload.referralCode = code;
       payload.referralFromUrl = referralFromUrl === true;
+    } else {
+      /** 추천인 코드 없음 → 관리자(사이트) 귀속 — 코치 목록·레퍼럴 집계용 */
+      payload.referralBucket = 'admin';
     }
     return db.collection('member').doc(uid).set(payload);
   }
@@ -212,12 +287,34 @@
     btn.textContent = '가입 중…';
     registrationInProgress = true;
     var referralCodeVal = (referralEl && referralEl.value) ? referralEl.value.trim() : '';
-    var referralFromUrlFlag = referralEl && referralEl.getAttribute('data-filled-from-url') === 'true';
-    auth.createUserWithEmailAndPassword(email, password)
-      .then(function(cred) {
-        var user = cred.user;
-        return user.updateProfile({ displayName: displayName }).then(function() {
-          return saveMemberToFirestore(user.uid, email, displayName, phone, true, referralCodeVal, referralFromUrlFlag).then(function() { return user; });
+    var refOrigin = referralEl && referralEl.getAttribute('data-filled-from-url');
+    var referralFromUrlFlag =
+      refOrigin === 'true' || refOrigin === 'stored';
+    if (!referralCodeVal) {
+      clearPendingReferral();
+    }
+    var infoReferralEl = document.getElementById('registerReferralInfo');
+    if (infoReferralEl) {
+      infoReferralEl.classList.add('d-none');
+      infoReferralEl.textContent = '';
+    }
+
+    resolveActiveReferralCode(referralCodeVal)
+      .then(function (resolved) {
+        var codeToSave = resolved.code;
+        var useUrlFlag = codeToSave && referralFromUrlFlag;
+        if (resolved.dismissed && referralCodeVal) {
+          clearPendingReferral();
+          if (infoReferralEl) {
+            infoReferralEl.textContent = '입력하신 추천 코드는 현재 적용할 수 없어 일반(사이트) 가입으로 처리됩니다.';
+            infoReferralEl.classList.remove('d-none');
+          }
+        }
+        return auth.createUserWithEmailAndPassword(email, password).then(function (cred) {
+          var user = cred.user;
+          return user.updateProfile({ displayName: displayName }).then(function () {
+            return saveMemberToFirestore(user.uid, email, displayName, phone, true, codeToSave, useUrlFlag).then(function () { return user; });
+          });
         });
       })
       .then(function(user) {
@@ -226,9 +323,13 @@
         }
         return user;
       })
-      .then(function() { window.location.href = 'index.html'; })
+      .then(function() {
+        clearPendingReferral();
+        window.location.href = 'index.html';
+      })
       .catch(function(e) {
         var msg = (e && e.code && e.code.indexOf('auth/') === 0) ? errMsg(e.code) : (e && e.message ? e.message : '저장 중 오류가 발생했습니다.');
+        if (e && e.code === 'permission-denied') msg = errMsg('permission-denied');
         errEl.textContent = msg;
         errEl.classList.remove('d-none');
       })
@@ -241,16 +342,63 @@
 
   function initReferralFromUrl() {
     var el = document.getElementById('registerReferralCode');
+    var infoEl = document.getElementById('registerReferralInfo');
     if (!el) return;
     try {
       var params = new URLSearchParams(window.location.search);
       var code = params.get('ref') || params.get('referral') || params.get('r');
+
       if (code) {
-        el.value = decodeURIComponent(code).replace(/\+/g, ' ').trim();
+        var decoded = decodeURIComponent(code).replace(/\+/g, ' ').trim();
+        persistPendingReferralFromUrl(decoded);
+        el.value = decoded;
         el.setAttribute('data-filled-from-url', 'true');
         el.readOnly = true;
         el.title = '추천 링크로 지정된 코드는 변경할 수 없습니다.';
+        resolveActiveReferralCode(decoded).then(function (res) {
+          if (!res.dismissed || !decoded) return;
+          el.readOnly = false;
+          el.removeAttribute('data-filled-from-url');
+          el.value = '';
+          el.title = '';
+          clearPendingReferral();
+          if (infoEl) {
+            infoEl.textContent = '해당 추천 링크는 현재 비활성이거나 확인되지 않아, 일반 가입으로 진행할 수 있습니다.';
+            infoEl.classList.remove('d-none');
+          }
+        }).catch(function () {
+          if (infoEl) {
+            infoEl.textContent = '추천 코드 확인에 실패했습니다. 잠시 후 다시 시도하거나 코드 없이 가입해 주세요.';
+            infoEl.classList.remove('d-none');
+          }
+        });
+        return;
       }
+
+      var pending = readPendingReferral();
+      if (!pending || !pending.code) return;
+
+      el.value = pending.code;
+      el.setAttribute('data-filled-from-url', 'stored');
+      el.readOnly = false;
+      el.title = '이전에 추천 링크로 저장된 코드입니다. 필요 시 수정할 수 있습니다.';
+      if (infoEl) {
+        infoEl.textContent =
+          '추천 링크로 저장된 코드를 불러왔습니다. (이 브라우저에서 홈으로 갔다가 돌아와도 유지됩니다.)';
+        infoEl.classList.remove('d-none');
+      }
+      resolveActiveReferralCode(pending.code).then(function (res) {
+        if (!res.dismissed) return;
+        el.value = '';
+        el.removeAttribute('data-filled-from-url');
+        el.title = '';
+        clearPendingReferral();
+        if (infoEl) {
+          infoEl.textContent =
+            '저장된 추천 코드는 현재 적용할 수 없어 일반 가입으로 진행할 수 있습니다.';
+          infoEl.classList.remove('d-none');
+        }
+      }).catch(function () {});
     } catch (e) {}
   }
 

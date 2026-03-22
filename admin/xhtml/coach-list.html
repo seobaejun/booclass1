@@ -1,11 +1,8 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-     	
-   <!-- All Meta -->
-	<meta charset="utf-8">
+    	
+   <meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="author" content="DexignLab" >
 	<meta name="robots" content="" >
@@ -20,50 +17,75 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- Page Title Here -->
-	<title>Akademi : School and Education Management Admin Dashboard Template</title>
+	<title>부스트클래스 관리자 - 코치 목록</title>
 
 <!-- FAVICONS ICON -->
 	<link rel="shortcut icon" type="image/png" href="images/favicon.png" >
+	<link rel="stylesheet" href="./vendor/chartist/css/chartist.min.css">
+	<link href="vendor/wow-master/css/libs/animate.css" rel="stylesheet">
 	<link href="vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
 	
-	<link href="vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+	<link href="vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	
+	
+	<!-- Style css -->
+	<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+	<!-- Style css -->
     <link href="css/style.css" rel="stylesheet">
-
+	<style>
+	/* 코치 목록 툴바 */
+	.student-member-toolbar .student-member-sort {
+		min-width: 11rem;
+		height: 3rem;
+	}
+	.student-member-toolbar .student-member-register-btn {
+		height: 3rem;
+		padding-top: 0;
+		padding-bottom: 0;
+		display: inline-flex;
+		align-items: center;
+	}
+	/* 코치 행 아래 레퍼럴 회원 패널 */
+	.coach-referral-detail .coach-referral-detail-inner {
+		border-left: 3px solid var(--primary);
+	}
+	#tblMemberList .coach-col-toggle {
+		width: 4.25rem;
+		max-width: 4.5rem;
+		padding-left: 0.2rem;
+		padding-right: 0.2rem;
+		vertical-align: middle;
+	}
+	#tblMemberList .coach-col-ref-count {
+		min-width: 8.75rem;
+	}
+	#tblMemberList .coach-col-ref-rev {
+		min-width: 11rem;
+	}
+	</style>
+	
 </head>
-
 <body>
 
     <!--*******************
         Preloader start
     ********************-->
-    	
-    <div id="preloader">
-	  <div class="loader">
-		<div class="dots">
-			  <div class="dot mainDot"></div>
-			  <div class="dot"></div>
-			  <div class="dot"></div>
-			  <div class="dot"></div>
-			  <div class="dot"></div>
-		</div>
-			
-		</div>
-	</div>
+	<div id="preloader">
+		<div class="loader"></div>
+	  </div>
     <!--*******************
         Preloader end
     ********************-->
-
 
     <!--**********************************
         Main wrapper start
     ***********************************-->
     <div id="main-wrapper">
-
+	
         <!--**********************************
             Nav header start
         ***********************************-->
-           <div class="nav-header">
+		<div class="nav-header">
             <a href="index.html" class="brand-logo d-flex align-items-center">
 				<img src="../../image/logo.png" alt="부스트클래스" class="img-fluid" style="max-height: 40px; width: auto; border-radius: 8px;">
             </a>
@@ -113,8 +135,8 @@
 							<div class="card-header chat-list-header text-center">
 								<a href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect fill="#000000" x="4" y="11" width="16" height="2" rx="1"/><rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) " x="4" y="11" width="16" height="2" rx="1"/></g></svg></a>
 								<div>
-									<h6 class="mb-1">Chat List</h6>
-									<p class="mb-0">Show All</p>
+									<h6 class="mb-1">채팅 목록</h6>
+									<p class="mb-0">전체 보기</p>
 								</div>
 								<a href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg></a>
 							</div>
@@ -600,23 +622,20 @@
 		<!--**********************************
             Chat box End
         ***********************************-->
-
-
 		
-		
-        <!--**********************************
+		<!--**********************************
             Header start
         ***********************************-->
 		<div class="header">
-			<div class="header-content">
-				<nav class="navbar navbar-expand">
-					<div class="collapse navbar-collapse justify-content-between">
-						<div class="header-left">
+            <div class="header-content">
+                <nav class="navbar navbar-expand">
+                    <div class="collapse navbar-collapse justify-content-between">
+                        <div class="header-left">
 						<div class="dashboard_bar">
-							Validation
+							코치 목록
 						</div>
-						</div>
-						<ul class="navbar-nav header-right">
+                        </div>
+                        <ul class="navbar-nav header-right">
 						<li class="nav-item dropdown notification_dropdown all">
 							<a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
 								<svg height="24" class="svg-main-icon" viewBox="0 0 32 32" width="24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><clipPath id="clip_1"><path id="artboard_1" clip-rule="evenodd" d="m0 0h32v32h-32z"/></clipPath><g id="select" clip-path="url(#clip_1)"><path id="Vector" d="m4.70222 7.16834-.12871-.2574c-.0593-.11861-.13904-.22136-.23922-.30824-.10018-.08689-.21317-.1513-.33898-.19323-.1258-.04194-.25484-.0582-.38711-.0488-.13228.0094-.25772.04375-.37633.10306-.24699.12349-.41414.31622-.50147.5782-.08732.26197-.06923.51645.05426.76344l1.32093 2.64183c.0593.1186.13904.2214.23922.3083.10018.0868.21317.1512.33898.1932.1258.0419.25484.0582.38711.0488.13228-.0094.25772-.0438.37633-.1031.01854-.0092.03678-.0191.05471-.0295s.03552-.0214.05277-.0329l5.99999-3.99995c.1104-.07356.2024-.16543.2762-.27561s.1237-.23029.1497-.36032c.026-.13004.0261-.2601.0004-.39019-.0257-.13008-.0754-.25029-.1489-.36063-.1532-.22977-.3652-.37173-.636-.42588-.2707-.05416-.521-.00465-.7508.14853l-1.94316 1.29545-3.1143 2.07619zm11.29778-1.16834c-.2761 0-.5118.09763-.7071.29289s-.2929.43097-.2929.70711.0976.51184.2929.70711c.1953.19526.431.29289.7071.29289h14c.2761 0 .5118-.09763.7071-.29289.1953-.19527.2929-.43097.2929-.70711s-.0976-.51185-.2929-.70711-.431-.29289-.7071-.29289zm-11.27691 9.1683-.12871-.2574c-.12349-.2469-.31622-.4141-.5782-.5014-.26197-.0874-.51645-.0693-.76344.0542-.11861.0593-.22135.1391-.30824.2393-.08688.1001-.15129.2131-.19323.3389-.04193.1258-.0582.2549-.0488.3871.0094.1323.04376.2578.10306.3764l1.32092 2.6418c.1235.247.31623.4142.5782.5015.26198.0873.51646.0692.76345-.0543.01854-.0092.03678-.0191.05471-.0295s.03552-.0214.05277-.0329l6.00002-3.9999c.2298-.1532.3717-.3652.4259-.636.0541-.2708.0046-.521-.1486-.7508-.1531-.2298-.3651-.3717-.6359-.4259-.2708-.0541-.521-.0046-.7508.1485l-5.05749 3.3717zm11.27691-.1683c-.2761 0-.5118.0976-.7071.2929s-.2929.431-.2929.7071.0976.5118.2929.7071.431.2929.7071.2929h14c.2761 0 .5118-.0976.7071-.2929s.2929-.431.2929-.7071-.0976-.5118-.2929-.7071-.431-.2929-.7071-.2929zm-11.27691 8.1683-.12871-.2574c-.12349-.247-.31622-.4141-.5782-.5014-.26197-.0874-.51645-.0693-.76344.0542-.11861.0593-.22135.1391-.30824.2393-.08688.1001-.15129.2131-.19323.3389-.04193.1258-.0582.2549-.0488.3871.0094.1323.04376.2578.10306.3764l1.32092 2.6418c.1235.247.31623.4142.5782.5015.26198.0873.51646.0692.76345-.0543.01854-.0092.03678-.0191.05471-.0295s.03552-.0214.05277-.0329l6.00002-4c.1103-.0735.2024-.1654.2762-.2756.0738-.1101.1237-.2303.1497-.3603s.0261-.2601.0004-.3902c-.0258-.1301-.0754-.2503-.149-.3606-.1531-.2298-.3651-.3717-.6359-.4259-.2708-.0541-.521-.0046-.7508.1485l-1.94319 1.2955-3.1143 2.0762zm11.27691.8317c-.2761 0-.5118.0976-.7071.2929s-.2929.431-.2929.7071.0976.5118.2929.7071.431.2929.7071.2929h14c.2761 0 .5118-.0976.7071-.2929s.2929-.431.2929-.7071-.0976-.5118-.2929-.7071-.431-.2929-.7071-.2929z" fill-rule="evenodd"/></g></svg>
@@ -979,20 +998,19 @@
 								</div>
 							</li>
                         </ul>
-					</div>
+                    </div>
 				</nav>
 			</div>
 			
-		</div>  
-                    
-        <!--**********************************
+		</div>
+			<!--**********************************
             Header end ti-comment-alt
         ***********************************-->
 
         <!--**********************************
             Sidebar start
         ***********************************-->
-      <div class="dlabnav">
+        <div class="dlabnav">
 			<div class="dlabnav-scroll">	
 				<ul class="metismenu" id="menu">
 					<li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
@@ -1214,296 +1232,133 @@
         <!--**********************************
             Sidebar end
         ***********************************-->
-
-        <!--**********************************
+		
+		<!--**********************************
             Content body start
         ***********************************-->
         <div class="content-body">
-            <div class="container-fluid">
-                <!-- row -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Form Validation</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="form-validation">
-                                    <form class="needs-validation" novalidate >
-                                        <div class="row">
-                                            <div class="col-xl-6">
-                                                <div class="mb-3 row">
-                                                    <label class="col-lg-4 col-form-label" for="validationCustom01">Username
-                                                        <span class="text-danger">*</span>
-                                                    </label>
-                                                    <div class="col-lg-6">
-														<input type="text" class="form-control" id="validationCustom01"  placeholder="Enter a username.." required>
-														<div class="invalid-feedback">
-															Please enter a username.
-														</div>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3 row">
-                                                    <label class="col-lg-4 col-form-label" for="validationCustom02">Email <span
-                                                            class="text-danger">*</span>
-                                                    </label>
-                                                    <div class="col-lg-6">
-                                                        <input type="text" class="form-control" id="validationCustom02"  placeholder="Your valid email.." required>
-														<div class="invalid-feedback">
-															Please enter a Email.
-														</div>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3 row">
-                                                    <label class="col-lg-4 col-form-label" for="validationCustom03">Password
-                                                        <span class="text-danger">*</span>
-                                                    </label>
-                                                    <div class="col-lg-6">
-                                                        <input type="password" class="form-control" id="validationCustom03" placeholder="Choose a safe one.." required>
-														<div class="invalid-feedback">
-															Please enter a password.
-														</div>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3 row">
-                                                    <label class="col-lg-4 col-form-label" for="validationCustom04">Suggestions <span
-                                                            class="text-danger">*</span>
-                                                    </label>
-                                                    <div class="col-lg-6">
-                                                        <textarea class="form-control" id="validationCustom04"  rows="5" placeholder="What would you like to see?" required></textarea>
-														<div class="invalid-feedback">
-															Please enter a Suggestions.
-														</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6">
-                                                <div class="mb-3 row">
-                                                    <label class="col-lg-4 col-form-label" for="validationCustom05">Best Skill
-                                                        <span class="text-danger">*</span>
-                                                    </label>
-                                                    <div class="col-lg-6">
-                                                        <select class="form-select wide form-control" id="validationCustom05" required>
-                                                            <option selected disabled value="">Please select</option>
-                                                            <option value="html">HTML</option>
-                                                            <option value="css">CSS</option>
-                                                            <option value="javascript">JavaScript</option>
-                                                            <option value="angular">Angular</option>
-                                                            <option value="angular">React</option>
-                                                            <option value="vuejs">Vue.js</option>
-                                                            <option value="ruby">Ruby</option>
-                                                            <option value="php">PHP</option>
-                                                            <option value="asp">ASP.NET</option>
-                                                            <option value="python">Python</option>
-                                                            <option value="mysql">MySQL</option>
-                                                        </select>
-														<div class="invalid-feedback">
-															Please select a one.
-														</div>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3 row">
-                                                    <label class="col-lg-4 col-form-label" for="validationCustom06">Currency
-                                                        <span class="text-danger">*</span>
-                                                    </label>
-                                                    <div class="col-lg-6">
-                                                        <input type="text" class="form-control" id="validationCustom06" placeholder="$21.60" required>
-														<div class="invalid-feedback">
-															Please enter a Currency.
-														</div>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3 row">
-                                                    <label class="col-lg-4 col-form-label" for="validationCustom07">Website
-                                                        <span class="text-danger">*</span>
-                                                    </label>
-                                                    <div class="col-lg-6">
-                                                        <input type="text" class="form-control" id="validationCustom07"  placeholder="http://example.com" required>
-														<div class="invalid-feedback">
-															Please enter a url.
-														</div>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3 row">
-                                                    <label class="col-lg-4 col-form-label" for="validationCustom08">Phone (US)
-                                                        <span class="text-danger">*</span>
-                                                    </label>
-                                                    <div class="col-lg-6">
-                                                        <input type="text" class="form-control" id="validationCustom08" placeholder="212-999-0000" required>
-														<div class="invalid-feedback">
-															Please enter a phone no.
-														</div>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3 row">
-                                                    <label class="col-lg-4 col-form-label" for="validationCustom09">Digits <span
-                                                            class="text-danger">*</span>
-                                                    </label>
-                                                    <div class="col-lg-6">
-                                                        <input type="text" class="form-control" id="validationCustom09"  placeholder="5" required>
-														<div class="invalid-feedback">
-															Please enter a digits.
-														</div>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3 row">
-                                                    <label class="col-lg-4 col-form-label" for="validationCustom10">Number <span
-                                                            class="text-danger">*</span>
-                                                    </label>
-                                                    <div class="col-lg-6">
-                                                        <input type="text" class="form-control" id="validationCustom10" placeholder="5.0" required>
-														<div class="invalid-feedback">
-															Please enter a num.
-														</div>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3 row">
-                                                    <label class="col-lg-4 col-form-label" for="validationCustom11">Range [1, 5]
-                                                        <span class="text-danger">*</span>
-                                                    </label>
-                                                    <div class="col-lg-6">
-                                                        <input type="text" class="form-control" id="validationCustom11" placeholder="4" required>
-														<div class="invalid-feedback">
-															Please select a range.
-														</div>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3 row">
-                                                    <label class="col-lg-4 col-form-label"><a
-                                                            href="javascript:void(0);">Terms &amp; Conditions</a> <span
-                                                            class="text-danger">*</span>
-                                                    </label>
-                                                    <div class="col-lg-8">
-                                                        <div class="form-check">
-														  <input class="form-check-input" type="checkbox" value="" id="validationCustom12" required>
-														  <label class="form-check-label" for="validationCustom12">
-															Agree to terms and conditions
-														  </label>
-														</div>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3 row">
-                                                    <div class="col-lg-8 ms-auto">
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Vertical Forms with icon</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="basic-form">
-                                    <form class="form-valide-with-icon needs-validation" novalidate>
-                                        <div class="mb-3">
-                                            <label class="text-label form-label" for="validationCustomUsername">Username</label>
-                                            <div class="input-group">
-												<span class="input-group-text"> <i class="fa fa-user"></i> </span>
-                                                <input type="text" class="form-control" id="validationCustomUsername" placeholder="Enter a username.." required>
-												<div class="invalid-feedback">
-													Please Enter a username.
-												  </div>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="text-label form-label" for="dlab-password">Password *</label>
-                                            <div class="input-group transparent-append">
-												<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-                                                <input type="password" class="form-control" id="dlab-password" placeholder="Choose a safe one.." required>
-												<span class="input-group-text show-pass"> 
-													<i class="fa fa-eye-slash"></i>
-													<i class="fa fa-eye"></i>
-												</span>
-                                                <div class="invalid-feedback">
-													Please Enter a username.
-												</div>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <div class="form-check">
-											  <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
-											  <label class="form-check-label" for="invalidCheck2">
-												Check Me out
-											  </label>
-											</div>
-                                        </div>
-                                        <button type="submit" class="btn me-2 btn-primary">Submit</button>
-                                        <button type="submit" class="btn btn-danger light">Cancel</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <!-- row -->
+			<div class="container-fluid">
+				<!-- Row -->
+				<div class="row">
+					<div class="col-xl-12">
+						<div class="row">
+							<div class="col-xl-12">
+								<div class="page-title student-member-toolbar flex-wrap flex-md-nowrap align-items-center justify-content-between gap-3">
+									<div class="input-group search-area mb-0 flex-grow-1 flex-md-grow-0" style="max-width: 100%;">
+										<input type="search" class="form-control" id="memberSearchInput" placeholder="이름, 이메일 검색" autocomplete="off" aria-label="코치 검색">
+										<span class="input-group-text"><span class="text-muted" aria-hidden="true">
+											<svg width="15" height="15" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<path d="M17.5605 15.4395L13.7527 11.6317C14.5395 10.446 15 9.02625 15 7.5C15 3.3645 11.6355 0 7.5 0C3.3645 0 0 3.3645 0 7.5C0 11.6355 3.3645 15 7.5 15C9.02625 15 10.446 14.5395 11.6317 13.7527L15.4395 17.5605C16.0245 18.1462 16.9755 18.1462 17.5605 17.5605C18.1462 16.9747 18.1462 16.0252 17.5605 15.4395V15.4395ZM2.25 7.5C2.25 4.605 4.605 2.25 7.5 2.25C10.395 2.25 12.75 4.605 12.75 7.5C12.75 10.395 10.395 12.75 7.5 12.75C4.605 12.75 2.25 10.395 2.25 7.5V7.5Z" fill="#01A3FF"/>
+											</svg>
+										</span></span>
+									</div>
+									<div class="d-flex align-items-center flex-nowrap gap-2 ms-md-auto flex-shrink-0">
+										<select class="form-select form-select-sm boostclass-native-select student-member-sort" id="memberSortSelect" aria-label="정렬">
+											<option value="created_desc" selected>가입일 · 최신순</option>
+											<option value="created_asc">가입일 · 오래된순</option>
+											<option value="name_asc">이름 · 가나다순</option>
+											<option value="name_desc">이름 · 역순</option>
+											<option value="email_asc">이메일 · 가나다순</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-12 mb-3">
+								<div class="d-flex flex-wrap gap-4 align-items-center py-3 px-3 border rounded bg-white shadow-sm">
+									<span class="fw-semibold text-dark me-1">부스트클래스</span>
+									<span><strong id="coachListStatTotalMembers" class="text-primary fs-5">—</strong> <span class="text-muted small">총 회원수</span></span>
+									<span class="text-muted d-none d-sm-inline">|</span>
+									<span><strong id="coachListStatTotalRevenue" class="text-primary fs-5">—</strong> <span class="text-muted small">총 매출</span></span>
+								</div>
+							</div>
+							<!--column-->
+							<div class="col-xl-12 wow fadeInUp" data-wow-delay="1.5s">
+								<div class="table-responsive full-data">
+									<div class="alert alert-info mb-3 d-none" id="memberListMessage" role="alert"></div>
+									<table class="table table-bordered table-striped align-middle" id="tblMemberList">
+										<thead>
+											<tr>
+												<th class="text-center" style="width:4rem;">순번</th>
+												<th>이름</th>
+												<th>이메일</th>
+												<th>추천인 코드 <span class="text-muted small fw-normal">(@앞 아이디)</span></th>
+												<th>추천인 링크</th>
+												<th class="text-end text-nowrap coach-col-ref-count">레퍼럴<br><span class="fw-normal small text-muted">회원수</span></th>
+												<th class="text-end text-nowrap coach-col-ref-rev">레퍼럴<br><span class="fw-normal small text-muted">매출</span></th>
+												<th class="text-center coach-col-toggle small">추천<br><span class="fw-normal text-muted">활성</span></th>
+												<th class="text-end" style="min-width:8rem;">작업</th>
+											</tr>
+										</thead>
+										<tbody id="memberListTbody">
+										</tbody>
+									</table>
+									<nav class="d-flex justify-content-center align-items-center flex-wrap gap-2 py-3 border-top" id="memberListPagination" aria-label="회원 목록 페이지">
+										<button type="button" class="btn btn-sm btn-outline-primary" id="memberPagePrev">이전</button>
+										<span class="text-muted small px-2" id="memberPageInfo">1 / 1</span>
+										<button type="button" class="btn btn-sm btn-outline-primary" id="memberPageNext">다음</button>
+									</nav>
+								</div>
+							</div>
+							<!--/column-->
+						</div>
+					</div>
+				</div>
+				<!--**********************************
+					Footer start
+				***********************************-->
+			</div>
+		</div>
+		
         <!--**********************************
             Content body end
         ***********************************-->
-		 <!--**********************************
-				Footer start
-			***********************************-->
-			<div class="footer out-footer style-2">
-				<div class="copyright">
-					<p>Copyright © Designed &amp; Developed by <a href="https://dexignlab.com/" target="_blank">DexignLab</a> 2023</p>
+			<!-- footer-start -->
+			
+				<div class="footer out-footer style-2">
+					<div class="copyright">
+						<p>Copyright © Designed &amp; Developed by <a href="https://dexignlab.com/" target="_blank">DexignLab</a> 2023</p>
+					</div>
 				</div>
-			</div>
-			<!--**********************************
-				Footer end
-			***********************************-->
+			
         <!--**********************************
-           Support ticket button start
+            Footer end
         ***********************************-->
 
+		<!--**********************************
+           Support ticket button start
+        ***********************************-->
+		
         <!--**********************************
            Support ticket button end
         ***********************************-->
 
-        
-    </div>
+
+	</div>
     <!--**********************************
         Main wrapper end
     ***********************************-->
-
     <!--**********************************
         Scripts
     ***********************************-->
     <!-- Required vendors -->
     <script src="vendor/global/global.min.js"></script>
-	<script src="vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>	
-	<script src="vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+	<script src="vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+	
+	<!-- Firebase: 회원(member) 목록 (이 페이지는 DataTables 미사용) -->
+	<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="../../js/member-notifications.js"></script>
+    <script src="js/admin-coach-list.js"></script>
 
-    <script src="js/custom.min.js"></script>
+	<script src="vendor/wow-master/dist/wow.min.js"></script>
+	
+	<script src="js/custom.min.js"></script>
 	<script src="js/dlabnav-init.js"></script>
 	
    
-	<script>
-		(function () {
-		  'use strict'
-
-		  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-		  var forms = document.querySelectorAll('.needs-validation')
-
-		  // Loop over them and prevent submission
-		  Array.prototype.slice.call(forms)
-			.forEach(function (form) {
-			  form.addEventListener('submit', function (event) {
-				if (!form.checkValidity()) {
-				  event.preventDefault()
-				  event.stopPropagation()
-				}
-
-				form.classList.add('was-validated')
-			  }, false)
-			})
-		})()
-	</script>
+	
+	
 </body>
 </html>
