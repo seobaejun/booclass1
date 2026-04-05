@@ -302,9 +302,21 @@
                 return '약 ' + m + '분';
             }
 
-            db.collection('courses').doc(courseId).get().then(function (doc) {
+            function memberHasEnrolledCourse(memb, cid) {
+                var items = (memb && memb.enrolledCourseItems) || [];
+                return items.some(function (it) {
+                    return it && (it.itemId === cid || it.key === 'course:' + cid);
+                });
+            }
+
+            var uid0 = auth.currentUser ? auth.currentUser.uid : null;
+            var pMember0 = uid0 ? db.collection('member').doc(uid0).get() : Promise.resolve({ exists: false });
+            Promise.all([db.collection('courses').doc(courseId).get(), pMember0]).then(function (results) {
+                var doc = results[0];
+                var memberSnap = results[1];
                 if (!doc.exists) return;
                 var d = doc.data() || {};
+                var mdata = memberSnap.exists ? memberSnap.data() : {};
 
                 var thumbEl = document.getElementById('courseThumb');
                 if (thumbEl) thumbEl.src = d.coverImageUrl || 'image/6.jpg';
@@ -347,11 +359,22 @@
 
                 var purchaseLink = document.getElementById('coursePurchaseLink');
                 if (purchaseLink) {
-                    var externalPurchaseUrl = PURCHASE_URL_BY_COURSE_ID[courseId];
-                    if (externalPurchaseUrl) {
-                        purchaseLink.href = externalPurchaseUrl;
-                        purchaseLink.target = '_blank';
+                    var canWatchCourse = d.isFree === true || memberHasEnrolledCourse(mdata, courseId);
+                    if (canWatchCourse) {
+                        purchaseLink.href = 'course-player.html?id=' + encodeURIComponent(courseId);
+                        purchaseLink.removeAttribute('target');
                         purchaseLink.rel = 'noopener noreferrer';
+                        var spanWatch = purchaseLink.querySelector('span');
+                        if (spanWatch) spanWatch.textContent = '온라인 강의 시청하기';
+                    } else {
+                        var externalPurchaseUrl = PURCHASE_URL_BY_COURSE_ID[courseId];
+                        if (externalPurchaseUrl) {
+                            purchaseLink.href = externalPurchaseUrl;
+                            purchaseLink.target = '_blank';
+                            purchaseLink.rel = 'noopener noreferrer';
+                        }
+                        var spanBuy = purchaseLink.querySelector('span');
+                        if (spanBuy) spanBuy.textContent = '수강하기';
                     }
                     purchaseLink.addEventListener('click', function (ev) {
                         if (auth.currentUser) return;

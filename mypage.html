@@ -471,6 +471,24 @@
     return Object.keys(map).map(function (k) { return map[k]; });
   }
 
+  function memberHasEnrolledCourseId(itemId) {
+    if (!itemId) return false;
+    var id = String(itemId);
+    var arr = Array.isArray(cachedMember.enrolledCourseItems) ? cachedMember.enrolledCourseItems : [];
+    return arr.some(function (it) {
+      return it && (String(it.itemId) === id || (it.key && String(it.key) === 'course:' + id));
+    });
+  }
+
+  function memberHasOwnedEbookId(itemId) {
+    if (!itemId) return false;
+    var id = String(itemId);
+    var arr = Array.isArray(cachedMember.ownedEbookItems) ? cachedMember.ownedEbookItems : [];
+    return arr.some(function (it) {
+      return it && (String(it.itemId) === id || (it.key && String(it.key) === 'ebook:' + id));
+    });
+  }
+
   function loadLibraryPricesForItems(items) {
     var needCourse = [];
     var needEbook = [];
@@ -712,18 +730,42 @@
     var icon;
     var ctaExtraAttrs = '';
     if (wishlistMode) {
-      href = item.detailUrl || '#';
-      ctaLabel = '찜 상품 보러가기';
-      icon = 'fa-arrow-right';
+      var wlCourse = item.type === 'course';
+      var wlEbook = item.type === 'ebook';
+      if (wlCourse && item.itemId && memberHasEnrolledCourseId(item.itemId)) {
+        href = 'course-player.html?id=' + encodeURIComponent(String(item.itemId));
+        ctaLabel = '온라인 강의 시청하기';
+        icon = 'fa-play';
+      } else if (wlEbook && item.itemId && memberHasOwnedEbookId(item.itemId)) {
+        href = 'ebook-download.html?id=' + encodeURIComponent(String(item.itemId));
+        ctaLabel = '전자책 다운로드';
+        icon = 'fa-download';
+      } else {
+        href = item.detailUrl || '#';
+        ctaLabel = '찜 상품 보러가기';
+        icon = 'fa-arrow-right';
+      }
     } else if (purchaseMode) {
-      href =
-        typeof BoostWishCart !== 'undefined' && BoostWishCart.resolvePurchaseUrl
-          ? BoostWishCart.resolvePurchaseUrl(item.type, item.itemId, item.detailUrl || '#', item.purchaseUrl)
-          : (item.detailUrl || '#');
-      ctaLabel = '구매하기';
-      icon = 'fa-bag-shopping';
-      if (/^https?:\/\//i.test(href)) {
-        ctaExtraAttrs = ' target="_blank" rel="noopener noreferrer"';
+      var cartCourse = item.type === 'course';
+      var cartEbook = item.type === 'ebook';
+      if (cartCourse && item.itemId && memberHasEnrolledCourseId(item.itemId)) {
+        href = 'course-player.html?id=' + encodeURIComponent(String(item.itemId));
+        ctaLabel = '온라인 강의 시청하기';
+        icon = 'fa-play';
+      } else if (cartEbook && item.itemId && memberHasOwnedEbookId(item.itemId)) {
+        href = 'ebook-download.html?id=' + encodeURIComponent(String(item.itemId));
+        ctaLabel = '전자책 다운로드';
+        icon = 'fa-download';
+      } else {
+        href =
+          typeof BoostWishCart !== 'undefined' && BoostWishCart.resolvePurchaseUrl
+            ? BoostWishCart.resolvePurchaseUrl(item.type, item.itemId, item.detailUrl || '#', item.purchaseUrl)
+            : (item.detailUrl || '#');
+        ctaLabel = '구매하기';
+        icon = 'fa-bag-shopping';
+        if (/^https?:\/\//i.test(href)) {
+          ctaExtraAttrs = ' target="_blank" rel="noopener noreferrer"';
+        }
       }
     } else {
       var isCourse = item.type === 'course';

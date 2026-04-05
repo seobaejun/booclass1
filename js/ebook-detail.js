@@ -49,13 +49,24 @@
     return "ebook-detail.html?" + q.toString();
   }
 
+  function memberHasOwnedEbook(memb, eid) {
+    var items = (memb && memb.ownedEbookItems) || [];
+    return items.some(function (it) {
+      return it && (it.itemId === eid || it.key === "ebook:" + eid);
+    });
+  }
+
   function renderEbookDetail() {
-    return db.collection("ebooks")
-      .doc(id)
-      .get()
-      .then(function (doc) {
+    var uid = auth.currentUser ? auth.currentUser.uid : null;
+    return Promise.all([
+      db.collection("ebooks").doc(id).get(),
+      uid ? db.collection("member").doc(uid).get() : Promise.resolve({ exists: false })
+    ]).then(function (snaps) {
+      var doc = snaps[0];
+      var memberSnap = snaps[1];
       if (!doc.exists) return;
       var d = doc.data();
+      var mdata = memberSnap.exists ? memberSnap.data() : {};
       if (d && d.fromCourseBundle === true) {
         window.location.replace("ebook.html");
         return;
@@ -104,11 +115,22 @@
 
       var purchaseLink = document.getElementById("ebookPurchaseLink");
       if (purchaseLink) {
-        var externalPurchaseUrl = PURCHASE_URL_BY_EBOOK_ID[id];
-        if (externalPurchaseUrl) {
-          purchaseLink.href = externalPurchaseUrl;
-          purchaseLink.target = "_blank";
+        var canDownloadEbook = d.isFree === true || memberHasOwnedEbook(mdata, id);
+        if (canDownloadEbook) {
+          purchaseLink.href = "ebook-download.html?id=" + encodeURIComponent(id);
+          purchaseLink.removeAttribute("target");
           purchaseLink.rel = "noopener noreferrer";
+          var spDl = purchaseLink.querySelector("span");
+          if (spDl) spDl.textContent = "전자책 다운로드";
+        } else {
+          var externalPurchaseUrl = PURCHASE_URL_BY_EBOOK_ID[id];
+          if (externalPurchaseUrl) {
+            purchaseLink.href = externalPurchaseUrl;
+            purchaseLink.target = "_blank";
+            purchaseLink.rel = "noopener noreferrer";
+          }
+          var spBuy = purchaseLink.querySelector("span");
+          if (spBuy) spBuy.textContent = "구매하기";
         }
         purchaseLink.addEventListener("click", function (ev) {
           if (auth.currentUser) return;
