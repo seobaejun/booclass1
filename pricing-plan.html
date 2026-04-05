@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shishirraven/animate-on-scroll@v1.2/animation_utility.css">
+    <link rel="icon" type="image/svg+xml" href="image/favicon.svg">
+    <title>Recode - Pricing Plan</title>
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="header" class="fixed-top bg-accent-transparent glass-effect py-0" style="z-index: 9999;">
+        <nav class="navbar navbar-expand-xl">
+            <div class="r-container w-100 px-3 px-xl-5 d-flex flex-nowrap align-items-center">
+                <div class="logo-container flex-shrink-0">
+                    <a class="navbar-brand home-brand-logo-text" href="index.html" aria-label="부스트 클래스 홈">BOOST CLASS</a>
+                </div>
+                <button class="navbar-toggler flex-shrink-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa-solid fa-bars-staggered accent-color-2"></i>
+                </button>
+                <div class="collapse navbar-collapse flex-grow-1 flex-nowrap min-w-0" id="navbarNav">
+                    <ul class="navbar-nav ms-xl-4 ps-xl-5 me-auto mb-2 mb-xl-0 gap-1 py-2 py-xl-0 nav-links-nowrap">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">홈</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="course-list.html">강의 수강</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="ebook.html">전자책</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">사이트 바로가기</a>
+                        </li>
+                        <li class="nav-item d-none">
+                            <a class="nav-link" href="mentor.html">멘토</a>
+                        </li>
+                        <li class="nav-item d-none">
+                            <a class="nav-link active" href="pricing-plan.html">가격</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="blog.html">무료 게시판</a></li>
+                                <li><a class="dropdown-item" href="blog-post.html">유료 게시판</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html#contact">문의</a>
+                        </li>
+                    </ul>
+                    <div class="mb-xl-0 mb-3 d-flex flex-xl-row flex-column gap-3 w-max-content ps-xl-3" id="headerAuthWrap">
+                        <div id="headerGuest" class="d-flex flex-xl-row flex-column gap-3 w-max-content">
+                            <a href="register.html" class="btn btn-accent accent d-flex flex-row gap-2 justify-content-center"><span>회원가입</span></a>
+                            <a href="login.html" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그인</span></a>
+                        </div>
+                        <div id="headerUser" class="d-flex flex-xl-row flex-column gap-3 w-max-content align-items-center d-none">
+                            <a href="mypage.html" class="text-accent text-decoration-none">마이페이지</a>
+                            <button type="button" id="btnHeaderLogout" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그아웃</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- End Header -->
+
+    <!-- Main -->
+    <main>
+        <!-- Banner -->
+        <div class="section position-relative bg-attach-cover pb-0" style="margin-top: 6em; ">
+            <div class="r-container">
+                <div class="row row-cols-xl-2 row-cols-1">
+                    <div class="col col-xl-4 mb-3">
+                        <div class="d-flex flex-column gap-3 pt-xl-5">
+                            <h2><span class="text-accent">Pricing </span>Plan</h2>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Pricing Plan</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col col-xl-8 mb-3">
+                        <img src="image/img_banner.png" class="img-fluid" style=" margin-top: -5rem;" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Pricing -->
+        <div class="section">
+            <div class="r-container d-flex flex-column gap-5">
+                <div
+                    class="d-flex flex-column gap-2 align-items-center justify-content-center mx-auto text-center scrollanimation animated fadeInDown adr-7">
+                    <h6 class="text-accent">Pricing Plan</h6>
+                    <h3>Flexible Pricing Plans for Every Learner</h3>
+                    <p style="max-width: 800px;">
+                        Choose a plan that fits your goals! Whether you're looking for a full-time immersive experience
+                        or a self-paced option, we offer flexible pricing to help you invest in your tech career with
+                        ease.
+                    </p>
+                </div>
+                <div class="row row-cols-xl-3 row-cols-1">
+                    <div class="col mb-3 scrollanimation animated fadeInLeft adr-7">
+                        <div class="card card-accent">
+                            <div class="bg"></div>
+                            <div class="blob price"></div>
+                            <div class="d-flex flex-column gap-5 position-relative" style="z-index: 3;">
+                                <div class="d-flex flex-column gap-2">
+                                    <h4>Beginner Plan</h4>
+                                    <div class="d-flex flex-row heading mb-3 align-items-end">
+                                        <h2 class="m-0 fw-semibold">$199</h2>
+                                        <h4 class="grey-hover">/month</h4>
+                                    </div>
+                                    <p class="m-0">
+                                        Perfect for beginners who want to learn the fundamentals of programming.
+                                    </p>
+                                </div>
+                                <div class="w-max-content">
+                                    <a href="" class="btn btn-accent d-flex flex-row gap-2 justify-content-center">
+                                        <span>Choose Plan</span>
+                                    </a>
+                                </div>
+                                <hr class="m-0">
+                                <div class="d-flex flex-column gap-4">
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">Basic Web Development (HTML, CSS, JavaScript)</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">Weekly Live Classes (2x per week)</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">Recorded Lessons Access</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">Small Project Assignments</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">Community Support</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-times fw-bold"></i>
+                                        </div>
+                                        <h6 class="grey-hover m-0">Coding Challenges</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-times fw-bold"></i>
+                                        </div>
+                                        <h6 class="grey-hover m-0">Career Guidance Sessions</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-3 scrollanimation animated fadeIn adr-7">
+                        <div class="card card-accent">
+                            <div class="bg"></div>
+                            <div class="blob price"></div>
+                            <div class="d-flex flex-column gap-5 position-relative" style="z-index: 3;">
+                                <div class="d-flex flex-column gap-2">
+                                    <h4>Ultimate Plan</h4>
+                                    <div class="d-flex flex-row heading mb-3 align-items-end">
+                                        <h2 class="m-0 fw-semibold">$899</h2>
+                                        <h4 class="grey-hover">/month</h4>
+                                    </div>
+                                    <p class="m-0">
+                                        Best for those who want an immersive bootcamp experience with career support.
+                                    </p>
+                                </div>
+                                <div class="w-max-content">
+                                    <a href="" class="btn btn-accent d-flex flex-row gap-2 justify-content-center">
+                                        <span>Choose Plan</span>
+                                    </a>
+                                </div>
+                                <hr class="m-0">
+                                <div class="d-flex flex-column gap-4">
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">Everything in Pro Plan +</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">Personalized Career Coaching</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">Exclusive Tech Industry Networking</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">Certificate of Completion</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">Priority Access to Workshops</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">Professional Portfolio Review</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">Job Referral Assistance</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-3 scrollanimation animated fadeInRight adr-7">
+                        <div class="card card-accent">
+                            <div class="bg"></div>
+                            <div class="blob price"></div>
+                            <div class="d-flex flex-column gap-5 position-relative" style="z-index: 3;">
+                                <div class="d-flex flex-column gap-2">
+                                    <h4>Pro Plan</h4>
+                                    <div class="d-flex flex-row heading mb-3 align-items-end">
+                                        <h2 class="m-0 fw-semibold">$499</h2>
+                                        <h4 class="grey-hover">/month</h4>
+                                    </div>
+                                    <p class="m-0">
+                                        Ideal for those who want a complete curriculum and an intensive learning
+                                        experience.
+                                    </p>
+                                </div>
+                                <div class="w-max-content">
+                                    <a href="" class="btn btn-accent d-flex flex-row gap-2 justify-content-center">
+                                        <span>Choose Plan</span>
+                                    </a>
+                                </div>
+                                <hr class="m-0">
+                                <div class="d-flex flex-column gap-4">
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">Everything in Beginner Plan +</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">Full-Stack Development (React, Node.js, Database)</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">Live Mentorship & 1-on-1 Code Review</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">Real-World Projects & Portfolio Building</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">Resume & Job Interview Training</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-times fw-bold"></i>
+                                        </div>
+                                        <h6 class="grey-hover m-0">Job Placement Assistance</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section FAQs -->
+        <div class="section bg-attach-cover" style="background-image: url(image/bg_all.png);">
+            <div class="r-container">
+                <div class="row row-cols-xl-2 row-cols-1">
+                    <div class="col mb-3 scrollanimation animated fadeInLeft adr-7">
+                        <div class="d-flex flex-column gap-2">
+                            <h6 class="text-accent">FAQs</h6>
+                            <h3>Got Questions? We Have Answers!</h3>
+                            <p>
+                                Get answers to common questions before starting your learning journey.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col mb-3 scrollanimation animated fadeInRight adr-7">
+                        <div class="d-flex flex-column gap-4 w-100">
+                            <div class="accordion mt-3 d-flex flex-column gap-4" id="faqAccordion1">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true"
+                                            aria-controls="faq1">
+                                            Do I need prior coding experience to join the bootcamp?
+                                        </button>
+                                    </h2>
+                                    <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion1">
+                                        <div class="accordion-body">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel erat
+                                            nibh. Sed rutrum turpis quis lacinia sollicitudin. Sed ac neque cursus,
+                                            ornare augue pellentesque, elementum turpis.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                                            Do I need to bring my own laptop for the bootcamp?
+                                        </button>
+                                    </h2>
+                                    <div id="faq2" class="accordion-collapse collapse show"
+                                        data-bs-parent="#faqAccordion1">
+                                        <div class="accordion-body">
+                                            Yes, you will need a laptop to complete assignments and projects. We
+                                            recommend using a laptop with at least 8GB of RAM and a modern processor for
+                                            the best experience.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false"
+                                            aria-controls="faq3">
+                                            How long does the bootcamp program take?
+                                        </button>
+                                    </h2>
+                                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion1">
+                                        <div class="accordion-body">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel erat
+                                            nibh. Sed rutrum turpis quis lacinia sollicitudin. Sed ac neque cursus,
+                                            ornare augue pellentesque, elementum turpis.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false"
+                                            aria-controls="faq4">
+                                            Can I get a refund if I’m not satisfied with the program?
+                                        </button>
+                                    </h2>
+                                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion1">
+                                        <div class="accordion-body">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel erat
+                                            nibh. Sed rutrum turpis quis lacinia sollicitudin. Sed ac neque cursus,
+                                            ornare augue pellentesque, elementum turpis.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false"
+                                            aria-controls="faq5">
+                                            Do you offer job placement support after I graduate?
+                                        </button>
+                                    </h2>
+                                    <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion1">
+                                        <div class="accordion-body">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel erat
+                                            nibh. Sed rutrum turpis quis lacinia sollicitudin. Sed ac neque cursus,
+                                            ornare augue pellentesque, elementum turpis.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Contact Us -->
+    <section class="section contact-us-section py-5" id="contact" style="background: #1a1a1a;">
+        <div class="r-container">
+            <div class="text-center mb-5">
+                <h2 class="text-white mb-2">Contact Us</h2>
+                <p class="text-white-50">답변은 마이페이지에서 확인하실 수 있습니다. 편하게 문의해 주세요.</p>
+            </div>
+            <form class="d-flex flex-column gap-1 w-100 needs-validation form" novalidate>
+                <input type="text" name="action" value="appointment" hidden>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-4">
+                        <input type="text" class="form-control form-control-lg bg-dark text-white py-3 px-4 contact-form-border" name="name" placeholder="이름" required>
+                        <div class="invalid-feedback">필수 입력 사항입니다.</div>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="email" class="form-control form-control-lg bg-dark text-white py-3 px-4 contact-form-border" name="email" placeholder="이메일" required>
+                        <div class="invalid-feedback">필수 입력 사항입니다.</div>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="tel" class="form-control form-control-lg bg-dark text-white py-3 px-4 contact-form-border" name="phone" placeholder="전화번호" required>
+                        <div class="invalid-feedback">필수 입력 사항입니다.</div>
+                    </div>
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <select name="bootcamp" class="form-select form-control-lg bg-dark text-white py-3 px-4 contact-form-border">
+                            <option value="" selected>부트캠프 프로그램 선택 (선택사항)</option>
+                            <option value="1">전자책 플랜</option>
+                            <option value="2">올인원 플랜</option>
+                            <option value="3">1:1 수익화 플랜</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <select name="location" class="form-select form-control-lg bg-dark text-white py-3 px-4 contact-form-border">
+                            <option value="" selected>선호 장소 (선택사항)</option>
+                            <option value="1">서울 (오프라인)</option>
+                            <option value="2">천안 (오프라인)</option>
+                            <option value="3">온라인 (원격)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <textarea class="form-control form-control-lg bg-dark text-white py-3 px-4 contact-form-border" name="message" rows="4" placeholder="메시지" required></textarea>
+                    <div class="invalid-feedback">필수 입력 사항입니다.</div>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-accent submit_appointment d-flex justify-content-center gap-2 rounded-4 px-4 py-3"><span>등록하기</span></button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" style="background: #111; color: #fff;">
+        <div class="r-container py-5">
+            <div class="row g-4 align-items-start mb-5">
+                <div class="col-12 col-md-3 col-lg-2 text-start">
+                    <a href="index.html" class="home-brand-logo-text home-brand-logo-text--footer d-inline-block" aria-label="부스트 클래스 홈">BOOST CLASS</a>
+                </div>
+                <div class="col-12 col-md-6 col-lg-7 text-start">
+                    <div class="d-flex flex-column gap-2 text-white-50 small">
+                        <p class="mb-0">회사명 : 부스트클래스<span class="d-none d-md-inline"> | </span><br class="d-md-none">대표자 : 서배준<span class="d-none d-md-inline"> | </span><br class="d-md-none">연락처 : 010-3673-6942</p>
+                        <p class="mb-0">사업자등록번호 : 152-74-00452<span class="d-none d-md-inline"> | </span><br class="d-md-none">통신판매신고번호 : 제2024-충남천안-2840호</p>
+                        <p class="mb-0">주소 : 충청남도 천안시 서북구 월봉로 126, 901-17호(쌍용동, 대림프라자)</p>
+                        <p class="mb-0">개인정보보호 최고책임자 : 서배준<span class="d-none d-md-inline"> | </span><br class="d-md-none">담당자 메일 : sprince1004@naver.com</p>
+                        <p class="mb-0">카카오뱅크 3333-32-0313102 부스트클래스</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-3 col-lg-3 text-start">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><a href="index.html#hero" class="text-white-50 text-decoration-none">홈</a></li>
+                        <li class="mb-2"><a href="course-list.html" class="text-white-50 text-decoration-none">강의 수강</a></li>
+                        <li class="mb-2"><a href="ebook.html" class="text-white-50 text-decoration-none">전자책</a></li>
+                        <li class="mb-2"><a href="about.html" class="text-white-50 text-decoration-none">사이트 바로가기</a></li>
+                        <li class="mb-2"><a href="blog.html" class="text-white-50 text-decoration-none">게시판</a></li>
+                        <li class="mb-2"><a href="index.html#contact" class="text-white-50 text-decoration-none">문의하기</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-4 border-top border-secondary d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+                <p class="mb-0 text-white-50 small">© Copyright 2025. All Rights Reserved 부스트클래스</p>
+                <div class="d-flex gap-3">
+                    <a href="index.html" class="text-white-50 text-decoration-none small">이용약관</a>
+                    <a href="index.html" class="text-white-50 text-decoration-none small">개인정보처리방침</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="js/referral-capture.js"></script>
+    <script src="js/header-auth.js"></script>
+    <script src="js/vendor/jquery.min.js"></script>
+    <script src="js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="js/vendor/swiper-bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/swiper-script.js"></script>
+    <script src="js/submit-form.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="js/member-notifications.js"></script>
+    <script src="js/inquiry-service.js"></script>
+    <script src="js/contact-auth-inquiry.js"></script>
+    <script src="js/vendor/isotope.pkgd.min.js"></script>
+    <script src="js/video_embedded.js"></script>
+    <script src="js/vendor/fslightbox.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/gh/shishirraven/animate-on-scroll@v1.0/oyethemes_onscroll_animation.js"></script>
+</body>
+
+</html>

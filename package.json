@@ -1,0 +1,10 @@
+{
+  "name": "boostclass",
+  "version": "1.0.0",
+  "private": true,
+  "description": "부스트클래스 정적 사이트. 런타임은 CDN Firebase + 브라우저 스크립트. npm은 문서 MIME 참고용으로 선택 설치 가능.",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "mime-types": "^2.1.35"
+  }
+}

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shishirraven/animate-on-scroll@v1.2/animation_utility.css">
+    <link rel="icon" type="image/svg+xml" href="image/favicon.svg">
+    <title>부스트클래스 - 강의 상세</title>
+    <style>
+        body { min-height: 100vh; display: flex; flex-direction: column; background: #111; }
+        body main { flex: 1; background: #1a1a1a; }
+        main {
+            font-family: "Manrope", "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+        }
+        .course-detail-media {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            border-radius: 1rem;
+            overflow: hidden;
+            background: #111;
+        }
+        .course-detail-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .detail-hero-title {
+            font-size: clamp(2.15rem, 3.2vw + 1rem, 3.65rem);
+            font-weight: 700;
+            line-height: 1.18;
+            letter-spacing: -0.025em;
+            color: #fff;
+            margin-bottom: 1.25rem;
+        }
+        .detail-hero-role {
+            display: block;
+            font-size: clamp(0.9rem, 0.6vw + 0.75rem, 1.05rem);
+            color: var(--bs-secondary, #9a9a9a);
+            margin-bottom: 0.2rem;
+        }
+        .detail-hero-person-name {
+            font-size: clamp(1.2rem, 1.35vw + 0.85rem, 1.65rem);
+            font-weight: 600;
+            color: #fff;
+        }
+        .detail-hero-price {
+            font-size: clamp(1.45rem, 2.1vw + 0.85rem, 2.15rem);
+            font-weight: 700;
+        }
+        .detail-hero-summary {
+            min-width: 0;
+        }
+        @media (min-width: 768px) {
+            .detail-hero-summary {
+                max-width: 36rem;
+            }
+        }
+        .course-meta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .course-meta-row .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.9rem;
+            color: var(--bs-secondary, #888);
+        }
+        .course-description {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="header" class="fixed-top bg-accent-transparent glass-effect py-0" style="z-index: 9999;">
+        <nav class="navbar navbar-expand-xl">
+            <div class="r-container w-100 px-3 px-xl-5 d-flex flex-nowrap align-items-center">
+                <div class="logo-container flex-shrink-0">
+                    <a class="navbar-brand home-brand-logo-text" href="index.html" aria-label="부스트 클래스 홈">BOOST CLASS</a>
+                </div>
+                <button class="navbar-toggler flex-shrink-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa-solid fa-bars-staggered accent-color-2"></i>
+                </button>
+                <div class="collapse navbar-collapse flex-grow-1 flex-nowrap min-w-0" id="navbarNav">
+                    <ul class="navbar-nav ms-xl-4 ps-xl-5 me-auto mb-2 mb-xl-0 gap-1 py-2 py-xl-0 nav-links-nowrap">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">홈</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="course-list.html">강의 수강</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="ebook.html">전자책</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">사이트 바로가기</a>
+                        </li>
+                        <li class="nav-item d-none">
+                            <a class="nav-link" href="mentor.html">멘토</a>
+                        </li>
+                        <li class="nav-item d-none">
+                            <a class="nav-link" href="pricing-plan.html">가격</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="blog.html">무료 게시판</a></li>
+                                <li><a class="dropdown-item" href="blog-post.html">유료 게시판</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html#contact">문의</a>
+                        </li>
+                    </ul>
+                    <div class="mb-xl-0 mb-3 d-flex flex-xl-row flex-column gap-3 w-max-content ps-xl-3" id="headerAuthWrap">
+                        <div id="headerGuest" class="d-flex flex-xl-row flex-column gap-3 w-max-content">
+                            <a href="register.html" class="btn btn-accent accent d-flex flex-row gap-2 justify-content-center"><span>회원가입</span></a>
+                            <a href="login.html" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그인</span></a>
+                        </div>
+                        <div id="headerUser" class="d-flex flex-xl-row flex-column gap-3 w-max-content align-items-center d-none">
+                            <a href="mypage.html" class="text-accent text-decoration-none">마이페이지</a>
+                            <button type="button" id="btnHeaderLogout" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그아웃</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- End Header -->
+
+    <main>
+        <!-- Breadcrumb (헤더 아래로 내림) -->
+        <div class="section pt-2 pb-0" style="margin-top: 8rem; padding-top: 2rem !important; padding-bottom: 0.5rem !important;">
+            <div class="r-container">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">홈</a></li>
+                        <li class="breadcrumb-item"><a href="course-list.html">강의 수강</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">웹 개발 기초</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <!-- 강의 상세: 전자책처럼 이미지 표시 -->
+        <div class="section pt-1 pb-5 bg-attach-cover" style="background-image: url(image/bg_all.png); padding-top: 2.5rem !important; padding-bottom: 4rem !important;">
+            <div class="r-container">
+                <div class="row g-4 g-md-5 align-items-md-center">
+                    <div class="col-12 col-md-5 col-lg-4 text-center text-md-start">
+                        <div class="course-detail-media mx-auto mx-md-0" style="max-width: 480px;">
+                            <img src="image/6.jpg" alt="강의 커버" id="courseThumb">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-7 col-lg-8 ps-md-4 ps-lg-5">
+                        <div class="detail-hero-summary">
+                            <h2 class="detail-hero-title mb-3 mb-md-4" id="courseTitleText">-</h2>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="rounded-circle overflow-hidden flex-shrink-0" style="width: 64px; height: 64px;">
+                                    <img src="image/dummy-img-600x700.jpg" alt="강사" class="w-100 h-100 object-fit-cover" id="courseInstructorImg">
+                                </div>
+                                <div>
+                                    <span class="detail-hero-role">강사</span>
+                                    <strong id="courseInstructorName" class="detail-hero-person-name">-</strong>
+                                </div>
+                            </div>
+                            <div class="course-meta-row">
+                                <span class="meta-item"><i class="fa-regular fa-clock"></i> <span id="courseDurationText">-</span></span>
+                                <span class="price text-accent detail-hero-price" id="coursePriceText">-</span>
+                            </div>
+                            <div class="mt-4 pt-1 d-flex flex-wrap gap-2 gap-md-3 align-items-center">
+                                <a href="#" id="coursePurchaseLink" class="btn btn-accent rounded-3 px-4 py-3" rel="noopener noreferrer"><span>수강하기</span></a>
+                                <button type="button" id="btnCourseWish" class="btn rounded-3 px-3 py-3" disabled style="color: #fff; border: 1px solid rgba(255,255,255,0.35); background: transparent;"><i class="fa-regular fa-heart me-1"></i>찜</button>
+                                <button type="button" id="btnCourseCart" class="btn rounded-3 px-3 py-3" disabled style="color: #fff; border: 1px solid rgba(255,255,255,0.35); background: transparent;"><i class="fa-solid fa-cart-shopping me-1"></i>장바구니</button>
+                                <a href="course-list.html" class="btn rounded-3 px-4 py-3" style="color: var(--accent-color); border: 1px solid var(--accent-color); background: transparent;">목록으로</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4 mt-md-5">
+                    <div class="col-12">
+                        <div class="course-description">
+                            <h6 class="text-accent mb-3">강의 소개</h6>
+                            <div id="courseDescriptionText" class="course-description-body text-white-50">-</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer" style="background: #111; color: #fff; margin-top: auto;">
+        <div class="r-container py-5">
+            <div class="row g-4 align-items-start mb-5">
+                <div class="col-12 col-md-3 col-lg-2 text-start">
+                    <a href="index.html" class="home-brand-logo-text home-brand-logo-text--footer d-inline-block" aria-label="부스트 클래스 홈">BOOST CLASS</a>
+                </div>
+                <div class="col-12 col-md-6 col-lg-7 text-start">
+                    <div class="d-flex flex-column gap-2 text-white-50 small">
+                        <p class="mb-0">회사명 : 부스트클래스<span class="d-none d-md-inline"> | </span><br class="d-md-none">대표자 : 서배준<span class="d-none d-md-inline"> | </span><br class="d-md-none">연락처 : 010-3673-6942</p>
+                        <p class="mb-0">사업자등록번호 : 152-74-00452<span class="d-none d-md-inline"> | </span><br class="d-md-none">통신판매신고번호 : 제2024-충남천안-2840호</p>
+                        <p class="mb-0">주소 : 충청남도 천안시 서북구 월봉로 126, 901-17호(쌍용동, 대림프라자)</p>
+                        <p class="mb-0">개인정보보호 최고책임자 : 서배준<span class="d-none d-md-inline"> | </span><br class="d-md-none">담당자 메일 : sprince1004@naver.com</p>
+                        <p class="mb-0">카카오뱅크 3333-32-0313102 부스트클래스</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-3 col-lg-3 text-start">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><a href="index.html#hero" class="text-white-50 text-decoration-none">홈</a></li>
+                        <li class="mb-2"><a href="course-list.html" class="text-white-50 text-decoration-none">강의 수강</a></li>
+                        <li class="mb-2"><a href="ebook.html" class="text-white-50 text-decoration-none">전자책</a></li>
+                        <li class="mb-2"><a href="about.html" class="text-white-50 text-decoration-none">사이트 바로가기</a></li>
+                        <li class="mb-2"><a href="blog.html" class="text-white-50 text-decoration-none">게시판</a></li>
+                        <li class="mb-2"><a href="index.html#contact" class="text-white-50 text-decoration-none">문의하기</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-4 border-top border-secondary d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+                <p class="mb-0 text-white-50 small">© Copyright 2025. All Rights Reserved 부스트클래스</p>
+                <div class="d-flex gap-3">
+                    <a href="index.html" class="text-white-50 text-decoration-none small">이용약관</a>
+                    <a href="index.html" class="text-white-50 text-decoration-none small">개인정보처리방침</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="js/referral-capture.js"></script>
+    <script src="js/header-auth.js"></script>
+    <script src="js/member-notifications.js"></script>
+    <script src="js/wishlist-cart.js"></script>
+    <script src="js/vendor/jquery.min.js"></script>
+    <script src="js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/submit-form.js"></script>
+    <script>
+        (function () {
+            var params = new URLSearchParams(window.location.search);
+            var courseId = params.get('id');
+            if (!courseId) return;
+
+            var firebaseConfig = {
+                apiKey: "AIzaSyCijM7nOf7xYPKevbOsRrrZTA6XwgODeIM",
+                authDomain: "boostclass-7d4fd.firebaseapp.com",
+                projectId: "boostclass-7d4fd",
+                storageBucket: "boostclass-7d4fd.firebasestorage.app",
+                messagingSenderId: "774803491487",
+                appId: "1:774803491487:web:daada5b95008a14c2730aa"
+            };
+
+            if (typeof firebase === 'undefined') return;
+            if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+            var auth = firebase.auth();
+            var db = firebase.firestore();
+
+            function courseDetailUrlForWishlist() {
+                var q = new URLSearchParams();
+                q.set('id', courseId);
+                var cur = new URLSearchParams(window.location.search);
+                ['ref', 'referral', 'r'].forEach(function (k) {
+                    var v = cur.get(k);
+                    if (v) q.set(k, v);
+                });
+                return 'course-detail.html?' + q.toString();
+            }
+
+            /** Firestore courses 문서 id별 외부 결제 페이지(아임웹 등) */
+            var PURCHASE_URL_BY_COURSE_ID = {
+                z9zwrkOB5soaMZA18g75: 'https://boostmaster.imweb.me/?idx=3'
+            };
+
+            function formatPrice(n) {
+                if (n === 0) return '무료';
+                if (typeof n !== 'number') n = parseInt(n, 10) || 0;
+                return '₩' + Number(n).toLocaleString();
+            }
+
+            function formatDuration(mins) {
+                var m = typeof mins === 'number' ? mins : parseInt(mins, 10) || 0;
+                if (!m) return '-';
+                if (m >= 60) {
+                    var h = Math.floor(m / 60);
+                    var r = m % 60;
+                    return '약 ' + h + '시간' + (r ? (' ' + r + '분') : '');
+                }
+                return '약 ' + m + '분';
+            }
+
+            db.collection('courses').doc(courseId).get().then(function (doc) {
+                if (!doc.exists) return;
+                var d = doc.data() || {};
+
+                var thumbEl = document.getElementById('courseThumb');
+                if (thumbEl) thumbEl.src = d.coverImageUrl || 'image/6.jpg';
+
+                var instructorImgEl = document.getElementById('courseInstructorImg');
+                if (instructorImgEl) instructorImgEl.src = d.instructorImageUrl || 'image/dummy-img-600x700.jpg';
+
+                var titleEl = document.getElementById('courseTitleText');
+                if (titleEl) titleEl.textContent = d.courseTitle || '-';
+
+                var instructorNameEl = document.getElementById('courseInstructorName');
+                if (instructorNameEl) instructorNameEl.textContent = d.courseInstructor || '-';
+
+                var durationEl = document.getElementById('courseDurationText');
+                if (durationEl) durationEl.textContent = formatDuration(d.duration);
+
+                var priceEl = document.getElementById('coursePriceText');
+                if (priceEl) {
+                    var original = (typeof d.priceOriginal === 'number') ? d.priceOriginal : 0;
+                    var sale = (typeof d.priceSale === 'number') ? d.priceSale : 0;
+                    var hasDiscount = original > sale && original > 0;
+                    if (hasDiscount) {
+                        priceEl.innerHTML =
+                            '<span class="text-decoration-line-through text-secondary me-1">' + formatPrice(original) + '</span> ' +
+                            formatPrice(sale);
+                    } else {
+                        priceEl.textContent = formatPrice(sale);
+                    }
+                }
+
+                var descEl = document.getElementById('courseDescriptionText');
+                if (descEl) {
+                    var desc = d.courseDesc || '';
+                    if (desc.indexOf('<') !== -1 && desc.indexOf('>') !== -1) {
+                        descEl.innerHTML = desc;
+                    } else {
+                        descEl.textContent = desc || '-';
+                    }
+                }
+
+                var purchaseLink = document.getElementById('coursePurchaseLink');
+                if (purchaseLink) {
+                    var externalPurchaseUrl = PURCHASE_URL_BY_COURSE_ID[courseId];
+                    if (externalPurchaseUrl) {
+                        purchaseLink.href = externalPurchaseUrl;
+                        purchaseLink.target = '_blank';
+                        purchaseLink.rel = 'noopener noreferrer';
+                    }
+                    purchaseLink.addEventListener('click', function (ev) {
+                        if (auth.currentUser) return;
+                        ev.preventDefault();
+                        window.alert('로그인 후 이용 가능합니다. 먼저 로그인해 주세요.');
+                        window.location.href =
+                            'login.html?redirect=' +
+                            encodeURIComponent(window.location.pathname + window.location.search);
+                    });
+                }
+
+                var btnWish = document.getElementById('btnCourseWish');
+                var btnCart = document.getElementById('btnCourseCart');
+                var coverForItem = d.coverImageUrl || 'image/6.jpg';
+                var titleForItem = d.courseTitle || '강의';
+                var detailUrl = courseDetailUrlForWishlist();
+                var metaLine = '수강기간 : 평생 소장';
+                var purchaseUrlForItem =
+                    typeof BoostWishCart !== 'undefined' && BoostWishCart.resolvePurchaseUrl
+                        ? BoostWishCart.resolvePurchaseUrl('course', courseId, detailUrl, null)
+                        : (PURCHASE_URL_BY_COURSE_ID[courseId] || detailUrl);
+                function goLogin() {
+                    window.location.href =
+                        'login.html?redirect=' +
+                        encodeURIComponent(window.location.pathname + window.location.search);
+                }
+                function toast(msg) {
+                    if (window.alert) window.alert(msg);
+                }
+                if (btnWish) {
+                    btnWish.disabled = false;
+                    btnWish.onclick = function () {
+                        if (typeof BoostWishCart === 'undefined') return;
+                        var u = BoostWishCart.requireLogin();
+                        if (!u) { goLogin(); return; }
+                        BoostWishCart.addWishlist(u.uid, {
+                            type: 'course',
+                            itemId: courseId,
+                            title: titleForItem,
+                            metaLine: metaLine,
+                            detailUrl: detailUrl,
+                            thumbUrl: coverForItem
+                        }).then(function (r) {
+                            if (r && r.duplicate) toast('이미 찜한 강의입니다.');
+                            else toast('찜 목록에 추가했습니다. 마이페이지에서 확인하세요.');
+                        }).catch(function () {
+                            toast('저장에 실패했습니다. 로그인 상태를 확인해 주세요.');
+                        });
+                    };
+                }
+                if (btnCart) {
+                    btnCart.disabled = false;
+                    btnCart.onclick = function () {
+                        if (typeof BoostWishCart === 'undefined') return;
+                        var u = BoostWishCart.requireLogin();
+                        if (!u) { goLogin(); return; }
+                        BoostWishCart.addCart(u.uid, {
+                            type: 'course',
+                            itemId: courseId,
+                            title: titleForItem,
+                            metaLine: metaLine,
+                            detailUrl: detailUrl,
+                            purchaseUrl: purchaseUrlForItem,
+                            thumbUrl: coverForItem
+                        }).then(function (r) {
+                            if (r && r.duplicate) toast('이미 장바구니에 있습니다.');
+                            else toast('장바구니에 담았습니다.');
+                        }).catch(function () {
+                            toast('저장에 실패했습니다.');
+                        });
+                    };
+                }
+            }).catch(function () {
+                // 화면은 기본 더미값으로 유지
+            });
+        })();
+    </script>
+</body>
+
+</html>

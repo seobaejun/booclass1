@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shishirraven/animate-on-scroll@v1.2/animation_utility.css">
+    <link rel="icon" type="image/svg+xml" href="image/favicon.svg">
+    <title>마이페이지 - 부스트클래스</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .mypage-stat-box:hover{background:#2a2a2a!important;}
+        #mypageProfileForm .form-control:focus { border-color: #A9F8B5; box-shadow: 0 0 0 0.2rem rgba(169,248,181,0.2); }
+        .mypage-product-card {
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 12px;
+            background: #1e1e1e;
+            padding: 1.15rem 1.25rem;
+            margin-bottom: 1rem;
+        }
+        .mypage-product-card .mypage-card-badge { font-size: 0.72rem; padding: 0.25rem 0.6rem; }
+        .mypage-card-badge-brand {
+            background: linear-gradient(78.12deg, #A9F8B5 0.32%, #DFF494 99.52%);
+            color: #111;
+            font-weight: 600;
+        }
+        .mypage-product-card .mypage-card-title {
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            line-height: 1.45;
+            margin: 0.5rem 0 0.35rem;
+            font-family: "Manrope", "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+        }
+        .mypage-product-card .mypage-card-meta {
+            color: rgba(255,255,255,0.55);
+            font-size: 0.85rem;
+            margin-bottom: 0.35rem;
+            font-family: "Manrope", "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+        }
+        .mypage-product-card .mypage-card-price {
+            color: rgba(255,255,255,0.92);
+            font-size: 0.92rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            font-family: "Manrope", "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+        }
+        .mypage-product-card .mypage-card-price .mypage-price-free {
+            color: #A9F8B5;
+            font-weight: 700;
+        }
+        .mypage-product-card .mypage-card-cta {
+            background: linear-gradient(78.12deg, #A9F8B5 0.32%, #DFF494 99.52%);
+            color: #111;
+            border: none;
+            border-radius: 8px;
+            padding: 0.45rem 0.9rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-family: "Manrope", "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+        }
+        .mypage-product-card .mypage-card-cta:hover { filter: brightness(1.06); color: #000; }
+        .mypage-btn-remove-brand {
+            border: 1px solid rgba(169, 248, 181, 0.85);
+            color: #A9F8B5;
+            background: transparent;
+            font-size: 0.8rem;
+        }
+        .mypage-btn-remove-brand:hover {
+            background: rgba(169, 248, 181, 0.12);
+            color: #DFF494;
+            border-color: rgba(223, 244, 148, 0.95);
+        }
+        .mypage-notify-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            background: #252525;
+            padding: 0.85rem 1rem;
+            margin-bottom: 0.65rem;
+        }
+        .mypage-notify-item-main { flex: 1; min-width: 0; }
+        .mypage-notify-item .mypage-notify-title { color: #fff; font-weight: 600; font-size: 0.92rem; margin: 0 0 0.35rem; }
+        .mypage-notify-item .mypage-notify-body { color: rgba(255,255,255,0.65); font-size: 0.82rem; margin: 0; line-height: 1.45; }
+        .mypage-notify-item .mypage-notify-time { color: rgba(255,255,255,0.4); font-size: 0.72rem; margin-top: 0.5rem; }
+        .mypage-notify-item .mypage-btn-remove-notification { flex-shrink: 0; white-space: nowrap; }
+        .mypage-inquiry-reply-box {
+            border: 1px solid rgba(169, 248, 181, 0.35);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            background: rgba(169, 248, 181, 0.08);
+            color: rgba(255,255,255,0.9);
+            white-space: pre-wrap;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .mypage-notice-section .card { border-color: rgba(255,255,255,0.12) !important; }
+        .mypage-notice-section .board-list-row { border: none; background: transparent; width: 100%; text-align: left; cursor: pointer; }
+        .mypage-notice-section .board-list-row:focus { outline: 2px solid rgba(169,248,181,0.5); outline-offset: 2px; }
+        .mypage-notice-detail-inner {
+            color: rgba(255,255,255,0.88);
+            font-size: 0.9rem;
+            line-height: 1.55;
+            padding: 0.75rem 0 0.25rem;
+        }
+        .mypage-notice-detail-inner img { max-width: 100%; height: auto; }
+        .mypage-notice-section .board-pagination { border-color: rgba(255,255,255,0.12) !important; }
+        .mypage-notice-section button.board-pagination-num { font: inherit; cursor: pointer; }
+        .mypage-notice-section button.board-pagination-arrow { font: inherit; cursor: pointer; border: none; }
+        /* 구매코드 입력: 처음부터 브랜드 컬러 테두리 (클릭 전에도 동일 계열) */
+        #mypagePurchaseCodeInput.mypage-purchase-code-input {
+            border: 1px solid rgba(169, 248, 181, 0.9);
+            background: rgba(30, 30, 30, 0.98);
+            color: #fff;
+            border-radius: 8px;
+            box-shadow: inset 0 0 0 1px rgba(169, 248, 181, 0.12);
+        }
+        #mypagePurchaseCodeInput.mypage-purchase-code-input:focus,
+        #mypagePurchaseCodeInput.mypage-purchase-code-input:focus-visible {
+            border-color: #A9F8B5;
+            background: rgba(30, 30, 30, 0.98);
+            color: #fff;
+            box-shadow: 0 0 0 0.2rem rgba(169, 248, 181, 0.28);
+            outline: none;
+        }
+        #mypagePurchaseCodeInput.mypage-purchase-code-input::placeholder {
+            color: rgba(255, 255, 255, 0.38);
+        }
+        @media (max-width: 991.98px) {
+            #mypageMainLayout { flex-direction: column !important; gap: 1rem !important; }
+            #mypageSidebar {
+                width: 100% !important;
+                border-right: 0 !important;
+                border-bottom: 1px solid rgba(255,255,255,0.08);
+                padding: 1.25rem 0 1rem 0 !important;
+            }
+            #mypageContentArea {
+                width: 100%;
+                min-height: 0 !important;
+                padding: 1rem 0 2rem !important;
+                overflow: visible !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header (메인과 동일) -->
+    <div id="header" class="fixed-top bg-accent-transparent glass-effect py-0" style="z-index: 9999;">
+        <nav class="navbar navbar-expand-xl">
+            <div class="r-container w-100 px-3 px-xl-5 d-flex flex-nowrap align-items-center">
+                <div class="logo-container flex-shrink-0">
+                    <a class="navbar-brand home-brand-logo-text" href="index.html" aria-label="부스트 클래스 홈">BOOST CLASS</a>
+                </div>
+                <button class="navbar-toggler flex-shrink-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa-solid fa-bars-staggered accent-color-2"></i>
+                </button>
+                <div class="collapse navbar-collapse flex-grow-1 flex-nowrap min-w-0" id="navbarNav">
+                    <ul class="navbar-nav ms-xl-4 ps-xl-5 me-auto mb-2 mb-xl-0 gap-1 py-2 py-xl-0 nav-links-nowrap">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">홈</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="course-list.html">강의 수강</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="ebook.html">전자책</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">사이트 바로가기</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="blog.html">무료 게시판</a></li>
+                                <li><a class="dropdown-item" href="blog-post.html">유료 게시판</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html#contact">문의</a>
+                        </li>
+                    </ul>
+                    <div class="mb-xl-0 mb-3 d-flex flex-xl-row flex-column gap-3 w-max-content ps-xl-3" id="headerAuthWrap">
+                        <div id="headerGuest" class="d-flex flex-xl-row flex-column gap-3 w-max-content">
+                            <a href="register.html" class="btn btn-accent accent d-flex flex-row gap-2 justify-content-center"><span>회원가입</span></a>
+                            <a href="login.html" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그인</span></a>
+                        </div>
+                        <div id="headerUser" class="d-flex flex-xl-row flex-column gap-3 w-max-content align-items-center d-none">
+                            <a href="mypage.html" class="text-accent text-decoration-none">마이페이지</a>
+                            <button type="button" id="btnHeaderLogout" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그아웃</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <main>
+        <section style="min-height: calc(100vh - 120px); padding: 7rem 0 3rem 0;">
+            <div class="r-container w-100 px-3 px-xl-5">
+                <div id="mypageMainLayout" style="display: flex; flex-direction: row; width: 100%; min-height: 480px; gap: 0;">
+                    <aside id="mypageSidebar" style="width: 260px; flex-shrink: 0; background: transparent; padding: 2.5rem 1.5rem 2rem 1.5rem; text-align: left; border-right: 1px solid rgba(255,255,255,0.08); padding-right: 2rem;">
+                        <p style="font-size: 1rem; margin-bottom: 2.25rem; color: #fff;">안녕하세요 ❤️ <span id="mypageUserName">회원</span>님</p>
+                        <button type="button" id="btnMypageEditProfile" style="width: 100%; margin-bottom: 2rem; padding: 0.65rem 1rem; border: none; border-radius: 8px; font-weight: 500; color: #111; background: linear-gradient(78.12deg, #A9F8B5 0.32%, #DFF494 99.52%); cursor: pointer;">정보수정</button>
+                        <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2.25rem;">
+                            <a href="javascript:void(0)" class="mypage-stat-box" data-panel="wish" style="width: 100%; min-width: 0; background: #252525; border-radius: 8px; padding: 0.8rem 0.6rem; text-align: center; text-decoration: none; color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.05);">
+                                <span style="font-size: 1.4rem; color: #A9F8B5; margin-bottom: 0.2rem;"><i class="fa-solid fa-heart"></i></span>
+                                <span style="font-size: 0.7rem; display: block; color: rgba(255,255,255,0.85);">찜상품</span>
+                                <span id="mypageCountWish" style="font-size: 0.95rem; font-weight: 600; margin-top: 0.15rem;">0</span>
+                            </a>
+                            <a href="javascript:void(0)" class="mypage-stat-box" data-panel="cart" style="width: 100%; min-width: 0; background: #252525; border-radius: 8px; padding: 0.8rem 0.6rem; text-align: center; text-decoration: none; color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.05);">
+                                <span style="font-size: 1.4rem; color: #A9F8B5; margin-bottom: 0.2rem;"><i class="fa-solid fa-cart-shopping"></i></span>
+                                <span style="font-size: 0.7rem; display: block; color: rgba(255,255,255,0.85);">장바구니</span>
+                                <span id="mypageCountCart" style="font-size: 0.95rem; font-weight: 600; margin-top: 0.15rem;">0</span>
+                            </a>
+                            <a href="javascript:void(0)" class="mypage-stat-box" data-panel="alert" style="width: 100%; min-width: 0; background: #252525; border-radius: 8px; padding: 0.8rem 0.6rem; text-align: center; text-decoration: none; color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.05);">
+                                <span style="font-size: 1.4rem; color: #A9F8B5; margin-bottom: 0.2rem;"><i class="fa-solid fa-bell"></i></span>
+                                <span style="font-size: 0.7rem; display: block; color: rgba(255,255,255,0.85);">알림</span>
+                                <span id="mypageCountAlert" style="font-size: 0.95rem; font-weight: 600; margin-top: 0.15rem;">0</span>
+                            </a>
+                        </div>
+                        <button type="button" id="btnMypagePurchaseCode" style="width: 100%; margin-bottom: 0.75rem; padding: 0.65rem 1rem; border: 1px solid rgba(169,248,181,0.85); border-radius: 8px; font-weight: 500; color: #A9F8B5; background: transparent; cursor: pointer;">구매코드 입력</button>
+                        <button type="button" id="btnMypageMyCourses" style="width: 100%; padding: 0.65rem 1rem; border: none; border-radius: 8px; font-weight: 500; color: #111; background: linear-gradient(78.12deg, #A9F8B5 0.32%, #DFF494 99.52%); cursor: pointer;">내 강의 보기</button>
+                        <button type="button" id="btnMypageMyEbooks" style="width: 100%; margin-top: 0.75rem; padding: 0.65rem 1rem; border: none; border-radius: 8px; font-weight: 500; color: #111; background: linear-gradient(78.12deg, #A9F8B5 0.32%, #DFF494 99.52%); cursor: pointer;">내 전자책 보기</button>
+                        <a href="index.html#contact" style="display: block; width: 100%; margin-top: 0.75rem; padding: 0.65rem 1rem; border: 1px solid rgba(169,248,181,0.8); border-radius: 8px; font-weight: 500; color: #A9F8B5; background: transparent; text-align: center; text-decoration: none;">1:1 문의하기</a>
+                        <a href="javascript:void(0)" class="mypage-stat-box" data-panel="inquiryReply" style="width: 100%; margin-top: 0.75rem; min-width: 0; background: #252525; border-radius: 8px; padding: 0.8rem 0.6rem; text-align: center; text-decoration: none; color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid rgba(169,248,181,0.35);">
+                            <span style="font-size: 1.4rem; color: #A9F8B5; margin-bottom: 0.2rem;"><i class="fa-solid fa-circle-check"></i></span>
+                            <span style="font-size: 0.7rem; display: block; color: rgba(255,255,255,0.85);">1:1 답변 확인하기</span>
+                        </a>
+                    </aside>
+                    <div id="mypageContentArea" style="flex: 1; min-height: 400px; padding: 2.5rem 2.5rem 3rem; overflow: auto;">
+                        <div id="mypageNoticeSection" class="mypage-notice-section mb-4">
+                            <div class="d-flex flex-column gap-2 mb-3">
+                                <h6 class="text-accent mb-0">공지사항</h6>
+                                <p class="text-white-50 small mb-0">제목을 누르면 내용을 펼쳐 볼 수 있습니다.</p>
+                            </div>
+                            <div id="mypageNoticeListRoot" class="card rounded-4 p-3 p-md-4 bg-dark border border-secondary">
+                                <p class="text-white-50 small mb-0">불러오는 중…</p>
+                            </div>
+                            <nav id="mypageNoticePagination" class="board-pagination mt-3 pt-3 border-top border-secondary" aria-label="공지 페이지"></nav>
+                        </div>
+                        <div id="mypageContentEmpty" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 320px; color: rgba(255,255,255,0.5); text-align: center; padding: 3rem 2rem;">
+                            <span style="font-size: 3rem; color: rgba(169,248,181,0.3); margin-bottom: 1.25rem;"><i class="fa-solid fa-hand-pointer"></i></span>
+                            <p class="mb-0" style="font-size: 1rem;">왼쪽 메뉴를 클릭하면 내용이 여기에 표시됩니다.</p>
+                        </div>
+                        <div id="mypageContentBody" class="d-none" style="min-height: 320px;"></div>
+                        <!-- 정보 수정 패널 (스크립트에서 표시) -->
+                        <div id="mypageProfilePanel" class="d-none" style="max-width: 480px;">
+                            <h5 style="margin-bottom: 1.25rem; color: #fff;">회원 정보 수정</h5>
+                            <div id="mypageProfileMessage" class="alert alert-danger d-none mb-3" role="alert"></div>
+                            <div id="mypageProfileSuccess" class="alert alert-success d-none mb-3" role="alert">저장되었습니다.</div>
+                            <form id="mypageProfileForm" novalidate>
+                                <div class="mb-3">
+                                    <label for="mypageEditName" class="form-label">이름</label>
+                                    <input type="text" class="form-control bg-dark text-white border-secondary" id="mypageEditName" required autocomplete="name" maxlength="80">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="mypageEditPhone" class="form-label">전화번호</label>
+                                    <input type="tel" class="form-control bg-dark text-white border-secondary" id="mypageEditPhone" required autocomplete="tel" maxlength="30">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="mypageEditEmail" class="form-label">이메일(아이디)</label>
+                                    <input type="email" class="form-control bg-dark text-white border-secondary" id="mypageEditEmail" required autocomplete="email" maxlength="120">
+                                </div>
+                                <div class="mb-3 d-none" id="mypagePasswordRow">
+                                    <label for="mypageEditPassword" class="form-label">현재 비밀번호 <span class="text-white-50 small">(이메일 변경 시 필수)</span></label>
+                                    <input type="password" class="form-control bg-dark text-white border-secondary" id="mypageEditPassword" autocomplete="current-password" placeholder="이메일을 바꿀 때만 입력">
+                                </div>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <button type="submit" class="btn btn-accent px-4" id="btnMypageProfileSave">저장</button>
+                                    <button type="button" class="btn btn-outline-light btn-sm" id="btnMypageProfileCancel">취소</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (메인과 동일) -->
+    <footer id="footer" style="background: #111; color: #fff;">
+        <div class="r-container py-5">
+            <div class="row g-4 align-items-start mb-5">
+                <div class="col-12 col-md-3 col-lg-2 text-start">
+                    <a href="index.html" class="home-brand-logo-text home-brand-logo-text--footer d-inline-block" aria-label="부스트 클래스 홈">BOOST CLASS</a>
+                </div>
+                <div class="col-12 col-md-6 col-lg-7 text-start">
+                    <div class="d-flex flex-column gap-2 text-white-50 small">
+                        <p class="mb-0">회사명 : 부스트클래스<span class="d-none d-md-inline"> | </span><br class="d-md-none">대표자 : 서배준<span class="d-none d-md-inline"> | </span><br class="d-md-none">연락처 : 010-3673-6942</p>
+                        <p class="mb-0">사업자등록번호 : 152-74-00452<span class="d-none d-md-inline"> | </span><br class="d-md-none">통신판매신고번호 : 제2024-충남천안-2840호</p>
+                        <p class="mb-0">주소 : 충청남도 천안시 서북구 월봉로 126, 901-17호(쌍용동, 대림프라자)</p>
+                        <p class="mb-0">개인정보보호 최고책임자 : 서배준<span class="d-none d-md-inline"> | </span><br class="d-md-none">담당자 메일 : sprince1004@naver.com</p>
+                        <p class="mb-0">카카오뱅크 3333-32-0313102 부스트클래스</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-3 col-lg-3 text-start">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><a href="index.html#hero" class="text-white-50 text-decoration-none">홈</a></li>
+                        <li class="mb-2"><a href="course-list.html" class="text-white-50 text-decoration-none">강의 수강</a></li>
+                        <li class="mb-2"><a href="ebook.html" class="text-white-50 text-decoration-none">전자책</a></li>
+                        <li class="mb-2"><a href="about.html" class="text-white-50 text-decoration-none">사이트 바로가기</a></li>
+                        <li class="mb-2"><a href="blog.html" class="text-white-50 text-decoration-none">게시판</a></li>
+                        <li class="mb-2"><a href="index.html#contact" class="text-white-50 text-decoration-none">문의하기</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-4 border-top border-secondary d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+                <p class="mb-0 text-white-50 small">© Copyright 2025. All Rights Reserved 부스트클래스</p>
+                <div class="d-flex gap-3">
+                    <a href="#" class="text-white-50 text-decoration-none small" data-bs-toggle="modal" data-bs-target="#termsModal">이용약관</a>
+                    <a href="#" class="text-white-50 text-decoration-none small" data-bs-toggle="modal" data-bs-target="#privacyModal">개인정보처리방침</a>
+                    <span id="footerAdminLink" class="d-none"><a href="admin/xhtml/page-lock-screen.html" class="text-white-50 text-decoration-none small" target="_blank" rel="noopener">관리자</a></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="mypagePurchaseCodeModal" tabindex="-1" aria-labelledby="mypagePurchaseCodeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white border border-secondary">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title" id="mypagePurchaseCodeModalLabel">구매코드 입력</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="닫기"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-white-50 small">강의·전자책 구매 시 받은 코드를 입력하세요. 확인되면 <strong class="text-white">유료 회원</strong>으로 전환되고, <strong class="text-white">내 강의 보기</strong> / <strong class="text-white">내 전자책 보기</strong>에서 이용할 수 있습니다.</p>
+                    <label for="mypagePurchaseCodeInput" class="form-label text-white-50">구매코드</label>
+                    <input type="text" id="mypagePurchaseCodeInput" class="form-control mypage-purchase-code-input" autocomplete="off" placeholder="코드를 입력하세요" maxlength="80">
+                    <div id="mypagePurchaseCodeError" class="text-danger small mt-2 d-none" role="alert"></div>
+                </div>
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-outline-light btn-sm" data-bs-dismiss="modal">닫기</button>
+                    <button type="button" class="btn btn-accent px-4" id="mypagePurchaseCodeSubmit">등록</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/vendor/jquery.min.js"></script>
+    <script src="js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="js/referral-capture.js"></script>
+    <script src="js/header-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="js/member-notifications.js"></script>
+    <script src="js/inquiry-service.js?v=2"></script>
+    <script src="js/wishlist-cart.js"></script>
+    <script src="js/purchase-code.js?v=3"></script>
+    <script>
+(function() {
+  var config = {
+    apiKey: "AIzaSyCijM7nOf7xYPKevbOsRrrZTA6XwgODeIM",
+    authDomain: "boostclass-7d4fd.firebaseapp.com",
+    projectId: "boostclass-7d4fd",
+    storageBucket: "boostclass-7d4fd.firebasestorage.app",
+    messagingSenderId: "774803491487",
+    appId: "1:774803491487:web:daada5b95008a14c2730aa"
+  };
+  if (typeof firebase === 'undefined') return;
+  firebase.initializeApp(config);
+  var auth = firebase.auth();
+  var db = firebase.firestore();
+  function updateHeader(user) {
+    var guest = document.getElementById('headerGuest');
+    var userEl = document.getElementById('headerUser');
+    if (!guest || !userEl) return;
+    if (user) {
+      guest.classList.add('d-none');
+      userEl.classList.remove('d-none');
+    } else {
+      guest.classList.remove('d-none');
+      userEl.classList.add('d-none');
+      window.location.href = 'index.html';
+    }
+  }
+  function setUserName(displayName) {
+    var el = document.getElementById('mypageUserName');
+    if (el) el.textContent = (displayName && displayName.trim()) ? displayName.trim() : '회원';
+  }
+  function loadUserName(uid) {
+    if (!uid) return;
+    var user = auth.currentUser;
+    if (user && user.displayName) {
+      setUserName(user.displayName);
+      return;
+    }
+    db.collection('member').doc(uid).get().then(function(doc) {
+      if (doc.exists && doc.data().displayName) setUserName(doc.data().displayName);
+    }).catch(function() {});
+  }
+  auth.onAuthStateChanged(function(user) {
+    updateHeader(user);
+    if (user) {
+      if (user.displayName) setUserName(user.displayName);
+      else loadUserName(user.uid);
+    }
+  });
+  document.getElementById('btnHeaderLogout') && document.getElementById('btnHeaderLogout').addEventListener('click', function() {
+    auth.signOut();
+    window.location.href = 'index.html';
+  });
+
+  var panelTitles = { wish: '찜상품', cart: '장바구니', alert: '알림', inquiry: '1:1 문의', inquiryReply: '1:1 답변 확인', mycourses: '내 강의', myebooks: '내 전자책' };
+  var mypageOriginalEmail = '';
+  var cachedMember = {};
+  var cachedFreeCourseItems = [];
+  var cachedFreeEbookItems = [];
+  /** itemId → { priceSale, priceOriginal, isFree } — 구매코드 등록만 된 예전 항목 가격 보강용 */
+  var coursePriceCache = {};
+  var ebookPriceCache = {};
+  var cachedInquiries = [];
+  var memberUnsub = null;
+  var inquiriesUnsub = null;
+  var mypageActivePanel = null;
+  var mypageActiveTriggerEl = null;
+
+  function isMypageMobileView() {
+    return window.matchMedia('(max-width: 991.98px)').matches;
+  }
+
+  function ensureMobileInlinePanel(triggerEl) {
+    var panel = document.getElementById('mypageMobileInlinePanel');
+    if (!panel) {
+      panel = document.createElement('div');
+      panel.id = 'mypageMobileInlinePanel';
+      panel.className = 'mt-2 mb-3';
+      panel.style.display = 'none';
+    }
+    if (triggerEl && triggerEl.parentNode) {
+      if (panel.parentNode !== triggerEl.parentNode || panel.previousElementSibling !== triggerEl) {
+        triggerEl.parentNode.insertBefore(panel, triggerEl.nextSibling);
+      }
+    }
+    return panel;
+  }
+
+  function loadFreeCatalogForMypage() {
+    if (typeof BoostPurchaseCode === 'undefined' || !BoostPurchaseCode.fetchFreeCatalog) {
+      cachedFreeCourseItems = [];
+      cachedFreeEbookItems = [];
+      return Promise.resolve();
+    }
+    return BoostPurchaseCode.fetchFreeCatalog(db).then(function (pack) {
+      cachedFreeCourseItems = pack && Array.isArray(pack.courseItems) ? pack.courseItems : [];
+      cachedFreeEbookItems = pack && Array.isArray(pack.ebookItems) ? pack.ebookItems : [];
+    }).catch(function () {
+      cachedFreeCourseItems = [];
+      cachedFreeEbookItems = [];
+    });
+  }
+
+  function mergeMypageItems(freeList, enrolledList) {
+    var map = {};
+    (freeList || []).forEach(function (it) {
+      if (it && it.key) map[it.key] = it;
+    });
+    (enrolledList || []).forEach(function (it) {
+      if (it && it.key && !map[it.key]) map[it.key] = it;
+    });
+    return Object.keys(map).map(function (k) { return map[k]; });
+  }
+
+  function loadLibraryPricesForItems(items) {
+    var needCourse = [];
+    var needEbook = [];
+    (items || []).forEach(function (it) {
+      if (!it || !it.itemId) return;
+      if (it.type === "course") {
+        if (it.priceSale != null || it.priceOriginal != null) return;
+        if (coursePriceCache[it.itemId]) return;
+        needCourse.push(it.itemId);
+      } else if (it.type === "ebook") {
+        if (it.priceSale != null || it.priceOriginal != null) return;
+        if (ebookPriceCache[it.itemId]) return;
+        needEbook.push(it.itemId);
+      }
+    });
+    var tasks = [];
+    needCourse.forEach(function (id) {
+      tasks.push(
+        db
+          .collection("courses")
+          .doc(id)
+          .get()
+          .then(function (doc) {
+            if (doc.exists) {
+              var d = doc.data() || {};
+              var ps = d.priceSale != null && d.priceSale !== "" ? Number(d.priceSale) : null;
+              var po = d.priceOriginal != null && d.priceOriginal !== "" ? Number(d.priceOriginal) : null;
+              coursePriceCache[id] = {
+                priceSale: ps != null && !isNaN(ps) ? ps : null,
+                priceOriginal: po != null && !isNaN(po) ? po : null,
+                isFree: d.isFree === true
+              };
+            }
+          })
+      );
+    });
+    needEbook.forEach(function (id) {
+      tasks.push(
+        db
+          .collection("ebooks")
+          .doc(id)
+          .get()
+          .then(function (doc) {
+            if (doc.exists) {
+              var d = doc.data() || {};
+              var ps = d.priceSale != null && d.priceSale !== "" ? Number(d.priceSale) : null;
+              var po = d.priceOriginal != null && d.priceOriginal !== "" ? Number(d.priceOriginal) : null;
+              ebookPriceCache[id] = {
+                priceSale: ps != null && !isNaN(ps) ? ps : null,
+                priceOriginal: po != null && !isNaN(po) ? po : null,
+                isFree: d.isFree === true
+              };
+            }
+          })
+      );
+    });
+    if (!tasks.length) return Promise.resolve();
+    return Promise.all(tasks);
+  }
+
+  function formatLibraryPriceLineHtml(item) {
+    if (!item || (item.type !== "course" && item.type !== "ebook")) return "";
+    var isCourse = item.type === "course";
+    var id = item.itemId;
+    var cached = isCourse ? (id ? coursePriceCache[id] : null) : id ? ebookPriceCache[id] : null;
+    var sale =
+      item.priceSale != null
+        ? Number(item.priceSale)
+        : cached && cached.priceSale != null
+          ? Number(cached.priceSale)
+          : null;
+    var orig =
+      item.priceOriginal != null
+        ? Number(item.priceOriginal)
+        : cached && cached.priceOriginal != null
+          ? Number(cached.priceOriginal)
+          : null;
+    if (sale != null && isNaN(sale)) sale = null;
+    if (orig != null && isNaN(orig)) orig = null;
+    var isFreeRow =
+      item.isFreeCatalog === true ||
+      item.badgeText === "무료" ||
+      (cached && cached.isFree === true);
+    if (isFreeRow) {
+      return '<span class="mypage-price-free">' + (isCourse ? "무료강의" : "무료전자책") + "</span>";
+    }
+    if (sale != null && sale > 0) {
+      var line = sale.toLocaleString("ko-KR") + "원";
+      if (orig != null && orig > sale) {
+        line +=
+          ' <span class="text-white-50 text-decoration-line-through small fw-normal">' +
+          orig.toLocaleString("ko-KR") +
+          "원</span>";
+      }
+      return line;
+    }
+    if (orig != null && orig > 0) {
+      return orig.toLocaleString("ko-KR") + "원";
+    }
+    return "";
+  }
+
+  function applyMypagePanelHtml(html, kind, title) {
+    var bodyEl = document.getElementById("mypageContentBody");
+    var targetEl = bodyEl;
+    if (isMypageMobileView() && mypageActiveTriggerEl) {
+      targetEl = ensureMobileInlinePanel(mypageActiveTriggerEl);
+    }
+    if (!targetEl) return;
+    var t = title || panelTitles[kind] || "목록";
+    var titleBlock =
+      kind === "alert" &&
+      Array.isArray(cachedMember.notificationItems) &&
+      cachedMember.notificationItems.length > 0
+        ? '<div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">' +
+          '<h5 class="mb-0" style="color: #fff;">' +
+          esc(t) +
+          '</h5>' +
+          '<button type="button" class="btn btn-sm mypage-btn-remove-brand" id="btnMypageNotifyClearAll">전체 삭제</button>' +
+          "</div>"
+        : '<h5 style="margin-bottom: 1.25rem; color: #fff;">' + esc(t) + "</h5>";
+    targetEl.innerHTML = titleBlock + html;
+    if (targetEl.id === 'mypageMobileInlinePanel') {
+      targetEl.style.display = '';
+    }
+  }
+
+  function esc(s) {
+    return (typeof BoostWishCart !== 'undefined' && BoostWishCart.escapeHtml) ? BoostWishCart.escapeHtml(s) : String(s == null ? '' : s);
+  }
+
+  function formatNotificationTime(ts) {
+    if (!ts) return '';
+    try {
+      var d = typeof ts.toDate === 'function' ? ts.toDate() : (ts instanceof Date ? ts : null);
+      if (!d) return '';
+      return d.toLocaleString('ko-KR', { dateStyle: 'medium', timeStyle: 'short' });
+    } catch (e) {
+      return '';
+    }
+  }
+
+  function renderInquiryRowCard(row) {
+    var d = row.data || {};
+    var sub = esc(d.subject || '(제목 없음)');
+    var msg = esc(d.message || '');
+    var t = formatNotificationTime(d.createdAt);
+    var rep = d.reply && String(d.reply).trim();
+    var replyBlock = rep
+      ? '<div class="mt-3"><strong class="text-white-50 small">관리자 답변</strong><div class="mypage-inquiry-reply-box mt-2">' + esc(String(d.reply)) + '</div></div>'
+      : '<p class="text-white-50 small mb-0 mt-3">아직 답변이 없습니다. 답변이 등록되면 알림으로 안내드립니다.</p>';
+    return (
+      '<div class="mypage-product-card">' +
+      '<div class="small text-white-50 mb-1">' + esc(t) + '</div>' +
+      '<h3 class="mypage-card-title">' + sub + '</h3>' +
+      '<p class="mypage-card-meta mb-0" style="white-space:pre-wrap;">' + msg + '</p>' +
+      replyBlock +
+      '</div>'
+    );
+  }
+
+  function renderInquiryListHtml(rows) {
+    if (!rows || !rows.length) return '';
+    return rows.map(renderInquiryRowCard).join('');
+  }
+
+  function renderInquiryReplyPanelHtml() {
+    var rows = Array.isArray(cachedInquiries) ? cachedInquiries : [];
+    var listHtml = renderInquiryListHtml(rows);
+    return (
+      '<p class="text-white-50 small mb-3">메인 페이지 Contact Us에서 남기신 문의와 관리자 답변이 아래에 표시됩니다. ' +
+      '<a href="index.html#contact" class="text-accent text-decoration-none">새 문의 작성하기</a></p>' +
+      (rows.length
+        ? listHtml
+        : '<p class="text-white-50 mb-0">아직 문의 내역이 없습니다. 상단의 <strong class="text-white-50">1:1 문의하기</strong>로 이동해 문의를 남겨 주세요.</p>')
+    );
+  }
+
+  function renderInquiryPanelHtml() {
+    var rows = Array.isArray(cachedInquiries) ? cachedInquiries : [];
+    var listHtml = renderInquiryListHtml(rows);
+    return (
+      '<p class="text-white-50 small mb-3">문의를 남기시면 관리자가 확인 후 답변합니다. 답변은 아래 목록과 알림에서 확인할 수 있습니다.</p>' +
+      '<form id="mypageInquiryForm" class="mb-4">' +
+      '<div class="mb-3">' +
+      '<label for="mypageInquirySubject" class="form-label text-white-50">제목 <span class="text-white-50">(선택)</span></label>' +
+      '<input type="text" class="form-control bg-dark text-white border-secondary" id="mypageInquirySubject" maxlength="120" placeholder="문의 제목">' +
+      '</div>' +
+      '<div class="mb-3">' +
+      '<label for="mypageInquiryMessage" class="form-label text-white-50">문의 내용 <span class="text-danger">*</span></label>' +
+      '<textarea class="form-control bg-dark text-white border-secondary" id="mypageInquiryMessage" rows="5" required placeholder="문의 내용을 입력하세요."></textarea>' +
+      '</div>' +
+      '<button type="submit" class="btn w-100 py-2" id="mypageInquirySubmit" style="font-weight:600;color:#111;background:linear-gradient(78.12deg, #A9F8B5 0.32%, #DFF494 99.52%);border:none;border-radius:8px;">문의 보내기</button>' +
+      '</form>' +
+      '<h6 class="text-white mb-3" style="font-size:1rem;">내 문의 내역</h6>' +
+      (rows.length ? listHtml : '<p class="text-white-50 mb-0">아직 문의 내역이 없습니다.</p>')
+    );
+  }
+
+  function renderNotificationRow(n, index) {
+    var title = esc(n.title || '알림');
+    var body = n.body ? '<p class="mypage-notify-body">' + esc(n.body) + '</p>' : '';
+    var time = formatNotificationTime(n.createdAt);
+    var timeHtml = time ? '<div class="mypage-notify-time">' + esc(time) + '</div>' : '';
+    var nid = n.id ? String(n.id) : '';
+    var delAttr = nid
+      ? ' data-notification-id="' + esc(nid) + '"'
+      : ' data-notification-index="' + String(index) + '"';
+    return (
+      '<div class="mypage-notify-item">' +
+      '<div class="mypage-notify-item-main">' +
+      '<p class="mypage-notify-title mb-0">' + title + '</p>' +
+      body +
+      timeHtml +
+      '</div>' +
+      '<button type="button" class="btn btn-sm mypage-btn-remove-brand mypage-btn-remove-notification"' + delAttr + '>삭제</button>' +
+      '</div>'
+    );
+  }
+
+  function renderMypageItemCard(item, opts) {
+    opts = opts || {};
+    var purchaseMode = !!opts.purchaseMode;
+    var wishlistMode = !!opts.wishlistMode;
+    var badge = esc(opts.badgeOverride != null ? opts.badgeOverride : (item.badgeText || ''));
+    var cat = esc(item.categoryLabel || '');
+    var title = esc(item.title || '제목 없음');
+    var metaRaw = opts.showLibraryPrice ? '' : item.metaLine || '';
+    var meta = esc(metaRaw);
+    var priceLine = '';
+    if (opts.showLibraryPrice && (item.type === 'course' || item.type === 'ebook')) {
+      var pHtml = formatLibraryPriceLineHtml(item);
+      if (pHtml) {
+        priceLine = '<p class="mypage-card-price mb-0">' + pHtml + '</p>';
+      }
+    }
+    var href;
+    var ctaLabel;
+    var icon;
+    var ctaExtraAttrs = '';
+    if (wishlistMode) {
+      href = item.detailUrl || '#';
+      ctaLabel = '찜 상품 보러가기';
+      icon = 'fa-arrow-right';
+    } else if (purchaseMode) {
+      href =
+        typeof BoostWishCart !== 'undefined' && BoostWishCart.resolvePurchaseUrl
+          ? BoostWishCart.resolvePurchaseUrl(item.type, item.itemId, item.detailUrl || '#', item.purchaseUrl)
+          : (item.detailUrl || '#');
+      ctaLabel = '구매하기';
+      icon = 'fa-bag-shopping';
+      if (/^https?:\/\//i.test(href)) {
+        ctaExtraAttrs = ' target="_blank" rel="noopener noreferrer"';
+      }
+    } else {
+      var isCourse = item.type === 'course';
+      var isEbook = item.type === 'ebook';
+      if (isCourse && item.itemId) {
+        href = 'course-player.html?id=' + encodeURIComponent(String(item.itemId));
+      } else if (isEbook && item.itemId) {
+        href = 'ebook-download.html?id=' + encodeURIComponent(String(item.itemId));
+      } else {
+        href = item.detailUrl || '#';
+      }
+      ctaLabel = isCourse ? '온라인 강의 시청하기' : '전자책 다운로드';
+      icon = isCourse ? 'fa-play' : 'fa-download';
+    }
+    var removeBtn = '';
+    if (opts.showRemove && opts.listField && item.key) {
+      removeBtn = '<button type="button" class="btn btn-sm mypage-btn-remove-brand mypage-btn-remove-item" data-field="' + esc(opts.listField) + '" data-key="' + esc(item.key) + '">삭제</button>';
+    }
+    return (
+      '<div class="mypage-product-card">' +
+      '<div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-1">' +
+      '<span class="badge mypage-card-badge mypage-card-badge-brand">' + badge + '</span>' +
+      '<span class="text-white-50 small">' + cat + '</span>' +
+      '</div>' +
+      '<h3 class="mypage-card-title">' + title + '</h3>' +
+      (meta ? '<p class="mypage-card-meta mb-0">' + meta + '</p>' : '') +
+      priceLine +
+      '<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mt-2">' +
+      removeBtn +
+      '<a class="mypage-card-cta ms-auto" href="' + esc(href) + '"' + ctaExtraAttrs + '><i class="fa-solid ' + icon + '"></i> ' + esc(ctaLabel) + '</a>' +
+      '</div></div>'
+    );
+  }
+
+  function renderMypagePanel() {
+    var bodyEl = document.getElementById('mypageContentBody');
+    if (!bodyEl || !mypageActivePanel) return;
+    var kind = mypageActivePanel;
+    var title = panelTitles[kind] || '목록';
+    var items = [];
+    var html = '';
+    if (kind === 'wish') {
+      items = Array.isArray(cachedMember.wishlistItems) ? cachedMember.wishlistItems : [];
+      if (items.length === 0) {
+        html = '<p class="text-white-50">찜한 상품이 없습니다. 강의·전자책 상세에서 ♥ 찜을 눌러 보세요.</p>';
+      } else {
+        html = items.map(function(it) {
+          return renderMypageItemCard(it, { showRemove: true, listField: 'wishlistItems', badgeOverride: '찜', wishlistMode: true });
+        }).join('');
+      }
+    } else if (kind === 'cart') {
+      items = Array.isArray(cachedMember.cartItems) ? cachedMember.cartItems : [];
+      if (items.length === 0) {
+        html = '<p class="text-white-50">장바구니가 비어 있습니다.</p>';
+      } else {
+        html = items.map(function(it) {
+          return renderMypageItemCard(it, { showRemove: true, listField: 'cartItems', badgeOverride: '장바구니', purchaseMode: true });
+        }).join('');
+      }
+    } else if (kind === 'mycourses') {
+      var enrolledCourses = Array.isArray(cachedMember.enrolledCourseItems) ? cachedMember.enrolledCourseItems : [];
+      items = mergeMypageItems(cachedFreeCourseItems, enrolledCourses);
+      if (items.length === 0) {
+        html = '<p class="text-white-50">수강 중인 강의가 없습니다. 무료 강의는 관리자가 「무료」로 설정하면 여기에 표시되며, 유료 강의는 구매코드 등록 후 이용할 수 있습니다.</p>';
+      } else {
+        loadLibraryPricesForItems(items).then(function () {
+          var innerHtml = items
+            .map(function (it) {
+              var isFreeRow = it.isFreeCatalog === true || it.badgeText === '무료';
+              var badge = isFreeRow ? '무료' : '수강중';
+              var row = Object.assign({}, it, { categoryLabel: it.categoryLabel || '강의' });
+              return renderMypageItemCard(row, { badgeOverride: badge, showLibraryPrice: true });
+            })
+            .join('');
+          applyMypagePanelHtml(innerHtml, kind, title);
+        });
+        return;
+      }
+    } else if (kind === 'myebooks') {
+      var ownedEbooks = Array.isArray(cachedMember.ownedEbookItems) ? cachedMember.ownedEbookItems : [];
+      items = mergeMypageItems(cachedFreeEbookItems, ownedEbooks);
+      if (items.length === 0) {
+        html = '<p class="text-white-50">보유한 전자책이 없습니다. 무료 전자책은 관리자가 「무료」로 설정하면 여기에 표시되며, 유료는 구매코드 등록 후 이용할 수 있습니다.</p>';
+      } else {
+        loadLibraryPricesForItems(items).then(function () {
+          var innerHtml = items
+            .map(function (it) {
+              var isFreeRow = it.isFreeCatalog === true || it.badgeText === '무료';
+              var badge = isFreeRow ? '무료' : '소장';
+              var row = Object.assign({}, it, { type: 'ebook', categoryLabel: it.categoryLabel || '전자책' });
+              return renderMypageItemCard(row, { badgeOverride: badge, showLibraryPrice: true });
+            })
+            .join('');
+          applyMypagePanelHtml(innerHtml, kind, title);
+        });
+        return;
+      }
+    } else if (kind === 'inquiry') {
+      html = renderInquiryPanelHtml();
+    } else if (kind === 'inquiryReply') {
+      html = renderInquiryReplyPanelHtml();
+    } else if (kind === 'alert') {
+      var notifs = Array.isArray(cachedMember.notificationItems) ? cachedMember.notificationItems : [];
+      if (notifs.length === 0) {
+        html = '<p class="text-white-50">알림이 없습니다.</p>';
+      } else {
+        html = notifs.map(function (n, i) {
+          return renderNotificationRow(n, i);
+        }).join('');
+      }
+    }
+    applyMypagePanelHtml(html, kind, title);
+  }
+
+  function openMypageContentPanel(kind, triggerEl) {
+    mypageActivePanel = kind;
+    mypageActiveTriggerEl = triggerEl || null;
+    var emptyEl = document.getElementById('mypageContentEmpty');
+    var bodyEl = document.getElementById('mypageContentBody');
+    var noticeEl = document.getElementById('mypageNoticeSection');
+    var mobileInlineEl = document.getElementById('mypageMobileInlinePanel');
+    hideMypageProfilePanel();
+    if (mobileInlineEl && (!isMypageMobileView() || !triggerEl)) {
+      mobileInlineEl.style.display = 'none';
+      mobileInlineEl.innerHTML = '';
+    }
+    if (emptyEl) emptyEl.style.display = isMypageMobileView() ? 'none' : 'none';
+    if (bodyEl) bodyEl.classList.toggle('d-none', isMypageMobileView());
+    if (noticeEl) {
+      noticeEl.style.display = window.matchMedia('(max-width: 991.98px)').matches ? 'none' : '';
+    }
+    if (kind === 'mycourses' || kind === 'myebooks') {
+      loadFreeCatalogForMypage().then(function () {
+        renderMypagePanel();
+        if (isMypageMobileView() && mypageActiveTriggerEl) {
+          ensureMobileInlinePanel(mypageActiveTriggerEl).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else if (bodyEl) {
+          bodyEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    } else {
+      renderMypagePanel();
+      if (isMypageMobileView() && mypageActiveTriggerEl) {
+        ensureMobileInlinePanel(mypageActiveTriggerEl).scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else if (bodyEl) {
+        bodyEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }
+
+  auth.onAuthStateChanged(function(user) {
+    if (memberUnsub) {
+      memberUnsub();
+      memberUnsub = null;
+    }
+    if (inquiriesUnsub) {
+      inquiriesUnsub();
+      inquiriesUnsub = null;
+    }
+    cachedMember = {};
+    cachedInquiries = [];
+    if (!user) return;
+    loadFreeCatalogForMypage().then(function () {
+      if (mypageActivePanel === 'mycourses' || mypageActivePanel === 'myebooks') renderMypagePanel();
+    });
+    memberUnsub = db.collection('member').doc(user.uid).onSnapshot(function(doc) {
+      cachedMember = doc.exists ? doc.data() : {};
+      var wEl = document.getElementById('mypageCountWish');
+      var cEl = document.getElementById('mypageCountCart');
+      var aEl = document.getElementById('mypageCountAlert');
+      var wl = cachedMember.wishlistItems;
+      var ct = cachedMember.cartItems;
+      var notifs = cachedMember.notificationItems;
+      if (wEl) wEl.textContent = String(Array.isArray(wl) ? wl.length : 0);
+      if (cEl) cEl.textContent = String(Array.isArray(ct) ? ct.length : 0);
+      if (aEl) aEl.textContent = String(Array.isArray(notifs) ? notifs.length : 0);
+      if (mypageActivePanel) renderMypagePanel();
+    });
+    if (typeof BoostInquiry !== 'undefined' && BoostInquiry.subscribeMyInquiries) {
+      inquiriesUnsub = BoostInquiry.subscribeMyInquiries(
+        user.uid,
+        function(list) {
+          cachedInquiries = list;
+          if (mypageActivePanel === 'inquiry' || mypageActivePanel === 'inquiryReply') renderMypagePanel();
+        },
+        function() {}
+      );
+    }
+  });
+
+  document.getElementById('mypageContentArea') && document.getElementById('mypageContentArea').addEventListener('click', function(ev) {
+    var clearAllBtn = ev.target.closest('#btnMypageNotifyClearAll');
+    if (clearAllBtn) {
+      ev.preventDefault();
+      var user = auth.currentUser;
+      if (!user || typeof BoostNotifications === 'undefined' || !BoostNotifications.clearAllNotifications) return;
+      if (!window.confirm('모든 알림을 삭제할까요?')) return;
+      BoostNotifications.clearAllNotifications(user.uid).catch(function() {
+        window.alert('삭제에 실패했습니다.');
+      });
+      return;
+    }
+    var nBtn = ev.target.closest('.mypage-btn-remove-notification');
+    if (nBtn) {
+      ev.preventDefault();
+      var user = auth.currentUser;
+      if (!user || typeof BoostNotifications === 'undefined' || !BoostNotifications.removeNotificationEntry) return;
+      var nid = nBtn.getAttribute('data-notification-id');
+      var nidx = nBtn.getAttribute('data-notification-index');
+      var opts = nid ? { id: nid } : { index: parseInt(nidx, 10) };
+      if (!nid && (isNaN(opts.index) || opts.index < 0)) return;
+      BoostNotifications.removeNotificationEntry(user.uid, opts).catch(function() {
+        window.alert('삭제에 실패했습니다.');
+      });
+      return;
+    }
+    var btn = ev.target.closest('.mypage-btn-remove-item');
+    if (!btn) return;
+    ev.preventDefault();
+    var user = auth.currentUser;
+    if (!user || typeof BoostWishCart === 'undefined') return;
+    var field = btn.getAttribute('data-field');
+    var key = btn.getAttribute('data-key');
+    if (!field || !key) return;
+    var p = field === 'wishlistItems'
+      ? BoostWishCart.removeWishlist(user.uid, key)
+      : BoostWishCart.removeCart(user.uid, key);
+    p.catch(function() { window.alert('삭제에 실패했습니다.'); });
+  });
+
+  function hideMypageProfilePanel() {
+    var profilePanel = document.getElementById('mypageProfilePanel');
+    if (profilePanel) profilePanel.classList.add('d-none');
+  }
+
+  function showMypageProfilePanel() {
+    var emptyEl = document.getElementById('mypageContentEmpty');
+    var bodyEl = document.getElementById('mypageContentBody');
+    var profilePanel = document.getElementById('mypageProfilePanel');
+    var noticeEl = document.getElementById('mypageNoticeSection');
+    var mobileInlineEl = document.getElementById('mypageMobileInlinePanel');
+    if (mobileInlineEl) {
+      mobileInlineEl.style.display = 'none';
+      mobileInlineEl.innerHTML = '';
+    }
+    if (emptyEl) emptyEl.style.display = 'none';
+    if (bodyEl) bodyEl.classList.add('d-none');
+    if (noticeEl) noticeEl.style.display = window.matchMedia('(max-width: 991.98px)').matches ? 'none' : '';
+    if (profilePanel) profilePanel.classList.remove('d-none');
+  }
+
+  function showMypageEmptyPlaceholder() {
+    var emptyEl = document.getElementById('mypageContentEmpty');
+    var bodyEl = document.getElementById('mypageContentBody');
+    var noticeEl = document.getElementById('mypageNoticeSection');
+    var mobileInlineEl = document.getElementById('mypageMobileInlinePanel');
+    hideMypageProfilePanel();
+    if (bodyEl) bodyEl.classList.add('d-none');
+    if (emptyEl) emptyEl.style.display = 'flex';
+    if (noticeEl) noticeEl.style.display = '';
+    if (mobileInlineEl) {
+      mobileInlineEl.style.display = 'none';
+      mobileInlineEl.innerHTML = '';
+    }
+  }
+
+  function profileAuthMsg(code) {
+    var map = {
+      'auth/wrong-password': '비밀번호가 올바르지 않습니다.',
+      'auth/invalid-email': '올바른 이메일 형식이 아닙니다.',
+      'auth/email-already-in-use': '이미 사용 중인 이메일입니다.',
+      'auth/requires-recent-login': '보안을 위해 다시 로그인한 뒤 시도해 주세요.',
+      'auth/weak-password': '비밀번호는 6자 이상이어야 합니다.'
+    };
+    return map[code] || '오류가 발생했습니다.';
+  }
+
+  function fillProfileForm(user) {
+    var nameEl = document.getElementById('mypageEditName');
+    var phoneEl = document.getElementById('mypageEditPhone');
+    var emailEl = document.getElementById('mypageEditEmail');
+    var pwdRow = document.getElementById('mypagePasswordRow');
+    var pwdEl = document.getElementById('mypageEditPassword');
+    var msgEl = document.getElementById('mypageProfileMessage');
+    var okEl = document.getElementById('mypageProfileSuccess');
+    if (!nameEl || !phoneEl || !emailEl) return;
+    if (msgEl) { msgEl.classList.add('d-none'); msgEl.textContent = ''; }
+    if (okEl) okEl.classList.add('d-none');
+    emailEl.value = user.email || '';
+    mypageOriginalEmail = (user.email || '').trim().toLowerCase();
+    nameEl.value = user.displayName || '';
+    phoneEl.value = '';
+    if (pwdEl) pwdEl.value = '';
+    if (pwdRow) pwdRow.classList.add('d-none');
+    db.collection('member').doc(user.uid).get().then(function(doc) {
+      if (doc.exists) {
+        var d = doc.data();
+        if (d.displayName) nameEl.value = d.displayName;
+        if (d.phone) phoneEl.value = d.phone;
+      }
+    }).catch(function() {});
+  }
+
+  function toggleEmailPasswordRow() {
+    var emailEl = document.getElementById('mypageEditEmail');
+    var pwdRow = document.getElementById('mypagePasswordRow');
+    if (!emailEl || !pwdRow) return;
+    var cur = (emailEl.value || '').trim().toLowerCase();
+    if (cur !== mypageOriginalEmail && cur.length > 0) pwdRow.classList.remove('d-none');
+    else pwdRow.classList.add('d-none');
+  }
+
+  document.getElementById('btnMypageEditProfile') && document.getElementById('btnMypageEditProfile').addEventListener('click', function() {
+    var user = auth.currentUser;
+    if (!user) return;
+    showMypageProfilePanel();
+    fillProfileForm(user);
+  });
+
+  document.getElementById('mypageEditEmail') && document.getElementById('mypageEditEmail').addEventListener('input', toggleEmailPasswordRow);
+
+  document.getElementById('btnMypageProfileCancel') && document.getElementById('btnMypageProfileCancel').addEventListener('click', function() {
+    showMypageEmptyPlaceholder();
+  });
+
+  document.getElementById('mypageProfileForm') && document.getElementById('mypageProfileForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var user = auth.currentUser;
+    var msgEl = document.getElementById('mypageProfileMessage');
+    var okEl = document.getElementById('mypageProfileSuccess');
+    var nameEl = document.getElementById('mypageEditName');
+    var phoneEl = document.getElementById('mypageEditPhone');
+    var emailEl = document.getElementById('mypageEditEmail');
+    var pwdEl = document.getElementById('mypageEditPassword');
+    var btn = document.getElementById('btnMypageProfileSave');
+    if (!user || !nameEl || !phoneEl || !emailEl || !msgEl) return;
+
+    var displayName = (nameEl.value || '').trim();
+    var phone = (phoneEl.value || '').trim();
+    var newEmail = (emailEl.value || '').trim().toLowerCase();
+    var pwd = (pwdEl && pwdEl.value) ? pwdEl.value : '';
+
+    msgEl.classList.add('d-none');
+    if (okEl) okEl.classList.add('d-none');
+    if (!displayName) { msgEl.textContent = '이름을 입력해 주세요.'; msgEl.classList.remove('d-none'); return; }
+    if (!phone) { msgEl.textContent = '전화번호를 입력해 주세요.'; msgEl.classList.remove('d-none'); return; }
+    if (!newEmail) { msgEl.textContent = '이메일을 입력해 주세요.'; msgEl.classList.remove('d-none'); return; }
+
+    if (newEmail !== mypageOriginalEmail && !pwd) {
+      msgEl.textContent = '이메일을 변경하려면 현재 비밀번호를 입력해 주세요.';
+      msgEl.classList.remove('d-none');
+      return;
+    }
+
+    if (btn) { btn.disabled = true; btn.textContent = '저장 중…'; }
+
+    var afterEmailUpdate = function() {
+      return user.updateProfile({ displayName: displayName }).then(function() {
+        return db.collection('member').doc(user.uid).set({
+          email: newEmail,
+          displayName: displayName,
+          phone: phone,
+          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+      });
+    };
+
+    var chainPromise;
+    if (newEmail !== mypageOriginalEmail) {
+      var cred = firebase.auth.EmailAuthProvider.credential(user.email, pwd);
+      chainPromise = user.reauthenticateWithCredential(cred).then(function() {
+        return user.updateEmail(newEmail);
+      }).then(afterEmailUpdate);
+    } else {
+      chainPromise = afterEmailUpdate();
+    }
+
+    chainPromise.then(function() {
+      mypageOriginalEmail = newEmail;
+      setUserName(displayName);
+      if (pwdEl) pwdEl.value = '';
+      var pwdRow = document.getElementById('mypagePasswordRow');
+      if (pwdRow) pwdRow.classList.add('d-none');
+      if (okEl) { okEl.classList.remove('d-none'); }
+    }).catch(function(err) {
+      var code = err && err.code ? err.code : '';
+      if (code === 'permission-denied') {
+        msgEl.textContent = '저장 권한이 없습니다. Firebase Firestore 보안 규칙에서 본인 member 문서 쓰기를 허용했는지 확인해 주세요.';
+      } else if (code && code.indexOf('auth/') === 0) {
+        msgEl.textContent = profileAuthMsg(code);
+      } else {
+        msgEl.textContent = (err && err.message) ? err.message : '오류가 발생했습니다.';
+      }
+      msgEl.classList.remove('d-none');
+    }).finally(function() {
+      if (btn) { btn.disabled = false; btn.textContent = '저장'; }
+    });
+  });
+
+  document.querySelectorAll('.mypage-stat-box').forEach(function(el) {
+    el.addEventListener('click', function(e) {
+      e.preventDefault();
+      var panel = el.getAttribute('data-panel');
+      if (!panel) return;
+      openMypageContentPanel(panel, el);
+    });
+  });
+
+  document.getElementById('mypageContentArea') && document.getElementById('mypageContentArea').addEventListener('submit', function(ev) {
+    var form = ev.target;
+    if (!form || form.id !== 'mypageInquiryForm') return;
+    ev.preventDefault();
+    var user = auth.currentUser;
+    if (!user || typeof BoostInquiry === 'undefined' || !BoostInquiry.createInquiry) return;
+    var subEl = document.getElementById('mypageInquirySubject');
+    var msgEl = document.getElementById('mypageInquiryMessage');
+    var btn = document.getElementById('mypageInquirySubmit');
+    var subject = subEl ? (subEl.value || '').trim() : '';
+    var message = msgEl ? (msgEl.value || '').trim() : '';
+    if (!message) {
+      window.alert('문의 내용을 입력해 주세요.');
+      return;
+    }
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = '전송 중…';
+    }
+    var payload = {
+      subject: subject,
+      message: message,
+      userEmail: user.email || '',
+      userName: (user.displayName || (cachedMember.displayName || '')).trim(),
+      userPhone: (cachedMember.phone || '').trim()
+    };
+    BoostInquiry.createInquiry(user.uid, payload)
+      .then(function() {
+        if (subEl) subEl.value = '';
+        if (msgEl) msgEl.value = '';
+        window.alert('문의가 등록되었습니다. 관리자 확인 후 답변 드립니다.');
+      })
+      .catch(function() {
+        window.alert('등록에 실패했습니다. 로그인 상태와 네트워크를 확인해 주세요.');
+      })
+      .finally(function() {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = '문의 보내기';
+        }
+      });
+  });
+
+  document.getElementById('btnMypageMyCourses') && document.getElementById('btnMypageMyCourses').addEventListener('click', function() {
+    openMypageContentPanel('mycourses', this);
+  });
+  document.getElementById('btnMypageMyEbooks') && document.getElementById('btnMypageMyEbooks').addEventListener('click', function() {
+    openMypageContentPanel('myebooks', this);
+  });
+
+  var purchaseModalEl = document.getElementById('mypagePurchaseCodeModal');
+  var btnPurchaseCode = document.getElementById('btnMypagePurchaseCode');
+  if (btnPurchaseCode && purchaseModalEl && typeof bootstrap !== 'undefined') {
+    btnPurchaseCode.addEventListener('click', function() {
+      var errEl = document.getElementById('mypagePurchaseCodeError');
+      var inp = document.getElementById('mypagePurchaseCodeInput');
+      if (errEl) {
+        errEl.classList.add('d-none');
+        errEl.textContent = '';
+      }
+      if (inp) inp.value = '';
+      var modal = bootstrap.Modal.getOrCreateInstance(purchaseModalEl);
+      modal.show();
+    });
+  }
+  var btnPurchaseSubmit = document.getElementById('mypagePurchaseCodeSubmit');
+  if (btnPurchaseSubmit && purchaseModalEl) {
+    btnPurchaseSubmit.addEventListener('click', function() {
+      var inp = document.getElementById('mypagePurchaseCodeInput');
+      var errEl = document.getElementById('mypagePurchaseCodeError');
+      var user = auth.currentUser;
+      if (!user) {
+        window.alert('로그인이 필요합니다.');
+        return;
+      }
+      if (typeof BoostPurchaseCode === 'undefined' || !BoostPurchaseCode.redeem) {
+        if (errEl) {
+          errEl.textContent = '구매코드 모듈을 불러올 수 없습니다.';
+          errEl.classList.remove('d-none');
+        }
+        return;
+      }
+      var code = inp ? (inp.value || '').trim() : '';
+      if (errEl) {
+        errEl.classList.add('d-none');
+        errEl.textContent = '';
+      }
+      btnPurchaseSubmit.disabled = true;
+      var prevLabel = btnPurchaseSubmit.textContent;
+      btnPurchaseSubmit.textContent = '처리 중…';
+      BoostPurchaseCode.redeem(user.uid, code)
+        .then(function (r) {
+          if (r && r.ok) {
+            var modalInst = bootstrap.Modal.getInstance(purchaseModalEl);
+            if (modalInst) modalInst.hide();
+            window.alert(r.message || '등록되었습니다.');
+          } else {
+            if (errEl) {
+              errEl.textContent = (r && r.message) ? r.message : '등록에 실패했습니다.';
+              errEl.classList.remove('d-none');
+            }
+          }
+        })
+        .catch(function (e) {
+          if (errEl) {
+            errEl.textContent = (e && e.message) ? e.message : '등록에 실패했습니다.';
+            errEl.classList.remove('d-none');
+          }
+        })
+        .finally(function () {
+          btnPurchaseSubmit.disabled = false;
+          btnPurchaseSubmit.textContent = prevLabel;
+        });
+    });
+  }
+  var purchaseCodeInput = document.getElementById('mypagePurchaseCodeInput');
+  if (purchaseCodeInput) {
+    purchaseCodeInput.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Enter') {
+        ev.preventDefault();
+        var submitBtn = document.getElementById('mypagePurchaseCodeSubmit');
+        if (submitBtn) submitBtn.click();
+      }
+    });
+  }
+})();
+    </script>
+    <script src="js/mypage-notices.js"></script>
+</body>
+</html>

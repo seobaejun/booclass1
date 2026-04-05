@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shishirraven/animate-on-scroll@v1.2/animation_utility.css">
+    <link rel="icon" type="image/svg+xml" href="image/favicon.svg">
+    <title>Recode - Career Support</title>
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="header" class="fixed-top bg-accent-transparent glass-effect py-0" style="z-index: 9999;">
+        <nav class="navbar navbar-expand-xl">
+            <div class="r-container w-100 px-3 px-xl-5 d-flex flex-nowrap align-items-center">
+                <div class="logo-container flex-shrink-0">
+                    <a class="navbar-brand home-brand-logo-text" href="index.html" aria-label="부스트 클래스 홈">BOOST CLASS</a>
+                </div>
+                <button class="navbar-toggler flex-shrink-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa-solid fa-bars-staggered accent-color-2"></i>
+                </button>
+                <div class="collapse navbar-collapse flex-grow-1 flex-nowrap min-w-0" id="navbarNav">
+                    <ul class="navbar-nav ms-xl-4 ps-xl-5 me-auto mb-2 mb-xl-0 gap-1 py-2 py-xl-0 nav-links-nowrap">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">홈</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="course-list.html">강의 수강</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="ebook.html">전자책</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">사이트 바로가기</a>
+                        </li>
+                        <li class="nav-item d-none">
+                            <a class="nav-link" href="mentor.html">멘토</a>
+                        </li>
+                        <li class="nav-item d-none">
+                            <a class="nav-link" href="pricing-plan.html">가격</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="blog.html">무료 게시판</a></li>
+                                <li><a class="dropdown-item" href="blog-post.html">유료 게시판</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html#contact">문의</a>
+                        </li>
+                    </ul>
+                    <div class="mb-xl-0 mb-3 d-flex flex-xl-row flex-column gap-3 w-max-content ps-xl-3" id="headerAuthWrap">
+                        <div id="headerGuest" class="d-flex flex-xl-row flex-column gap-3 w-max-content">
+                            <a href="register.html" class="btn btn-accent accent d-flex flex-row gap-2 justify-content-center"><span>회원가입</span></a>
+                            <a href="login.html" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그인</span></a>
+                        </div>
+                        <div id="headerUser" class="d-flex flex-xl-row flex-column gap-3 w-max-content align-items-center d-none">
+                            <a href="mypage.html" class="text-accent text-decoration-none">마이페이지</a>
+                            <button type="button" id="btnHeaderLogout" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그아웃</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- End Header -->
+
+    <!-- Main -->
+    <main>
+        <!-- Banner -->
+        <div class="section position-relative bg-attach-cover pb-0" style="margin-top: 6em; ">
+            <div class="r-container">
+                <div class="row row-cols-xl-2 row-cols-1">
+                    <div class="col col-xl-4 mb-3">
+                        <div class="d-flex flex-column gap-3 pt-xl-5">
+                            <h2><span class="text-accent">Career </span>Support</h2>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Services</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col col-xl-8 mb-3">
+                        <img src="image/img_banner.png" class="img-fluid" style=" margin-top: -5rem;" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Career Support -->
+         <div class="section">
+            <div class="r-container d-flex flex-column gap-5">
+                <div class="row row-cols-xl-2 row-cols-1 align-items-end">
+                    <div class="col mb-3 scrollanimation animated fadeInLeft adr-7">
+                        <div class="d-flex flex-column gap-5" style="max-width: 500px;">
+                            <div class="d-flex flex-column gap-2 ">
+                                <h6 class="text-accent">Career Support</h6>
+                                <h3>Recode Bootcamp Career Support</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-3">
+                        <div class="w-max-content" style="justify-self: end;">
+                            <a href="index.html#contact"
+                                class="btn btn-white-outline d-flex flex-row gap-2 justify-content-center">
+                                <span>Get Career Support</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-cols-xl-3 row-cols-1">
+                    <div class="col mb-3">
+                        <div class="card-accent">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-xl-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" fill="CurrentColor"
+                                    viewBox="0 0 128 128">
+                                    <title>SECURITY SYSTEM</title>
+                                    <g>
+                                        <path
+                                            d="M63.541,35.427l-22,5.969a1.751,1.751,0,0,0-1.291,1.689V63.6A32.856,32.856,0,0,0,57.429,92.489l5.735,3.117a1.745,1.745,0,0,0,1.671,0L70.57,92.49A32.858,32.858,0,0,0,87.75,63.6V43.085A1.751,1.751,0,0,0,86.458,41.4l-22-5.969A1.761,1.761,0,0,0,63.541,35.427Zm20.709,9V63.6A29.358,29.358,0,0,1,68.9,89.415L64,92.077l-4.9-2.663A29.357,29.357,0,0,1,43.75,63.6V44.424L64,38.929Z" />
+                                        <path
+                                            d="M49.206,64A14.794,14.794,0,1,0,64,49.207,14.81,14.81,0,0,0,49.206,64Zm26.088,0A11.294,11.294,0,1,1,64,52.707,11.307,11.307,0,0,1,75.294,64Z" />
+                                        <path
+                                            d="M115,56.25a7.757,7.757,0,0,0-7.543,6H95.75V36.967a1.75,1.75,0,0,0-1.292-1.689L80.75,31.558V14.75H95.457a7.75,7.75,0,1,0,0-3.5H79A1.75,1.75,0,0,0,77.25,13V30.609L64.458,27.137a1.761,1.761,0,0,0-.917,0L50.75,30.609V13A1.751,1.751,0,0,0,49,11.25H32.543a7.75,7.75,0,1,0,0,3.5H47.25V31.558l-13.709,3.72a1.75,1.75,0,0,0-1.291,1.689V62.25H20.543a7.75,7.75,0,1,0,0,3.5h11.78A40.821,40.821,0,0,0,47.25,95.227V113.25H32.543a7.75,7.75,0,1,0,0,3.5H49A1.751,1.751,0,0,0,50.75,115V97.793c.928.607,1.875,1.19,2.86,1.726l9.555,5.192a1.743,1.743,0,0,0,1.67,0l9.556-5.192c.984-.535,1.931-1.119,2.859-1.726V115A1.75,1.75,0,0,0,79,116.75H95.457a7.75,7.75,0,1,0,0-3.5H80.75V95.227A40.819,40.819,0,0,0,95.677,65.75h11.78A7.747,7.747,0,1,0,115,56.25ZM103,8.75A4.25,4.25,0,1,1,98.75,13,4.255,4.255,0,0,1,103,8.75Zm-78,8.5A4.25,4.25,0,1,1,29.25,13,4.255,4.255,0,0,1,25,17.25Zm-12,51A4.25,4.25,0,1,1,17.25,64,4.255,4.255,0,0,1,13,68.25Zm12,51A4.25,4.25,0,1,1,29.25,115,4.255,4.255,0,0,1,25,119.25Zm78-8.5A4.25,4.25,0,1,1,98.75,115,4.255,4.255,0,0,1,103,110.75ZM92.25,63.6A37.351,37.351,0,0,1,72.719,96.443L64,101.182l-8.719-4.739A37.353,37.353,0,0,1,35.75,63.6V38.306L64,30.64l28.25,7.666ZM115,68.25A4.25,4.25,0,1,1,119.25,64,4.255,4.255,0,0,1,115,68.25Z" />
+                                        <path
+                                            d="M61,62.763a1.75,1.75,0,0,0-2.475,2.474l2.829,2.829a1.748,1.748,0,0,0,2.474,0l5.656-5.657a1.75,1.75,0,0,0-2.474-2.475l-4.419,4.42Z" />
+                                    </g>
+                                </svg>
+                                <h4>Company Network</h4>
+                                <p>Choose a payment plan that works for you and start learning without financial
+                                    worries.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-3">
+                        <div class="card-accent">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-xl-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" fill="CurrentColor"
+                                    viewBox="0 0 128 128">
+                                    <title>WEBSITE</title>
+                                    <g>
+                                        <path
+                                            d="M50.217,56.264a1.751,1.751,0,0,0-1.953,1.519l-.784,6.265-1.915-3.831a1.75,1.75,0,0,0-3.13,0l-1.916,3.831-.783-6.265a1.75,1.75,0,0,0-3.472.434l1.5,12a1.75,1.75,0,0,0,3.3.566L44,64.913l2.935,5.87a1.75,1.75,0,0,0,3.3-.566l1.5-12A1.749,1.749,0,0,0,50.217,56.264Z" />
+                                        <path
+                                            d="M70.217,56.264a1.747,1.747,0,0,0-1.953,1.519l-.784,6.265-1.915-3.831a1.75,1.75,0,0,0-3.13,0l-1.916,3.831-.783-6.265a1.75,1.75,0,0,0-3.472.434l1.5,12a1.75,1.75,0,0,0,3.3.566L64,64.913l2.935,5.87a1.75,1.75,0,0,0,3.3-.566l1.5-12A1.749,1.749,0,0,0,70.217,56.264Z" />
+                                        <path
+                                            d="M90.217,56.264a1.747,1.747,0,0,0-1.953,1.519l-.784,6.265-1.915-3.831a1.75,1.75,0,0,0-3.13,0l-1.916,3.831-.783-6.265a1.75,1.75,0,0,0-3.472.434l1.5,12a1.75,1.75,0,0,0,3.3.566L84,64.913l2.935,5.87a1.75,1.75,0,0,0,3.3-.566l1.5-12A1.749,1.749,0,0,0,90.217,56.264Z" />
+                                        <path
+                                            d="M64,5.25A58.75,58.75,0,1,0,122.75,64,58.816,58.816,0,0,0,64,5.25Zm0,114c-7.433,0-14.317-9.559-18.41-24.5H82.41C78.317,109.691,71.433,119.25,64,119.25Zm-19.294-28c-.7-2.994-1.286-6.167-1.752-9.5H85.045c-.465,3.333-1.055,6.506-1.751,9.5ZM8.794,65.75H24.25V76A5.757,5.757,0,0,0,30,81.75h9.425c.45,3.322,1.016,6.5,1.69,9.5H15.967A54.867,54.867,0,0,1,8.794,65.75ZM64,8.75c7.433,0,14.317,9.559,18.41,24.5H45.59C49.683,18.309,56.567,8.75,64,8.75Zm19.294,28c.7,2.994,1.286,6.167,1.751,9.5H42.954c.466-3.333,1.056-6.506,1.752-9.5ZM30,78.25A2.253,2.253,0,0,1,27.75,76V52A2.253,2.253,0,0,1,30,49.75H98A2.253,2.253,0,0,1,100.25,52V76A2.253,2.253,0,0,1,98,78.25Zm9.425-32H30A5.757,5.757,0,0,0,24.25,52V62.25H8.794a54.867,54.867,0,0,1,7.173-25.5H41.115C40.441,39.753,39.875,42.928,39.425,46.25Zm49.15,35.5H98A5.757,5.757,0,0,0,103.75,76V65.75h15.456a54.867,54.867,0,0,1-7.173,25.5H86.885C87.559,88.247,88.125,85.072,88.575,81.75Zm15.175-19.5V52A5.757,5.757,0,0,0,98,46.25H88.575c-.45-3.322-1.016-6.5-1.69-9.5h25.148a54.867,54.867,0,0,1,7.173,25.5Zm6.128-29H86.028C83.2,22.563,78.972,14.351,73.942,9.663A55.359,55.359,0,0,1,109.878,33.25ZM54.058,9.663c-5.03,4.688-9.262,12.9-12.086,23.587H18.122A55.359,55.359,0,0,1,54.058,9.663ZM18.122,94.75h23.85c2.824,10.687,7.056,18.9,12.086,23.587A55.359,55.359,0,0,1,18.122,94.75Zm55.82,23.587c5.03-4.688,9.262-12.9,12.086-23.587h23.85A55.359,55.359,0,0,1,73.942,118.337Z" />
+                                    </g>
+                                </svg>
+                                <h4>Alumni Community</h4>
+                                <p>Join a supportive alumni network where you can collaborate, share
+                                    experiences,
+                                    and find job opportunities.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-3">
+                        <div class="card-accent">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-xl-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" fill="CurrentColor"
+                                    viewBox="0 0 128 128">
+                                    <title>SEARCH</title>
+                                    <g>
+                                        <path
+                                            d="M51,14.75A36.25,36.25,0,1,0,87.25,51,36.291,36.291,0,0,0,51,14.75Zm0,69A32.75,32.75,0,1,1,83.75,51,32.786,32.786,0,0,1,51,83.75Z" />
+                                        <path
+                                            d="M119.727,106.36,88.412,77.284A45.821,45.821,0,1,0,77.284,88.412l29.076,31.315a9.376,9.376,0,0,0,6.756,3.021l.181,0a9.459,9.459,0,0,0,6.43-16.39ZM8.75,51A42.25,42.25,0,1,1,51,93.25,42.3,42.3,0,0,1,8.75,51Zm108.755,66.505a5.96,5.96,0,0,1-8.581-.159L80.087,86.288a46.046,46.046,0,0,0,6.2-6.2l31.059,28.837a5.96,5.96,0,0,1,.159,8.581Z" />
+                                        <path
+                                            d="M39.831,40.919a1.75,1.75,0,0,0-2.458-.295l-11.454,9a1.75,1.75,0,0,0,0,2.752l11.454,9a1.75,1.75,0,1,0,2.163-2.752L29.832,51l9.7-7.624A1.75,1.75,0,0,0,39.831,40.919Z" />
+                                        <path
+                                            d="M76.081,49.624l-11.455-9a1.75,1.75,0,1,0-2.162,2.752L72.167,51l-9.7,7.624a1.75,1.75,0,1,0,2.162,2.752l11.455-9a1.75,1.75,0,0,0,0-2.752Z" />
+                                        <path
+                                            d="M55.874,37.352a1.749,1.749,0,0,0-2.236,1.06l-8.572,24a1.75,1.75,0,0,0,1.06,2.236,1.731,1.731,0,0,0,.588.1,1.75,1.75,0,0,0,1.648-1.163l8.572-24A1.75,1.75,0,0,0,55.874,37.352Z" />
+                                    </g>
+                                </svg>
+                                <h4>Access to Job Board</h4>
+                                <p>Get exclusive access to curated job openings and apply directly to positions
+                                    that
+                                    match your skills and expertise.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div>
+
+        <!-- Section How It Works -->
+        <div class="section position-relative bg-attach-cover" style="background-image: url(image/bg_all.png);">
+            <div class="r-container">
+                <div class="row row-cols-xl-2 row-cols-1">
+                    <div class="col mb-3 scrollanimation animated fadeInLeft adr-7">
+                        <div class="pe-5">
+                            <img src="image/dummy-img-600x700.jpg" class="img-fluid rounded-4 w-100" style="aspect-ratio: 6/7;"
+                                alt="">
+                        </div>
+                    </div>
+                    <div class="col mb-3 scrollanimation animated fadeInRight adr-7">
+                        <div class="d-flex flex-column gap-5">
+                            <div class="d-flex flex-column gap-2">
+                                <h6 class="text-accent">How It Works?</h6>
+                                <h3>Your Path to a Tech Career Starts Here</h3>
+                                <p>
+                                    Follow our structured learning process from selecting your course to landing your
+                                    dream
+                                    job with expert guidance and hands-on experience.
+                                </p>
+                            </div>
+                            <div class="d-flex flex-column gap-5 position-relative">
+                                <div class="devider-progress"></div>
+                                <div class="d-flex flex-xl-row flex-column gap-5 align-items-center">
+                                    <div class="icon-box-2 position-relative">
+                                        <i class="rtmicon rtmicon-search"></i>
+                                        <div class="position-absolute top-0 end-0 p-1 align-items-center text-center justify-content-center rounded-pill bg-text-color"
+                                            style="width: 36px; height: 36px; margin-top: -15px; margin-right: -15px;">
+                                            <h6 class="accent-color-primary m-0">01</h6>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column text-xl-start text-center">
+                                        <h5>Choose a course</h5>
+                                        <p class="accent-color-4">Select the course that fits your career goals.</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-xl-row flex-column gap-5 align-items-center">
+                                    <div class="icon-box-3 position-relative">
+                                        <i class="rtmicon rtmicon-post-comment"></i>
+                                        <div class="position-absolute top-0 end-0 p-1 align-items-center text-center justify-content-center rounded-pill bg-text-color"
+                                            style="width: 36px; height: 36px; margin-top: -15px; margin-right: -15px;">
+                                            <h6 class="accent-color-primary m-0">02</h6>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column text-xl-start text-center">
+                                        <h5>Learn with Interactive Sessions</h5>
+                                        <p class="accent-color-4">Engage in hands-on learning with expert guidance.</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-xl-row flex-column gap-5 align-items-center">
+                                    <div class="icon-box-3 position-relative">
+                                        <i class="rtmicon rtmicon-folder-open"></i>
+                                        <div class="position-absolute top-0 end-0 p-1 align-items-center text-center justify-content-center rounded-pill bg-text-color"
+                                            style="width: 36px; height: 36px; margin-top: -15px; margin-right: -15px;">
+                                            <h6 class="accent-color-primary m-0">03</h6>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column text-xl-start text-center">
+                                        <h5>Build real-world projects</h5>
+                                        <p class="accent-color-4">Apply your skills to practical projects.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Why Choose Us -->
+        <div class="section bg-attach-cover" style="background-image: url(image/bg_heading.png);">
+            <div class="r-container d-flex flex-column gap-5">
+                <div class="row row-cols-xl-4 row-cols-1">
+                    <div class="col mb-3"></div>
+                    <div class="col mb-3 scrollanimation animated fadeInLeft adr-7">
+                        <div class="card-accent">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content">
+                                <h4>Hands-On, Real World Projects</h4>
+                                <p>Build a strong portfolio with industry-relevant projects that showcase your skills.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-3 scrollanimation animated fadeInRight adr-7">
+                        <div class="card-accent">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content">
+                                <h4>High-Quality Coding Bootcamp</h4>
+                                <p>Master in-demand coding skills with expert training and hands-on projects for
+                                    tech careers.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-3"></div>
+                </div>
+                <div class="row row-cols-xl-3 row-cols-1">
+                    <div class="col col-xl-3 mb-3 scrollanimation animated fadeInLeft adr-7">
+                        <div class="card-accent">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content">
+                                <h4>Job Guarantee or Money Back</h4>
+                                <p>Get 100% job placement support with our hiring partners or your money back,
+                                    guaranteed!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-xl-6 mb-3">
+                        <div class="d-flex flex-column gap-2 align-items-center justify-content-center mx-auto text-center h-100 scrollanimation animated zoomIn adr-7"
+                            style="max-width: 500px;">
+                            <h6 class="text-accent">Why Choose Bootcamp?</h6>
+                            <h3>Benefits from this bootcamp</h3>
+                        </div>
+                    </div>
+                    <div class="col col-xl-3 mb-3 scrollanimation animated fadeInRight adr-7">
+                        <div class="card-accent">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content">
+                                <h4>Exclusive Access to Events</h4>
+                                <p>Get free access to workshops, events, and extra courses for students and alumni.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-cols-xl-4 row-cols-1">
+                    <div class="col mb-3"></div>
+                    <div class="col mb-3 scrollanimation animated fadeInLeft adr-7">
+                        <div class="card-accent">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content">
+                                <h4>Flexible Payment Options</h4>
+                                <p>Choose a payment plan that works for you and start learning without financial
+                                    worries.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-3 scrollanimation animated fadeInRight adr-7">
+                        <div class="card-accent">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content">
+                                <h4>In-Demand Tech Skills</h4>
+                                <p>Master the latest technologies and frameworks that top companies are looking for.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-3"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Success Stories -->
+        <div class="section bg-attach-cover" style="background-image: url(image/bg_all.png);">
+            <div class="r-container d-flex flex-column gap-5 align-items-center">
+                <div class="d-flex flex-column gap-2 align-items-center justify-content-center mx-auto text-center scrollanimation animated fadeInDown adr-7"
+                    style="max-width: 700px;">
+                    <h6 class="text-accent">Success Stories</h6>
+                    <h3>Our Alumni's Success Stories</h3>
+                    <p>
+                        Discover how our bootcamp has empowered students to achieve their career goals through real-life
+                        success stories and testimonials.
+                    </p>
+                </div>
+                <div class="row row-cols-xl-3 row-cols-xl-1">
+                    <div class="col mb-4 scrollanimation animated fadeInLeft adr-7">
+                        <div class="position-relative h-100">
+                            <div class="position-absolute start-0 top-0 overflow-visible"
+                                style="z-index: 9999; margin-left: -1rem; margin-top: -1rem;">
+                                <div class="icon-box">
+                                    <i class="rtmicon rtmicon-blockquote fs-3"></i>
+                                </div>
+                            </div>
+                            <div class="card-accent py-5">
+                                <div class="bg"></div>
+                                <div class="blob"></div>
+                                <div class="card-content text-start">
+                                    <p>Recode offers high-quality training that significantly enhanced my skills. The
+                                        knowledge I gained was invaluable, and the conducive classroom atmosphere truly
+                                        supported my learning process.
+                                    </p>
+                                    <div class="d-flex flex-xl-row flex-column gap-3 align-items-center">
+                                        <div class="customer-item">
+                                            <img src="image/dummy-img-400x400.jpg" class="img-fluid" alt="">
+                                        </div>
+
+                                        <div class="vr"></div>
+
+                                        <div class="d-flex flex-column">
+                                            <h5 class="m-0 team-name">Lucas Moore</h5>
+                                            <span class="font-2">Web Developer</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-4 scrollanimation animated fadeIn adr-7">
+                        <div class="position-relative h-100">
+                            <div class="position-absolute start-0 top-0 overflow-visible"
+                                style="z-index: 9999; margin-left: -1rem; margin-top: -1rem;">
+                                <div class="icon-box">
+                                    <i class="rtmicon rtmicon-blockquote fs-3"></i>
+                                </div>
+                            </div>
+                            <div class="card-accent py-5">
+                                <div class="bg"></div>
+                                <div class="blob"></div>
+                                <div class="card-content text-start">
+                                    <p>I am very happy with my learning experience at Recode. I gained a lot of
+                                        programming and soft skills from the experienced trainers. The conducive
+                                        classroom environment made me feel comfortable and motivated to learn.
+                                    </p>
+                                    <div class="d-flex flex-xl-row flex-column gap-3 align-items-center">
+                                        <div class="customer-item">
+                                            <img src="image/dummy-img-400x400.jpg" class="img-fluid" alt="">
+                                        </div>
+
+                                        <div class="vr"></div>
+
+                                        <div class="d-flex flex-column">
+                                            <h5 class="m-0">Amanda Smith</h5>
+                                            <span class="font-2">Software Engineer</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-4 scrollanimation animated fadeInRight adr-7">
+                        <div class="position-relative h-100">
+                            <div class="position-absolute start-0 top-0 overflow-visible"
+                                style="z-index: 9999; margin-left: -1rem; margin-top: -1rem;">
+                                <div class="icon-box">
+                                    <i class="rtmicon rtmicon-blockquote fs-3"></i>
+                                </div>
+                            </div>
+                            <div class="card-accent py-5">
+                                <div class="bg"></div>
+                                <div class="blob"></div>
+                                <div class="card-content text-start">
+                                    <p>Recode offers excellent programming training. I also learned many soft skills
+                                        from the professional trainers. The comfortable classroom environment really
+                                        supported my learning process.ledge I gained was invaluable, and the conducive
+                                        classroom atmosphere truly
+                                        supported my learning process.
+                                    </p>
+                                    <div class="d-flex flex-xl-row flex-column gap-3 align-items-center">
+                                        <div class="customer-item">
+                                            <img src="image/dummy-img-400x400.jpg" class="img-fluid" alt="">
+                                        </div>
+
+                                        <div class="vr"></div>
+
+                                        <div class="d-flex flex-column">
+                                            <h5 class="m-0 team-name">Daniel Johnson</h5>
+                                            <span class="font-2">Frontend Developer</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-4 scrollanimation animated fadeInLeft adr-7">
+                        <div class="position-relative h-100">
+                            <div class="position-absolute start-0 top-0 overflow-visible"
+                                style="z-index: 9999; margin-left: -1rem; margin-top: -1rem;">
+                                <div class="icon-box">
+                                    <i class="rtmicon rtmicon-blockquote fs-3"></i>
+                                </div>
+                            </div>
+                            <div class="card-accent py-5">
+                                <div class="bg"></div>
+                                <div class="blob"></div>
+                                <div class="card-content text-start">
+                                    <p>My learning experience at Recode was truly amazing. I not only gained programming
+                                        knowledge but also valuable soft skills from expert trainers. The conducive
+                                        classroom environment made learning more enjoyable.
+                                    </p>
+                                    <div class="d-flex flex-xl-row flex-column gap-3 align-items-center">
+                                        <div class="customer-item">
+                                            <img src="image/dummy-img-400x400.jpg" class="img-fluid" alt="">
+                                        </div>
+
+                                        <div class="vr"></div>
+
+                                        <div class="d-flex flex-column">
+                                            <h5 class="m-0 team-name">Daniel Martinez</h5>
+                                            <span class="font-2">Full Stack Developer</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-4 scrollanimation animated fadeIn adr-7">
+                        <div class="position-relative h-100">
+                            <div class="position-absolute start-0 top-0 overflow-visible"
+                                style="z-index: 9999; margin-left: -1rem; margin-top: -1rem;">
+                                <div class="icon-box">
+                                    <i class="rtmicon rtmicon-blockquote fs-3"></i>
+                                </div>
+                            </div>
+                            <div class="card-accent py-5">
+                                <div class="bg"></div>
+                                <div class="blob"></div>
+                                <div class="card-content text-start">
+                                    <p>At Recode, I can learn both programming and soft skills at the same time. The
+                                        professional trainers and comfortable classroom atmosphere really motivated me
+                                        to keep learning and growing.
+                                    </p>
+                                    <div class="d-flex flex-xl-row flex-column gap-3 align-items-center">
+                                        <div class="customer-item">
+                                            <img src="image/dummy-img-400x400.jpg" class="img-fluid" alt="">
+                                        </div>
+
+                                        <div class="vr"></div>
+
+                                        <div class="d-flex flex-column">
+                                            <h5 class="m-0 team-name">Michael Brown</h5>
+                                            <span class="font-2">Backend Developer</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-4 scrollanimation animated fadeInRight adr-7">
+                        <div class="position-relative h-100">
+                            <div class="position-absolute start-0 top-0 overflow-visible"
+                                style="z-index: 9999; margin-left: -1rem; margin-top: -1rem;">
+                                <div class="icon-box">
+                                    <i class="rtmicon rtmicon-blockquote fs-3"></i>
+                                </div>
+                            </div>
+                            <div class="card-accent py-5">
+                                <div class="bg"></div>
+                                <div class="blob"></div>
+                                <div class="card-content text-start">
+                                    <p>The learning process at Recode was truly outstanding. I felt supported by the
+                                        lessons provided by the expert trainers. The comfortable classroom atmosphere
+                                        made me even more motivated to continue developing.
+                                    </p>
+                                    <div class="d-flex flex-xl-row flex-column gap-3 align-items-center">
+                                        <div class="customer-item">
+                                            <img src="image/dummy-img-400x400.jpg" class="img-fluid" alt="">
+                                        </div>
+
+                                        <div class="vr"></div>
+
+                                        <div class="d-flex flex-column">
+                                            <h5 class="m-0 team-name">Olivia Garcia</h5>
+                                            <span class="font-2">Mobile App Developer</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Contact Us -->
+    <section class="section contact-us-section py-5" id="contact" style="background: #1a1a1a;">
+        <div class="r-container">
+            <div class="text-center mb-5">
+                <h2 class="text-white mb-2">Contact Us</h2>
+                <p class="text-white-50">답변은 마이페이지에서 확인하실 수 있습니다. 편하게 문의해 주세요.</p>
+            </div>
+            <form class="d-flex flex-column gap-1 w-100 needs-validation form" novalidate>
+                <input type="text" name="action" value="appointment" hidden>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-4">
+                        <input type="text" class="form-control form-control-lg bg-dark text-white py-3 px-4 contact-form-border" name="name" placeholder="이름" required>
+                        <div class="invalid-feedback">필수 입력 사항입니다.</div>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="email" class="form-control form-control-lg bg-dark text-white py-3 px-4 contact-form-border" name="email" placeholder="이메일" required>
+                        <div class="invalid-feedback">필수 입력 사항입니다.</div>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="tel" class="form-control form-control-lg bg-dark text-white py-3 px-4 contact-form-border" name="phone" placeholder="전화번호" required>
+                        <div class="invalid-feedback">필수 입력 사항입니다.</div>
+                    </div>
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <select name="bootcamp" class="form-select form-control-lg bg-dark text-white py-3 px-4 contact-form-border">
+                            <option value="" selected>부트캠프 프로그램 선택 (선택사항)</option>
+                            <option value="1">전자책 플랜</option>
+                            <option value="2">올인원 플랜</option>
+                            <option value="3">1:1 수익화 플랜</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <select name="location" class="form-select form-control-lg bg-dark text-white py-3 px-4 contact-form-border">
+                            <option value="" selected>선호 장소 (선택사항)</option>
+                            <option value="1">서울 (오프라인)</option>
+                            <option value="2">천안 (오프라인)</option>
+                            <option value="3">온라인 (원격)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <textarea class="form-control form-control-lg bg-dark text-white py-3 px-4 contact-form-border" name="message" rows="4" placeholder="메시지" required></textarea>
+                    <div class="invalid-feedback">필수 입력 사항입니다.</div>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-accent submit_appointment d-flex justify-content-center gap-2 rounded-4 px-4 py-3"><span>등록하기</span></button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" style="background: #111; color: #fff;">
+        <div class="r-container py-5">
+            <div class="row g-4 align-items-start mb-5">
+                <div class="col-12 col-md-3 col-lg-2 text-start">
+                    <a href="index.html" class="home-brand-logo-text home-brand-logo-text--footer d-inline-block" aria-label="부스트 클래스 홈">BOOST CLASS</a>
+                </div>
+                <div class="col-12 col-md-6 col-lg-7 text-start">
+                    <div class="d-flex flex-column gap-2 text-white-50 small">
+                        <p class="mb-0">회사명 : 부스트클래스<span class="d-none d-md-inline"> | </span><br class="d-md-none">대표자 : 서배준<span class="d-none d-md-inline"> | </span><br class="d-md-none">연락처 : 010-3673-6942</p>
+                        <p class="mb-0">사업자등록번호 : 152-74-00452<span class="d-none d-md-inline"> | </span><br class="d-md-none">통신판매신고번호 : 제2024-충남천안-2840호</p>
+                        <p class="mb-0">주소 : 충청남도 천안시 서북구 월봉로 126, 901-17호(쌍용동, 대림프라자)</p>
+                        <p class="mb-0">개인정보보호 최고책임자 : 서배준<span class="d-none d-md-inline"> | </span><br class="d-md-none">담당자 메일 : sprince1004@naver.com</p>
+                        <p class="mb-0">카카오뱅크 3333-32-0313102 부스트클래스</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-3 col-lg-3 text-start">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><a href="index.html#hero" class="text-white-50 text-decoration-none">홈</a></li>
+                        <li class="mb-2"><a href="course-list.html" class="text-white-50 text-decoration-none">강의 수강</a></li>
+                        <li class="mb-2"><a href="ebook.html" class="text-white-50 text-decoration-none">전자책</a></li>
+                        <li class="mb-2"><a href="about.html" class="text-white-50 text-decoration-none">사이트 바로가기</a></li>
+                        <li class="mb-2"><a href="blog.html" class="text-white-50 text-decoration-none">게시판</a></li>
+                        <li class="mb-2"><a href="index.html#contact" class="text-white-50 text-decoration-none">문의하기</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-4 border-top border-secondary d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+                <p class="mb-0 text-white-50 small">© Copyright 2025. All Rights Reserved 부스트클래스</p>
+                <div class="d-flex gap-3">
+                    <a href="index.html" class="text-white-50 text-decoration-none small">이용약관</a>
+                    <a href="index.html" class="text-white-50 text-decoration-none small">개인정보처리방침</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="js/referral-capture.js"></script>
+    <script src="js/header-auth.js"></script>
+    <script src="js/vendor/jquery.min.js"></script>
+    <script src="js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="js/vendor/swiper-bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/swiper-script.js"></script>
+    <script src="js/submit-form.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="js/member-notifications.js"></script>
+    <script src="js/inquiry-service.js"></script>
+    <script src="js/contact-auth-inquiry.js"></script>
+    <script src="js/vendor/isotope.pkgd.min.js"></script>
+    <script src="js/video_embedded.js"></script>
+    <script src="js/vendor/fslightbox.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/gh/shishirraven/animate-on-scroll@v1.0/oyethemes_onscroll_animation.js"></script>
+</body>
+
+</html>

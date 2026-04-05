@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/course-player.css">
+  <link rel="icon" type="image/svg+xml" href="image/favicon.svg">
+  <title>온라인 강의 - 부스트클래스</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="course-player-page">
+  <div id="coursePlayerRoot">
+    <header class="cp-header">
+      <a class="cp-back" href="mypage.html"><span aria-hidden="true">←</span> 마이페이지</a>
+      <h1 class="cp-title" id="cpPageTitle">불러오는 중…</h1>
+      <div class="cp-stats" id="cpStats"></div>
+    </header>
+
+    <div class="cp-layout">
+      <main class="cp-main">
+        <div class="cp-video-shell" id="cpVideoShell">
+          <div class="cp-video-wrap">
+            <video id="cpVideo" playsinline preload="metadata"></video>
+            <div class="cp-watermark" id="cpWatermark" aria-hidden="true"></div>
+            <div class="cp-video-placeholder" id="cpVideoPlaceholder">재생할 강의를 선택하세요.</div>
+          </div>
+          <div class="cp-controls" id="cpControls" aria-label="동영상 재생 컨트롤">
+            <button type="button" class="cp-ctrl-btn cp-ctrl-play" id="cpBtnPlay" aria-label="재생" title="재생/일시정지">
+              <svg class="cp-icon cp-icon-play" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+              <svg class="cp-icon cp-icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+            <div class="cp-time-wrap">
+              <span id="cpTimeCurrent">0:00</span>
+              <span class="cp-time-sep">/</span>
+              <span id="cpTimeTotal">0:00</span>
+            </div>
+            <input type="range" class="cp-progress" id="cpProgress" min="0" max="100" step="0.05" value="0" aria-label="재생 위치" disabled />
+            <div class="cp-volume-wrap">
+              <button type="button" class="cp-ctrl-btn" id="cpBtnMute" aria-label="음소거" title="음소거">
+                <svg class="cp-icon" id="cpIconVolHigh" viewBox="0 0 24 24"><path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                <svg class="cp-icon" id="cpIconVolMute" viewBox="0 0 24 24" hidden><path fill="currentColor" d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+              </button>
+              <input type="range" class="cp-volume" id="cpVolume" min="0" max="1" step="0.05" value="1" aria-label="볼륨" />
+            </div>
+            <label class="cp-rate-label">
+              <span class="visually-hidden">재생 속도</span>
+              <select id="cpPlaybackRate" class="cp-rate-select" title="재생 속도">
+                <option value="0.5">0.5×</option>
+                <option value="0.75">0.75×</option>
+                <option value="1" selected>1×</option>
+                <option value="1.25">1.25×</option>
+                <option value="1.5">1.5×</option>
+                <option value="1.75">1.75×</option>
+                <option value="2">2×</option>
+              </select>
+            </label>
+            <button type="button" class="cp-ctrl-btn" id="cpBtnFullscreen" aria-label="전체 화면" title="전체 화면">
+              <svg class="cp-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+            </button>
+          </div>
+        </div>
+      </main>
+
+      <aside class="cp-sidebar">
+        <div class="cp-tabs" role="tablist">
+          <button type="button" class="cp-tab active" data-tab="curriculum" role="tab">강의목차</button>
+          <button type="button" class="cp-tab" data-tab="ebooks" role="tab">전자책 다운로드</button>
+        </div>
+        <div class="cp-tab-panel active" data-panel="curriculum" id="cpCurriculum"></div>
+        <div class="cp-tab-panel" data-panel="ebooks" id="cpEbookDownloads"></div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="js/referral-capture.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-storage-compat.js"></script>
+  <script src="js/boost-file-download.js?v=12"></script>
+  <script src="js/course-player.js?v=5"></script>
+</body>
+</html>

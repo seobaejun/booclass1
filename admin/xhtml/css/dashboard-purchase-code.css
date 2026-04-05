@@ -1,0 +1,188 @@
+/**
+ * 대시보드 구매코드 관리 — 기존 Teacher / tech-data 테이블 톤과 동일한 리스트 형식
+ */
+.purchase-code-card.card {
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.purchase-code-card .card-header {
+  background: #fff;
+}
+
+.purchase-code-card .card-header .heading {
+  color: #1e2a4a;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+/* 테이블: 기본 부트스트랩 table + 라벤더 헤더 */
+.purchase-code-table.table {
+  margin-bottom: 0;
+  vertical-align: middle;
+}
+
+.purchase-code-table thead th {
+  background: #eef0fb;
+  color: #5c5f7b;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid #e4e7f5;
+  white-space: nowrap;
+}
+
+.purchase-code-table tbody td {
+  color: #6b7280;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  border-color: #f0f2f8;
+  vertical-align: middle;
+}
+
+.purchase-code-table tbody tr:hover td {
+  background: #fafbff;
+}
+
+/* 구분 뱃지 — 강의: 진보라, 전자책: 시안 */
+.purchase-code-badge--course {
+  display: inline-block;
+  padding: 0.28rem 0.65rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: #4f46b5;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.purchase-code-badge--ebook {
+  display: inline-block;
+  padding: 0.28rem 0.65rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: #a5f0fc;
+  color: #0c4a6e;
+  line-height: 1.2;
+}
+
+/* 구매코드 입력 + 마스킹 토글 */
+.purchase-code-table .purchase-code-input-group {
+  max-width: 280px;
+  min-width: 180px;
+}
+
+.purchase-code-table .purchase-code-input-group .purchase-code-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: none;
+  border-radius: 0 0.5rem 0.5rem 0;
+  border: 1px solid #d8dce8;
+  font-size: 0.875rem;
+  padding: 0.4rem 0.65rem;
+  background: #fff;
+}
+
+.purchase-code-table .purchase-code-mask-btn {
+  flex-shrink: 0;
+  padding: 0.25rem 0.45rem;
+  border-radius: 0.5rem 0 0 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.purchase-code-table .purchase-code-input {
+  max-width: 220px;
+  min-width: 160px;
+  border-radius: 0.5rem;
+  border: 1px solid #d8dce8;
+  font-size: 0.875rem;
+  padding: 0.4rem 0.65rem;
+  background: #fff;
+}
+
+.purchase-code-table .purchase-code-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 0.15rem rgba(79, 70, 181, 0.15);
+}
+
+/* 무료 체크 */
+.purchase-code-table .form-check-input {
+  width: 1.1rem;
+  height: 1.1rem;
+  cursor: pointer;
+}
+
+/* 저장 버튼 — 보라 계열 */
+.purchase-code-table .btn-purchase-save {
+  border-radius: 0.5rem;
+  padding: 0.35rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.purchase-code-table .btn-purchase-save:hover {
+  filter: brightness(1.05);
+  color: #fff;
+}
+
+/* 하단 요약 (기존 DataTables info 톤) */
+.purchase-code-footer {
+  background: #fff;
+  border-top: 1px solid #f0f2f8 !important;
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+.purchase-code-range {
+  color: #a098ae !important;
+  padding-left: 0.25rem;
+}
+
+.purchase-code-footer .pagination .page-link {
+  border-radius: 0.35rem;
+  margin: 0 0.15rem;
+  color: #5c5f7b;
+}
+
+.purchase-code-footer .pagination .page-item.active .page-link {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+/* 하단 페이징: 항상 보이도록 우측 정렬·버튼 크기 */
+.purchase-code-footer nav {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+  min-width: 0;
+}
+
+.purchase-code-footer .pagination {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.15rem;
+}
+
+.purchase-code-footer .pagination .page-link {
+  min-width: 2.25rem;
+  text-align: center;
+  padding: 0.4rem 0.55rem;
+}
+
+.purchase-code-footer .pagination .page-item.disabled .page-link {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* 표 영역이 길어질 때 카드 안에서만 스크롤 (페이지 버튼은 항상 카드 하단에 고정) */
+.purchase-code-card .card-body.p-0 {
+  max-height: min(55vh, 28rem);
+  overflow-y: auto;
+}

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shishirraven/animate-on-scroll@v1.2/animation_utility.css">
+    <link rel="icon" type="image/svg+xml" href="image/favicon.svg">
+    <title>부스트클래스 - 유료 게시판</title>
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="header" class="fixed-top bg-accent-transparent glass-effect py-0" style="z-index: 9999;">
+        <nav class="navbar navbar-expand-xl">
+            <div class="r-container w-100 px-3 px-xl-5 d-flex flex-nowrap align-items-center">
+                <div class="logo-container flex-shrink-0">
+                    <a class="navbar-brand home-brand-logo-text" href="index.html" aria-label="부스트 클래스 홈">BOOST CLASS</a>
+                </div>
+                <button class="navbar-toggler flex-shrink-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa-solid fa-bars-staggered accent-color-2"></i>
+                </button>
+                <div class="collapse navbar-collapse flex-grow-1 flex-nowrap min-w-0" id="navbarNav">
+                    <ul class="navbar-nav ms-xl-4 ps-xl-5 me-auto mb-2 mb-xl-0 gap-1 py-2 py-xl-0 nav-links-nowrap">
+                        <li class="nav-item"><a class="nav-link" href="index.html">홈</a></li>
+                        <li class="nav-item"><a class="nav-link" href="course-list.html">강의 수강</a></li>
+                        <li class="nav-item"><a class="nav-link" href="ebook.html">전자책</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">사이트 바로가기</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="blog.html">무료 게시판</a></li>
+                                <li><a class="dropdown-item active" href="blog-post.html">유료 게시판</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#contact">문의</a></li>
+                    </ul>
+                    <div class="mb-xl-0 mb-3 d-flex flex-xl-row flex-column gap-3 w-max-content ps-xl-3" id="headerAuthWrap">
+                        <div id="headerGuest" class="d-flex flex-xl-row flex-column gap-3 w-max-content">
+                            <a href="register.html" class="btn btn-accent accent d-flex flex-row gap-2 justify-content-center"><span>회원가입</span></a>
+                            <a href="login.html" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그인</span></a>
+                        </div>
+                        <div id="headerUser" class="d-flex flex-xl-row flex-column gap-3 w-max-content align-items-center d-none">
+                            <a href="mypage.html" class="text-accent text-decoration-none">마이페이지</a>
+                            <button type="button" id="btnHeaderLogout" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그아웃</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <main>
+        <div class="section bg-attach-cover" style="margin-top: 6em; min-height: 60vh; background-image: url(image/bg_support.png);">
+            <div class="r-container py-5">
+                <div class="d-flex flex-column gap-2 mb-4">
+                    <h6 class="text-accent">게시판</h6>
+                    <h3 class="text-white">유료 게시판</h3>
+                    <p class="text-white-50 mb-0">제목을 클릭하면 내용을 볼 수 있습니다.</p>
+                </div>
+                <p id="paid-board-loading" class="text-white-50 mb-3">회원 권한 확인 중…</p>
+                <div id="paid-board-denied" class="d-none card rounded-4 p-4 bg-dark border border-secondary">
+                    <p class="text-white mb-2">유료 게시판은 <strong class="text-accent">유료 회원</strong>만 이용할 수 있습니다.</p>
+                    <p class="text-white-50 small mb-3">(강사·코치·관리자 계정은 운영 목적으로 열람 가능합니다.)</p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="login.html?redirect=blog-post.html" class="btn btn-accent btn-sm">로그인</a>
+                        <a href="mypage.html" class="btn btn-outline-light btn-sm">마이페이지</a>
+                        <a href="index.html" class="btn btn-outline-secondary btn-sm">홈</a>
+                    </div>
+                </div>
+                <div id="paid-board-allowed" class="d-none">
+                <div id="board-list" class="card rounded-4 p-4 bg-dark border border-secondary" data-board-type="paid">
+                    <div data-board-list></div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer id="footer" style="background: #111; color: #fff;">
+        <div class="r-container py-5">
+            <div class="row g-4 align-items-start mb-5">
+                <div class="col-12 col-md-3 col-lg-2 text-start">
+                    <a href="index.html" class="home-brand-logo-text home-brand-logo-text--footer d-inline-block" aria-label="부스트 클래스 홈">BOOST CLASS</a>
+                </div>
+                <div class="col-12 col-md-6 col-lg-7 text-start">
+                    <div class="d-flex flex-column gap-2 text-white-50 small">
+                        <p class="mb-0">회사명 : 부스트클래스<span class="d-none d-md-inline"> | </span><br class="d-md-none">대표자 : 서배준<span class="d-none d-md-inline"> | </span><br class="d-md-none">연락처 : 010-3673-6942</p>
+                        <p class="mb-0">사업자등록번호 : 152-74-00452<span class="d-none d-md-inline"> | </span><br class="d-md-none">통신판매신고번호 : 제2024-충남천안-2840호</p>
+                        <p class="mb-0">주소 : 충청남도 천안시 서북구 월봉로 126, 901-17호(쌍용동, 대림프라자)</p>
+                        <p class="mb-0">개인정보보호 최고책임자 : 서배준<span class="d-none d-md-inline"> | </span><br class="d-md-none">담당자 메일 : sprince1004@naver.com</p>
+                        <p class="mb-0">카카오뱅크 3333-32-0313102 부스트클래스</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-3 col-lg-3 text-start">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><a href="index.html#hero" class="text-white-50 text-decoration-none">홈</a></li>
+                        <li class="mb-2"><a href="course-list.html" class="text-white-50 text-decoration-none">강의 수강</a></li>
+                        <li class="mb-2"><a href="ebook.html" class="text-white-50 text-decoration-none">전자책</a></li>
+                        <li class="mb-2"><a href="about.html" class="text-white-50 text-decoration-none">사이트 바로가기</a></li>
+                        <li class="mb-2"><a href="blog.html" class="text-white-50 text-decoration-none">게시판</a></li>
+                        <li class="mb-2"><a href="index.html#contact" class="text-white-50 text-decoration-none">문의하기</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-4 border-top border-secondary d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+                <p class="mb-0 text-white-50 small">© Copyright 2025. All Rights Reserved 부스트클래스</p>
+                <div class="d-flex gap-3">
+                    <a href="index.html" class="text-white-50 text-decoration-none small">이용약관</a>
+                    <a href="index.html" class="text-white-50 text-decoration-none small">개인정보처리방침</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="js/referral-capture.js"></script>
+    <script src="js/header-auth.js"></script>
+    <script src="js/vendor/jquery.min.js"></script>
+    <script src="js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="js/paid-board-access.js"></script>
+    <script src="js/board.js?v=12"></script>
+    <script>
+      (function () {
+        var loadingEl = document.getElementById('paid-board-loading');
+        var deniedEl = document.getElementById('paid-board-denied');
+        var allowedEl = document.getElementById('paid-board-allowed');
+
+        function showDenied() {
+          if (loadingEl) loadingEl.classList.add('d-none');
+          if (allowedEl) allowedEl.classList.add('d-none');
+          if (deniedEl) deniedEl.classList.remove('d-none');
+        }
+
+        function runBoardList() {
+          if (loadingEl) loadingEl.classList.add('d-none');
+          if (deniedEl) deniedEl.classList.add('d-none');
+          if (allowedEl) allowedEl.classList.remove('d-none');
+          function run() {
+            if (typeof firebase === 'undefined' || !firebase.firestore) return false;
+            if (typeof Board === 'undefined') return false;
+            Board.loadList('paid', 'board-list');
+            return true;
+          }
+          if (!run()) {
+            var attempts = 0;
+            var t = setInterval(function () {
+              if (run() || ++attempts > 50) {
+                clearInterval(t);
+                if (attempts > 50) {
+                  var w = document.getElementById('board-list');
+                  var inner = w && w.querySelector('[data-board-list]');
+                  if (inner) inner.innerHTML = '<p class="text-white-50">목록을 불러올 수 없습니다. 새로고침 해 주세요.</p>';
+                }
+              }
+            }, 100);
+          }
+        }
+
+        if (typeof PaidBoardAccess === 'undefined') {
+          showDenied();
+          return;
+        }
+        PaidBoardAccess.runGuard({
+          onAllowed: runBoardList,
+          onDenied: function (reason) {
+            if (reason === 'guest') {
+              var back = 'blog-post.html' + (window.location.search || '');
+              window.location.href = 'login.html?redirect=' + encodeURIComponent(back);
+              return;
+            }
+            showDenied();
+          }
+        });
+      })();
+    </script>
+</body>
+
+</html>

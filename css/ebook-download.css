@@ -1,0 +1,127 @@
+/**
+ * 전자책 다운로드 — 소장 회원·무료 공개 연동
+ */
+.ebd-page {
+  min-height: 100vh;
+  background: #0f0f12;
+  color: #e8e8ed;
+  font-family: "Manrope", "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+}
+
+.ebd-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0.85rem 1.25rem;
+  background: #16161c;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ebd-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #a8a8b8;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.ebd-back:hover {
+  color: #fff;
+}
+
+.ebd-main {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+
+.ebd-cover {
+  width: 100%;
+  max-width: 280px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 1rem;
+  background: #1a1a1a;
+  display: block;
+  margin: 0 auto 1.5rem;
+}
+
+.ebd-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 0.5rem;
+  text-align: center;
+}
+
+.ebd-author {
+  text-align: center;
+  color: #9a9a9a;
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+}
+
+.ebd-btn-download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  padding: 0.85rem 1.25rem;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
+  background: linear-gradient(78.12deg, #a9f8b5 0.32%, #dff494 99.52%);
+  color: #111;
+  text-decoration: none;
+}
+.ebd-btn-download:hover {
+  filter: brightness(1.05);
+  color: #000;
+}
+.ebd-btn-download:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ebd-wrap-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ebd-error-box,
+.ebd-info {
+  padding: 1.25rem;
+  border-radius: 10px;
+  background: rgba(255, 80, 80, 0.12);
+  border: 1px solid rgba(255, 100, 100, 0.35);
+  color: #ffb4b4;
+  text-align: center;
+}
+
+.ebd-info {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #c8c8d4;
+}
+
+.ebd-hint {
+  margin-top: 1.25rem;
+  font-size: 0.85rem;
+  color: #7a7a8a;
+  text-align: center;
+}
+
+.ebd-file-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.35rem;
+}

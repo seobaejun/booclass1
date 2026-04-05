@@ -1,0 +1,2229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shishirraven/animate-on-scroll@v1.2/animation_utility.css">
+    <link rel="icon" type="image/svg+xml" href="image/favicon.svg">
+    <title>부스트 클래스</title>
+    <meta name="description" content="AI홈페이지 제작 - 바이브 코딩으로 웹에이전시 대표가 되세요">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="부스트 클래스">
+    <meta property="og:title" content="부스트 클래스">
+    <meta property="og:description" content="AI홈페이지 제작 - 바이브 코딩으로 웹에이전시 대표가 되세요">
+    <meta property="og:url" content="https://booclass1.vercel.app/">
+    <meta property="og:image" content="https://booclass1.vercel.app/image/39.png">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="부스트 클래스">
+    <meta property="twitter:description" content="AI홈페이지 제작 - 바이브 코딩으로 웹에이전시 대표가 되세요">
+    <meta property="twitter:image" content="https://booclass1.vercel.app/image/39.png">
+    <style>
+        /* 모달이 헤더(z-index:9999) 위에 보이도록 */
+        #termsModal.modal, #privacyModal.modal { z-index: 10050 !important; }
+        #termsModal.modal .modal-backdrop, #privacyModal.modal .modal-backdrop { z-index: 10000 !important; }
+        body .modal-backdrop { z-index: 10000 !important; }
+        /* 모달 넓이 적당히, 헤더에 가리지 않도록 상단 여백 */
+        #termsModal .modal-dialog, #privacyModal .modal-dialog {
+            max-width: 700px !important;
+            width: 90% !important;
+            margin-top: 5rem !important;
+            margin-bottom: 5rem !important;
+        }
+        /* 모바일만: 히어로 플로팅 포스터(img1)만 가로 꽉 채움 — PC(992px↑) 미적용 */
+        @media only screen and (max-width: 991.98px) {
+            #hero .floating-banner {
+                width: 100vw;
+                max-width: 100vw;
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+                box-sizing: border-box;
+            }
+            #hero .floating-banner .row {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                --bs-gutter-x: 0;
+            }
+            #hero .floating-banner .row > .col:first-child:empty {
+                display: none !important;
+            }
+            #hero .floating-banner .row > [class*="col"] {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                flex: 0 0 100% !important;
+            }
+            #hero .floating-banner .hero-float-poster {
+                width: 100% !important;
+                max-width: none !important;
+                height: auto !important;
+                display: block;
+            }
+        }
+        /* 모바일만: "어떻게 진행되나요?" 위 이미지(image/1.png) 가로 꽉 채움 — PC(992px↑) 미적용 */
+        @media only screen and (max-width: 991.98px) {
+            #about {
+                overflow-x: clip;
+            }
+            #about > .row {
+                --bs-gutter-x: 0;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+            #about > .row > .col:first-child {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+            #about .about-poster-wrap {
+                width: 100vw;
+                max-width: 100vw;
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+                box-sizing: border-box;
+            }
+            #about .about-progress-poster {
+                width: 100% !important;
+                max-width: none !important;
+                aspect-ratio: auto !important;
+                object-fit: cover !important;
+                border-radius: 0 !important;
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="header" class="fixed-top bg-accent-transparent glass-effect py-0" style="z-index: 9999;">
+        <nav class="navbar navbar-expand-xl">
+            <div class="r-container w-100 px-3 px-xl-5 d-flex flex-nowrap align-items-center">
+                <div class="logo-container flex-shrink-0">
+                    <a class="navbar-brand home-brand-logo-text" href="index.html" aria-label="부스트 클래스 홈">BOOST CLASS</a>
+                </div>
+                <button class="navbar-toggler flex-shrink-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa-solid fa-bars-staggered accent-color-2"></i>
+                </button>
+                <div class="collapse navbar-collapse flex-grow-1 flex-nowrap min-w-0" id="navbarNav">
+                    <ul class="navbar-nav ms-xl-4 ps-xl-5 me-auto mb-2 mb-xl-0 gap-1 py-2 py-xl-0 nav-links-nowrap">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html">홈</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="course-list.html">강의 수강</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="ebook.html">전자책</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">사이트 바로가기</a>
+                        </li>
+                        <li class="nav-item d-none">
+                            <a class="nav-link" aria-current="page" href="mentor.html">멘토</a>
+                        </li>
+                        <li class="nav-item d-none">
+                            <a class="nav-link" aria-current="page" href="pricing-plan.html">가격</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                게시판
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="blog.html">무료 게시판</a></li>
+                                <li><a class="dropdown-item" href="blog-post.html">유료 게시판</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">문의</a>
+                        </li>
+                    </ul>
+                    <div class="mb-xl-0 mb-3 d-flex flex-xl-row flex-column gap-3 w-max-content ps-xl-3" id="headerAuthWrap">
+                        <div id="headerGuest" class="d-flex flex-xl-row flex-column gap-3 w-max-content">
+                            <a href="register.html" class="btn btn-accent accent d-flex flex-row gap-2 justify-content-center"><span>회원가입</span></a>
+                            <a href="login.html" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그인</span></a>
+                        </div>
+                        <div id="headerUser" class="d-flex flex-xl-row flex-column gap-3 w-max-content align-items-center d-none">
+                            <a href="mypage.html" class="text-accent text-decoration-none">마이페이지</a>
+                            <button type="button" id="btnHeaderLogout" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그아웃</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- End Header -->
+
+    <!-- Main -->
+    <main>
+        <!-- Banner -->
+        <div id="hero" class="section position-relative bg-attach-cover"
+            style="background-image: url(image/bg_hero.png); margin-top: 2em;">
+            <div class="floating-banner">
+                <div class="row row-cols-xl-2 row-cols-1">
+                    <div class="col"></div>
+                    <div class="col">
+                        <img src="image/img1.png" class="img-fluid hero-float-poster" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="r-container position-relative h-100 mt-xl-5">
+                <div class="d-flex flex-column gap-5 justify-content-between scrollanimation animated fadeInLeft adr-7 h-100"
+                    style="max-width: 900px;">
+                    <div class="d-flex flex-column gap-2 justify-content-center h-100">
+                        <h1>홈페이지 제작으로 <span class="text-accent home-hero-shimmer-text">웹에이전시 대표</span>가 되세요</h1>
+                        <p>
+                            AI바이브 코딩으로 홈페이지를 제작하고 전문가가 되세요.
+                        </p>
+                        <div class="w-max-content">
+                            <a href="#contact"
+                                class="btn btn-accent-icon home-hero-shimmer-btn">
+                                <span>강의보기</span>
+                                <div class="icon-box">
+                                    <i class="rtmicon rtmicon-arrow-right"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row row-cols-xl-3 row-cols-1 w-100 align-items-center mt-xl-5" style="max-width: 800px;">
+                        <div class="col d-flex flex-column align-items-center gap-2 mb-3 accent-color">
+                            <div class="d-flex justify-content-center">
+                                <h3 class="number" data-target="20" data-duration="1000">0</h3>
+                                <h3>K</h3>
+                                <h5>+</h5>
+                            </div>
+                            <h5 class="text-color-2">수료생</h5>
+                        </div>
+                        <div class="col d-flex flex-column align-items-center gap-2 mb-3 accent-color">
+                            <div class="d-flex justify-content-center">
+                                <h3 class="number" data-target="100" data-duration="1000">0</h3>
+                                <h5>%</h5>
+                            </div>
+                            <h5 class="text-color-2">만족도</h5>
+                        </div>
+                        <div class="col d-flex flex-column align-items-center gap-2 mb-3 accent-color">
+                            <div class="d-flex justify-content-center">
+                                <h3 class="number" data-target="11" data-duration="1000">0</h3>
+                                <h5>명</h5>
+                            </div>
+                            <h5 class="text-color-2">코치진</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="section bg-attach-cover" style="background-image: url(image/bg_wcu.png);">
+            <!-- Section Why Choose Us -->
+            <div class="r-container" style="padding-bottom: 6em;">
+                <div class="d-flex flex-column gap-5">
+                    <div
+                        class="d-flex flex-column gap-2 align-items-center justify-content-center mx-auto text-center scrollanimation animated fadeInDown adr-7">
+                        <h6 class="text-accent">왜 부스트클래스인가?</h6>
+                        <h3>부스트클래스가 주는 혜택</h3>
+                    </div>
+                    <div class="row row-cols-xl-4 row-cols-1">
+                        <div class="col mb-3">
+                            <div class="card-accent">
+                                <div class="bg"></div>
+                                <div class="blob"></div>
+                                <div class="card-content">
+                                    <h4>한 번 결제로 평생케어</h4>
+                                    <p>단톡방을 운영해 궁금하신 점이나 문의 사항을 답변해드립니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col mb-3">
+                            <div class="card-accent">
+                                <div class="bg"></div>
+                                <div class="blob"></div>
+                                <div class="card-content">
+                                    <h4>유연한 강의</h4>
+                                    <p>나에게 맞는 강의 방식으로 부담 없이 학습을 시작하세요.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col mb-3">
+                            <div class="card-accent">
+                                <div class="bg"></div>
+                                <div class="blob"></div>
+                                <div class="card-content">
+                                    <h4>오프라인과 온라인 강의</h4>
+                                    <p>오프라인과 온라인을 선택해서 강의를 들을 수 있어요.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col mb-3">
+                            <div class="card-accent">
+                                <div class="bg"></div>
+                                <div class="blob"></div>
+                                <div class="card-content">
+                                    <h4>전용 이벤트 참여</h4>
+                                    <p>세미나, 추가 강의를 수강생과 수료생게 무료로 제공합니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section About Us -->
+            <div id="about" class="r-container" style="padding-top: 6em;">
+                <div class="row row-cols-xl-2 row-cols-1">
+                    <div class="col mb-3 scrollanimation animated fadeInLeft adr-7">
+                        <div class="pe-0 pe-xl-5 about-poster-wrap">
+                            <img src="image/1.png" class="img-fluid rounded-4 w-100 about-progress-poster" style="aspect-ratio: 6/7; object-fit: contain;"
+                                alt="">
+                        </div>
+                    </div>
+                    <div class="col mb-3 scrollanimation animated fadeInRight adr-7">
+                        <div class="d-flex flex-column gap-5">
+                            <div class="d-flex flex-column gap-2">
+                                <h6 class="text-accent">어떻게 진행되나요?</h6>
+                                <h3>AI 커리어는 여기서 시작됩니다</h3>
+                                <p>
+                                    과정 전체에서 문법 또는 무엇까지, 제작자인 학습 과정과 전문가 멘토링, 실습으로 이어집니다.
+                                </p>
+                            </div>
+                            <div class="d-flex flex-column gap-5 position-relative">
+                                <div class="devider-progress"></div>
+                                <div class="d-flex flex-xl-row flex-column gap-5 align-items-center">
+                                    <div class="icon-box-2 position-relative">
+                                        <i class="rtmicon rtmicon-search"></i>
+                                        <div class="position-absolute top-0 end-0 p-1 align-items-center text-center justify-content-center rounded-pill bg-text-color"
+                                            style="width: 36px; height: 36px; margin-top: -15px; margin-right: -15px;">
+                                            <h6 class="accent-color-primary m-0">01</h6>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column text-xl-start text-center">
+                                        <h5>과정 선택</h5>
+                                        <p class="accent-color-4">커리어 목표에 맞는 과정을 선택하세요.</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-xl-row flex-column gap-5 align-items-center">
+                                    <div class="icon-box-3 position-relative">
+                                        <i class="rtmicon rtmicon-post-comment"></i>
+                                        <div class="position-absolute top-0 end-0 p-1 align-items-center text-center justify-content-center rounded-pill bg-text-color"
+                                            style="width: 36px; height: 36px; margin-top: -15px; margin-right: -15px;">
+                                            <h6 class="accent-color-primary m-0">02</h6>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column text-xl-start text-center">
+                                        <h5>실습 중심 수업</h5>
+                                        <p class="accent-color-4">전문가와 함께하는 실습을 배웁니다.</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-xl-row flex-column gap-5 align-items-center">
+                                    <div class="icon-box-3 position-relative">
+                                        <i class="rtmicon rtmicon-folder-open"></i>
+                                        <div class="position-absolute top-0 end-0 p-1 align-items-center text-center justify-content-center rounded-pill bg-text-color"
+                                            style="width: 36px; height: 36px; margin-top: -15px; margin-right: -15px;">
+                                            <h6 class="accent-color-primary m-0">03</h6>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column text-xl-start text-center">
+                                        <h5>실전 프로젝트 수행</h5>
+                                        <p class="accent-color-4">배운 내용을 실제 프로젝트에 적용합니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section What You'll Learn -->
+        <div id="bootcamp" class="section">
+            <div class="r-container d-flex flex-column gap-5 align-items-center">
+                <div class="d-flex flex-column gap-2 align-items-center justify-content-center mx-auto text-center scrollanimation animated fadeInDown adr-7"
+                    style="max-width: 700px;">
+                    <h6 class="text-accent">What You’ll Learn?</h6>
+                    <h3>AI 바이브 코딩 홈페이지 제작 과정</h3>
+                    <p>
+                        기초부터 수익화까지 집중 강의 입니다. 맞는 과정을 고르고, 수익화 시작하세요
+                    </p>
+                </div>
+                <div class="d-flex flex-column gap-3">
+                    <div class="row row-cols-xl-2 row-cols-1 scrollanimation animated fadeInLeft adr-7">
+                        <div class="col col-xl-5 mb-3">
+                            <img src="image/3.png" class="img-fluid rounded-4 h-100 object-fit-cover"
+                                style="aspect-ratio: 5/3;" alt="">
+                        </div>
+                        <div class="col col-xl-7 mb-3">
+                            <div class="card-service">
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="d-flex flex-xl-row flex-column gap-3">
+                                        <div class="info">
+                                            <span class="small-text">A반</span>
+                                        </div>
+                                        <div class="info">
+                                            <span class="small-text">1주일 코스</span>
+                                        </div>
+                                    </div>
+                                    <h4>바이브코딩 홈페이지 제작 전자책</h4>
+                                    <p>
+                                        AI로 어떻게 홈페이지를 쉽게 제작할 수 있나요? 고단가로 판매할 수 있는 템플릿과 AI 바이브코딩 기술을 알려드립니다.
+                                    </p>
+                                </div>
+                                <div class="w-max-content">
+                                    <a href="ebook.html"
+                                        class="btn btn-accent-underline d-flex flex-row rounded-0 gap-2 px-0 py-2">
+                                        <span>자세히 보기</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-cols-xl-2 row-cols-1 scrollanimation animated fadeInRight adr-7">
+                        <div class="col col-xl-5 mb-3">
+                            <img src="image/2.png" class="img-fluid rounded-4 h-100 object-fit-cover"
+                                style="aspect-ratio: 5/3;" alt="">
+                        </div>
+                        <div class="col col-xl-7 mb-3">
+                            <div class="card-service">
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="d-flex flex-xl-row flex-column gap-3">
+                                        <div class="info">
+                                            <span class="small-text">B반</span>
+                                        </div>
+                                        <div class="info">
+                                            <span class="small-text">한달코스</span>
+                                        </div>
+                                    </div>
+                                    <h4>홈페이지 제작 올인원 코스</h4>
+                                    <p>
+                                        A반의 전자책과 함께 제작 동영상 B반 VOD게시판 수강권이 주어지며 VOD는 계속 업데이트 됩니다. 시청기간은 평생 시청이 가능합니다. 전자책 만으로 따라하기 힘드신 분들은 추천드립니다.
+                                    </p>
+                                </div>
+                                <div class="w-max-content">
+                                    <a href="course-list.html"
+                                        class="btn btn-accent-underline d-flex flex-row rounded-0 gap-2 px-0 py-2">
+                                        <span>자세히 보기</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-cols-xl-2 row-cols-1 scrollanimation animated fadeInLeft adr-7">
+                        <div class="col col-xl-5 mb-3">
+                            <img src="image/4.png" class="img-fluid rounded-4 h-100 object-fit-cover"
+                                style="aspect-ratio: 5/3;" alt="">
+                        </div>
+                        <div class="col col-xl-7 mb-3">
+                            <div class="card-service">
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="d-flex flex-xl-row flex-column gap-3">
+                                        <div class="info">
+                                            <span class="small-text">C반</span>
+                                        </div>
+                                        <div class="info">
+                                            <span class="small-text">평생 코스</span>
+                                        </div>
+                                    </div>
+                                    <h4>홈페이지 제작 1:1 평생 케어반</h4>
+                                    <p>
+                                        A반의 전자책과 B반의 VOD의 수강권 포함 1:1혹은 2:1 오프라인 강의 코스로 수익화를 실현해서 월급 이상으로 벌 수 있도록 밀착 케어해 드립니다.
+                                    </p>
+                                </div>
+                                <div class="w-max-content">
+                                    <a href="#contact"
+                                        class="btn btn-accent-underline d-flex flex-row rounded-0 gap-2 px-0 py-2">
+                                        <span>문의하기</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-max-content">
+                    <a href="course-list.html" class="btn btn-accent d-flex flex-row gap-2 justify-content-center">
+                        <span>전체 강의보기</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section bg-attach-cover" style="background-image: url(image/bg_support.png);">
+            <!-- Section Career Support -->
+            <div class="r-container" style="padding-bottom: 6em;">
+                <div class="row row-cols-xl-3 row-cols-1">
+                    <div class="col col-xl-4 mb-3 scrollanimation animated fadeInLeft adr-7">
+                        <div class="d-flex flex-column gap-5">
+                            <div class="d-flex flex-column gap-2 ">
+                                <h6 class="text-accent">취업 지원</h6>
+                                <h3>부스트 코딩 클래스<br>취업 지원</h3>
+                            </div>
+                            <div class="w-max-content">
+                                <a href="service.html" class="btn btn-white-outline d-flex flex-row gap-2 justify-content-center">
+                                    <span>취업 지원 받기</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-xl-8 mb-3">
+                        <div class="row row-cols-xl-2 row-cols-1">
+                            <div class="col mb-3">
+                                <div class="card-accent">
+                                    <div class="bg"></div>
+                                    <div class="blob"></div>
+                                    <div class="card-content text-xl-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44"
+                                            fill="CurrentColor" viewBox="0 0 128 128">
+                                            <title>SECURITY SYSTEM</title>
+                                            <g>
+                                                <path
+                                                    d="M63.541,35.427l-22,5.969a1.751,1.751,0,0,0-1.291,1.689V63.6A32.856,32.856,0,0,0,57.429,92.489l5.735,3.117a1.745,1.745,0,0,0,1.671,0L70.57,92.49A32.858,32.858,0,0,0,87.75,63.6V43.085A1.751,1.751,0,0,0,86.458,41.4l-22-5.969A1.761,1.761,0,0,0,63.541,35.427Zm20.709,9V63.6A29.358,29.358,0,0,1,68.9,89.415L64,92.077l-4.9-2.663A29.357,29.357,0,0,1,43.75,63.6V44.424L64,38.929Z" />
+                                                <path
+                                                    d="M49.206,64A14.794,14.794,0,1,0,64,49.207,14.81,14.81,0,0,0,49.206,64Zm26.088,0A11.294,11.294,0,1,1,64,52.707,11.307,11.307,0,0,1,75.294,64Z" />
+                                                <path
+                                                    d="M115,56.25a7.757,7.757,0,0,0-7.543,6H95.75V36.967a1.75,1.75,0,0,0-1.292-1.689L80.75,31.558V14.75H95.457a7.75,7.75,0,1,0,0-3.5H79A1.75,1.75,0,0,0,77.25,13V30.609L64.458,27.137a1.761,1.761,0,0,0-.917,0L50.75,30.609V13A1.751,1.751,0,0,0,49,11.25H32.543a7.75,7.75,0,1,0,0,3.5H47.25V31.558l-13.709,3.72a1.75,1.75,0,0,0-1.291,1.689V62.25H20.543a7.75,7.75,0,1,0,0,3.5h11.78A40.821,40.821,0,0,0,47.25,95.227V113.25H32.543a7.75,7.75,0,1,0,0,3.5H49A1.751,1.751,0,0,0,50.75,115V97.793c.928.607,1.875,1.19,2.86,1.726l9.555,5.192a1.743,1.743,0,0,0,1.67,0l9.556-5.192c.984-.535,1.931-1.119,2.859-1.726V115A1.75,1.75,0,0,0,79,116.75H95.457a7.75,7.75,0,1,0,0-3.5H80.75V95.227A40.819,40.819,0,0,0,95.677,65.75h11.78A7.747,7.747,0,1,0,115,56.25ZM103,8.75A4.25,4.25,0,1,1,98.75,13,4.255,4.255,0,0,1,103,8.75Zm-78,8.5A4.25,4.25,0,1,1,29.25,13,4.255,4.255,0,0,1,25,17.25Zm-12,51A4.25,4.25,0,1,1,17.25,64,4.255,4.255,0,0,1,13,68.25Zm12,51A4.25,4.25,0,1,1,29.25,115,4.255,4.255,0,0,1,25,119.25Zm78-8.5A4.25,4.25,0,1,1,98.75,115,4.255,4.255,0,0,1,103,110.75ZM92.25,63.6A37.351,37.351,0,0,1,72.719,96.443L64,101.182l-8.719-4.739A37.353,37.353,0,0,1,35.75,63.6V38.306L64,30.64l28.25,7.666ZM115,68.25A4.25,4.25,0,1,1,119.25,64,4.255,4.255,0,0,1,115,68.25Z" />
+                                                <path
+                                                    d="M61,62.763a1.75,1.75,0,0,0-2.475,2.474l2.829,2.829a1.748,1.748,0,0,0,2.474,0l5.656-5.657a1.75,1.75,0,0,0-2.474-2.475l-4.419,4.42Z" />
+                                            </g>
+                                        </svg>
+                                        <h4>네트워크</h4>
+                                        <p>수익 쉐어로 홈페이지 제작 기회를 넓힐 수 있습니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col mb-3">
+                                <div class="card-accent">
+                                    <div class="bg"></div>
+                                    <div class="blob"></div>
+                                    <div class="card-content text-xl-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44"
+                                            fill="CurrentColor" viewBox="0 0 128 128">
+                                            <title>WEBSITE</title>
+                                            <g>
+                                                <path
+                                                    d="M50.217,56.264a1.751,1.751,0,0,0-1.953,1.519l-.784,6.265-1.915-3.831a1.75,1.75,0,0,0-3.13,0l-1.916,3.831-.783-6.265a1.75,1.75,0,0,0-3.472.434l1.5,12a1.75,1.75,0,0,0,3.3.566L44,64.913l2.935,5.87a1.75,1.75,0,0,0,3.3-.566l1.5-12A1.749,1.749,0,0,0,50.217,56.264Z" />
+                                                <path
+                                                    d="M70.217,56.264a1.747,1.747,0,0,0-1.953,1.519l-.784,6.265-1.915-3.831a1.75,1.75,0,0,0-3.13,0l-1.916,3.831-.783-6.265a1.75,1.75,0,0,0-3.472.434l1.5,12a1.75,1.75,0,0,0,3.3.566L64,64.913l2.935,5.87a1.75,1.75,0,0,0,3.3-.566l1.5-12A1.749,1.749,0,0,0,70.217,56.264Z" />
+                                                <path
+                                                    d="M90.217,56.264a1.747,1.747,0,0,0-1.953,1.519l-.784,6.265-1.915-3.831a1.75,1.75,0,0,0-3.13,0l-1.916,3.831-.783-6.265a1.75,1.75,0,0,0-3.472.434l1.5,12a1.75,1.75,0,0,0,3.3.566L84,64.913l2.935,5.87a1.75,1.75,0,0,0,3.3-.566l1.5-12A1.749,1.749,0,0,0,90.217,56.264Z" />
+                                                <path
+                                                    d="M64,5.25A58.75,58.75,0,1,0,122.75,64,58.816,58.816,0,0,0,64,5.25Zm0,114c-7.433,0-14.317-9.559-18.41-24.5H82.41C78.317,109.691,71.433,119.25,64,119.25Zm-19.294-28c-.7-2.994-1.286-6.167-1.752-9.5H85.045c-.465,3.333-1.055,6.506-1.751,9.5ZM8.794,65.75H24.25V76A5.757,5.757,0,0,0,30,81.75h9.425c.45,3.322,1.016,6.5,1.69,9.5H15.967A54.867,54.867,0,0,1,8.794,65.75ZM64,8.75c7.433,0,14.317,9.559,18.41,24.5H45.59C49.683,18.309,56.567,8.75,64,8.75Zm19.294,28c.7,2.994,1.286,6.167,1.751,9.5H42.954c.466-3.333,1.056-6.506,1.752-9.5ZM30,78.25A2.253,2.253,0,0,1,27.75,76V52A2.253,2.253,0,0,1,30,49.75H98A2.253,2.253,0,0,1,100.25,52V76A2.253,2.253,0,0,1,98,78.25Zm9.425-32H30A5.757,5.757,0,0,0,24.25,52V62.25H8.794a54.867,54.867,0,0,1,7.173-25.5H41.115C40.441,39.753,39.875,42.928,39.425,46.25Zm49.15,35.5H98A5.757,5.757,0,0,0,103.75,76V65.75h15.456a54.867,54.867,0,0,1-7.173,25.5H86.885C87.559,88.247,88.125,85.072,88.575,81.75Zm15.175-19.5V52A5.757,5.757,0,0,0,98,46.25H88.575c-.45-3.322-1.016-6.5-1.69-9.5h25.148a54.867,54.867,0,0,1,7.173,25.5Zm6.128-29H86.028C83.2,22.563,78.972,14.351,73.942,9.663A55.359,55.359,0,0,1,109.878,33.25ZM54.058,9.663c-5.03,4.688-9.262,12.9-12.086,23.587H18.122A55.359,55.359,0,0,1,54.058,9.663ZM18.122,94.75h23.85c2.824,10.687,7.056,18.9,12.086,23.587A55.359,55.359,0,0,1,18.122,94.75Zm55.82,23.587c5.03-4.688,9.262-12.9,12.086-23.587h23.85A55.359,55.359,0,0,1,73.942,118.337Z" />
+                                            </g>
+                                        </svg>
+                                        <h4>수료생 커뮤니티</h4>
+                                        <p>수료생 네트워크에서 협업하고 경험을 나누며 취업 기회를 얻을 수 있습니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col mb-3">
+                                <div class="card-accent">
+                                    <div class="bg"></div>
+                                    <div class="blob"></div>
+                                    <div class="card-content text-xl-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44"
+                                            fill="CurrentColor" viewBox="0 0 128 128">
+                                            <title>SEARCH</title>
+                                            <g>
+                                                <path
+                                                    d="M51,14.75A36.25,36.25,0,1,0,87.25,51,36.291,36.291,0,0,0,51,14.75Zm0,69A32.75,32.75,0,1,1,83.75,51,32.786,32.786,0,0,1,51,83.75Z" />
+                                                <path
+                                                    d="M119.727,106.36,88.412,77.284A45.821,45.821,0,1,0,77.284,88.412l29.076,31.315a9.376,9.376,0,0,0,6.756,3.021l.181,0a9.459,9.459,0,0,0,6.43-16.39ZM8.75,51A42.25,42.25,0,1,1,51,93.25,42.3,42.3,0,0,1,8.75,51Zm108.755,66.505a5.96,5.96,0,0,1-8.581-.159L80.087,86.288a46.046,46.046,0,0,0,6.2-6.2l31.059,28.837a5.96,5.96,0,0,1,.159,8.581Z" />
+                                                <path
+                                                    d="M39.831,40.919a1.75,1.75,0,0,0-2.458-.295l-11.454,9a1.75,1.75,0,0,0,0,2.752l11.454,9a1.75,1.75,0,1,0,2.163-2.752L29.832,51l9.7-7.624A1.75,1.75,0,0,0,39.831,40.919Z" />
+                                                <path
+                                                    d="M76.081,49.624l-11.455-9a1.75,1.75,0,1,0-2.162,2.752L72.167,51l-9.7,7.624a1.75,1.75,0,1,0,2.162,2.752l11.455-9a1.75,1.75,0,0,0,0-2.752Z" />
+                                                <path
+                                                    d="M55.874,37.352a1.749,1.749,0,0,0-2.236,1.06l-8.572,24a1.75,1.75,0,0,0,1.06,2.236,1.731,1.731,0,0,0,.588.1,1.75,1.75,0,0,0,1.648-1.163l8.572-24A1.75,1.75,0,0,0,55.874,37.352Z" />
+                                            </g>
+                                        </svg>
+                                        <h4>채용</h4>
+                                        <p>우수 수강자는 역량에 맞는 포지션에 채용될 수 있습니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col mb-3">
+                                <div class="card-accent">
+                                    <div class="bg"></div>
+                                    <div class="blob"></div>
+                                    <div class="card-content text-xl-start">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44"
+                                            fill="CurrentColor" viewBox="0 0 128 128">
+                                            <title>CHECKLIST</title>
+                                            <g>
+                                                <path
+                                                    d="M117,10.25H11A5.757,5.757,0,0,0,5.25,16v96A5.757,5.757,0,0,0,11,117.75H117a5.757,5.757,0,0,0,5.75-5.75V16A5.757,5.757,0,0,0,117,10.25ZM119.25,112a2.253,2.253,0,0,1-2.25,2.25H11A2.253,2.253,0,0,1,8.75,112V35.75h110.5Zm0-79.75H8.75V16A2.253,2.253,0,0,1,11,13.75H117A2.253,2.253,0,0,1,119.25,16Z" />
+                                                <circle cx="18" cy="23" r="2.5" />
+                                                <circle cx="28" cy="23" r="2.5" />
+                                                <circle cx="38" cy="23" r="2.5" />
+                                                <path
+                                                    d="M29.349,63.065a1.748,1.748,0,0,0,2.474,0l5.657-5.656a1.75,1.75,0,1,0-2.475-2.474l-4.419,4.418L29,57.763a1.75,1.75,0,0,0-2.475,2.474Z" />
+                                                <path
+                                                    d="M32,71.75A12.75,12.75,0,1,0,19.25,59,12.765,12.765,0,0,0,32,71.75Zm0-22A9.25,9.25,0,1,1,22.75,59,9.26,9.26,0,0,1,32,49.75Z" />
+                                                <path
+                                                    d="M29.349,95.065a1.748,1.748,0,0,0,2.474,0l5.657-5.656a1.75,1.75,0,1,0-2.475-2.474l-4.419,4.418L29,89.763a1.75,1.75,0,0,0-2.475,2.474Z" />
+                                                <path
+                                                    d="M32,103.75A12.75,12.75,0,1,0,19.25,91,12.765,12.765,0,0,0,32,103.75Zm0-22A9.25,9.25,0,1,1,22.75,91,9.26,9.26,0,0,1,32,81.75Z" />
+                                                <path
+                                                    d="M53,55.75h54a1.75,1.75,0,0,0,0-3.5H53a1.75,1.75,0,0,0,0,3.5Z" />
+                                                <path
+                                                    d="M53,65.75H80a1.75,1.75,0,0,0,0-3.5H53a1.75,1.75,0,0,0,0,3.5Z" />
+                                                <path
+                                                    d="M53,87.75h54a1.75,1.75,0,0,0,0-3.5H53a1.75,1.75,0,0,0,0,3.5Z" />
+                                                <path
+                                                    d="M53,97.75H80a1.75,1.75,0,0,0,0-3.5H53a1.75,1.75,0,0,0,0,3.5Z" />
+                                            </g>
+                                        </svg>
+                                        <h4>커리어 멘토링</h4>
+                                        <p>현업 멘토의 1:1 맞춤 지도로 커리어 경로를 성공적으로 설계할 수 있습니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Section Plan marquee (요금제 안내) -->
+            <div class="r-container plan-marquee-section">
+                <style>
+                    .plan-marquee-section { --plan-marquee-gap: 1.25rem; }
+                    /* PC: 섹션 상하 여백 (인라인 4em 대체 — 모바일은 아래 미디어쿼리에서만 축소) */
+                    .plan-marquee-section.r-container {
+                        padding-block: 4em;
+                    }
+                    /* 상하 패딩: 호버 시 translateY·그림자가 overflow에 잘리지 않도록 */
+                    .plan-marquee-outer {
+                        overflow: hidden;
+                        width: 100%;
+                        padding-top: 18px;
+                        padding-bottom: 22px;
+                        margin-top: -8px;
+                        margin-bottom: -8px;
+                        mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+                        -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+                    }
+                    /* 두 덩어리(각 3박스) 너비가 정확히 동일해야 -50% 루프가 끊기지 않음. 트랙 gap은 0 */
+                    .plan-marquee-track {
+                        display: flex;
+                        flex-wrap: nowrap;
+                        align-items: center;
+                        gap: 0;
+                        width: max-content;
+                        animation: plan-marquee-scroll 40s linear infinite;
+                        will-change: transform;
+                    }
+                    .plan-marquee-track:hover {
+                        animation-play-state: paused;
+                    }
+                    .plan-marquee-group {
+                        display: flex;
+                        flex-wrap: nowrap;
+                        align-items: center;
+                        gap: var(--plan-marquee-gap);
+                        /* 세트 끝과 다음 세트 첫 박스 사이 간격 = 박스 사이 gap과 동일 */
+                        padding-right: var(--plan-marquee-gap);
+                    }
+                    @keyframes plan-marquee-scroll {
+                        0% { transform: translate3d(0, 0, 0); }
+                        100% { transform: translate3d(-50%, 0, 0); }
+                    }
+                    @keyframes plan-marquee-blink {
+                        0%, 100% { opacity: 1; }
+                        50% { opacity: 0.45; }
+                    }
+                    a.plan-marquee-box {
+                        flex: 0 0 auto;
+                        flex-shrink: 0;
+                        min-width: min(280px, 86vw);
+                        max-width: 340px;
+                        padding: 1rem 1.35rem;
+                        border: 1px solid var(--accent-color-5, rgba(169, 248, 181, 0.45));
+                        border-radius: 16px;
+                        text-decoration: none;
+                        color: inherit;
+                        background: rgba(0, 0, 0, 0.35);
+                        backdrop-filter: blur(8px);
+                        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+                        cursor: pointer;
+                    }
+                    a.plan-marquee-box:hover,
+                    a.plan-marquee-box:focus-visible {
+                        transform: translate3d(0, -2px, 0);
+                        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35), 0 0 24px rgba(169, 248, 181, 0.28);
+                        border-color: var(--accent-color, #a9f8b5);
+                        outline: none;
+                    }
+                    .plan-marquee-box .plan-marquee-label {
+                        display: block;
+                        font-weight: 600;
+                        font-size: 1rem;
+                        line-height: 1.45;
+                        text-align: center;
+                        animation: plan-marquee-blink 1.15s ease-in-out infinite;
+                    }
+                    @media (prefers-reduced-motion: reduce) {
+                        .plan-marquee-track { animation: none; }
+                        .plan-marquee-box .plan-marquee-label { animation: none; }
+                    }
+                    /* 모바일만: 흘러가는 배너 상·하 여백 축소 (992px 이상은 위 값 유지) */
+                    @media only screen and (max-width: 991.98px) {
+                        .plan-marquee-section.r-container {
+                            padding-block: 0.65rem;
+                        }
+                        .plan-marquee-outer {
+                            padding-top: 6px;
+                            padding-bottom: 8px;
+                            margin-top: 0;
+                            margin-bottom: 0;
+                        }
+                        a.plan-marquee-box {
+                            padding: 0.55rem 1rem;
+                        }
+                    }
+                </style>
+                <div class="plan-marquee-outer" role="region" aria-label="요금제 바로가기">
+                    <div class="plan-marquee-track">
+                        <div class="plan-marquee-group">
+                            <a class="plan-marquee-box" href="#pricing">
+                                <span class="plan-marquee-label text-accent">전자책 플랜 구매하기</span>
+                            </a>
+                            <a class="plan-marquee-box" href="#pricing">
+                                <span class="plan-marquee-label text-accent">1:1 수익화 플랜 신청하기</span>
+                            </a>
+                            <a class="plan-marquee-box" href="#pricing">
+                                <span class="plan-marquee-label text-accent">올인원 플랜 구매하기</span>
+                            </a>
+                        </div>
+                        <div class="plan-marquee-group" aria-hidden="true">
+                            <a class="plan-marquee-box" href="#pricing" tabindex="-1">
+                                <span class="plan-marquee-label text-accent">전자책 플랜 구매하기</span>
+                            </a>
+                            <a class="plan-marquee-box" href="#pricing" tabindex="-1">
+                                <span class="plan-marquee-label text-accent">1:1 수익화 플랜 신청하기</span>
+                            </a>
+                            <a class="plan-marquee-box" href="#pricing" tabindex="-1">
+                                <span class="plan-marquee-label text-accent">올인원 플랜 구매하기</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    (function () {
+                        document.querySelectorAll('.plan-marquee-section a.plan-marquee-box[href="#pricing"]').forEach(function (el) {
+                            el.addEventListener('click', function (e) {
+                                var target = document.getElementById("pricing");
+                                if (target) {
+                                    e.preventDefault();
+                                    target.scrollIntoView({ behavior: "smooth", block: "start" });
+                                    history.replaceState(null, "", "#pricing");
+                                }
+                            });
+                        });
+                    })();
+                </script>
+            </div>
+
+            <!-- Section Bootcamp Location -->
+            <div class="r-container d-flex flex-column gap-5" style="padding-block: 6em;">
+                <div class="p-4 rounded-4 border border-accent-5">
+                    <div class="row row-cols-xl-2 row-cols-1">
+                        <div class="col mb-3 scrollanimation animated fadeInLeft adr-7">
+                            <div class="d-flex flex-column gap-2">
+                                <h6 class="text-accent">교육 장소</h6>
+                                <h3>편리한 오프라인 장소 또는 온라인으로 참여하세요</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-cols-xl-2 row-cols-1">
+                        <div class="col mb-3">
+                            <div class="d-flex flex-column gap-3">
+                                <div class="card-service  scrollanimation animated fadeInLeft adr-7">
+                                    <div class="d-flex flex-column gap-3">
+                                        <div
+                                            class="d-flex flex-row p-1 border border-accent-2 rounded-pill w-max-content">
+                                            <div class="px-3 py-1 bg-accent-color-3 accent-color-primary rounded-pill">
+                                                <span class="small-text">오프라인</span>
+                                            </div>
+                                            <div class="px-3 py-1">
+                                                <span class="small-text">서울</span>
+                                            </div>
+                                        </div>
+                                        <h4>A반</h4>
+                                        <p>
+                                            체계적인 교실 환경에서 실습 중심으로 배우는 서울 캠퍼스입니다. 멘토의 직접 지도, 동료와의 협업, 전문가와 함께하는 실전 프로젝트를 경험하세요.
+                                        </p>
+                                    </div>
+                                    <a href="#contact" class="btn btn-accent-underline w-max-content rounded-0 gap-2 px-0 py-2">
+                                        <span>특강 신청하기</span>
+                                    </a>
+                                </div>
+                                <div class="card-service class scrollanimation animated fadeInLeft adr-7">
+                                    <div class="d-flex flex-column gap-3">
+                                        <div
+                                            class="d-flex flex-row p-1 border border-accent-2 rounded-pill w-max-content">
+                                            <div class="px-3 py-1 bg-accent-color-3 accent-color-primary rounded-pill">
+                                                <span class="small-text">오프라인</span>
+                                            </div>
+                                            <div class="px-3 py-1">
+                                                <span class="small-text">천안</span>
+                                            </div>
+                                        </div>
+                                        <h4>B반</h4>
+                                        <p>
+                                            체계적인 교실 환경에서 실습 중심으로 배우는 천안 캠퍼스입니다. 멘토의 직접 지도, 동료와의 협업, 전문가와 함께하는 실전 프로젝트를 경험하세요.
+                                        </p>
+                                    </div>
+                                    <a href="#contact" class="btn btn-accent-underline w-max-content rounded-0 gap-2 px-0 py-2">
+                                        <span>특강 신청하기</span>
+                                    </a>
+                                </div>
+                                <div class="card-service class scrollanimation animated fadeInLeft adr-7">
+                                    <div class="d-flex flex-column gap-3">
+                                        <div
+                                            class="d-flex flex-row p-1 border border-accent-2 rounded-pill w-max-content">
+                                            <div class="px-3 py-1 bg-accent-color-3 accent-color-primary rounded-pill">
+                                                <span class="small-text">온라인</span>
+                                            </div>
+                                            <div class="px-3 py-1">
+                                                <span class="small-text">줌 미팅</span>
+                                            </div>
+                                        </div>
+                                        <h4>원격 수업</h4>
+                                        <p>
+                                            온라인으로 진행되는 원격 수업입니다. 체계적인 환경에서 실습하며, 멘토의 직접 지도, 동료와의 협업, 전문가와 함께하는 실전 프로젝트를 경험하세요.
+                                        </p>
+                                    </div>
+                                    <a href="#contact" class="btn btn-accent-underline w-max-content rounded-0 gap-2 px-0 py-2">
+                                        <span>특강 신청하기</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col mb-3">
+                            <img src="image/5.png" class="img-fluid rounded-4" style="transition: all 0.5s; object-fit: contain; aspect-ratio: 6/7; height: 700px;"
+                                alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Section Success Stories -->
+            <div class="r-container d-flex flex-column gap-5 align-items-center" style="padding-block: 6em;">
+                <div class="d-flex flex-column gap-2 align-items-center justify-content-center mx-auto text-center scrollanimation animated fadeInDown adr-7"
+                    style="max-width: 700px;">
+                    <h6 class="text-accent">성공 사례</h6>
+                    <h3>수강생들의 성공 스토리</h3>
+                    <p>
+                        실제 성공 사례와 후기를 통해 저희 부트캠프가 어떻게 수강생들의 커리어 목표 달성을 도왔는지 확인해보세요.
+                    </p>
+                </div>
+                <div class="success-stories-grid">
+                    <style>
+                        .success-stories-grid {
+                            display: grid !important;
+                            grid-template-columns: repeat(3, 1fr) !important;
+                            gap: 1.5rem !important;
+                            grid-auto-rows: min-content !important;
+                            align-items: start !important;
+                        }
+                        @media (max-width: 767px) {
+                            .success-stories-grid {
+                                grid-template-columns: 1fr !important;
+                            }
+                            /* 푸터: 아이콘 · 세로바 · 이름이 한 줄에 정렬 (세로 스택+가운데 정렬로 어긋나던 문제) */
+                            .success-story-footer {
+                                flex-direction: row !important;
+                                align-items: center !important;
+                                justify-content: flex-start !important;
+                                flex-wrap: nowrap !important;
+                                gap: 0.75rem !important;
+                            }
+                            .success-story-footer .customer-item {
+                                flex-shrink: 0;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                            }
+                            .success-story-footer .vr {
+                                flex-shrink: 0;
+                                align-self: stretch;
+                                min-height: 2.25rem;
+                            }
+                            .success-story-footer > .d-flex.flex-column.flex-grow-1 {
+                                flex: 1 1 0;
+                                min-width: 0;
+                            }
+                        }
+                        .success-card {
+                            height: auto !important;
+                            min-height: auto !important;
+                        }
+                        .success-card .card-accent {
+                            height: auto !important;
+                        }
+                        .card-content p {
+                            display: -webkit-box;
+                            -webkit-line-clamp: 5;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            line-height: 1.5;
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                        }
+                        .card-content p.expanded {
+                            -webkit-line-clamp: unset;
+                            overflow: visible;
+                        }
+                        .card-content p:hover {
+                            opacity: 0.8;
+                        }
+                        /* fa-user에 text-accent(그라데이션+text-fill:transparent)가 붙어 있어 color만으로는 안 보임.
+                           취업지원 카드의 SVG(CurrentColor)처럼 호버 시 단색 검정으로 보이게 초기화 */
+                        .success-card .card-accent:hover .customer-item i.text-accent,
+                        .success-card:hover .customer-item i.text-accent,
+                        .success-card .card-accent:hover .customer-item i.text-accent::before,
+                        .success-card:hover .customer-item i.text-accent::before {
+                            background: none !important;
+                            background-image: none !important;
+                            -webkit-background-clip: border-box !important;
+                            background-clip: border-box !important;
+                            -webkit-text-fill-color: #000000 !important;
+                            color: #000000 !important;
+                        }
+                        .card-accent:hover .customer-item i {
+                            color: #000000 !important;
+                        }
+                        .success-card:hover .customer-item i {
+                            color: #000000 !important;
+                        }
+                        .success-card:hover .fa-user {
+                            color: #000000 !important;
+                        }
+                        /* style.css의 .card-accent:hover span { color: var(--primary) } 가
+                           내부 "자세히보기" <span>에 우선 적용되어 밝은 카드에서 글자가 배경과 같아짐 → CTA 트리만 검정 고정 */
+                        .success-story-cta {
+                            cursor: pointer;
+                            user-select: none;
+                            opacity: 0.92;
+                            transition: color 0.2s ease, opacity 0.2s ease;
+                        }
+                        .success-card .card-accent:hover .success-story-cta,
+                        .success-card .card-accent:hover .success-story-cta span,
+                        .success-story-cta:hover,
+                        .success-story-cta:hover span,
+                        .success-story-cta:focus-visible,
+                        .success-story-cta:focus-visible span,
+                        .success-card:hover .success-story-cta,
+                        .success-card:hover .success-story-cta span {
+                            opacity: 1;
+                            outline: none;
+                            color: #000000 !important;
+                            -webkit-text-fill-color: #000000 !important;
+                        }
+                        .success-card .card-accent:hover .success-story-cta .fa-arrow-down,
+                        .success-story-cta:hover .fa-arrow-down,
+                        .success-story-cta:focus-visible .fa-arrow-down,
+                        .success-card:hover .success-story-cta .fa-arrow-down {
+                            color: #000000 !important;
+                        }
+                        .success-story-cta .fa-arrow-down {
+                            font-size: 0.85em;
+                            display: inline-block;
+                            transition: transform 0.25s ease, color 0.2s ease;
+                        }
+                        .card-content p.expanded ~ .success-story-footer .success-story-cta .fa-arrow-down {
+                            transform: rotate(180deg);
+                        }
+                    </style>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            function toggleStoryParagraph(trigger) {
+                                var content = trigger.closest('.card-content');
+                                if (!content) return;
+                                var textEl = content.querySelector('p');
+                                if (textEl) textEl.classList.toggle('expanded');
+                            }
+                            document.querySelectorAll('.card-content p').forEach(function(text) {
+                                text.addEventListener('click', function() {
+                                    this.classList.toggle('expanded');
+                                });
+                            });
+                            document.querySelectorAll('.success-story-cta').forEach(function(cta) {
+                                cta.addEventListener('click', function(e) {
+                                    e.stopPropagation();
+                                    toggleStoryParagraph(this);
+                                });
+                                cta.addEventListener('keydown', function(e) {
+                                    if (e.key === 'Enter' || e.key === ' ') {
+                                        e.preventDefault();
+                                        toggleStoryParagraph(this);
+                                    }
+                                });
+                            });
+                        });
+                    </script>
+                    <div class="success-card scrollanimation animated fadeInLeft adr-7">
+                        <div class="position-relative">
+                            <div class="position-absolute start-0 top-0 overflow-visible"
+                                style="z-index: 9999; margin-left: -1rem; margin-top: -1rem;">
+                                <div class="icon-box">
+                                    <i class="rtmicon rtmicon-blockquote fs-3"></i>
+                                </div>
+                            </div>
+                            <div class="card-accent py-5">
+                                <div class="bg"></div>
+                                <div class="blob"></div>
+                                <div class="card-content text-start">
+                                    <p>홈페이지 제작을 9시간 동안강의해주셔서 감사합니다. 솔직히 시작전에는 내가 이걸 따라갈수있을까?걱정을 많이했는데 막상 수업을들어보니 홈페이지 제작 흐름전체를 이해하게 만들어주셨고 중간에 막히거나 헷갈리는 부분이 생기면 바로 질문할수있어서 너무좋았고 처음부터 끝까지 직접 상세하게 기초부터 알려주셔서 감사합니다! 정말 피곤하신대도 열정적으로 가르쳐주셔서 감동했고 집에서도 혼자노력하면된다는 용기를주셨어요! 이미 수익화내신 수강생보면서 자극도되고 더 분발해야겠다고 다짐하게되었습니다 완성도가 완벽하진 않더라도 노력해서 꼭 수익화를 시켜보고싶습니다 늘감사합니다!
+                                    </p>
+                                    <div class="d-flex flex-xl-row flex-column gap-3 align-items-center w-100 success-story-footer">
+                                        <div class="customer-item">
+                                            <i class="fa-solid fa-user fs-1 text-accent"></i>
+                                        </div>
+
+                                        <div class="vr"></div>
+
+                                        <div class="d-flex flex-column flex-grow-1 gap-1 w-100" style="min-width:0">
+                                            <div class="d-flex flex-row align-items-center justify-content-between gap-2 w-100 flex-wrap">
+                                                <h5 class="m-0 team-name">조아람</h5>
+                                                <span class="success-story-cta text-accent small fw-semibold text-nowrap d-inline-flex align-items-center gap-1" role="button" tabindex="0" aria-label="후기 펼치기">
+                                                    <span>자세히보기</span>
+                                                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="success-card scrollanimation animated fadeIn adr-7">
+                        <div class="position-relative">
+                            <div class="position-absolute start-0 top-0 overflow-visible"
+                                style="z-index: 9999; margin-left: -1rem; margin-top: -1rem;">
+                                <div class="icon-box">
+                                    <i class="rtmicon rtmicon-blockquote fs-3"></i>
+                                </div>
+                            </div>
+                            <div class="card-accent py-5">
+                                <div class="bg"></div>
+                                <div class="blob"></div>
+                                <div class="card-content text-start">
+                                    <p>서배준 강사님의 바이브 코딩 강의로 바이브 코딩을 처음 접했는데, 말 그대로 시야가 확 열렸어요. 홈페이지를 이렇게까지 쉽게 만들 수 있다는 사실 자체가 가장 큰 충격이었고, 그 과정이 막연하지 않고 "아, 이래서 되는구나" 하고 이해되게 풀어주는 점이 인상 깊었습니다. 강의에서 특히 좋았던 건 자료를 전혀 아끼지 않고 공유해 주신다는 점이에요. 실무에서 바로 써먹을 수 있는 것들 위주라, 듣고 끝나는 강의가 아니라 곧바로 손이 움직이게 됩니다. 매달 월 1회 진행되는 오프라인 강의와 밀착 케어도 큰 장점이에요. 질문 하나하나에 대한 피드백이 빠르고 정확해서, 혼자 공부했다면 한참 헤맸을 부분들을 바로 정리할 수 있었어요. 정말 1:1 과외를 받는 느낌에 가깝습니다. 기초부터 차근차근 설명해 주셔서 코딩에 대한 부담도 많이 줄었고, 무엇보다 이 강의가 바이브 코딩만 다루지 않는다는 점이 마음에 들었어요. 디자인 관점, 실제 영업에서 어떻게 활용할지, 그리고 수익화까지 이어지는 구조를 함께 배울 수 있어서 '기술 공부'가 아니라 '비즈니스 공부'를 하고 있다는 느낌이 들었습니다. 단순히 홈페이지 하나 만드는 법을 배우는 강의가 아니라, 혼자서도 만들고, 팔고, 확장할 수 있게 만들어주는 올인원 강의라고 느꼈어요. 처음 바이브 코딩을 접하는 사람에게도, 이미 뭔가를 하고 있지만 정리가 안 된 사람에게도 충분히 추천할 수 있는 강의입니다.
+                                    </p>
+                                    <div class="d-flex flex-xl-row flex-column gap-3 align-items-center w-100 success-story-footer">
+                                        <div class="customer-item">
+                                            <i class="fa-solid fa-user fs-1 text-accent"></i>
+                                        </div>
+
+                                        <div class="vr"></div>
+
+                                        <div class="d-flex flex-column flex-grow-1 gap-1 w-100" style="min-width:0">
+                                            <div class="d-flex flex-row align-items-center justify-content-between gap-2 w-100 flex-wrap">
+                                                <h5 class="m-0 team-name">장수빈</h5>
+                                                <span class="success-story-cta text-accent small fw-semibold text-nowrap d-inline-flex align-items-center gap-1" role="button" tabindex="0" aria-label="후기 펼치기">
+                                                    <span>자세히보기</span>
+                                                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="success-card scrollanimation animated fadeInRight adr-7">
+                        <div class="position-relative">
+                            <div class="position-absolute start-0 top-0 overflow-visible"
+                                style="z-index: 9999; margin-left: -1rem; margin-top: -1rem;">
+                                <div class="icon-box">
+                                    <i class="rtmicon rtmicon-blockquote fs-3"></i>
+                                </div>
+                            </div>
+                            <div class="card-accent py-5">
+                                <div class="bg"></div>
+                                <div class="blob"></div>
+                                <div class="card-content text-start">
+                                    <p>홈페이지 하나를 만들려면 몇 달은 걸릴 줄 알았고, 영어와 숫자가 섞인 화면을 보면 머리부터 복잡해졌지만 바이브코딩의 속성 강의는 복잡한 이론에 매몰되는 것이 아니라, 비개발자도 쉽게 이해할 수 있게 핵심을 콕 집어주시는 덕분에 시작부터 재미를 느낄 수 있습니다. 무엇보다 단순히 지식을 전달하는 것을 넘어, 수강생 한 명 한 명이 제대로 이해하고 구현할 수 있을 때까지 책임감으로 될 때까지' 알려주시는 강사님의 미친 열정입니다. 또한 1:1 같은 섬세한 케어로 마치 개인 과외를 받는 듯한 든든함이 있습니다. 바이브코딩의 강점은 어려운 걸 쉽게 만드는 능력인 것 같습니다. 비개발자도 충분히 할 수 있다는 자신감을 불어넣어 주신 강사님의 긍정적인 에너지 또한 저를 달리게 하는 원동력이 됩니다.
+                                    </p>
+                                    <div class="d-flex flex-xl-row flex-column gap-3 align-items-center w-100 success-story-footer">
+                                        <div class="customer-item">
+                                            <i class="fa-solid fa-user fs-1 text-accent"></i>
+                                        </div>
+
+                                        <div class="vr"></div>
+
+                                        <div class="d-flex flex-column flex-grow-1 gap-1 w-100" style="min-width:0">
+                                            <div class="d-flex flex-row align-items-center justify-content-between gap-2 w-100 flex-wrap">
+                                                <h5 class="m-0 team-name">심아연</h5>
+                                                <span class="success-story-cta text-accent small fw-semibold text-nowrap d-inline-flex align-items-center gap-1" role="button" tabindex="0" aria-label="후기 펼치기">
+                                                    <span>자세히보기</span>
+                                                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="success-card scrollanimation animated fadeInLeft adr-7">
+                        <div class="position-relative">
+                            <div class="position-absolute start-0 top-0 overflow-visible"
+                                style="z-index: 9999; margin-left: -1rem; margin-top: -1rem;">
+                                <div class="icon-box">
+                                    <i class="rtmicon rtmicon-blockquote fs-3"></i>
+                                </div>
+                            </div>
+                            <div class="card-accent py-5">
+                                <div class="bg"></div>
+                                <div class="blob"></div>
+                                <div class="card-content text-start">
+                                    <p>바이브코딩 수업 들으면서 막막하게 생각만했던 아이디어들이 실현이 되니까 가슴이 뻥 뚫리는 기분이었습니다. 실전 꿀팁 덕분에 배운대로만 했는데도 직관적으로 바로 수익이 나서 신기하기도 하고, 아! 이렇게도 돈을벌수가 있구나 하는 기분이었습니다. 앞으로 더 나아가서, 더 크게 성장하도록 하겠습니다!
+                                    </p>
+                                    <div class="d-flex flex-xl-row flex-column gap-3 align-items-center w-100 success-story-footer">
+                                        <div class="customer-item">
+                                            <i class="fa-solid fa-user fs-1 text-accent"></i>
+                                        </div>
+
+                                        <div class="vr"></div>
+
+                                        <div class="d-flex flex-column flex-grow-1 gap-1 w-100" style="min-width:0">
+                                            <div class="d-flex flex-row align-items-center justify-content-between gap-2 w-100 flex-wrap">
+                                                <h5 class="m-0 team-name">성민성</h5>
+                                                <span class="success-story-cta text-accent small fw-semibold text-nowrap d-inline-flex align-items-center gap-1" role="button" tabindex="0" aria-label="후기 펼치기">
+                                                    <span>자세히보기</span>
+                                                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="success-card scrollanimation animated fadeIn adr-7">
+                        <div class="position-relative">
+                            <div class="position-absolute start-0 top-0 overflow-visible"
+                                style="z-index: 9999; margin-left: -1rem; margin-top: -1rem;">
+                                <div class="icon-box">
+                                    <i class="rtmicon rtmicon-blockquote fs-3"></i>
+                                </div>
+                            </div>
+                            <div class="card-accent py-5">
+                                <div class="bg"></div>
+                                <div class="blob"></div>
+                                <div class="card-content text-start">
+                                    <p>처음 대표님 강의를 접했을 때는 솔직히 반신반의했습니다. 요즘 워낙 "AI로 다 해준다"는 이야기가 많다 보니 정말 되는걸까 했었죠 🙂 그런데 서배준 대표님 강의는 시작부터 접근 방식이 조금 달랐습니다. 기획 단계부터 구조를 어떻게 잡아야 하는지, 어떤 순서로 AI에게 요청해야 원하는 결과가 나오는지를 차근차근 설명해 주셨습니다. 강의를 따라가다 보니 어느 순간 AI가 주도하는 느낌이 아니라, 제가 AI를 도구처럼 활용하고 있다는 감각이 분명해졌습니다 👍 특히 인상 깊었던 부분은 결과물의 완성도였습니다. AI로 만든 홈페이지라고 하면 한눈에 티가 나는 경우가 많은데, 이 강의 방식으로 만든 페이지는 그런 느낌이 거의 없었습니다. 문구의 톤이나 섹션 구성, 버튼 배치 같은 디테일들이 잘 살아 있어서 개인 브랜드 홈페이지나 랜딩페이지로 바로 활용해도 무리가 없겠다는 생각이 들었습니다. AI 느낌 보다는 사람이 기획하고 다듬은 페이지에 가깝다는 인상이었습니다. 또 하나 좋았던 점은 비개발자를 정말 잘 배려한 강의라는 점입니다. 코딩 문법이나 기술적인 설명에 깊이 들어가기보다는, 왜 이 단계에서 이런 요청을 해야 하는지, 이 작업을 AI에게 맡기면 어떤 장점이 있는지를 중심으로 설명해 주셔서 이해하기가 훨씬 수월했습니다 😊 개발자가 아니어도 디자인이나 마케팅을 조금이라도 경험해 본 분들이라면 충분히 따라갈 수 있는 구성이라고 느껴졌습니다. 특히 홈페이지나 랜딩페이지를 외주에만 의존하기 부담스러운 1인 사업자 분들, 여러 버전의 페이지를 빠르게 만들어 테스트해 보고 싶은 분들, 그리고 개발자는 아니지만 결과물만큼은 직접 컨트롤하고 싶은 분들도 잘 맞을 것 같습니다. 2~3달걸릴걸 1~2주에 만들어낼수 있습니다ㅎㅎ ✨ 시간 대비 얻는 것이 많고 한 번 익혀두면 앞으로 홈페이지 개발이 가능해지기에 AI 활용 강의 중에서도 실전 활용도가 상당히 높은 편이라고 느꼈습니다 👍 대표님 덕분에 수익화도 성공하고 새로운 세계를 하나 더 연 느낌입니다 강추에요~!
+                                    </p>
+                                    <div class="d-flex flex-xl-row flex-column gap-3 align-items-center w-100 success-story-footer">
+                                        <div class="customer-item">
+                                            <i class="fa-solid fa-user fs-1 text-accent"></i>
+                                        </div>
+
+                                        <div class="vr"></div>
+
+                                        <div class="d-flex flex-column flex-grow-1 gap-1 w-100" style="min-width:0">
+                                            <div class="d-flex flex-row align-items-center justify-content-between gap-2 w-100 flex-wrap">
+                                                <h5 class="m-0 team-name">박건휘</h5>
+                                                <span class="success-story-cta text-accent small fw-semibold text-nowrap d-inline-flex align-items-center gap-1" role="button" tabindex="0" aria-label="후기 펼치기">
+                                                    <span>자세히보기</span>
+                                                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="success-card scrollanimation animated fadeInRight adr-7">
+                        <div class="position-relative">
+                            <div class="position-absolute start-0 top-0 overflow-visible"
+                                style="z-index: 9999; margin-left: -1rem; margin-top: -1rem;">
+                                <div class="icon-box">
+                                    <i class="rtmicon rtmicon-blockquote fs-3"></i>
+                                </div>
+                            </div>
+                            <div class="card-accent py-5">
+                                <div class="bg"></div>
+                                <div class="blob"></div>
+                                <div class="card-content text-start">
+                                    <p>바이브코딩 수업을 듣기 전까지 저에게 코딩은 "전문가만 할 수 있는 영역" 이라는 인식이 강했습니다. 어디서부터 시작해야 할지도 모르겠고, 잘못 건드리면 오히려 시간만 낭비할 것 같다는 두려움이 컸습니다. 그런데 바이브코딩 수업은 처음부터 그 생각을 완전히 바꿔주었습니다. 이 수업은 코딩 문법을 외우게 하는 수업이 아니라 '어떻게 활용해서 결과를 만들 것인가'에 집중하는 수업이었습니다. 특히 인상 깊었던 점은 아이디어 → 구조 → 구현 → 테스트까지의 흐름을 실제로 눈으로 보고, 손으로 따라가며 경험할 수 있었다는 점입니다. "이건 개발자가 해야 하는 거야"가 아니라 "이 정도는 나도 충분히 해볼 수 있겠는데?"라는 생각이 자연스럽게 들었습니다. 또 하나 좋았던 점은 수업의 속도와 방향성이었습니다. 불필요한 이론 설명에 시간을 쓰지 않고, 실제 현업에서 바로 써먹을 수 있는 방식으로 진행되어서 집중도와 이해도가 모두 높았습니다. 혼자였다면 시작도 못 했을 일들을 수업 안에서는 짧은 시간 안에 결과물로 만들어냈다는 점이 가장 큰 성과였습니다. 바이브코딩 수업을 통해 코딩이 더 이상 부담이나 장벽이 아니라, 아이디어를 현실로 바꿔주는 도구라는 인식을 갖게 되었습니다. 코딩이 어렵게 느껴지거나 어디서부터 시작해야 할지 막막한 분들, 특히 실무에 바로 써먹을 수 있는 결과를 원하는 분들께 정말 추천하고 싶은 수업입니다.
+                                    </p>
+                                    <div class="d-flex flex-xl-row flex-column gap-3 align-items-center w-100 success-story-footer">
+                                        <div class="customer-item">
+                                            <i class="fa-solid fa-user fs-1 text-accent"></i>
+                                        </div>
+
+                                        <div class="vr"></div>
+
+                                        <div class="d-flex flex-column flex-grow-1 gap-1 w-100" style="min-width:0">
+                                            <div class="d-flex flex-row align-items-center justify-content-between gap-2 w-100 flex-wrap">
+                                                <h5 class="m-0 team-name">서건우</h5>
+                                                <span class="success-story-cta text-accent small fw-semibold text-nowrap d-inline-flex align-items-center gap-1" role="button" tabindex="0" aria-label="후기 펼치기">
+                                                    <span>자세히보기</span>
+                                                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="success-card scrollanimation animated fadeInLeft adr-7">
+                        <div class="position-relative">
+                            <div class="position-absolute start-0 top-0 overflow-visible"
+                                style="z-index: 9999; margin-left: -1rem; margin-top: -1rem;">
+                                <div class="icon-box">
+                                    <i class="rtmicon rtmicon-blockquote fs-3"></i>
+                                </div>
+                            </div>
+                            <div class="card-accent py-5">
+                                <div class="bg"></div>
+                                <div class="blob"></div>
+                                <div class="card-content text-start">
+                                    <p>저는 컴퓨터공학 전공자인데도 대표님의 바이브 코딩 수업을 들으면서 "아, 개발을 이렇게 접근할 수도 있구나"라는 생각을 많이 했어요. 기존에 배워왔던 개발 방식과는 다르게 비전공자들도 쉽게 AI를 활용해서 어떻게 만들고, 어떻게 써먹고, 어떻게 연결해서 실제로 활용하는지까지 함께 다뤄주는 점이 인상 깊었습니다. 특히 개발뿐만 아니라 만든 결과물을 어떻게 광고하고, 어떤 식으로 수익 구조로 이어갈 수 있는지까지 알려주셔서 기술을 수익으로 연결하는 시야가 넓어졌어요. 가장 감동 받았던 점은 대표님이 정해진 커리큘럼만 진행하는 게 아니라, 질문 하나하나에 조금이라도 더 알려주려고 하시는 따뜻한 마음이였어요. 수강생 한 명도 놓치지 않으려는 느낌이 들어서 배우는 입장에서 신뢰가 갔습니다. 그리고 수업을 통해 같이 수강하는 분들과 자연스럽게 연결되고, 정보를 나누고 자극을 받을 수 있었던 점도 혼자 공부할 때와는 확실히 다른 장점이었어요. 개발을 이미 해본 사람에게도, 그리고 개발을 처음 시작하는 사람에게도 정말로 수익화로 이어갈 수 있는 수업이라고 느꼈습니다. 항상 감사합니다 대표님.
+                                    </p>
+                                    <div class="d-flex flex-xl-row flex-column gap-3 align-items-center w-100 success-story-footer">
+                                        <div class="customer-item">
+                                            <i class="fa-solid fa-user fs-1 text-accent"></i>
+                                        </div>
+                                        <div class="vr"></div>
+                                        <div class="d-flex flex-column flex-grow-1 gap-1 w-100" style="min-width:0">
+                                            <div class="d-flex flex-row align-items-center justify-content-between gap-2 w-100 flex-wrap">
+                                                <h5 class="m-0 team-name">진하은</h5>
+                                                <span class="success-story-cta text-accent small fw-semibold text-nowrap d-inline-flex align-items-center gap-1" role="button" tabindex="0" aria-label="후기 펼치기">
+                                                    <span>자세히보기</span>
+                                                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="success-card scrollanimation animated fadeIn adr-7">
+                        <div class="position-relative">
+                            <div class="position-absolute start-0 top-0 overflow-visible"
+                                style="z-index: 9999; margin-left: -1rem; margin-top: -1rem;">
+                                <div class="icon-box">
+                                    <i class="rtmicon rtmicon-blockquote fs-3"></i>
+                                </div>
+                            </div>
+                            <div class="card-accent py-5">
+                                <div class="bg"></div>
+                                <div class="blob"></div>
+                                <div class="card-content text-start">
+                                    <p>수업을 통해 전공자가 아니어도 홈페이지와 프로그램까지 만들수 있어서 너무 신기하고 재미있었습니다!. 강사님께서 하나하나 순서대로 시키는대로하면 홈페이지가 만들어져서 진짜 재미있었어요. 아직도 홈페이지를 필요로 하는 수요가 생각보다 많고 주변에도 홈페이지 만든다고하면 관심갖고 여쭤보시는 분도 있어서, 꾸준하게 하면 수익화가 될 수 있습니다!
+                                    </p>
+                                    <div class="d-flex flex-xl-row flex-column gap-3 align-items-center w-100 success-story-footer">
+                                        <div class="customer-item">
+                                            <i class="fa-solid fa-user fs-1 text-accent"></i>
+                                        </div>
+                                        <div class="vr"></div>
+                                        <div class="d-flex flex-column flex-grow-1 gap-1 w-100" style="min-width:0">
+                                            <div class="d-flex flex-row align-items-center justify-content-between gap-2 w-100 flex-wrap">
+                                                <h5 class="m-0 team-name">양민아</h5>
+                                                <span class="success-story-cta text-accent small fw-semibold text-nowrap d-inline-flex align-items-center gap-1" role="button" tabindex="0" aria-label="후기 펼치기">
+                                                    <span>자세히보기</span>
+                                                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="success-card scrollanimation animated fadeInRight adr-7">
+                        <div class="position-relative">
+                            <div class="position-absolute start-0 top-0 overflow-visible"
+                                style="z-index: 9999; margin-left: -1rem; margin-top: -1rem;">
+                                <div class="icon-box">
+                                    <i class="rtmicon rtmicon-blockquote fs-3"></i>
+                                </div>
+                            </div>
+                            <div class="card-accent py-5">
+                                <div class="bg"></div>
+                                <div class="blob"></div>
+                                <div class="card-content text-start">
+                                    <p>바이브코딩 수강후기 입니다. AI가 출시되고 쳇지피티와 제미나이등 여러 AI들이 나오면서 바이브코딩 시장이 요새 정말 핫한것 같습니다. 여러AI들로 시간과 비용을 단축할수 있기도 한데 특히 코딩을 자세히 몰라도 바이브코딩으로 홈페이지를 간편하게 만들 수 있고 또한 그 부분으로 수익화까지 가능하다는 것이 놀랍기도 하고 신기했습니다. 저는 비개발자이고 코딩에 ㅋ도 모르지만 시대에 도태되지않고 싶었고 바이브코딩은 쉽고 재미있게 배울 수 있을꺼 같아서 신청하여서 수업을 듣게 되었습니다. 처음에는 생소하기한 낯선용어들이였지만 하나하나씩 전자책의 용어들과 필요한 사이트를 보면서 개념정리을 하게 되었고 영상과 전자책에 있는 대로 따로 해보며 실습해보았습니다. 하다보니 익숙해졌고 조금씩 이해가 가면서 재미있어졌습니다. 수업을 들을떄 시간가는줄 모를 정도로 신기하고 놀라웠습니다. 처음 홈페이지를 만들었을떄 단3일정도만에 홈페이지를 만들게 되었고 신이 나고 재밌었습니다. 게다가 좀더 노력해서 완성도를 높히면 수익화까지 가능하다니~~!! 바이브 코딩을 배우길 잘했다는 생각도 들었고 점점 오프라인 사업들이 온라인으로 넘어오면서 홈페이지가 필요한 분들의 수요는 많을꺼라고 생각을 했는데 홈페이지가 필요한 클라이언트들에게 원하는 기능들을 받아서 그 분들을 가족처럼 도와주자는 느낌으로 수익화 하면 계속 소개도 받을수 있을꺼 같고 좋은 시장이 될꺼라 확신이 들었습니다. 하루에 시간을 정해놓고 꾸준히 수업듣고 전자책보고 열심히만 따라온다면 누구나 수익화에 성공할수도 있고 실력향상에 따라 외주 금액도 점점 높아질꺼라 생각됩니다. 점점 더 디벨롭할려고 하고 있습니다. 요즘 부업강의들 정말 많은데 서배준 대표님의 바이브코딩 교육과 실행으로 꼭 모두 수익화에 성공하였으면 좋겠습니다. 코딩을 전혀 몰라도 수업듣고 실행만 하면 누구든 가능합니다. 다만 수업만 듣고 안하시면 안되고 무조건 꾸준히 실행하셔야합니다. 실행하면 분명히 좋은 성과가 따라올 것입니다. 감사합니다.
+                                    </p>
+                                    <div class="d-flex flex-xl-row flex-column gap-3 align-items-center w-100 success-story-footer">
+                                        <div class="customer-item">
+                                            <i class="fa-solid fa-user fs-1 text-accent"></i>
+                                        </div>
+                                        <div class="vr"></div>
+                                        <div class="d-flex flex-column flex-grow-1 gap-1 w-100" style="min-width:0">
+                                            <div class="d-flex flex-row align-items-center justify-content-between gap-2 w-100 flex-wrap">
+                                                <h5 class="m-0 team-name">김명은</h5>
+                                                <span class="success-story-cta text-accent small fw-semibold text-nowrap d-inline-flex align-items-center gap-1" role="button" tabindex="0" aria-label="후기 펼치기">
+                                                    <span>자세히보기</span>
+                                                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="success-card scrollanimation animated fadeInLeft adr-7">
+                        <div class="position-relative">
+                            <div class="position-absolute start-0 top-0 overflow-visible"
+                                style="z-index: 9999; margin-left: -1rem; margin-top: -1rem;">
+                                <div class="icon-box">
+                                    <i class="rtmicon rtmicon-blockquote fs-3"></i>
+                                </div>
+                            </div>
+                            <div class="card-accent py-5">
+                                <div class="bg"></div>
+                                <div class="blob"></div>
+                                <div class="card-content text-start">
+                                    <p>비전공자이자 '코딩의 '코'자도 모르던' 제가 바이브 코딩(Vibe Coding) 수강을 마친 솔직한 후기를 남겨봅니다! 저처럼 막연한 두려움을 가진 분들에게 도움이 되었으면 좋겠네요! 사실 저는 코딩이라고 하면 검은 화면에 알 수 없는 영어 단어들이 쏟아지는, 아주 똑똑한 사람들만의 전유물이라고 생각했습니다. '변수', '함수' 같은 단어만 들어도 머리가 아파오는 사람이었습니다. 처음엔 "이게 정말 될까?" 싶었지만, 그냥 AI와 대화하듯 나의 비전을 설명하다 보니 어느새 개발자가 되어 있는 저를 발견했습니다. 완벽한 문법보다 중요한 건, 여러분의 감각과 '바이브'입니다! AI와의 환상적인 콤비네이션! 내가 완벽하지 않아도 괜찮습니다. AI(커서, 클로드 등)에게 "이런 느낌의 웹사이트를 만들고 싶어"라고 말하면, 찰떡같이 알아듣고 초안을 잡아주는 과정이 정말 짜릿했습니다. 여러분도 나만의 웹사이트가 눈앞에 만들어지는 과정을 보며 눈을 뜨고 의심하게 될 겁니다! 처음엔 반신반의했지만, 이제는 압니다. 코딩은 더 이상 벽이 아니라는 것을요. 여러분의 열정과 아이디어, 그리고 '바이브'만 있다면 여러분도 무엇이든 만들 수 있습니다! "바이브 코딩은 기술을 배우는 게 아니라, 내 아이디어를 실현하는 법을 배우는 것이었습니다."
+                                    </p>
+                                    <div class="d-flex flex-xl-row flex-column gap-3 align-items-center w-100 success-story-footer">
+                                        <div class="customer-item">
+                                            <i class="fa-solid fa-user fs-1 text-accent"></i>
+                                        </div>
+                                        <div class="vr"></div>
+                                        <div class="d-flex flex-column flex-grow-1 gap-1 w-100" style="min-width:0">
+                                            <div class="d-flex flex-row align-items-center justify-content-between gap-2 w-100 flex-wrap">
+                                                <h5 class="m-0 team-name">김기현</h5>
+                                                <span class="success-story-cta text-accent small fw-semibold text-nowrap d-inline-flex align-items-center gap-1" role="button" tabindex="0" aria-label="후기 펼치기">
+                                                    <span>자세히보기</span>
+                                                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="success-card scrollanimation animated fadeIn adr-7">
+                        <div class="position-relative">
+                            <div class="position-absolute start-0 top-0 overflow-visible"
+                                style="z-index: 9999; margin-left: -1rem; margin-top: -1rem;">
+                                <div class="icon-box">
+                                    <i class="rtmicon rtmicon-blockquote fs-3"></i>
+                                </div>
+                            </div>
+                            <div class="card-accent py-5">
+                                <div class="bg"></div>
+                                <div class="blob"></div>
+                                <div class="card-content text-start">
+                                    <p>✨바이브코딩 수강 후기✨ 직장 다니는 30대 비전공자인 제가 바이브코딩으로 홈페이지 제작부터 실제 수익화까지 해냈다는 게 아직도 신기합니다. 코딩이 처음이라 겁이 났는데, 강사님이 왜 이렇게 되는지부터 하나하나 정말 알아듣기 쉽게 설명해 주셔서 따라갈 수 있었어요. 세세한 꿀팁 정보도 전혀 아끼지 않으시고, 바로 써먹을 수 있는 가장 빠른 수익화 방법까지 알려주셔서 실전에서 도움이 컸습니다. 결국 중요한 건 재능이 아니라 포기하지 않고 해보겠다는 의지라는 걸 느꼈고, 이 경험은 단기 수익을 넘어 오래 가져갈 수 있는 저만의 무기가 됐습니다! 올해 강사님을 만난게 큰 행운이라고 생각하며, 더 공부해서 강사 자리까지 도전해 보겠습니다!ㅎㅎ 감사합니다!
+                                    </p>
+                                    <div class="d-flex flex-xl-row flex-column gap-3 align-items-center w-100 success-story-footer">
+                                        <div class="customer-item">
+                                            <i class="fa-solid fa-user fs-1 text-accent"></i>
+                                        </div>
+                                        <div class="vr"></div>
+                                        <div class="d-flex flex-column flex-grow-1 gap-1 w-100" style="min-width:0">
+                                            <div class="d-flex flex-row align-items-center justify-content-between gap-2 w-100 flex-wrap">
+                                                <h5 class="m-0 team-name">박정은</h5>
+                                                <span class="success-story-cta text-accent small fw-semibold text-nowrap d-inline-flex align-items-center gap-1" role="button" tabindex="0" aria-label="후기 펼치기">
+                                                    <span>자세히보기</span>
+                                                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Meet the Mentors -->
+        <div class="section" style="display: none;">
+            <div class="r-container d-flex flex-column gap-5">
+                <div class="row row-cols-xl-2 row-cols-1 align-items-end">
+                    <div class="col col-xl-5 mb-3 scrollanimation animated fadeInLeft adr-7">
+                        <div class="d-flex flex-column gap-2">
+                            <h6 class="text-accent">전문 멘토 만나기</h6>
+                            <h3>여러분의 성공을 이끄는 전문가들로부터 배우세요</h3>
+                        </div>
+                    </div>
+                    <div class="col col-xl-7 mb-3 scrollanimation animated fadeInDown adr-7">
+                        <div class="w-max-content" style="justify-self: end;">
+                            <a href="team.html"
+                                class="btn btn-white-outline d-flex flex-row gap-2 justify-content-center">
+                                <span>모든 멘토 보기</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-cols-xl-4 row-cols-1 scrollanimation animated fadeInRight">
+                    <div class="col mb-3">
+                        <div class="card card-overlay gap-3">
+                            <div class="card-image overflow-hidden rounded-4 position-relative">
+                                <img src="image/dummy-img-600x700.jpg" alt="" class="img-fluid w-100" style="aspect-ratio: 3/4;">
+                                <div class="card-body">
+                                    <div class="d-flex flex-column gap-2 h-100 w-100 text-white justify-content-end">
+                                        <div class="social-container p-3 w-max-content column mb-xl-0 mb-3"
+                                            style="border-top-right-radius: 20px;">
+                                            <a href="https://www.facebook.com" class="social-item">
+                                                <i class="fa-brands fa-xs fa-facebook-f"></i>
+                                            </a>
+                                            <a href="https://www.twitter.com" class="social-item">
+                                                <i class="fa-brands fa-xs fa-twitter"></i>
+                                            </a>
+                                            <a href="https://www.instagram.com" class="social-item">
+                                                <i class="fa-brands fa-xs fa-instagram"></i>
+                                            </a>
+                                            <a href="https://www.youtube.com" class="social-item">
+                                                <i class="fa-brands fa-xs fa-youtube"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer border-0 bg-transparent">
+                                <div class="d-flex flex-column">
+                                    <h4>김철수</h4>
+                                    <span>풀스택 웹 개발</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-3">
+                        <div class="card card-overlay gap-3">
+                            <div class="card-image overflow-hidden rounded-4 position-relative">
+                                <img src="image/dummy-img-600x700.jpg" alt="" class="img-fluid w-100" style="aspect-ratio: 3/4;">
+                                <div class="card-body">
+                                    <div class="d-flex flex-column gap-2 h-100 w-100 text-white justify-content-end">
+                                        <div class="social-container bg-accent-color-2 p-3 w-max-content column mb-xl-0 mb-3"
+                                            style="border-top-right-radius: 20px;">
+                                            <a href="https://www.facebook.com" class="social-item">
+                                                <i class="fa-brands fa-xs fa-facebook-f"></i>
+                                            </a>
+                                            <a href="https://www.twitter.com" class="social-item">
+                                                <i class="fa-brands fa-xs fa-twitter"></i>
+                                            </a>
+                                            <a href="https://www.instagram.com" class="social-item">
+                                                <i class="fa-brands fa-xs fa-instagram"></i>
+                                            </a>
+                                            <a href="https://www.youtube.com" class="social-item">
+                                                <i class="fa-brands fa-xs fa-youtube"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer border-0 bg-transparent">
+                                <div class="d-flex flex-column">
+                                    <h4>박영희</h4>
+                                    <span class="font-3 accent-color">프론트엔드 웹 개발</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-3">
+                        <div class="card card-overlay gap-3">
+                            <div class="card-image overflow-hidden rounded-4 position-relative">
+                                <img src="image/dummy-img-600x700.jpg" alt="" class="img-fluid w-100" style="aspect-ratio: 3/4;">
+                                <div class="card-body">
+                                    <div class="d-flex flex-column gap-2 h-100 w-100 text-white justify-content-end">
+                                        <div class="social-container bg-accent-color-2 p-3 w-max-content column mb-xl-0 mb-3"
+                                            style="border-top-right-radius: 20px;">
+                                            <a href="https://www.facebook.com" class="social-item">
+                                                <i class="fa-brands fa-xs fa-facebook-f"></i>
+                                            </a>
+                                            <a href="https://www.twitter.com" class="social-item">
+                                                <i class="fa-brands fa-xs fa-twitter"></i>
+                                            </a>
+                                            <a href="https://www.instagram.com" class="social-item">
+                                                <i class="fa-brands fa-xs fa-instagram"></i>
+                                            </a>
+                                            <a href="https://www.youtube.com" class="social-item">
+                                                <i class="fa-brands fa-xs fa-youtube"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer border-0 bg-transparent">
+                                <div class="d-flex flex-column">
+                                    <h4>이민호</h4>
+                                    <span class="font-3 accent-color">모바일 앱 개발</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-3">
+                        <div class="card card-overlay gap-3">
+                            <div class="card-image overflow-hidden rounded-4 position-relative">
+                                <img src="image/dummy-img-600x700.jpg" alt="" class="img-fluid w-100" style="aspect-ratio: 3/4;">
+                                <div class="card-body">
+                                    <div class="d-flex flex-column gap-2 h-100 w-100 text-white justify-content-end">
+                                        <div class="social-container bg-accent-color-2 p-3 w-max-content column mb-xl-0 mb-3"
+                                            style="border-top-right-radius: 20px;">
+                                            <a href="https://www.facebook.com" class="social-item">
+                                                <i class="fa-brands fa-xs fa-facebook-f"></i>
+                                            </a>
+                                            <a href="https://www.twitter.com" class="social-item">
+                                                <i class="fa-brands fa-xs fa-twitter"></i>
+                                            </a>
+                                            <a href="https://www.instagram.com" class="social-item">
+                                                <i class="fa-brands fa-xs fa-instagram"></i>
+                                            </a>
+                                            <a href="https://www.youtube.com" class="social-item">
+                                                <i class="fa-brands fa-xs fa-youtube"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer border-0 bg-transparent">
+                                <div class="d-flex flex-column">
+                                    <h4>정하은</h4>
+                                    <span class="font-3 accent-color">백엔드 개발 및 데이터베이스</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="pricing" class="section bg-attach-cover" style="background-image: url(image/bg_price.png); scroll-margin-top: 5.5rem;">
+            <!-- Section Pricing -->
+            <div class="r-container d-flex flex-column gap-5" style="padding-bottom: 6em;">
+                <div
+                    class="d-flex flex-column gap-2 align-items-center justify-content-center mx-auto text-center scrollanimation animated fadeInDown adr-7">
+                    <h6 class="text-accent">요금제</h6>
+                    <h3>부스트 클래스 요금제</h3>
+                    <p style="max-width: 800px;">
+                        목표에 맞는 플랜을 선택하세요! 풀타임 집중 과정이나 자기주도 학습 옵션 등, 여러분의 기술 커리어 투자를 쉽게 할 수 있도록 유연한 요금을 제공합니다.
+                    </p>
+                </div>
+                <div class="row row-cols-xl-3 row-cols-1">
+                    <div class="col mb-3 scrollanimation animated fadeInLeft adr-7">
+                        <div class="card card-accent">
+                            <div class="bg"></div>
+                            <div class="blob price"></div>
+                            <div class="d-flex flex-column gap-5 position-relative" style="z-index: 3;">
+                                <div class="d-flex flex-column gap-2">
+                                    <h4>전자책 플랜</h4>
+                                    <div class="d-flex flex-row heading mb-3 align-items-end">
+                                        <h2 class="m-0 fw-semibold">₩59,000</h2>
+                                        <h4 class="grey-hover">/원</h4>
+                                    </div>
+                                    <p class="m-0">
+                                        바이브코딩의 기초부터 실전까지, 체계적인 커리큘럼으로 홈페이지 제작의 모든 과정을 담았습니다.
+                                    </p>
+                                </div>
+                                <div class="w-max-content">
+                                    <a href="" class="btn btn-accent d-flex flex-row gap-2 justify-content-center">
+                                        <span>플랜 선택</span>
+                                    </a>
+                                </div>
+                                <hr class="m-0">
+                                <div class="d-flex flex-column gap-4">
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">코딩을 위한 준비</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">AI홈페이지 제작</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">데이터 저장과 배포</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">UI/UX디자인</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">고객을 줄서게 하는 방법</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-times fw-bold"></i>
+                                        </div>
+                                        <h6 class="grey-hover m-0">VOD 수강권</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-times fw-bold"></i>
+                                        </div>
+                                        <h6 class="grey-hover m-0">코드 지원</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-3 scrollanimation animated fadeIn adr-7">
+                        <div class="card card-accent">
+                            <div class="bg"></div>
+                            <div class="blob price"></div>
+                            <div class="d-flex flex-column gap-5 position-relative" style="z-index: 3;">
+                                <div class="d-flex flex-column gap-2">
+                                    <h4>1:1 수익화 플랜</h4>
+                                    <div class="d-flex flex-row heading mb-3 align-items-end">
+                                        <h2 class="m-0 fw-semibold">₩2,400,000</h2>
+                                        <h4 class="grey-hover">/원</h4>
+                                    </div>
+                                    <p class="m-0">
+                                        웹에이전시 대표의 생생한 밀착케어로 상황에 맞는 수익화 전략을 제시해드립니다.
+                                    </p>
+                                </div>
+                                <div class="w-max-content">
+                                    <a href="" class="btn btn-accent d-flex flex-row gap-2 justify-content-center">
+                                        <span>플랜 선택</span>
+                                    </a>
+                                </div>
+                                <hr class="m-0">
+                                <div class="d-flex flex-column gap-4">
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">올인원 플랜의 모든 내용 +</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">개인 맞춤 커리어 코칭</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">오프라인 주1회 한달 집중교육</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">수익쉐어 전략으로 일거리 제공가능</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">쇼핑몰 코드 제공</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">우수 수강자 강사 지원 자격</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-3 scrollanimation animated fadeInRight adr-7">
+                        <div class="card card-accent">
+                            <div class="bg"></div>
+                            <div class="blob price"></div>
+                            <div class="d-flex flex-column gap-5 position-relative" style="z-index: 3;">
+                                <div class="d-flex flex-column gap-2">
+                                    <h4>올인원 플랜</h4>
+                                    <div class="d-flex flex-row heading mb-3 align-items-end">
+                                        <h2 class="m-0 fw-semibold">₩230,000</h2>
+                                        <h4 class="grey-hover">/원</h4>
+                                    </div>
+                                    <p class="m-0">
+                                        전자책과 영상을 한번에! 최고의 가성비를 자랑하며 1달정도 배우시면 충분히 월급 이상 수익화 가능합니다.
+                                    </p>
+                                </div>
+                                <div class="w-max-content">
+                                    <a href="" class="btn btn-accent d-flex flex-row gap-2 justify-content-center">
+                                        <span>플랜 선택</span>
+                                    </a>
+                                </div>
+                                <hr class="m-0">
+                                <div class="d-flex flex-column gap-4">
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">전자책 플랜의 모든 내용 +</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">VOD수강권</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">특강수강권</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">빠른 피드백</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-check fw-bold"></i>
+                                        </div>
+                                        <h6 class="m-0">우수 수강자 채용</h6>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 align-items-center text-color-2">
+                                        <div class="social-item">
+                                            <i class="rtmicon rtmicon-times fw-bold"></i>
+                                        </div>
+                                        <h6 class="grey-hover m-0">코드 제공</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section FAQs -->
+            <div id="faq" class="r-container" style="padding-block: 6em;">
+                <div class="row row-cols-xl-2 row-cols-1">
+                    <div class="col mb-3 scrollanimation animated fadeInLeft adr-7">
+                        <div class="d-flex flex-column gap-2">
+                            <h6 class="text-accent">자주 묻는 질문</h6>
+                            <h3>궁금한 점이 있으신가요? 답변을 준비했습니다!</h3>
+                            <p>
+                                학습 여정을 시작하기 전 자주 묻는 질문들에 대한 답변을 확인하세요.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col mb-3 scrollanimation animated fadeInRight adr-7">
+                        <div class="d-flex flex-column gap-4 w-100">
+                            <div class="accordion mt-3 d-flex flex-column gap-4" id="faqAccordion1">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true"
+                                            aria-controls="faq1">
+                                            강의를 수강하려면 사전 코딩 경험이 필요한가요?
+                                        </button>
+                                    </h2>
+                                    <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion1">
+                                        <div class="accordion-body">
+                                            아니요, 사전 코딩 경험이 없어도 괜찮습니다. 저의 강의는 초보자부터 시작할 수 있도록 설계되었으며, 기초부터 차근차근 배울 수 있습니다.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                                            오프라인 강의는 노트북을 가져와야 하나요?
+                                        </button>
+                                    </h2>
+                                    <div id="faq2" class="accordion-collapse collapse show"
+                                        data-bs-parent="#faqAccordion1">
+                                        <div class="accordion-body">
+                                            네, 프로젝트를 실습하기 위해서는 노트북이 필요합니다. 필요한 프로그램을 설치하시고 오시면 됩니다.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false"
+                                            aria-controls="faq3">
+                                            홈페이지 제작까지 얼마나 배워야 하나요?
+                                        </button>
+                                    </h2>
+                                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion1">
+                                        <div class="accordion-body">
+                                            빠르면 일주일에서 한달동안 실습을 통해서 수익화 할 수 있게 해드립니다.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false"
+                                            aria-controls="faq4">
+                                            새로운 AI가 나오면 어떻게 하죠?
+                                        </button>
+                                    </h2>
+                                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion1">
+                                        <div class="accordion-body">
+                                            VOD를 계속해서 업로드해드립니다. 무료 혹은 회원은 합리적인 가격으로 유료로 시청하실 수 있습니다.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false"
+                                            aria-controls="faq5">
+                                            수강이 끝나도 계속 질문해도 되나요?
+                                        </button>
+                                    </h2>
+                                    <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion1">
+                                        <div class="accordion-body">
+                                            단톡방을 운영해서 회원제로 평생 케어해드립니다.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Blog -->
+        <div class="section" style="display: none;">
+            <div class="r-container d-flex flex-column gap-5">
+                <div class="row row-cols-xl-2 row-cols-1 align-items-center">
+                    <div class="col col-xl-5 mb-3 scrollanimation animated fadeInLeft adr-7">
+                        <div class="d-flex flex-column gap-2">
+                            <h6 class="text-accent">게시판 & 뉴스</h6>
+                            <h3>부스트클래스 소식 & 인사이트</h3>
+                        </div>
+                    </div>
+                    <div
+                        class="col col-xl-7 mb-3 justify-content-xl-end d-flex scrollanimation animated fadeInRight adr-7">
+                        <div class="d-flex flex-column gap-3" style="max-width: 450px;">
+                            <p>
+                                코딩 팁, 성공 스토리, 부트캠프 소식으로 최신 정보를 받아보세요!
+                            </p>
+                            <div class="w-max-content" style="justify-self: end;">
+                                <a href="blog.html"
+                                    class="btn btn-white-outline d-flex flex-row gap-2 justify-content-center">
+                                    <span>모든 게시물 보기</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-cols-xl-2 row-cols-1">
+                    <div class="col mb-3 scrollanimation animated fadeInLeft">
+                        <div class="card d-flex flex-column gap-4 position-relative">
+                            <div class="position-absolute top-0 start-0 px-3 py-1 bg-accent-color-3 rounded-pill"
+                                style="z-index: 2; margin-left: 2rem; margin-top: 2rem;">
+                                <span class="accent-color-primary">코딩 팁</span>
+                            </div>
+                            <img src="image/dummy-img-900x600.jpg" alt="" class="img-fluid rounded-4" style="aspect-ratio: 5/3;">
+                            <a href="blog-post.html">
+                                <div class="d-flex flex-column gap-2">
+                                    <p>2025년 1월 17일</p>
+                                    <h4 class="text-color font-1">30일 만에 JavaScript 마스터하기: 완벽 가이드</h4>
+                                    <p>
+                                        단 30일 만에 JavaScript를 배우는 효과적인 전략을 발견하세요! 단계별 가이드와 리소스를 제공합니다.
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col mb-3 scrollanimation animated fadeInRight">
+                        <div class="d-flex flex-column gap-4 ps-xl-3">
+                            <div class="card">
+                                <div class="row row-cols-xl-2 row-cols-1">
+                                    <div class="col mb-3 col-xl-5">
+                                        <img src="image/dummy-img-900x600.jpg" alt="" class="img-fluid rounded-4 h-100"
+                                            style="aspect-ratio: 5/3;">
+                                    </div>
+                                    <div class="col mb-3 col-xl-7">
+                                        <a href="blog-post.html">
+                                            <div class="d-flex flex-column">
+                                                <div class="d-flex flex-row gap-3">
+                                                    <p>부트캠프 업데이트</p>
+                                                    <p>2025년 1월 4일</p>
+                                                </div>
+                                                <h4 class="text-color font-1">부스트클래스 새로운 React 과정 출시!
+                                                </h4>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="row row-cols-xl-2 row-cols-1">
+                                    <div class="col mb-3 col-xl-5">
+                                        <img src="image/dummy-img-900x600.jpg" alt="" class="img-fluid rounded-4 h-100"
+                                            style="aspect-ratio: 5/3;">
+                                    </div>
+                                    <div class="col mb-3 col-xl-7">
+                                        <a href="blog-post.html">
+                                            <div class="d-flex flex-column">
+                                                <div class="d-flex flex-row gap-3">
+                                                    <p>기술 트렌드</p>
+                                                    <p>2025년 1월 5일</p>
+                                                </div>
+                                                <h4 class="text-color font-1">2025년에 배워야 할 프로그래밍 언어 TOP 5</h4>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="row row-cols-xl-2 row-cols-1">
+                                    <div class="col mb-3 col-xl-5">
+                                        <img src="image/dummy-img-900x600.jpg" alt="" class="img-fluid rounded-4 h-100"
+                                            style="aspect-ratio: 5/3;">
+                                    </div>
+                                    <div class="col mb-3 col-xl-7">
+                                        <a href="blog-post.html">
+                                            <div class="d-flex flex-column">
+                                                <div class="d-flex flex-row gap-3">
+                                                    <p>커리어 지원</p>
+                                                    <p>2025년 1월 3일</p>
+                                                </div>
+                                                <h4 class="text-color font-1">부스트클래스가 꿈의 직장 취업을 돕는 방법</h4>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Terms Modal -->
+    <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header bg-dark border-secondary">
+                    <h5 class="modal-title text-white" id="termsModalLabel">서비스 약관</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body bg-dark text-white">
+                    <div class="terms-content">
+                        <h6 class="text-white fw-bold">제1조(목적)</h6>
+                        <p>이 약관은 서배준 (전자상거래 사업자)가 운영하는 부스트웹 사이버 몰(이하 "몰"이라 한다)에서 제공하는 인터넷 관련 서비스(이하 "서비스"라 한다)를 이용함에 있어 사이버 몰과 이용자의 권리/ 의무 및 책임사항을 규정함을 목적으로 합니다.</p>
+                        <p class="text-muted">※「PC통신, 무선 등을 이용하는 전자상거래에 대해서도 그 성질에 반하지 않는 한 이 약관을 준용합니다.」</p>
+                        
+                        <h6 class="text-white fw-bold">제2조(정의)</h6>
+                        <p>① "몰"이란 부스트웹 회사가 재화 또는 용역(이하 "재화 등"이라 함)을 이용자에게 제공하기 위하여 컴퓨터 등 정보통신설비를 이용하여 재화 등을 거래할 수 있도록 설정한 가상의 영업장을 말하며, 아울러 사이버몰을 운영하는 사업자의 의미로도 사용합니다.</p>
+                        <p>② "이용자"란 "몰"에 접속하여 이 약관에 따라 "몰"이 제공하는 서비스를 받는 회원 및 비회원을 말합니다.</p>
+                        <p>③ '회원'이라 함은 "몰"에 회원등록을 한 자로서, 계속적으로 "몰"이 제공하는 서비스를 이용할 수 있는 자를 말합니다.</p>
+                        <p>④ '비회원'이라 함은 회원에 가입하지 않고 "몰"이 제공하는 서비스를 이용하는 자를 말합니다.</p>
+                        
+                        <h6 class="text-white fw-bold">제3조 (약관 등의 명시와 설명 및 개정)</h6>
+                        <p>① "몰"은 이 약관의 내용과 상호 및 대표자 성명, 영업소 소재지 주소(소비자의 불만을 처리할 수 있는 곳의 주소를 포함), 전화번호, 모사전송번호, 전자우편주소, 사업자등록번호, 통신판매업 신고번호, 개인정보보호책임자등을 이용자가 쉽게 알 수 있도록 부스트웹 사이버몰의 초기 서비스화면(전면)에 게시합니다. 다만, 약관의 내용은 이용자가 연결화면을 통하여 볼 수 있도록 할 수 있습니다.</p>
+                        <p>② "몰은 이용자가 약관에 동의하기에 앞서 약관에 정하여져 있는 내용 중 청약철회?배송책임?환불조건 등과 같은 중요한 내용을 이용자가 이해할 수 있도록 별도의 연결화면 또는 팝업화면 등을 제공하여 이용자의 확인을 구하여야 합니다.</p>
+                        <p>③ "몰"은 「전자상거래 등에서의 소비자보호에 관한 법률」, 「약관의 규제에 관한 법률」, 「전자문서 및 전자거래기본법」, 「전자금융거래법」, 「전자서명법」, 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」, 「방문판매 등에 관한 법률」, 「소비자기본법」 등 관련 법을 위배하지 않는 범위에서 이 약관을 개정할 수 있습니다.</p>
+                        <p>④ "몰"이 약관을 개정할 경우에는 적용일자 및 개정사유를 명시하여 현행약관과 함께 몰의 초기화면에 그 적용일자 7일 이전부터 적용일자 전일까지 공지합니다. 다만, 이용자에게 불리하게 약관내용을 변경하는 경우에는 최소한 30일 이상의 사전 유예기간을 두고 공지합니다. 이 경우 "몰"은 개정 전 내용과 개정 후 내용을 명확하게 비교하여 이용자가 알기 쉽도록 표시합니다.</p>
+                        <p>⑤ "몰"이 약관을 개정할 경우에는 그 개정약관은 그 적용일자 이후에 체결되는 계약에만 적용되고 그 이전에 이미 체결된 계약에 대해서는 개정 전의 약관조항이 그대로 적용됩니다. 다만 이미 계약을 체결한 이용자가 개정약관 조항의 적용을 받기를 원하는 뜻을 제3항에 의한 개정약관의 공지기간 내에 "몰"에 송신하여 "몰"의 동의를 받은 경우에는 개정약관 조항이 적용됩니다.</p>
+                        <p>⑥ 이 약관에서 정하지 아니한 사항과 이 약관의 해석에 관하여는 전자상거래 등에서의 소비자보호에 관한 법률, 약관의 규제 등에 관한 법률, 공정거래위원회가 정하는 전자상거래 등에서의 소비자 보호지침 및 관계법령 또는 상관례에 따릅니다.</p>
+                        
+                        <h6 class="text-white fw-bold">제4조(서비스의 제공 및 변경)</h6>
+                        <p>① "몰"은 다음과 같은 업무를 수행합니다.</p>
+                        <p>1. 재화 또는 용역에 대한 정보 제공 및 구매계약의 체결</p>
+                        <p>2. 구매계약이 체결된 재화 또는 용역의 배송</p>
+                        <p>3. 기타 "몰"이 정하는 업무</p>
+                        <p>② "몰"은 재화 또는 용역의 품절 또는 기술적 사양의 변경 등의 경우에는 장차 체결되는 계약에 의해 제공할 재화 또는 용역의 내용을 변경할 수 있습니다. 이 경우에는 변경된 재화 또는 용역의 내용 및 제공일자를 명시하여 현재의 재화 또는 용역의 내용을 게시한 곳에 즉시 공지합니다.</p>
+                        <p>③ "몰"이 제공하기로 이용자와 계약을 체결한 서비스의 내용을 재화등의 품절 또는 기술적 사양의 변경 등의 사유로 변경할 경우에는 그 사유를 이용자에게 통지 가능한 주소로 즉시 통지합니다.</p>
+                        <p>④ 전항의 경우 "몰"은 이로 인하여 이용자가 입은 손해를 배상합니다. 다만, "몰"이 고의 또는 과실이 없음을 입증하는 경우에는 그러하지 아니합니다.</p>
+                        
+                        <h6 class="text-white fw-bold">제5조(서비스의 중단)</h6>
+                        <p>① "몰"은 컴퓨터 등 정보통신설비의 보수점검 교체 및 고장, 통신의 두절 등의 사유가 발생한 경우에는 서비스의 제공을 일시적으로 중단할 수 있습니다.</p>
+                        <p>② "몰"은 제1항의 사유로 서비스의 제공이 일시적으로 중단됨으로 인하여 이용자 또는 제3자가 입은 손해에 대하여 배상합니다. 단, "몰"이 고의 또는 과실이 없음을 입증하는 경우에는 그러하지 아니합니다.</p>
+                        <p>③ 사업종목의 전환, 사업의 포기, 업체 간의 통합 등의 이유로 서비스를 제공할 수 없게 되는 경우에는 "몰"은 제8조에 정한 방법으로 이용자에게 통지하고 당초 "몰"에서 제시한 조건에 따라 소비자에게 보상합니다. 다만, "몰"이 보상기준 등을 고지하지 아니한 경우에는 이용자들의 마일리지 또는 적립금 등을 "몰"에서 통용되는 통화가치에 상응하는 현물 또는 현금으로 이용자에게 지급합니다.</p>
+                        
+                        <h6 class="text-white fw-bold">제6조(회원가입)</h6>
+                        <p>① 이용자는 "몰"이 정한 가입 양식에 따라 회원정보를 기입한 후 이 약관에 동의한다는 의사표시를 함으로서 회원가입을 신청합니다.</p>
+                        <p>② "몰"은 제1항과 같이 회원으로 가입할 것을 신청한 이용자 중 다음 각 호에 해당하지 않는 한 회원으로 등록합니다.</p>
+                        <p>1. 가입신청자가 이 약관 제7조제3항에 의하여 이전에 회원자격을 상실한 적이 있는 경우, 다만 제7조제3항에 의한 회원자격 상실 후 3년이 경과한 자로서 "몰"의 회원재가입 승낙을 얻은 경우에는 예외로 한다.</p>
+                        <p>2. 등록 내용에 허위, 기재누락, 오기가 있는 경우</p>
+                        <p>3. 기타 회원으로 등록하는 것이 "몰"의 기술상 현저히 지장이 있다고 판단되는 경우</p>
+                        <p>③ 회원가입계약의 성립 시기는 "몰"의 승낙이 회원에게 도달한 시점으로 합니다.</p>
+                        <p>④ 회원은 회원가입 시 등록한 사항에 변경이 있는 경우, 상당한 기간 이내에 "몰"에 대하여 회원정보 수정 등의 방법으로 그 변경사항을 알려야 합니다.</p>
+                        
+                        <h6 class="text-white fw-bold">제7조(회원 탈퇴 및 자격 상실 등)</h6>
+                        <p>① 회원은 "몰"에 언제든지 탈퇴를 요청할 수 있으며 "몰"은 즉시 회원탈퇴를 처리합니다.</p>
+                        <p>② 회원이 다음 각 호의 사유에 해당하는 경우, "몰"은 회원자격을 제한 및 정지시킬 수 있습니다.</p>
+                        <p>1. 가입 신청 시에 허위 내용을 등록한 경우</p>
+                        <p>2. "몰"을 이용하여 구입한 재화 등의 대금, 기타 "몰"이용에 관련하여 회원이 부담하는 채무를 기일에 지급하지 않는 경우</p>
+                        <p>3. 다른 사람의 "몰" 이용을 방해하거나 그 정보를 도용하는 등 전자상거래 질서를 위협하는 경우</p>
+                        <p>4. "몰"을 이용하여 법령 또는 이 약관이 금지하거나 공서양속에 반하는 행위를 하는 경우</p>
+                        <p>③ "몰"이 회원 자격을 제한?정지 시킨 후, 동일한 행위가 2회 이상 반복되거나 30일 이내에 그 사유가 시정되지 아니하는 경우 "몰"은 회원자격을 상실시킬 수 있습니다.</p>
+                        <p>④ "몰"이 회원자격을 상실시키는 경우에는 회원등록을 말소합니다. 이 경우 회원에게 이를 통지하고, 회원등록 말소 전에 최소한 30일 이상의 기간을 정하여 소명할 기회를 부여합니다.</p>
+                    </div>
+                </div>
+                <div class="modal-footer bg-dark border-secondary">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header bg-dark border-secondary">
+                    <h5 class="modal-title text-white" id="privacyModalLabel">개인정보처리방침</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body bg-dark text-white">
+                    <div class="privacy-content">
+                        <p>부스트웹은 (이하 "회사"는) 고객님의 개인정보를 중요시하며, "정보통신망 이용촉진 및 정보보호"에 관한 법률을 준수하고 있습니다.</p>
+                        <p>회사는 개인정보처리방침을 통하여 고객님께서 제공하시는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며, 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.</p>
+                        
+                        <h6 class="text-white fw-bold">■ 수집하는 개인정보 항목 및 수집방법</h6>
+                        <p><strong>가. 수집하는 개인정보의 항목</strong></p>
+                        <p>o 회사는 회원가입, 상담, 서비스 신청 등을 위해 아래와 같은 개인정보를 수집하고 있습니다.</p>
+                        <p>- 회원가입시 : 이름 , 생년월일 , 성별 , 로그인ID , 비밀번호 , 자택 전화번호 , 휴대전화번호 , 이메일 , 14세미만 가입자의 경우 법정대리인의 정보</p>
+                        <p>- 서비스 신청시 : 주소, 결제 정보</p>
+                        <p>o 서비스 이용 과정이나 사업 처리 과정에서 서비스이용기록, 접속로그, 쿠키, 접속 IP, 결제 기록, 불량이용 기록이 생성되어 수집될 수 있습니다.</p>
+                        
+                        <p><strong>나. 수집방법</strong></p>
+                        <p>- 홈페이지, 서면양식, 게시판, 이메일, 이벤트 응모, 배송요청, 전화, 팩스, 생성 정보 수집 툴을 통한 수집</p>
+                        
+                        <h6 class="text-white fw-bold">■ 개인정보의 수집 및 이용목적</h6>
+                        <p>회사는 수집한 개인정보를 다음의 목적을 위해 활용합니다.</p>
+                        <p><strong>o 서비스 제공에 관한 계약 이행 및 서비스 제공에 따른 요금정산</strong></p>
+                        <p>콘텐츠 제공 , 구매 및 요금 결제 , 물품배송 또는 청구지 등 발송 , 금융거래 본인 인증 및 금융 서비스</p>
+                        <p><strong>o 회원 관리</strong></p>
+                        <p>회원제 서비스 이용에 따른 본인확인 , 개인 식별 , 불량회원의 부정 이용 방지와 비인가 사용 방지 , 가입 의사 확인 , 연령확인 , 만14세 미만 아동 개인정보 수집 시 법정 대리인 동의여부 확인, 불만처리 등 민원처리 , 고지사항 전달</p>
+                        <p><strong>o 마케팅 및 광고에 활용</strong></p>
+                        <p>이벤트 등 광고성 정보 전달 , 접속 빈도 파악 또는 회원의 서비스 이용에 대한 통계</p>
+                        
+                        <h6 class="text-white fw-bold">■ 개인정보의 보유 및 이용기간</h6>
+                        <p>원칙적으로, 개인정보 수집 및 이용목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다. 단, 다음의 정보에 대해서는 아래의 이유로 명시한 기간 동안 보존합니다.</p>
+                        
+                        <p><strong>가. 회사 내부방침에 의한 정보보유 사유</strong></p>
+                        <p>회원이 탈퇴한 경우에도 불량회원의 부정한 이용의 재발을 방지, 분쟁해결 및 수사기관의 요청에 따른 협조를 위하여, 이용계약 해지일로부터 5년간 회원의 정보를 보유할 수 있습니다.</p>
+                        
+                        <p><strong>나. 관련 법령에 의한 정보 보유 사유</strong></p>
+                        <p>전자상거래등에서의소비자보호에관한법률 등 관계법령의 규정에 의하여 보존할 필요가 있는 경우 회사는 아래와 같이 관계법령에서 정한 일정한 기간 동안 회원정보를 보관합니다.</p>
+                        <p>o 계약 또는 청약철회 등에 관한 기록<br>-보존이유 : 전자상거래등에서의소비자보호에관한법률<br>-보존기간 : 5년</p>
+                        <p>o 대금 결제 및 재화 등의 공급에 관한 기록<br>-보존이유: 전자상거래등에서의소비자보호에관한법률<br>-보존기간 : 5년</p>
+                        <p>o 소비자 불만 또는 분쟁처리에 관한 기록<br>-보존이유 : 전자상거래등에서의소비자보호에관한법률<br>-보존기간 : 3년</p>
+                        <p>o 로그 기록<br>-보존이유: 통신비밀보호법<br>-보존기간 : 3개월</p>
+                        
+                        <h6 class="text-white fw-bold">■ 개인정보의 파기절차 및 방법</h6>
+                        <p>회사는 원칙적으로 개인정보 수집 및 이용목적이 달성된 후에는 해당 정보를 지체없이 파기합니다. 파기절차 및 방법은 다음과 같습니다.</p>
+                        <p><strong>o 파기절차</strong></p>
+                        <p>회원님이 회원가입 등을 위해 입력하신 정보는 목적이 달성된 후 별도의 DB로 옮겨져(종이의 경우 별도의 서류함) 내부 방침 및 기타 관련 법령에 의한 정보보호 사유에 따라(보유 및 이용기간 참조) 일정 기간 저장된 후 파기되어집니다.</p>
+                        <p>별도 DB로 옮겨진 개인정보는 법률에 의한 경우가 아니고서는 보유되어지는 이외의 다른 목적으로 이용되지 않습니다.</p>
+                        <p><strong>o 파기방법</strong></p>
+                        <p>전자적 파일형태로 저장된 개인정보는 기록을 재생할 수 없는 기술적 방법을 사용하여 삭제합니다.</p>
+                        
+                        <h6 class="text-white fw-bold">■ 개인정보 제공</h6>
+                        <p>회사는 이용자의 개인정보를 원칙적으로 외부에 제공하지 않습니다. 다만, 아래의 경우에는 예외로 합니다.</p>
+                        <p>o 이용자들이 사전에 동의한 경우</p>
+                        <p>o 법령의 규정에 의거하거나, 수사 목적으로 법령에 정해진 절차와 방법에 따라 수사기관의 요구가 있는 경우</p>
+                        
+                        <h6 class="text-white fw-bold">■ 수집한 개인정보의 위탁</h6>
+                        <p>회사는 서비스 이행을 위해 아래와 같이 외부 전문업체에 위탁하여 운영하고 있습니다.</p>
+                        <p>o 위탁 대상자 : [KCP]</p>
+                        <p>o 위탁업무 내용 : [카드결제/ 계좌이체/ 휴대폰결제]</p>
+                        
+                        <h6 class="text-white fw-bold">■ 이용자 및 법정대리인의 권리와 그 행사방법</h6>
+                        <p>o 이용자는 언제든지 등록되어 있는 자신의 개인정보를 조회하거나 수정할 수 있으며 가입해지를 요청할 수도 있습니다.</p>
+                        <p>o 이용자들의 개인정보 조회,수정을 위해서는 "개인정보변경"(또는 "회원정보수정" 등)을 가입해지(동의철회)를 위해서는 "회원탈퇴"를 클릭하여 본인 확인 절차를 거치신 후 직접 열람, 정정 또는 탈퇴가 가능합니다.</p>
+                        <p>o 혹은 개인정보보호책임자에게 서면, 전화 또는 이메일로 연락하시면 지체없이 조치하겠습니다.</p>
+                        <p>o 귀하가 개인정보의 오류에 대한 정정을 요청하신 경우에는 정정을 완료하기 전까지 당해 개인정보를 이용 또는 제공하지 않습니다. 또한 잘못된 개인정보를 제3자에게 이미 제공한 경우에는 정정 처리결과를 제3자에게 지체없이 통지하여 정정이 이루어지도록 하겠습니다.</p>
+                        <p>o 회사는 이용자의 요청에 의해 해지 또는 삭제된 개인정보는 "회사가 수집하는 개인정보의 보유 및 이용기간"에 명시된 바에 따라 처리하고 그 외의 용도로 열람 또는 이용할 수 없도록 처리하고 있습니다.</p>
+                        
+                        <h6 class="text-white fw-bold">■ 개인정보 자동수집 장치의 설치, 운영 및 그 거부에 관한 사항</h6>
+                        <p>회사는 귀하의 정보를 수시로 저장하고 찾아내는 "쿠키(cookie)" 등을 운용합니다. 쿠키란 웹사이트를 운영하는데 이용되는 서버가 귀하의 브라우저에 보내는 아주 작은 텍스트 파일로서 귀하의 컴퓨터 하드디스크에 저장됩니다.</p>
+                        <p>회사은(는) 다음과 같은 목적을 위해 쿠키를 사용합니다.</p>
+                        <p><strong>o 쿠키 등 사용 목적</strong></p>
+                        <p>1. 회원과 비회원의 접속 빈도나 방문 시간 등을 분석, 이용자의 취향과 관심분야를 파악 및 자취 추적, 각종 이벤트 참여 정도 및 방문 회수 파악 등을 통한 타겟 마케팅 및 개인 맞춤 서비스 제공</p>
+                        <p>2. 귀하는 쿠키 설치에 대한 선택권을 가지고 있습니다. 따라서, 귀하는 웹브라우저에서 옵션을 설정함으로써 모든 쿠키를 허용하거나, 쿠키가 저장될 때마다 확인을 거치거나, 아니면 모든 쿠키의 저장을 거부할 수도 있습니다.</p>
+                        <p><strong>o 쿠키 설정 거부 방법</strong></p>
+                        <p>1. 쿠키 설정을 거부하는 방법으로는 회원님이 사용하시는 웹 브라우저의 옵션을 선택함으로써 모든 쿠키를 허용하거나 쿠키를 저장할 때마다 확인을 거치거나, 모든 쿠키의 저장을 거부할 수 있습니다.</p>
+                        <p>2. 설정방법 예(인터넷 익스플로어의 경우) : 웹 브라우저 상단의 도구 > 인터넷 옵션 > 개인정보</p>
+                        <p>3. 단, 귀하께서 쿠키 설치를 거부하였을 경우 서비스 제공에 어려움이 있을 수 있습니다.</p>
+                        
+                        <h6 class="text-white fw-bold">■ 개인정보에 관한 민원서비스</h6>
+                        <p>회사는 고객의 개인정보를 보호하고 개인정보와 관련한 불만을 처리하기 위하여 아래와 같이 관련 부서 및 개인정보보호책임자를 지정하고 있습니다.</p>
+                        <p><strong>o 개인정보보호담당자</strong><br>성명 : 서배준<br>소속 : 부스트웹<br>전화번호 : 010-3673-6942<br>이메일 : sprince1004@naver.com</p>
+                        <p><strong>o 개인정보보호책임자</strong><br>성명 : 서배준<br>소속 : 부스트웹<br>전화번호 : 010-3673-6942<br>이메일 : sprince1004@naver.com</p>
+                        <p>o 귀하께서는 회사의 서비스를 이용하시며 발생하는 모든 개인정보보호 관련 민원을 개인정보보호책임자 혹은 담당부서로 신고하실 수 있습니다.</p>
+                        <p>o 회사는 이용자들의 신고사항에 대해 신속하게 충분한 답변을 드릴 것입니다.</p>
+                        <p>o 기타 개인정보침해에 대한 신고나 상담이 필요하신 경우에는 아래 기관에 문의하시기 바랍니다.</p>
+                        <p>개인정보침해신고센터 (privacy.kisa.or.kr / 국번 없이 118)<br>대검찰청 사이버범죄수사단 (www.spo.go.kr / 02-3480-2000)<br>경찰청 사이버안전국 (www.ctrc.go.kr/ 국번 없이 182)</p>
+                    </div>
+                </div>
+                <div class="modal-footer bg-dark border-secondary">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Us (open9 스타일 레이아웃 + 기존 입력폼 항목) -->
+    <section class="section contact-us-section py-5" id="contact" style="background: #1a1a1a;">
+        <div class="r-container">
+            <div class="text-center mb-5">
+                <h2 class="text-white mb-2">Contact Us</h2>
+                <p class="text-white-50">답변은 마이페이지에서 확인하실 수 있습니다. 편하게 문의해 주세요.</p>
+            </div>
+            <form class="d-flex flex-column gap-1 w-100 needs-validation form" novalidate>
+                <input type="text" name="action" value="appointment" hidden>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-4">
+                        <input type="text" class="form-control form-control-lg bg-dark text-white py-3 px-4 contact-form-border" name="name" id="footer_name" placeholder="이름" required>
+                        <div class="invalid-feedback">필수 입력 사항입니다.</div>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="email" class="form-control form-control-lg bg-dark text-white py-3 px-4 contact-form-border" name="email" id="footer_email" placeholder="이메일" required>
+                        <div class="invalid-feedback">필수 입력 사항입니다.</div>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="tel" class="form-control form-control-lg bg-dark text-white py-3 px-4 contact-form-border" name="phone" id="footer_phone" placeholder="전화번호" required>
+                        <div class="invalid-feedback">필수 입력 사항입니다.</div>
+                    </div>
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <select name="bootcamp" id="footer_bootcamp" class="form-select form-control-lg bg-dark text-white py-3 px-4 contact-form-border">
+                            <option value="" selected>부트캠프 프로그램 선택 (선택사항)</option>
+                            <option value="1">전자책 플랜</option>
+                            <option value="2">올인원 플랜</option>
+                            <option value="3">1:1 수익화 플랜</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <select name="location" id="footer_location" class="form-select form-control-lg bg-dark text-white py-3 px-4 contact-form-border">
+                            <option value="" selected>선호 장소 (선택사항)</option>
+                            <option value="1">서울 (오프라인)</option>
+                            <option value="2">천안 (오프라인)</option>
+                            <option value="3">온라인 (원격)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <textarea class="form-control form-control-lg bg-dark text-white py-3 px-4 contact-form-border" id="footer_message" name="message" rows="4" placeholder="메시지" required></textarea>
+                    <div class="invalid-feedback">필수 입력 사항입니다.</div>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-accent submit_appointment d-flex justify-content-center gap-2 rounded-4 px-4 py-3">
+                        <span>등록하기</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" style="background: #111; color: #fff;">
+        <div class="r-container py-5">
+            <div class="row g-4 align-items-start mb-5">
+                <div class="col-12 col-md-3 col-lg-2 text-start footer-logo-col">
+                    <a href="index.html" class="home-brand-logo-text home-brand-logo-text--footer d-inline-block" aria-label="부스트 클래스 홈">BOOST CLASS</a>
+                </div>
+                <div class="col-12 col-md-6 col-lg-7 text-start">
+                    <div class="d-flex flex-column gap-2 text-white-50 small">
+                        <p class="mb-0">회사명 : 부스트클래스<span class="d-none d-md-inline"> | </span><br class="d-md-none">대표자 : 서배준<span class="d-none d-md-inline"> | </span><br class="d-md-none">연락처 : 010-3673-6942</p>
+                        <p class="mb-0">사업자등록번호 : 152-74-00452<span class="d-none d-md-inline"> | </span><br class="d-md-none">통신판매신고번호 : 제2024-충남천안-2840호</p>
+                        <p class="mb-0">주소 : 충청남도 천안시 서북구 월봉로 126, 901-17호(쌍용동, 대림프라자)</p>
+                        <p class="mb-0">개인정보보호 최고책임자 : 서배준<span class="d-none d-md-inline"> | </span><br class="d-md-none">담당자 메일 : sprince1004@naver.com</p>
+                        <p class="mb-0">카카오뱅크 3333-32-0313102 부스트클래스</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-3 col-lg-3 text-start">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><a href="index.html#hero" class="text-white-50 text-decoration-none">홈</a></li>
+                        <li class="mb-2"><a href="course-list.html" class="text-white-50 text-decoration-none">강의 수강</a></li>
+                        <li class="mb-2"><a href="ebook.html" class="text-white-50 text-decoration-none">전자책</a></li>
+                        <li class="mb-2"><a href="about.html" class="text-white-50 text-decoration-none">사이트 바로가기</a></li>
+                        <li class="mb-2"><a href="blog.html" class="text-white-50 text-decoration-none">게시판</a></li>
+                        <li class="mb-2"><a href="#contact" class="text-white-50 text-decoration-none">문의하기</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-4 border-top border-secondary d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+                <p class="mb-0 text-white-50 small">© Copyright 2025. All Rights Reserved 부스트클래스</p>
+                <div class="d-flex gap-3">
+                    <a href="#" class="text-white-50 text-decoration-none small" data-bs-toggle="modal" data-bs-target="#termsModal">이용약관</a>
+                    <a href="#" class="text-white-50 text-decoration-none small" data-bs-toggle="modal" data-bs-target="#privacyModal">개인정보처리방침</a>
+                    <span id="footerAdminLink" class="d-none"><a href="admin/xhtml/page-lock-screen.html" class="text-white-50 text-decoration-none small" target="_blank" rel="noopener">관리자</a></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Scripts -->
+    <script src="js/referral-capture.js"></script>
+    <script src="js/vendor/jquery.min.js"></script>
+    <script src="js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="js/vendor/swiper-bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/swiper-script.js"></script>
+    <script src="js/submit-form.js"></script>
+    <script src="js/vendor/isotope.pkgd.min.js"></script>
+    <script src="js/video_embedded.js"></script>
+    <script src="js/vendor/fslightbox.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/gh/shishirraven/animate-on-scroll@v1.0/oyethemes_onscroll_animation.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script>
+(function() {
+  var ADMIN_EMAIL = 'sprince1004@naver.com';
+  var config = {
+    apiKey: "AIzaSyCijM7nOf7xYPKevbOsRrrZTA6XwgODeIM",
+    authDomain: "boostclass-7d4fd.firebaseapp.com",
+    projectId: "boostclass-7d4fd",
+    storageBucket: "boostclass-7d4fd.firebasestorage.app",
+    messagingSenderId: "774803491487",
+    appId: "1:774803491487:web:daada5b95008a14c2730aa"
+  };
+  if (typeof firebase === 'undefined') return;
+  firebase.initializeApp(config);
+  var auth = firebase.auth();
+  function updateHeader(user) {
+    var guest = document.getElementById('headerGuest');
+    var userEl = document.getElementById('headerUser');
+    if (guest && userEl) {
+      if (user) {
+        guest.classList.add('d-none');
+        userEl.classList.remove('d-none');
+      } else {
+        guest.classList.remove('d-none');
+        userEl.classList.add('d-none');
+      }
+    }
+    var footerAdmin = document.getElementById('footerAdminLink');
+    if (footerAdmin) {
+      if (user && user.email === ADMIN_EMAIL) {
+        footerAdmin.classList.remove('d-none');
+      } else {
+        footerAdmin.classList.add('d-none');
+      }
+    }
+  }
+  auth.onAuthStateChanged(function(user) { updateHeader(user); });
+  document.getElementById('btnHeaderLogout') && document.getElementById('btnHeaderLogout').addEventListener('click', function() {
+    auth.signOut();
+  });
+})();
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="js/member-notifications.js"></script>
+    <script src="js/inquiry-service.js"></script>
+    <script src="js/contact-auth-inquiry.js"></script>
+</body>
+
+</html>

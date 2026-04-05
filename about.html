@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shishirraven/animate-on-scroll@v1.2/animation_utility.css">
+    <link rel="icon" type="image/svg+xml" href="image/favicon.svg">
+    <title>Recode - About Us</title>
+    <style>
+        a.card-accent { text-decoration: none; color: inherit; display: flex; }
+        .card-accent:hover .site-link {
+            color: #000 !important;
+            -webkit-text-fill-color: #000 !important;
+            background: none !important;
+            -webkit-background-clip: unset !important;
+            background-clip: unset !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="header" class="fixed-top bg-accent-transparent glass-effect py-0" style="z-index: 9999;">
+        <nav class="navbar navbar-expand-xl">
+            <div class="r-container w-100 px-3 px-xl-5 d-flex flex-nowrap align-items-center">
+                <div class="logo-container flex-shrink-0">
+                    <a class="navbar-brand home-brand-logo-text" href="index.html" aria-label="부스트 클래스 홈">BOOST CLASS</a>
+                </div>
+                <button class="navbar-toggler flex-shrink-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa-solid fa-bars-staggered accent-color-2"></i>
+                </button>
+                <div class="collapse navbar-collapse flex-grow-1 flex-nowrap min-w-0" id="navbarNav">
+                    <ul class="navbar-nav ms-xl-4 ps-xl-5 me-auto mb-2 mb-xl-0 gap-1 py-2 py-xl-0 nav-links-nowrap">
+                        <li class="nav-item"><a class="nav-link" href="index.html">홈</a></li>
+                        <li class="nav-item"><a class="nav-link" href="course-list.html">강의 수강</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="ebook.html">전자책</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="about.html">사이트 바로가기</a>
+                        </li>
+                        <li class="nav-item d-none"><a class="nav-link" href="mentor.html">멘토</a></li>
+                        <li class="nav-item d-none"><a class="nav-link" href="pricing-plan.html">가격</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="blog.html">무료 게시판</a></li>
+                                <li><a class="dropdown-item" href="blog-post.html">유료 게시판</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#contact">문의</a></li>
+                    </ul>
+                    <div class="mb-xl-0 mb-3 d-flex flex-xl-row flex-column gap-3 w-max-content ps-xl-3" id="headerAuthWrap">
+                        <div id="headerGuest" class="d-flex flex-xl-row flex-column gap-3 w-max-content">
+                            <a href="register.html" class="btn btn-accent accent d-flex flex-row gap-2 justify-content-center"><span>회원가입</span></a>
+                            <a href="login.html" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그인</span></a>
+                        </div>
+                        <div id="headerUser" class="d-flex flex-xl-row flex-column gap-3 w-max-content align-items-center d-none">
+                            <a href="mypage.html" class="text-accent text-decoration-none">마이페이지</a>
+                            <button type="button" id="btnHeaderLogout" class="btn btn-accent d-flex flex-row gap-2 justify-content-center"><span>로그아웃</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- End Header -->
+
+    <!-- Main -->
+    <main>
+        <div class="section bg-attach-cover" style="margin-top: 6em; background-image: url(image/bg_support.png);">
+            <!-- Section Career Support -->
+            <div class="r-container d-flex flex-column gap-5" style="padding-bottom: 6em;">
+                <div class="row row-cols-xl-2 row-cols-1 align-items-end">
+                    <div class="col mb-3 scrollanimation animated fadeInLeft adr-7">
+                        <div class="d-flex flex-column gap-5" style="max-width: 500px;">
+                            <div class="d-flex flex-column gap-2 ">
+                                <h6 class="text-accent">홈페이지</h6>
+                                <h3 style="font-size: 1.85rem;">필수 설치 사이트</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-cols-xl-3 row-cols-1">
+                    <div class="col mb-3">
+                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="card-accent">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-xl-start">
+                                <h4>깃허브</h4>
+                                <p>코드 버전 관리와 협업을 위한 플랫폼입니다.<br>소스를 저장·공유하고 팀과 함께 프로젝트를 진행할 수 있습니다.</p>
+                                <span class="site-link text-accent small">https://github.com</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col mb-3">
+                        <a href="https://www.python.org" target="_blank" rel="noopener noreferrer" class="card-accent">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-xl-start">
+                                <h4>파이썬</h4>
+                                <p>웹 개발, 데이터 분석, 자동화 등에 쓰이는 프로그래밍 언어입니다.<br>문법이 쉽고 다양한 분야에서 활용됩니다.</p>
+                                <span class="site-link text-accent small">https://www.python.org</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col mb-3">
+                        <a href="https://nodejs.org" target="_blank" rel="noopener noreferrer" class="card-accent">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-xl-start">
+                                <h4>노드제이에스</h4>
+                                <p>JavaScript로 서버·백엔드·네트워크 프로그램을 만드는 런타임입니다.<br>프론트와 같은 언어로 풀스택 개발이 가능합니다.</p>
+                                <span class="site-link text-accent small">https://nodejs.org</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 디자인 사이트 -->
+                <div class="row row-cols-xl-2 row-cols-1 align-items-end">
+                    <div class="col mb-3 scrollanimation animated fadeInLeft adr-7">
+                        <div class="d-flex flex-column gap-5" style="max-width: 500px;">
+                            <div class="d-flex flex-column gap-2 ">
+                                <h6 class="text-accent">홈페이지 디자인</h6>
+                                <h3 style="font-size: 1.85rem;">디자인 사이트</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-cols-xl-3 row-cols-1">
+                    <div class="col mb-3">
+                        <a href="https://21st.dev/home" target="_blank" rel="noopener noreferrer" class="card-accent">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-xl-start">
+                                <h4>21st.dev</h4>
+                                <p>버튼, 폼, 카드 등 UI 컴포넌트 레퍼런스 사이트입니다.<br>모던한 웹 컴포넌트 디자인을 참고할 수 있습니다.</p>
+                                <span class="site-link text-accent small">https://21st.dev/home</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col mb-3">
+                        <a href="https://uiverse.io/" target="_blank" rel="noopener noreferrer" class="card-accent">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-xl-start">
+                                <h4>uiverse.io</h4>
+                                <p>무료로 CSS·HTML 컴포넌트 코드를 복사해 쓸 수 있는 갤러리입니다.<br>버튼, 카드, 로딩 애니메이션 등 다양한 UI를 제공합니다.</p>
+                                <span class="site-link text-accent small">https://uiverse.io</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col mb-3">
+                        <a href="https://www.cta.gallery/" target="_blank" rel="noopener noreferrer" class="card-accent">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-xl-start">
+                                <h4>cta.gallery</h4>
+                                <p>콜투액션(CTA) 버튼·배너 디자인 모음입니다.<br>전환을 유도하는 CTA 레이아웃과 문구를 참고할 수 있습니다.</p>
+                                <span class="site-link text-accent small">https://www.cta.gallery</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col mb-3">
+                        <a href="https://www.supahero.io/" target="_blank" rel="noopener noreferrer" class="card-accent">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-xl-start">
+                                <h4>supahero.io</h4>
+                                <p>랜딩·서비스 페이지의 섹션 디자인 레퍼런스입니다.<br>히어로, 기능 소개, 가격표 등 섹션별 예시를 볼 수 있습니다.</p>
+                                <span class="site-link text-accent small">https://www.supahero.io</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col mb-3">
+                        <a href="https://www.footer.design/" target="_blank" rel="noopener noreferrer" class="card-accent">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-xl-start">
+                                <h4>footer.design</h4>
+                                <p>웹사이트 푸터 디자인 모음입니다.<br>링크 구성, SNS, 뉴스레터 등 푸터 레이아웃을 참고할 수 있습니다.</p>
+                                <span class="site-link text-accent small">https://www.footer.design</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col mb-3">
+                        <a href="https://www.navbar.gallery/" target="_blank" rel="noopener noreferrer" class="card-accent">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-xl-start">
+                                <h4>navbar.gallery</h4>
+                                <p>네비게이션 바·헤더 디자인 갤러리입니다.<br>상단 메뉴, 로고 배치, 반응형 네비 레이아웃을 참고할 수 있습니다.</p>
+                                <span class="site-link text-accent small">https://www.navbar.gallery</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col mb-3">
+                        <a href="https://www.landing.love/" target="_blank" rel="noopener noreferrer" class="card-accent">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-xl-start">
+                                <h4>landing.love</h4>
+                                <p>랜딩 페이지 디자인 컬렉션입니다.<br>서비스 소개, 앱·웹 프로모션 페이지 레이아웃을 참고할 수 있습니다.</p>
+                                <span class="site-link text-accent small">https://www.landing.love</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col mb-3">
+                        <a href="https://bentogrids.com/" target="_blank" rel="noopener noreferrer" class="card-accent">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-xl-start">
+                                <h4>bentogrids.com</h4>
+                                <p>벤토 그리드·레이아웃 레퍼런스입니다.<br>카드 그리드, 갤러리, 대시보드형 레이아웃을 참고할 수 있습니다.</p>
+                                <span class="site-link text-accent small">https://bentogrids.com</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col mb-3">
+                        <a href="https://vibedesignlab.net/" target="_blank" rel="noopener noreferrer" class="card-accent">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-xl-start">
+                                <h4>vibedesignlab</h4>
+                                <p>웹·앱 디자인 트렌드와 레퍼런스 사이트입니다.<br>타이포, 컬러, 컴포넌트 등 디자인 인사이트를 얻을 수 있습니다.</p>
+                                <span class="site-link text-accent small">https://vibedesignlab.net</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col mb-3">
+                        <a href="https://mobbin.com/" target="_blank" rel="noopener noreferrer" class="card-accent">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-xl-start">
+                                <h4>mobbin.com</h4>
+                                <p>앱·웹 UI/UX 종합 레퍼런스입니다.<br>실제 서비스 화면을 모아 둔 갤러리로 플로우와 패턴을 참고할 수 있습니다.</p>
+                                <span class="site-link text-accent small">https://mobbin.com</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col mb-3">
+                        <a href="https://godly.website/" target="_blank" rel="noopener noreferrer" class="card-accent">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-xl-start">
+                                <h4>godly.website</h4>
+                                <p>웹사이트 디자인 종합 갤러리입니다.<br>랜딩, 포트폴리오, 이커머스 등 다양한 사례를 카테고리별로 볼 수 있습니다.</p>
+                                <span class="site-link text-accent small">https://godly.website</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col mb-3">
+                        <a href="https://saaspo.com/" target="_blank" rel="noopener noreferrer" class="card-accent">
+                            <div class="bg"></div>
+                            <div class="blob"></div>
+                            <div class="card-content text-xl-start">
+                                <h4>saaspo.com</h4>
+                                <p>SaaS·스타트업 웹사이트 종합 사례 모음입니다.<br>가격 페이지, 기능 소개, 헤로 섹션 등 실서비스 레이아웃을 참고할 수 있습니다.</p>
+                                <span class="site-link text-accent small">https://saaspo.com</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer" style="background: #111; color: #fff;">
+        <div class="r-container py-5">
+            <div class="row g-4 align-items-start mb-5">
+                <div class="col-12 col-md-3 col-lg-2 text-start">
+                    <a href="index.html" class="home-brand-logo-text home-brand-logo-text--footer d-inline-block" aria-label="부스트 클래스 홈">BOOST CLASS</a>
+                </div>
+                <div class="col-12 col-md-6 col-lg-7 text-start">
+                    <div class="d-flex flex-column gap-2 text-white-50 small">
+                        <p class="mb-0">회사명 : 부스트클래스<span class="d-none d-md-inline"> | </span><br class="d-md-none">대표자 : 서배준<span class="d-none d-md-inline"> | </span><br class="d-md-none">연락처 : 010-3673-6942</p>
+                        <p class="mb-0">사업자등록번호 : 152-74-00452<span class="d-none d-md-inline"> | </span><br class="d-md-none">통신판매신고번호 : 제2024-충남천안-2840호</p>
+                        <p class="mb-0">주소 : 충청남도 천안시 서북구 월봉로 126, 901-17호(쌍용동, 대림프라자)</p>
+                        <p class="mb-0">개인정보보호 최고책임자 : 서배준<span class="d-none d-md-inline"> | </span><br class="d-md-none">담당자 메일 : sprince1004@naver.com</p>
+                        <p class="mb-0">카카오뱅크 3333-32-0313102 부스트클래스</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-3 col-lg-3 text-start">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><a href="index.html#hero" class="text-white-50 text-decoration-none">홈</a></li>
+                        <li class="mb-2"><a href="course-list.html" class="text-white-50 text-decoration-none">강의 수강</a></li>
+                        <li class="mb-2"><a href="ebook.html" class="text-white-50 text-decoration-none">전자책</a></li>
+                        <li class="mb-2"><a href="about.html" class="text-white-50 text-decoration-none">사이트 바로가기</a></li>
+                        <li class="mb-2"><a href="blog.html" class="text-white-50 text-decoration-none">게시판</a></li>
+                        <li class="mb-2"><a href="index.html#contact" class="text-white-50 text-decoration-none">문의하기</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-4 border-top border-secondary d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+                <p class="mb-0 text-white-50 small">© Copyright 2025. All Rights Reserved 부스트클래스</p>
+                <div class="d-flex gap-3">
+                    <a href="index.html" class="text-white-50 text-decoration-none small">이용약관</a>
+                    <a href="index.html" class="text-white-50 text-decoration-none small">개인정보처리방침</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="js/referral-capture.js"></script>
+    <script src="js/header-auth.js"></script>
+    <script src="js/vendor/jquery.min.js"></script>
+    <script src="js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="js/vendor/swiper-bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/swiper-script.js"></script>
+    <script src="js/submit-form.js"></script>
+    <script src="js/vendor/isotope.pkgd.min.js"></script>
+    <script src="js/video_embedded.js"></script>
+    <script src="js/vendor/fslightbox.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/gh/shishirraven/animate-on-scroll@v1.0/oyethemes_onscroll_animation.js"></script>
+</body>
+
+</html>

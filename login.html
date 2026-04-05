@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/svg+xml" href="image/favicon.svg">
+    <title>로그인 - 부스트클래스</title>
+    <style>
+        .auth-section { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem 0; margin-top: 80px; }
+        .auth-card { max-width: 420px; width: 100%; }
+        .auth-card .form-control { padding: 0.75rem 1rem; }
+    </style>
+</head>
+<body>
+    <!-- 상단: 로고 없음, 홈으로만 -->
+    <div id="header" class="fixed-top bg-accent-transparent glass-effect py-0" style="z-index: 9999;">
+        <nav class="navbar navbar-expand-xl">
+            <div class="r-container w-100 px-3 px-xl-5 d-flex align-items-center justify-content-end">
+                <a href="index.html" class="btn btn-accent">홈으로</a>
+            </div>
+        </nav>
+    </div>
+
+    <section class="auth-section">
+        <div class="auth-card">
+            <h2 class="text-center mb-2">로그인</h2>
+            <p class="text-center text-white-50 mb-4">부스트클래스 계정으로 로그인하세요</p>
+            <div id="loginError" class="alert alert-danger d-none mb-3" role="alert"></div>
+            <form id="loginForm" novalidate>
+                <div class="mb-3">
+                    <label for="loginEmail" class="form-label">아이디(이메일)</label>
+                    <input type="email" class="form-control bg-dark text-white border-secondary" id="loginEmail" placeholder="이메일을 입력하세요" required autocomplete="username">
+                </div>
+                <div class="mb-3">
+                    <label for="loginPassword" class="form-label">비밀번호</label>
+                    <input type="password" class="form-control bg-dark text-white border-secondary" id="loginPassword" placeholder="비밀번호" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn btn-accent w-100 py-3 mb-3" id="btnLoginSubmit">로그인</button>
+            </form>
+            <p class="text-center mt-3 text-white-50"><a href="forgot-password.html" class="text-accent">비밀번호 찾기</a></p>
+            <p class="text-center mt-2 text-white-50">계정이 없으신가요? <a href="register.html" class="text-accent">회원가입</a></p>
+        </div>
+    </section>
+
+    <script src="js/referral-capture.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script>
+(function() {
+  var config = {
+    apiKey: "AIzaSyCijM7nOf7xYPKevbOsRrrZTA6XwgODeIM",
+    authDomain: "boostclass-7d4fd.firebaseapp.com",
+    projectId: "boostclass-7d4fd",
+    storageBucket: "boostclass-7d4fd.firebasestorage.app",
+    messagingSenderId: "774803491487",
+    appId: "1:774803491487:web:daada5b95008a14c2730aa"
+  };
+  if (typeof firebase === 'undefined') {
+    var errEl = document.getElementById('loginError');
+    if (errEl) { errEl.textContent = 'Firebase를 불러올 수 없습니다.'; errEl.classList.remove('d-none'); }
+    return;
+  }
+  firebase.initializeApp(config);
+  var auth = firebase.auth();
+  function getSafeRedirect() {
+    var params = new URLSearchParams(window.location.search);
+    var red = params.get('redirect');
+    if (!red || typeof red !== 'string') return '';
+    if (red.length > 500) return '';
+    if (/^https?:\/\//i.test(red) || red.trim().indexOf('//') === 0) return '';
+    if (/[\s<>"']/.test(red)) return '';
+    return red;
+  }
+  function goAfterLogin() {
+    var red = getSafeRedirect();
+    window.location.href = red || 'index.html';
+  }
+  function errMsg(code) {
+    var map = { 'auth/invalid-email':'올바른 이메일이 아닙니다.', 'auth/user-not-found':'등록되지 않은 이메일입니다.', 'auth/wrong-password':'비밀번호가 올바르지 않습니다.', 'auth/invalid-credential':'이메일 또는 비밀번호가 올바르지 않습니다.', 'auth/popup-closed-by-user':'로그인 창이 닫혔습니다.', 'auth/popup-blocked':'팝업을 허용해 주세요.', 'auth/operation-not-allowed':'이 로그인 방식이 비활성화되어 있습니다.' };
+    return map[code] || (code || '오류가 발생했습니다.');
+  }
+  window.doLogin = function() {
+    var emailEl = document.getElementById('loginEmail');
+    var pwEl = document.getElementById('loginPassword');
+    var errEl = document.getElementById('loginError');
+    var btn = document.getElementById('btnLoginSubmit');
+    if (!emailEl || !pwEl || !errEl || !btn) return;
+    var email = (emailEl.value || '').trim();
+    var password = pwEl.value || '';
+    errEl.classList.add('d-none');
+    if (!email || !password) { errEl.textContent = '이메일과 비밀번호를 입력해 주세요.'; errEl.classList.remove('d-none'); return; }
+    btn.disabled = true;
+    btn.textContent = '로그인 중…';
+    auth.signInWithEmailAndPassword(email, password)
+      .then(function() { goAfterLogin(); })
+      .catch(function(e) { errEl.textContent = errMsg(e.code); errEl.classList.remove('d-none'); })
+      .finally(function() { btn.disabled = false; btn.textContent = '로그인'; });
+  };
+  function init() {
+    auth.onAuthStateChanged(function(user) { if (user) goAfterLogin(); });
+    var form = document.getElementById('loginForm');
+    var btn = document.getElementById('btnLoginSubmit');
+    if (form) form.addEventListener('submit', function(e) { e.preventDefault(); window.doLogin(); });
+    if (btn) btn.addEventListener('click', window.doLogin);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else setTimeout(init, 0);
+})();
+    </script>
+</body>
+</html>

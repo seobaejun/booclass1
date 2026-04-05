@@ -1,0 +1,25 @@
+# 환경 변수 (Firebase 등 비밀 정보)
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+.cursor/
+*.swp
+*.swo
+
+# 로그
+*.log
+npm-debug.log*
+
+# 의존성
+node_modules/
+
+# GitHub 100MB 파일 제한 — 대용량 영상은 Storage/CDN에 두고, 저장소에는 포함하지 않음
+image/202603311120.mp4
