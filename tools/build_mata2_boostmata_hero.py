@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""mata2 히어로를 image/boostmata/ 이미지(파일명 자연 정렬 순)로 교체. 산출: image/hero-opt-mata2/."""
+"""mata2 히어로를 image/boostmata/ 이미지로 교체(자연 정렬 + Frame#158은 boost19 직전). 산출: image/hero-opt-mata2/."""
 from __future__ import annotations
 
 import html
@@ -19,6 +19,9 @@ WEBP_Q = 82
 JPEG_Q = 85
 HERO_SIZES = "(max-width: 1200px) 92vw, 1080px"
 EXTS = {".png", ".jpg", ".jpeg", ".webp"}
+# 파일명 자연 정렬만으로는 Frame#*.png 가 boost* 뒤로 가므로, 특정 장면 순서만 수동 고정
+FRAME158_BEFORE_ANCHOR = "boost19.png"
+FRAME158_SOURCE = "Frame#158.png"
 
 
 def natural_key(path: Path) -> tuple:
@@ -31,6 +34,29 @@ def natural_key(path: Path) -> tuple:
         else:
             key.append(p.lower())
     return tuple(key)
+
+
+def reorder_frame158_before_boost19(sorted_paths: list[Path]) -> list[Path]:
+    """Frame#158(실전 가이드/목차)를 boost19(얼리버드) 직전에 두기."""
+    insert_path: Path | None = None
+    rest: list[Path] = []
+    for p in sorted_paths:
+        if p.name == FRAME158_SOURCE:
+            insert_path = p
+        else:
+            rest.append(p)
+    if insert_path is None:
+        return sorted_paths
+    out: list[Path] = []
+    placed = False
+    for p in rest:
+        if p.name == FRAME158_BEFORE_ANCHOR and not placed:
+            out.append(insert_path)
+            placed = True
+        out.append(p)
+    if not placed:
+        return sorted_paths
+    return out
 
 
 def resize_max_width(im: Image.Image, max_w: int) -> Image.Image:
@@ -101,6 +127,7 @@ def main() -> int:
         ),
         key=natural_key,
     )
+    files = reorder_frame158_before_boost19(files)
     if not files:
         print(f"{BOOST_DIR} 에 이미지가 없습니다.", file=sys.stderr)
         return 1
