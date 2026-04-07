@@ -132,6 +132,19 @@
    * @param {firebase.firestore.Firestore|null} db
    * @returns {Promise<{ courseItems: object[], ebookItems: object[] }>}
    */
+  function mergeEbookDocsById(docsA, docsB) {
+    var map = {};
+    (docsA || []).forEach(function (d) {
+      if (d && d.id) map[d.id] = d;
+    });
+    (docsB || []).forEach(function (d) {
+      if (d && d.id && !map[d.id]) map[d.id] = d;
+    });
+    return Object.keys(map).map(function (k) {
+      return map[k];
+    });
+  }
+
   function fetchFreeCatalog(db) {
     var database = db || getDb() || ensureApp();
     if (!database) {
@@ -139,12 +152,14 @@
     }
     return Promise.all([
       database.collection("courses").where("isFree", "==", true).get(),
-      database.collection("ebooks").where("isFree", "==", true).get()
+      database.collection("ebooks").where("isFree", "==", true).get(),
+      database.collection("ebooks").where("priceSale", "==", 0).get()
     ]).then(function (snaps) {
       var courseItems = snaps[0].docs.map(function (d) {
         return buildCourseItem(d.id, d.data(), { isFree: true });
       });
-      var ebookItems = snaps[1].docs.map(function (d) {
+      var ebookDocs = mergeEbookDocsById(snaps[1].docs, snaps[2].docs);
+      var ebookItems = ebookDocs.map(function (d) {
         return buildEbookItem(d.id, d.data(), { isFree: true });
       });
       return { courseItems: courseItems, ebookItems: ebookItems };
@@ -190,7 +205,11 @@
       var docId = doc.id;
       var data = doc.data() || {};
 
-      if (data.isFree === true) {
+      var ebookSale = data.priceSale != null && data.priceSale !== "" ? Number(data.priceSale) : null;
+      if (
+        data.isFree === true ||
+        (!isCourse && ebookSale != null && !isNaN(ebookSale) && ebookSale === 0)
+      ) {
         return {
           ok: false,
           message:

@@ -54,6 +54,12 @@
     return 0;
   }
 
+  function getCatalogOrder(d) {
+    var v = d && d.catalogOrder;
+    if (typeof v === "number" && !isNaN(v)) return v;
+    return null;
+  }
+
   var grid = document.getElementById("courseListGrid");
   var placeholder = document.getElementById("courseListPlaceholder");
   if (!grid) return;
@@ -67,7 +73,14 @@
         return;
       }
       var docs = snap.docs.slice();
-      docs.sort(function (a, b) { return getCreatedTime(b) - getCreatedTime(a); });
+      docs.sort(function (a, b) {
+        var oa = getCatalogOrder(a.data());
+        var ob = getCatalogOrder(b.data());
+        if (oa != null && ob != null && oa !== ob) return oa - ob;
+        if (oa != null && ob == null) return -1;
+        if (oa == null && ob != null) return 1;
+        return getCreatedTime(b) - getCreatedTime(a);
+      });
 
       docs.forEach(function (doc) {
         var d = doc.data();
@@ -90,7 +103,7 @@
         col.innerHTML =
           '<div class="card course-card">' +
           '  <div class="card-media">' +
-          '    <a href="' + escapeHtml(detailUrl) + '"><img src="' + escapeHtml(coverImg) + '" alt="' + escapeHtml(title) + '" onerror="this.src=\'image/6.jpg\'"></a>' +
+          '    <a href="' + escapeHtml(detailUrl) + '"><img src="' + escapeHtml(coverImg) + '" alt="' + escapeHtml(title) + '" width="480" height="480" loading="lazy" decoding="async" onerror="this.src=\'image/6.jpg\'"></a>' +
           "  </div>" +
           '  <div class="card-body">' +
           '    <div class="card-title-wrap">' +
@@ -98,7 +111,7 @@
           '      <p class="card-desc">' + escapeHtml(desc.slice(0, 80)) + (desc.length > 80 ? "…" : "") + "</p>" +
           "    </div>" +
           '    <div class="author-row">' +
-          '      <div class="avatar"><img src="' + escapeHtml(instructorImg) + '" alt="" onerror="this.src=\'image/dummy-img-600x700.jpg\'"></div>' +
+          '      <div class="avatar"><img src="' + escapeHtml(instructorImg) + '" alt="" width="48" height="48" loading="lazy" decoding="async" onerror="this.src=\'image/dummy-img-600x700.jpg\'"></div>' +
           '      <span class="author-name">' + escapeHtml(instructor) + "</span>" +
           "    </div>" +
           '    <div class="meta-row">' +

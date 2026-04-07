@@ -77,23 +77,15 @@
   }
 
   function hasEbookAccess(memberData, eid, ebookData) {
-    if (ebookData && ebookData.isFree === true) return true;
+    if (!ebookData) ebookData = {};
+    if (ebookData.isFree === true) return true;
+    var ps = ebookData.priceSale;
+    if (typeof ps === "number" && ps === 0) return true;
+    if (ps != null && ps !== "" && Number(ps) === 0) return true;
     var items = (memberData && memberData.ownedEbookItems) || [];
     return items.some(function (it) {
       return it && (it.key === "ebook:" + eid || it.itemId === eid);
     });
-  }
-
-  function mergeFreeEbookAccess(database, eid) {
-    return database
-      .collection("ebooks")
-      .where("isFree", "==", true)
-      .get()
-      .then(function (snap) {
-        return snap.docs.some(function (d) {
-          return d.id === eid;
-        });
-      });
   }
 
   if (rootEl) {
@@ -154,20 +146,18 @@
     }
     Promise.all([
       db.collection("ebooks").doc(ebookId).get(),
-      db.collection("member").doc(user.uid).get(),
-      mergeFreeEbookAccess(db, ebookId)
+      db.collection("member").doc(user.uid).get()
     ])
       .then(function (results) {
         var doc = results[0];
         var memberDoc = results[1];
-        var isFreeCatalog = results[2];
         if (!doc.exists) {
           showError("전자책을 찾을 수 없습니다.");
           return;
         }
         var ebook = doc.data() || {};
         var memberData = memberDoc.exists ? memberDoc.data() : {};
-        var ok = hasEbookAccess(memberData, ebookId, ebook) || isFreeCatalog;
+        var ok = hasEbookAccess(memberData, ebookId, ebook);
         if (!ok) {
           showError(
             "다운로드 권한이 없습니다. 마이페이지에서 구매코드를 등록했는지 확인해 주세요."
@@ -209,7 +199,7 @@
           (ebook.coverImageUrl
             ? '<img class="ebd-cover" src="' +
               esc(ebook.coverImageUrl) +
-              '" alt="" onerror="this.style.display=\'none\'">'
+              '" alt="" width="320" height="320" decoding="async" loading="eager" onerror="this.style.display=\'none\'">'
             : "") +
           '<h1 class="ebd-title">' +
           esc(title) +

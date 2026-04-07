@@ -161,7 +161,7 @@
                 <div class="row g-4 g-md-5 align-items-md-center">
                     <div class="col-12 col-md-5 col-lg-4 text-center text-md-start">
                         <div class="course-detail-media mx-auto mx-md-0" style="max-width: 480px;">
-                            <img src="image/6.jpg" alt="강의 커버" id="courseThumb">
+                            <img src="image/6.jpg" alt="강의 커버" id="courseThumb" width="480" height="480" decoding="async" fetchpriority="high">
                         </div>
                     </div>
                     <div class="col-12 col-md-7 col-lg-8 ps-md-4 ps-lg-5">
@@ -169,7 +169,7 @@
                             <h2 class="detail-hero-title mb-3 mb-md-4" id="courseTitleText">-</h2>
                             <div class="d-flex align-items-center gap-3">
                                 <div class="rounded-circle overflow-hidden flex-shrink-0" style="width: 64px; height: 64px;">
-                                    <img src="image/dummy-img-600x700.jpg" alt="강사" class="w-100 h-100 object-fit-cover" id="courseInstructorImg">
+                                    <img src="image/dummy-img-600x700.jpg" alt="강사" class="w-100 h-100 object-fit-cover" id="courseInstructorImg" width="128" height="128" decoding="async">
                                 </div>
                                 <div>
                                     <span class="detail-hero-role">강사</span>
@@ -319,10 +319,19 @@
                 var mdata = memberSnap.exists ? memberSnap.data() : {};
 
                 var thumbEl = document.getElementById('courseThumb');
-                if (thumbEl) thumbEl.src = d.coverImageUrl || 'image/6.jpg';
+                if (thumbEl) {
+                    thumbEl.src = d.coverImageUrl || 'image/6.jpg';
+                    thumbEl.decoding = 'async';
+                    thumbEl.loading = 'eager';
+                    if (thumbEl.setAttribute) thumbEl.setAttribute('fetchpriority', 'high');
+                }
 
                 var instructorImgEl = document.getElementById('courseInstructorImg');
-                if (instructorImgEl) instructorImgEl.src = d.instructorImageUrl || 'image/dummy-img-600x700.jpg';
+                if (instructorImgEl) {
+                    instructorImgEl.src = d.instructorImageUrl || 'image/dummy-img-600x700.jpg';
+                    instructorImgEl.decoding = 'async';
+                    instructorImgEl.loading = 'eager';
+                }
 
                 var titleEl = document.getElementById('courseTitleText');
                 if (titleEl) titleEl.textContent = d.courseTitle || '-';

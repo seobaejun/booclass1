@@ -132,7 +132,9 @@
         }
         var ref = storage.ref(path);
         var meta = {};
-        if (typeof BoostMimeTypes !== "undefined" && BoostMimeTypes.getMimeTypeFromFilename) {
+        if (file.type) {
+          meta.contentType = file.type;
+        } else if (typeof BoostMimeTypes !== "undefined" && BoostMimeTypes.getMimeTypeFromFilename) {
           meta.contentType = BoostMimeTypes.getMimeTypeFromFilename(file.name);
         }
         if (
@@ -399,14 +401,35 @@
           : uniqueId();
       var basePath = STORAGE_PREFIX + "/" + refId;
 
+      function optimizeRaster(file, preset) {
+        if (!file) return Promise.resolve(null);
+        if (
+          typeof BoostImageOptimize !== "undefined" &&
+          BoostImageOptimize.resizeImageFile &&
+          preset
+        ) {
+          return BoostImageOptimize.resizeImageFile(file, preset);
+        }
+        return Promise.resolve(file);
+      }
+
+      function extForUpload(f, fallbackWhenFile) {
+        if (!f) return "";
+        var ext = f.name ? getExtension(f.name) : "";
+        if (!ext && fallbackWhenFile) return ".jpg";
+        return ext;
+      }
+
       Promise.all([
-        uploadFile(
-          authorFile,
-          basePath + "/author" + (authorFile ? getExtension(authorFile.name) : "")
+        optimizeRaster(authorFile, BoostImageOptimize && BoostImageOptimize.presetAvatar).then(
+          function (f) {
+            return uploadFile(f, basePath + "/author" + extForUpload(f, true));
+          }
         ),
-        uploadFile(
-          coverFile,
-          basePath + "/cover" + (coverFile ? getExtension(coverFile.name) : "")
+        optimizeRaster(coverFile, BoostImageOptimize && BoostImageOptimize.presetCover).then(
+          function (f) {
+            return uploadFile(f, basePath + "/cover" + extForUpload(f, true));
+          }
         )
       ])
         .then(function (urls) {
@@ -428,6 +451,7 @@
                 ebookFiles: ebookFiles,
                 priceOriginal: priceOriginal,
                 priceSale: priceSale,
+                isFree: priceSale === 0,
                 intro: introHtml,
                 order: orderVal,
                 refId: refId,
@@ -446,6 +470,7 @@
                 ebookFiles: ebookFiles,
                 priceOriginal: priceOriginal,
                 priceSale: priceSale,
+                isFree: priceSale === 0,
                 intro: introHtml,
                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                 order: snap.size,

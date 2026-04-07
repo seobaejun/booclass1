@@ -67,7 +67,9 @@
         }
         var ref = storage.ref(path);
         var meta = {};
-        if (typeof BoostMimeTypes !== "undefined" && BoostMimeTypes.getMimeTypeFromFilename) {
+        if (file.type) {
+          meta.contentType = file.type;
+        } else if (typeof BoostMimeTypes !== "undefined" && BoostMimeTypes.getMimeTypeFromFilename) {
           meta.contentType = BoostMimeTypes.getMimeTypeFromFilename(file.name);
         }
         if (
@@ -509,11 +511,37 @@
         editCourseId && currentCourseDoc && currentCourseDoc.refId ? currentCourseDoc.refId : uniqueId();
       var basePath = STORAGE_PREFIX + "/" + refId;
 
+      function optimizeRaster(file, preset) {
+        if (!file) return Promise.resolve(null);
+        if (
+          typeof BoostImageOptimize !== "undefined" &&
+          BoostImageOptimize.resizeImageFile &&
+          preset
+        ) {
+          return BoostImageOptimize.resizeImageFile(file, preset);
+        }
+        return Promise.resolve(file);
+      }
+
+      function extForUpload(f, fallbackWhenFile) {
+        if (!f) return "";
+        var ext = f.name ? getExtension(f.name) : "";
+        if (!ext && fallbackWhenFile) return ".jpg";
+        return ext;
+      }
+
       Promise.all([
-        instructorImageFile
-          ? uploadFile(instructorImageFile, basePath + "/instructor" + getExtension(instructorImageFile.name))
-          : Promise.resolve(""),
-        coverImageFile ? uploadFile(coverImageFile, basePath + "/cover" + getExtension(coverImageFile.name)) : Promise.resolve("")
+        optimizeRaster(
+          instructorImageFile,
+          BoostImageOptimize && BoostImageOptimize.presetAvatar
+        ).then(function (f) {
+          return uploadFile(f, basePath + "/instructor" + extForUpload(f, true));
+        }),
+        optimizeRaster(coverImageFile, BoostImageOptimize && BoostImageOptimize.presetCover).then(
+          function (f) {
+            return uploadFile(f, basePath + "/cover" + extForUpload(f, true));
+          }
+        )
       ])
         .then(function (urls) {
           var instructorImageUrl = urls[0] || (currentCourseDoc && currentCourseDoc.instructorImageUrl) || "";
@@ -542,7 +570,15 @@
               };
               if (!editCourseId) data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
               if (editCourseId) return db.collection("courses").doc(editCourseId).update(data);
-              return db.collection("courses").add(data);
+              return db.collection("courses").get().then(function (courseSnap) {
+                var maxC = -1;
+                courseSnap.docs.forEach(function (d) {
+                  var co = d.data().catalogOrder;
+                  if (typeof co === "number" && !isNaN(co) && co > maxC) maxC = co;
+                });
+                data.catalogOrder = maxC + 1;
+                return db.collection("courses").add(data);
+              });
             });
           });
         })

@@ -62,7 +62,7 @@
     col.innerHTML =
       '<div class="card ebook-card">' +
       '  <div class="card-media">' +
-      '    <a href="' + escapeHtml(detailHref) + '"><img src="' + escapeHtml(coverImg) + '" alt="' + escapeHtml(title) + '" onerror="this.src=\'image/10.jpg\'"></a>' +
+      '    <a href="' + escapeHtml(detailHref) + '"><img src="' + escapeHtml(coverImg) + '" alt="' + escapeHtml(title) + '" width="480" height="480" loading="lazy" decoding="async" onerror="this.src=\'image/10.jpg\'"></a>' +
       "  </div>" +
       '  <div class="card-body">' +
       '    <div class="card-title-wrap">' +
@@ -70,7 +70,7 @@
       '      <p class="card-desc">' + escapeHtml((d.intro || "").replace(/<[^>]+>/g, "").slice(0, 60)) + "</p>" +
       "    </div>" +
       '    <div class="author-row">' +
-      '      <div class="avatar"><img src="' + escapeHtml(authorImg) + '" alt="" onerror="this.src=\'image/dummy-img-600x700.jpg\'"></div>' +
+      '      <div class="avatar"><img src="' + escapeHtml(authorImg) + '" alt="" width="48" height="48" loading="lazy" decoding="async" onerror="this.src=\'image/dummy-img-600x700.jpg\'"></div>' +
       '      <span class="author-name">' + escapeHtml(authorName) + "</span>" +
       "    </div>" +
       '    <div class="meta-row">' +

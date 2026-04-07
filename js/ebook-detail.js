@@ -56,6 +56,13 @@
     });
   }
 
+  /** 관리자가 isFree를 안 넣고 판매가 0만 넣은 경우도 무료로 처리 */
+  function isEbookFreeAccess(d) {
+    if (!d) return false;
+    if (d.isFree === true) return true;
+    return typeof d.priceSale === "number" && d.priceSale === 0;
+  }
+
   function renderEbookDetail() {
     var uid = auth.currentUser ? auth.currentUser.uid : null;
     return Promise.all([
@@ -92,10 +99,19 @@
       if (authorEl) authorEl.textContent = authorName;
       if (authorImgEl) {
         authorImgEl.src = authorImg;
+        authorImgEl.width = 128;
+        authorImgEl.height = 128;
+        authorImgEl.decoding = "async";
+        authorImgEl.loading = "eager";
         authorImgEl.onerror = function () { this.src = "image/dummy-img-600x700.jpg"; };
       }
       if (coverEl) {
         coverEl.src = coverImg;
+        coverEl.width = 480;
+        coverEl.height = 480;
+        coverEl.decoding = "async";
+        coverEl.loading = "eager";
+        if (coverEl.setAttribute) coverEl.setAttribute("fetchpriority", "high");
         coverEl.onerror = function () { this.src = "image/10.jpg"; };
       }
 
@@ -115,19 +131,29 @@
 
       var purchaseLink = document.getElementById("ebookPurchaseLink");
       if (purchaseLink) {
-        var canDownloadEbook = d.isFree === true || memberHasOwnedEbook(mdata, id);
-        if (canDownloadEbook) {
+        var owned = memberHasOwnedEbook(mdata, id);
+        var freeCatalog = isEbookFreeAccess(d);
+        var canDownloadEbook = freeCatalog || owned;
+        if (freeCatalog) {
+          purchaseLink.href = "mypage.html#myebooks";
+          purchaseLink.removeAttribute("target");
+          purchaseLink.rel = "noopener noreferrer";
+          var spFree = purchaseLink.querySelector("span");
+          if (spFree) spFree.textContent = "마이페이지에서 받기";
+        } else if (owned) {
           purchaseLink.href = "ebook-download.html?id=" + encodeURIComponent(id);
           purchaseLink.removeAttribute("target");
           purchaseLink.rel = "noopener noreferrer";
-          var spDl = purchaseLink.querySelector("span");
-          if (spDl) spDl.textContent = "전자책 다운로드";
+          var spOwned = purchaseLink.querySelector("span");
+          if (spOwned) spOwned.textContent = "전자책 다운로드";
         } else {
           var externalPurchaseUrl = PURCHASE_URL_BY_EBOOK_ID[id];
           if (externalPurchaseUrl) {
             purchaseLink.href = externalPurchaseUrl;
             purchaseLink.target = "_blank";
             purchaseLink.rel = "noopener noreferrer";
+          } else {
+            purchaseLink.href = "#";
           }
           var spBuy = purchaseLink.querySelector("span");
           if (spBuy) spBuy.textContent = "구매하기";
@@ -135,6 +161,15 @@
         purchaseLink.addEventListener("click", function (ev) {
           if (auth.currentUser) return;
           ev.preventDefault();
+          if (freeCatalog) {
+            window.alert(
+              "로그인 후 마이페이지 「내 전자책 보기」에서 코드 없이 받을 수 있습니다."
+            );
+            window.location.href =
+              "login.html?redirect=" +
+              encodeURIComponent("mypage.html#myebooks");
+            return;
+          }
           redirectLoginWithAlert();
         });
       }

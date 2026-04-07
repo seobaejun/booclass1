@@ -31,6 +31,8 @@
       'auth/user-not-found': '등록되지 않은 이메일입니다.',
       'auth/wrong-password': '비밀번호가 올바르지 않습니다.',
       'auth/invalid-credential': '이메일 또는 비밀번호가 올바르지 않습니다.',
+      'auth/invalid-login-credentials': '이메일 또는 비밀번호가 올바르지 않습니다.',
+      'auth/too-many-requests': '시도 횟수가 많습니다. 잠시 후 다시 시도해 주세요.',
       'auth/popup-closed-by-user': '로그인 창이 닫혔습니다.',
       'auth/popup-blocked': '팝업이 차단되었습니다. 브라우저에서 팝업을 허용해 주세요.',
       'auth/cancelled-popup-request': '로그인 요청이 취소되었습니다.'

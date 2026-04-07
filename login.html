@@ -77,8 +77,23 @@
     window.location.href = red || 'index.html';
   }
   function errMsg(code) {
-    var map = { 'auth/invalid-email':'올바른 이메일이 아닙니다.', 'auth/user-not-found':'등록되지 않은 이메일입니다.', 'auth/wrong-password':'비밀번호가 올바르지 않습니다.', 'auth/invalid-credential':'이메일 또는 비밀번호가 올바르지 않습니다.', 'auth/popup-closed-by-user':'로그인 창이 닫혔습니다.', 'auth/popup-blocked':'팝업을 허용해 주세요.', 'auth/operation-not-allowed':'이 로그인 방식이 비활성화되어 있습니다.' };
-    return map[code] || (code || '오류가 발생했습니다.');
+    var map = {
+      'auth/invalid-email': '올바른 이메일이 아닙니다.',
+      'auth/user-not-found': '등록되지 않은 이메일입니다.',
+      'auth/wrong-password': '비밀번호가 올바르지 않습니다.',
+      'auth/invalid-credential': '이메일 또는 비밀번호가 올바르지 않습니다.',
+      'auth/invalid-login-credentials': '이메일 또는 비밀번호가 올바르지 않습니다.',
+      'auth/user-disabled': '비활성화된 계정입니다. 관리자에게 문의해 주세요.',
+      'auth/too-many-requests': '시도 횟수가 많습니다. 잠시 후 다시 시도해 주세요.',
+      'auth/popup-closed-by-user': '로그인 창이 닫혔습니다.',
+      'auth/popup-blocked': '팝업을 허용해 주세요.',
+      'auth/operation-not-allowed': '이 로그인 방식이 비활성화되어 있습니다.'
+    };
+    if (code && map[code]) return map[code];
+    if (code && String(code).indexOf('auth/') === 0) {
+      return '이메일·비밀번호를 다시 확인해 주세요. 가입한 적이 없다면 회원가입 후 이용해 주세요.';
+    }
+    return code || '오류가 발생했습니다.';
   }
   window.doLogin = function() {
     var emailEl = document.getElementById('loginEmail');

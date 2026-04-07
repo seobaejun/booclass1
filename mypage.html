@@ -356,7 +356,7 @@
     <script src="js/member-notifications.js"></script>
     <script src="js/inquiry-service.js?v=2"></script>
     <script src="js/wishlist-cart.js"></script>
-    <script src="js/purchase-code.js?v=3"></script>
+    <script src="js/purchase-code.js?v=4"></script>
     <script>
 (function() {
   var config = {
@@ -571,7 +571,8 @@
     var isFreeRow =
       item.isFreeCatalog === true ||
       item.badgeText === "무료" ||
-      (cached && cached.isFree === true);
+      (cached && cached.isFree === true) ||
+      (sale != null && sale === 0);
     if (isFreeRow) {
       return '<span class="mypage-price-free">' + (isCourse ? "무료강의" : "무료전자책") + "</span>";
     }
@@ -916,6 +917,17 @@
     }
   }
 
+  function openMypageFromHashIfNeeded() {
+    var raw = window.location.hash || "";
+    var h = raw.charAt(0) === "#" ? raw.slice(1) : raw;
+    if (h !== "myebooks" && h !== "mycourses") return;
+    var trigger =
+      h === "mycourses"
+        ? document.getElementById("btnMypageMyCourses")
+        : document.getElementById("btnMypageMyEbooks");
+    openMypageContentPanel(h, trigger);
+  }
+
   auth.onAuthStateChanged(function(user) {
     if (memberUnsub) {
       memberUnsub();
@@ -930,6 +942,7 @@
     if (!user) return;
     loadFreeCatalogForMypage().then(function () {
       if (mypageActivePanel === 'mycourses' || mypageActivePanel === 'myebooks') renderMypagePanel();
+      openMypageFromHashIfNeeded();
     });
     memberUnsub = db.collection('member').doc(user.uid).onSnapshot(function(doc) {
       cachedMember = doc.exists ? doc.data() : {};
