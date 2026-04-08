@@ -383,6 +383,65 @@
         text-align: center;
       }
     }
+    .mata-free-ebook {
+      margin-top: 1rem;
+      border-radius: 14px;
+      border: 1px solid rgba(169, 248, 181, 0.22);
+      background: linear-gradient(160deg, rgba(169, 248, 181, 0.09), rgba(8, 10, 14, 0.94));
+      padding: 1.15rem 1.1rem 1.2rem;
+    }
+    .mata-free-ebook-title {
+      margin: 0 0 0.5rem;
+      font-size: clamp(1.05rem, 2.5vw, 1.28rem);
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+    .mata-free-ebook-desc {
+      margin: 0 0 0.75rem;
+      color: var(--muted);
+      font-size: 0.93rem;
+      line-height: 1.55;
+    }
+    .mata-free-ebook-desc .mata-free-ebook-em {
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .mata-free-ebook-steps {
+      margin: 0 0 1rem;
+      padding-left: 1.15rem;
+      color: #dfe4f0;
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+    .mata-free-ebook-steps li {
+      margin-bottom: 0.35rem;
+    }
+    .mata-free-ebook-steps li:last-child {
+      margin-bottom: 0;
+    }
+    .mata-free-ebook .btn-ebook-free {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 48px;
+      padding: 0.55rem 1rem;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.98rem;
+      text-decoration: none;
+      color: #101317;
+      background: linear-gradient(78.12deg, var(--accent) 0.32%, var(--accent2) 99.52%);
+      border: none;
+      touch-action: manipulation;
+      box-sizing: border-box;
+    }
+    .mata-free-ebook .btn-ebook-free:hover,
+    .mata-free-ebook .btn-ebook-free:focus-visible {
+      filter: brightness(1.06);
+      outline: none;
+    }
   </style>
 </head>
 <body>
@@ -1041,6 +1100,19 @@
         </article>
       </div>
       <p class="meta-bridge-note">얼리버드 종료 전에 시작하면 학습-제작-적용까지 한 번에 연결할 수 있습니다. 아래에서 바로 구매 후 시작하세요.</p>
+    </section>
+
+    <section class="mata-free-ebook" aria-label="무료 전자책 안내">
+      <h2 class="mata-free-ebook-title">무료 전자책 받아보기</h2>
+      <p class="mata-free-ebook-desc">
+        유료 강의·전자책과 별도로, <strong class="mata-free-ebook-em">무료로 제공되는 전자책</strong>을 원하시는 분은 아래 순서대로 이용하시면 다운로드하실 수 있습니다.
+      </p>
+      <ol class="mata-free-ebook-steps">
+        <li>아래 버튼으로 <strong>전자책 목록 페이지</strong>로 이동합니다.</li>
+        <li>목록에서 <strong>무료</strong>로 표시된 전자책을 선택합니다.</li>
+        <li>안내에 따라 로그인(또는 회원가입) 후 <strong>다운로드</strong>를 진행합니다.</li>
+      </ol>
+      <a class="btn-ebook-free" href="ebook.html">무료 전자책 목록으로 이동</a>
     </section>
 
     <section class="mata-why" aria-label="부스트클래스 장점">
