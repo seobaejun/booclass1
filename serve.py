@@ -7,7 +7,9 @@ import sys
 DIR = os.path.dirname(os.path.abspath(__file__))
 os.chdir(DIR)
 
-PORT = int(os.environ.get("PORT", "8000"))
+# Default avoids 8000 (often used by other local apps). Override with PORT=...
+DEFAULT_SERVE_PORT = 8888
+PORT = int(os.environ.get("PORT", str(DEFAULT_SERVE_PORT)))
 # 0.0.0.0: localhost + other devices on same LAN (dev only)
 HOST = os.environ.get("SERVE_HOST", "0.0.0.0")
 
@@ -25,9 +27,12 @@ def _lan_ip():
 
 
 sys.stdout.write(f"Serving from: {DIR}\n")
-sys.stdout.write(f"Open in browser: http://localhost:{PORT}/\n")
+sys.stdout.write(f"Open in browser: http://127.0.0.1:{PORT}/  (or http://localhost:{PORT}/)\n")
 lip = _lan_ip()
 if lip:
     sys.stdout.write(f"From phone/other PC (same Wi-Fi): http://{lip}:{PORT}/\n")
 sys.stdout.flush()
-http.server.HTTPServer((HOST, PORT), http.server.SimpleHTTPRequestHandler).serve_forever()
+# Handles several concurrent browser connections (favicon, prefetch, etc.).
+server = http.server.ThreadingHTTPServer((HOST, PORT), http.server.SimpleHTTPRequestHandler)
+server.daemon_threads = True
+server.serve_forever()
