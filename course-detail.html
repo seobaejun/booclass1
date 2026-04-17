@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 
 <head>
@@ -293,11 +293,21 @@
             var PURCHASE_URL_BY_COURSE_ID = {
                 z9zwrkOB5soaMZA18g75: 'https://boostmaster.imweb.me/?idx=3'
             };
+            var VOD_PRICE_OVERRIDE_BY_COURSE_ID = {
+                z9zwrkOB5soaMZA18g75: 230000
+            };
 
             function formatPrice(n) {
                 if (n === 0) return '무료';
                 if (typeof n !== 'number') n = parseInt(n, 10) || 0;
                 return '₩' + Number(n).toLocaleString();
+            }
+
+            function getDisplaySalePrice(cid, rawSalePrice) {
+                if (Object.prototype.hasOwnProperty.call(VOD_PRICE_OVERRIDE_BY_COURSE_ID, cid)) {
+                    return VOD_PRICE_OVERRIDE_BY_COURSE_ID[cid];
+                }
+                return rawSalePrice;
             }
 
             function formatDuration(mins) {
@@ -354,7 +364,8 @@
                 var priceEl = document.getElementById('coursePriceText');
                 if (priceEl) {
                     var original = (typeof d.priceOriginal === 'number') ? d.priceOriginal : 0;
-                    var sale = (typeof d.priceSale === 'number') ? d.priceSale : 0;
+                    var rawSale = (typeof d.priceSale === 'number') ? d.priceSale : 0;
+                    var sale = getDisplaySalePrice(courseId, rawSale);
                     var hasDiscount = original > sale && original > 0;
                     if (hasDiscount) {
                         priceEl.innerHTML =

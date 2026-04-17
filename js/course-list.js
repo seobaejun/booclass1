@@ -14,6 +14,9 @@
   if (typeof firebase === "undefined") return;
   if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
   var db = firebase.firestore();
+  var VOD_PRICE_OVERRIDE_BY_COURSE_ID = {
+    z9zwrkOB5soaMZA18g75: 230000
+  };
 
   function courseDetailUrlWithRef(id) {
     var base = "course-detail.html?id=" + encodeURIComponent(id);
@@ -30,6 +33,13 @@
   function formatPrice(n) {
     if (n === 0) return "무료";
     return "₩" + Number(n).toLocaleString();
+  }
+
+  function getDisplaySalePrice(courseId, rawSalePrice) {
+    if (Object.prototype.hasOwnProperty.call(VOD_PRICE_OVERRIDE_BY_COURSE_ID, courseId)) {
+      return VOD_PRICE_OVERRIDE_BY_COURSE_ID[courseId];
+    }
+    return rawSalePrice;
   }
 
   function escapeHtml(s) {
@@ -91,7 +101,8 @@
         var instructorImg = d.instructorImageUrl || "image/dummy-img-600x700.jpg";
         var coverImg = d.coverImageUrl || "image/6.jpg";
         var priceOriginal = typeof d.priceOriginal === "number" ? d.priceOriginal : 0;
-        var priceSale = typeof d.priceSale === "number" ? d.priceSale : 0;
+        var rawPriceSale = typeof d.priceSale === "number" ? d.priceSale : 0;
+        var priceSale = getDisplaySalePrice(id, rawPriceSale);
         var hasDiscount = priceOriginal > priceSale && priceOriginal > 0;
         var priceText = hasDiscount
           ? '<span class="text-decoration-line-through text-secondary me-1">' + formatPrice(priceOriginal) + "</span> " + formatPrice(priceSale)
