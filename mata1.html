@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -181,6 +181,136 @@
       background: linear-gradient(145deg, rgba(14, 17, 23, 0.98), rgba(11, 13, 18, 0.98));
       padding: 1.2rem;
     }
+    .meta-bridge-cta {
+      margin-bottom: 0.85rem;
+    }
+    .ebook-toc {
+      margin-top: 1rem;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      background: linear-gradient(145deg, rgba(14, 17, 23, 0.98), rgba(11, 13, 18, 0.98));
+      padding: 1.2rem;
+    }
+    .ebook-toc-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+      margin-bottom: 0.95rem;
+      padding-bottom: 0.7rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .ebook-toc-title {
+      margin: 0;
+      font-size: clamp(1.12rem, 2.7vw, 1.38rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #f4f8ff;
+    }
+    .ebook-toc-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 3.2rem;
+      padding: 0.28rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(169, 248, 181, 0.45);
+      background: rgba(169, 248, 181, 0.12);
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .ebook-toc-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+    .ebook-toc-item {
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.02);
+      padding: 0.9rem;
+    }
+    .ebook-toc-item-title {
+      margin: 0 0 0.45rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1.4;
+    }
+    .ebook-toc-sublist {
+      margin: 0;
+      padding-left: 1.05rem;
+      color: #d7ddef;
+      font-size: 0.89rem;
+      line-height: 1.48;
+    }
+    .ebook-toc-sublist li + li {
+      margin-top: 0.2rem;
+    }
+    .vod-toc {
+      margin-top: 1rem;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      background: linear-gradient(145deg, rgba(18, 28, 23, 0.98), rgba(13, 20, 17, 0.98));
+      padding: 1.2rem;
+    }
+    .vod-toc-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+      margin-bottom: 0.95rem;
+      padding-bottom: 0.7rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .vod-toc-title {
+      margin: 0;
+      font-size: clamp(1.08rem, 2.6vw, 1.32rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #f4f8ff;
+    }
+    .vod-toc-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 3.2rem;
+      padding: 0.28rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(169, 248, 181, 0.45);
+      background: rgba(169, 248, 181, 0.12);
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .vod-toc-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-left: 1px solid rgba(255, 255, 255, 0.26);
+    }
+    .vod-toc-list li {
+      display: grid;
+      grid-template-columns: 3rem 1fr;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.4rem 0 0.4rem 1rem;
+      color: #eaf2ff;
+      line-height: 1.45;
+    }
+    .vod-toc-number {
+      color: #c8f7d0;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      font-variant-numeric: tabular-nums;
+    }
+    .vod-toc-note {
+      margin: 0.9rem 0 0;
+      color: #d8dfec;
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
     .meta-bridge-title {
       margin: 0 0 0.45rem;
       font-size: clamp(1.1rem, 2.8vw, 1.45rem);
@@ -343,6 +473,7 @@
       line-height: 1.45;
     }
     @media (max-width: 640px) {
+      .ebook-toc-grid { grid-template-columns: 1fr; }
       .meta-bridge-grid { grid-template-columns: 1fr; }
       .mata-why-grid { grid-template-columns: 1fr; }
       .wrap {
@@ -931,7 +1062,111 @@
                 </div>
     </section>
 
+    <section class="ebook-toc" aria-label="월300버는 홈페이지 전자책 목차">
+      <div class="ebook-toc-header">
+        <h2 class="ebook-toc-title">월300버는 홈페이지 전자책</h2>
+        <span class="ebook-toc-badge">목차</span>
+      </div>
+      <div class="ebook-toc-grid">
+        <article class="ebook-toc-item">
+          <h3 class="ebook-toc-item-title">1. 1인 웹에이전시 창업</h3>
+          <ol class="ebook-toc-sublist">
+            <li>사업 준비하기</li>
+            <li>사업 정책 세우기</li>
+            <li>홈페이지 제작에서 판매까지 단계</li>
+          </ol>
+        </article>
+        <article class="ebook-toc-item">
+          <h3 class="ebook-toc-item-title">2. 바이브 코딩이란?</h3>
+          <ol class="ebook-toc-sublist">
+            <li>왜 바이브 코딩인가?</li>
+            <li>웹빌더 or AI코딩</li>
+            <li>바이브 코딩을 위한 준비</li>
+          </ol>
+        </article>
+        <article class="ebook-toc-item">
+          <h3 class="ebook-toc-item-title">3. 홈페이지 템플릿 이용하기</h3>
+        </article>
+        <article class="ebook-toc-item">
+          <h3 class="ebook-toc-item-title">4. 코딩은 커서 AI가 알아서</h3>
+          <ol class="ebook-toc-sublist">
+            <li>커서 AI 셋팅과 설명</li>
+            <li>개발화면 열기</li>
+            <li>래퍼런스가 있는 경우</li>
+            <li>랜딩페이지와 홈페이지</li>
+            <li>헤더와 네비게이션</li>
+            <li>페이지와 섹션 그리고 카드</li>
+            <li>하단푸터</li>
+            <li>관리자페이지</li>
+            <li>저자가 만든 사이트로 디자인 수정하는 법</li>
+            <li>수많은 컴포넌트와 참고 사이트</li>
+            <li>UX/UI</li>
+            <li>디자인에서 중요한것</li>
+            <li>하지말아야 할 행동</li>
+            <li>에러 줄이기</li>
+          </ol>
+        </article>
+        <article class="ebook-toc-item">
+          <h3 class="ebook-toc-item-title">5. 파이어베이스 데이터 연결</h3>
+          <ol class="ebook-toc-sublist">
+            <li>프로젝트 만들기</li>
+            <li>데이터 저장하기</li>
+            <li>회원 저장하기</li>
+            <li>입력폼 저장하기</li>
+            <li>마이페이지 구현</li>
+            <li>관리자페이지 구현</li>
+            <li>문자서비스 연결하기</li>
+          </ol>
+        </article>
+        <article class="ebook-toc-item">
+          <h3 class="ebook-toc-item-title">6. 저장과 배포</h3>
+          <ol class="ebook-toc-sublist">
+            <li>깃허브에 코드 저장하기</li>
+            <li>버셀에서 배포하기</li>
+            <li>도메인 구매하기</li>
+            <li>최적화와 검색등록</li>
+            <li>미리보기와 패비콘</li>
+          </ol>
+        </article>
+        <article class="ebook-toc-item">
+          <h3 class="ebook-toc-item-title">7. 고객을 줄서게하는 방법</h3>
+          <ol class="ebook-toc-sublist">
+            <li>무료 마케팅</li>
+            <li>유료 마케팅</li>
+          </ol>
+        </article>
+      </div>
+    </section>
+
+    <section class="vod-toc" aria-label="월 300버는 홈페이지 VOD 목차">
+      <div class="vod-toc-header">
+        <h2 class="vod-toc-title">월 300버는 홈페이지 VOD 목차</h2>
+        <span class="vod-toc-badge">15강</span>
+      </div>
+      <ol class="vod-toc-list">
+        <li><span class="vod-toc-number">01</span><span>AI 코딩을 위한 준비</span></li>
+        <li><span class="vod-toc-number">02</span><span>커서 AI셋팅</span></li>
+        <li><span class="vod-toc-number">03</span><span>템플릿 개발 화면 열기</span></li>
+        <li><span class="vod-toc-number">04</span><span>템플릿 수정하기</span></li>
+        <li><span class="vod-toc-number">05</span><span>파이어 베이스에 DB저장하기</span></li>
+        <li><span class="vod-toc-number">06</span><span>깃허브에 코드 저장하기</span></li>
+        <li><span class="vod-toc-number">07</span><span>버셀에 배포하기</span></li>
+        <li><span class="vod-toc-number">08</span><span>도메인 연결</span></li>
+        <li><span class="vod-toc-number">09</span><span>피그마 활용</span></li>
+        <li><span class="vod-toc-number">10</span><span>3D구현</span></li>
+        <li><span class="vod-toc-number">11</span><span>디자인을 쉽고 빠르게하기</span></li>
+        <li><span class="vod-toc-number">12</span><span>검색등록</span></li>
+        <li><span class="vod-toc-number">13</span><span>문자서비스 연동</span></li>
+        <li><span class="vod-toc-number">14</span><span>관리비용 받는 법</span></li>
+        <li><span class="vod-toc-number">15</span><span>개인서버 접속하는 법 마무리</span></li>
+      </ol>
+      <p class="vod-toc-note">총 4시간 분량의 강의 + 재수강 가능 + 계속 업로드</p>
+    </section>
+
     <section class="meta-bridge" aria-label="수강 구성 안내">
+      <div class="meta-bridge-cta">
+        <a class="btn btn-ghost" href="https://booclass1.vercel.app/ebook.html">무료전자책 받기</a>
+      </div>
       <h2 class="meta-bridge-title">오늘부터 바로 실행할 수 있는 홈페이지 제작 흐름</h2>
       <p class="meta-bridge-desc">처음이라도 순서만 따라오면 됩니다. 강의로 제작 흐름을 익히고, 전자책으로 실전 구성을 바로 적용해 결과물까지 이어지도록 만들었습니다.</p>
       <div class="meta-bridge-grid">
